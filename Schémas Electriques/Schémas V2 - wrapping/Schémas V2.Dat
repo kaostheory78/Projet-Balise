@@ -1,0 +1,40 @@
+Field=Designator~String~Designator~100|Field=Description~String~Description~152|Field=Value~String~Value~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~Free Documents|ReportField=ProjectFullPath~Free Documents|ReportField=Title~Bill of Materials For Schematic Document [Schémas V2.SchDoc]|ReportField=TotalQuantity~66|ReportField=ReportTime~15:42:50|ReportField=ReportDate~27/02/2015|ReportField=ReportDateTime~27/02/2015 15:42:50|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~27/02/2015|ReportField=CurrentTime~15:42:40|ReportField=Date~|ReportField=DocumentFullPathAndName~C:\Users\Quentin\Desktop\Projet-Balise\Schémas Electriques\Schémas V2 - wrapping\Schémas V2.SchDoc|ReportField=DocumentName~Schémas V2.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~27/02/2015|ReportField=Organization~|ReportField=ProjectName~|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~Schémas V2.SchDoc|ReportField=DataSourceFullPath~C:\Users\Quentin\Desktop\Projet-Balise\Schémas Electriques\Schémas V2 - wrapping\Schémas V2.SchDoc
+C1, C4|Capacitor|27pF|Cap|2
+C2, C3|Capacitor|10nF|Cap|2
+C5|Capacitor|220uF|Cap2|1
+C6, C10, C14|Capacitor|1uF|Cap|3
+C7|Capacitor|100pF|Cap|1
+C8|Capacitor|100uF|Cap2|1
+C9|Capacitor|0.1 uF|Cap|1
+C11, C15|Capacitor|10uF|Cap|2
+C12|Capacitor|330uF|Cap2|1
+C13|Capacitor|0.1uF|Cap|1
+C16|Capacitor|0.2uF|Cap|1
+Cap1, Cap2, Cap3, Cap4|Capacitor||Cap|4
+D1, D2, D4, D5, D6|Typical RED, GREEN, YELLOW, AMBER GaAs LED||LED2|5
+D3|Schottky Diode||D Schottky|1
+J1, J2|Connecteur||MINICONNEC_2B|2
+L1|Inductor|15uH|Inductor|1
+P1, P4|Header, 6-Pin||MHDR1X6|2
+P2, P3, P6|Header, 4-Pin||MHDR1X4|3
+P5|Header, 2-Pin||MHDR1X2|1
+Q1|P-Channel Power MOSFET||PMOS-2|1
+Q2|NPN Bipolar Transistor||QNPN|1
+R1, R3, R5, R11, R18, R22|Resistor|10K|Res3|6
+R2|Resistor|100|Res3|1
+R4, R8|Resistor|15k|Res3|2
+R6, R7, R16, R19, R21|Resistor|1K|Res3|5
+R9|Resistor|330|Res3|1
+R10, R14|Resistor|330|Res3|2
+R12|Resistor|0R|Res3|1
+R13|Resistor|3K4|Res3|1
+R15|Resistor|470|Res3|1
+R17|Resistor|17.4k|Res3|1
+R20|Resistor|2k|Res3|1
+S1|Switch||SW-PB|1
+U1|Enhanced Flash Microcontroller with nanoWatt Technology, High Performance PWM and A/D, 16K Flash, 44-Pin TQFP, Industrial Temperature||PIC18F4431-I/PT|1
+U2|Pont-H||LMD18200|1
+VR1|Voltage Regulator||Volt Reg|1
+VR2|||LM2588|1
+VR3|Voltage Regulator||Volt Reg|1
+Y1|Crystal Oscillator||XTAL|1
