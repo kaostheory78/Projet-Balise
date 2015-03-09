@@ -1,11 +1,11 @@
 
 /******************************************************************************/
-/************** Carte principale Robot 1 : DSPIC33FJ128MC804*******************/
+/************************ Carte Balise - PIC18f4431 ***************************/
 /******************************************************************************/
-/* Fichier 	: interruptions.c
- * Auteur  	: Quentin
+/* Fichier 	: system.c
+ * Auteur  	: M1E11
  * Revision	: 1.0
- * Date		: 23 octobre 2014, 12:00
+ * Date		: 09 Mars 2014, 17:02
  *******************************************************************************
  *
  *
@@ -14,7 +14,6 @@
 
 #include "system.h"
 
-
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
@@ -22,6 +21,8 @@
 void init_system (void)
 {
     init_clock();
+    ConfigPorts();
+    ConfigInterrupt();
     //init_flag();
 }
 
@@ -38,32 +39,9 @@ void init_system (void)
 
 void init_clock(void)
 {
-    //Tunage de la fréquence : Ftune = 8,0056625
-    OSCTUNbits.TUN = 0;        //SEMBLE NE PAS FONCTIONNER ....
-
-    //New Osc = FRC sans PLL
-    OSCCONbits.NOSC = 0b000;
-    OSCCONbits.OSWEN = 1;
-    while(OSCCONbits.OSWEN != 0);
-
-
-    // Configure PLL prescaler, PLL postscaler, PLL divisor
-    // Fext = Fin * M / (N1 * N2)
-    // F =  80,017 142 MHz
-
-    PLLFBD = 150; // M = 152
-    CLKDIVbits.PLLPOST= 0b00; // N2 = 2
-    CLKDIVbits.PLLPRE= 5; // N1 = 7
-
-    CLKDIVbits.DOZE = 0b000; //FRC = 1:1 FRC
-
-    //On switch sur la nouvelle clock avec PLL
-    OSCCONbits.NOSC = 0b001;
-    OSCCONbits.OSWEN = 1;
-    while(OSCCONbits.OSWEN != 0);
-
-    // Wait for PLL to lock
-    while(OSCCONbits.LOCK!=1);
+    //Oscillateur externe sur osc1 et 2 avec PLL
+    OSCCONbits.SCS = 0; //Primary Oscillator
+    while(OSCCONbits.IOFS == 0); //on attends que la pll soit stable
 }
 
 /******************************************************************************/
@@ -71,196 +49,103 @@ void init_clock(void)
 /******************************************************************************/
 
 
-void ConfigMapping (void)
-{
-    #ifdef CARTE_V1
-        // Mapping UART1 : XBee
-	_U1RXR	= 0x0E;		// IN	: UART1 RX sur RP14
-	_RP15R	= 0x03;		// OUT	: UART1 TX sur RP15
-
-	// Mapping UART2 : AX12
-	_U2RXR	= 0x05;         // IN	: UART2 RX sur RP5
-	_RP6R	= 0x05;         // OUT	: UART2 TX sur RP6
-
-        // Mapping QEI1 : Codeur Droit
-	_QEB1R	= 0x19;         // IN	: QEB1 sur RP25
-	_QEA1R	= 0x18;         // IN	: QEA1 sur RP24
-
-	// Mapping QEI2 : Codeur Gauche
-	_QEB2R	= 0x17;		// QEB2 sur RP23
-	_QEA2R	= 0x16;		// QEA2 sur RP22
-    #endif
-
-	// Temporisation
-	delay_ms (50);
-}
-
-
 /*********************************************************/
 void ConfigPorts (void)
 {
-	// Desactivation du module CAN
-	_ADON		= 0;
+        // PORT A
+        TRISAbits.RA0       = 0;        // NC
+        TRISAbits.RA1       = 0;        // NC
+        TRISAbits.RA2       = 0;        // NC
+        TRISAbits.RA3       = 1;        // INPUT : CODEURS QEA
+        TRISAbits.RA4       = 1;        // INPUT : CODEURS QEB
+        TRISAbits.RA5       = 0;        // NC
+        TRISAbits.RA6       = 1;        // OSC2
+        TRISAbits.RA7       = 1;        // OSC1
 
-	// Desactivation des entrees analogiques
-	_PCFG0		= 1;
-	_PCFG1		= 1;
-	_PCFG2		= 1;
-	_PCFG3		= 1;
-	_PCFG4		= 1;
-	_PCFG5		= 1;
-	_PCFG6		= 1;
-	_PCFG7		= 1;
-	_PCFG8		= 1;
+        // PORT B
+        TRISBbits.RB0       = 0;        // OUTPUT DIGIT : LED1
+        TRISBbits.RB1       = 0;        // OUTPUT DIGIT : LED2
+        TRISBbits.RB2       = 0;        //
+        TRISBbits.RB3       = 0;        //
+        TRISBbits.RB4       = 0;        //
+        TRISBbits.RB5       = 0;        //
+        TRISBbits.RB6       = 0;        //  PGC
+        TRISBbits.RB7       = 0;        //  PGC
 
-	// Desactivation PWM
-	_PEN1L		= 0;
-	_PEN1H		= 0;
-	_PEN2L		= 0;
-	_PEN2H		= 0;
-	_PEN3L		= 0;
-	_PEN3H		= 0;
+        // PORT C
+        TRISCbits.RC0       = 0;        // OUTPUT DIGIT : RESET BLUETOOTH
+        TRISCbits.RC1       = 0;        //
+        TRISCbits.RC2       = 0;        // OUTPUT DIGIT : ENABLE CAPTEUR
+        TRISCbits.RC3       = 1;        // INPUT  DIGIT : CAPTEUR 1
+        TRISCbits.RC4       = 0;        //
+        TRISCbits.RC5       = 0;        //
+        TRISCbits.RC6       = 1;        //  OUTPUT UART : TX (déclaré input pour configuration uart -> datasheet)
+        TRISCbits.RC7       = 1;        //  INPUT  UART : RX
 
+        // PORT D
+        TRISDbits.RD0       = 0;        //
+        TRISDbits.RD1       = 0;        //
+        TRISDbits.RD2       = 1;        // I²C : SDA
+        TRISDbits.RD3       = 0;        // I²C : SCL
+        TRISDbits.RD4       = 0;        // OUTPUT DIGIT : SENS MOTEUR
+        TRISDbits.RD5       = 0;        // OUTPUT DIGIT : BREAK MOTEUR
+        TRISDbits.RD6       = 0;        // OUPUT  PWM   : PWM MOTEUR
+        TRISDbits.RD7       = 0;        //
 
-    #ifdef CARTE_V1
-	//****************
-	// PORT x
-	//****************
-	//_CNxIE  : interrup sur broche	| _CN6PUE : pull-up sur broche
-	// Config PORTA
-	_TRISA0		= 1;	_CN2IE	= 0;	_CN2PUE		= 0;	// IN  : (ANALOG) Courant_G (AN0)
-	_TRISA1		= 1;	_CN3IE	= 0;	_CN3PUE		= 0;	// IN  : (ANALOG) Courant_D (AN1)
-        _TRISA2         = 1;                                            // IN  : (DIGIT) capteur 1
-	_TRISA3		= 1;	_CN29IE	= 0;	_CN29PUE	= 0;	// IN  : (DIGIT) capteur 2
-	_TRISA4		= 1;	_CN0IE	= 0;	_CN0PUE		= 0;	// IN  : (DIGIT) capteur 3
-        _TRISA7		= 0;						// OUT : (DIGIT) XBEE RSET
-	_TRISA8		= 1;						// IN  : (DIGIT) capteur 4
-	_TRISA9		= 1;						// IN  : (DIGIT) capteur 5
-	_TRISA10	= 0;						// OUT : (DIGIT) Commande Alim AX12
+        // PORT E
+        TRISEbits.RE0       = 0;        //
+        TRISEbits.RE1       = 0;        //
+        TRISEbits.RE2       = 0;        //
 
-	// Config PORTB
-	_TRISB0		= 0;	_CN4IE	= 0;	_CN4PUE		= 0;	// RES : PGED1 pour programmation
-	_TRISB1		= 0;	_CN5IE	= 0;	_CN5PUE		= 0;	// RES : PGEC1 pour programmation
-	_TRISB2		= 0;	_CN6IE	= 0;	_CN6PUE		= 0;	// OUT : (DIGIT)  Photomos 1
-	_TRISB3		= 0;	_CN7IE	= 0;	_CN7PUE		= 0;	// OUT : (DIGIT)  Photomos 2
-	_TRISB4		= 1;	_CN1IE	= 0;	_CN1PUE		= 0;	// IN  : Jack
-	_TRISB5		= 1;	_CN27IE	= 0;	_CN27PUE	= 0;	// IN  : RX AX12
-	_TRISB6		= 0;	_CN24IE	= 0;	_CN24PUE	= 0;	// OUT : TX AX12
-	_TRISB7		= 0;	_CN23IE	= 0;	_CN23PUE	= 0;	// OUT : DIR UART AX12
-	_TRISB8		= 0;	_CN22IE	= 0;	_CN22PUE	= 0;	// RES : SCL1
-	_TRISB9		= 0;	_CN21IE	= 0;	_CN21PUE	= 0;	// RES : SDA1
-	_TRISB10	= 0;	_CN16IE	= 0;	_CN16PUE	= 0;	// OUT : PWM1H3 : moteur gauche
-	_TRISB11	= 0;	_CN15IE	= 0;	_CN15PUE	= 0;	// OUT : SENS   : moteur gauche
-	_TRISB12	= 0;	_CN14IE	= 0;	_CN14PUE	= 0;	// OUT : PWM1H2 : moteur droit
-	_TRISB13	= 0;	_CN13IE	= 0;	_CN13PUE	= 0;	// OUT : SENS   : moteur droit
-	_TRISB14	= 1;	_CN12IE	= 0;	_CN12PUE	= 0;	// IN  : RX XBEE
-	_TRISB15	= 0;	_CN11IE	= 0;	_CN11PUE	= 0;	// OUT : TX XBEE
-
-	// Config PORTC
-	_TRISC0		= 1;	_CN8IE	= 0;	_CN8PUE		= 0;	// IN  : (ANALOG/DIGIT)  capteur 6 (AN6)
-	_TRISC1		= 1;	_CN9IE	= 0;	_CN9PUE		= 0;	// IN  : (ANALOG/DIGIT)  capteur 7 (AN7)
-	_TRISC2		= 1;	_CN10IE	= 0;	_CN10PUE	= 0;	// IN  : (ANALOG/DIGIT)  capteur 8 (AN8)
-	_TRISC3		= 1;	_CN28IE	= 0;	_CN28PUE	= 0;	// IN  : (DIGIT) : capteur 9
-	_TRISC4		= 1;	_CN25IE	= 0;	_CN25PUE	= 0;	// IN  : (DIGIT) : capteur 10
-	_TRISC5		= 0;	_CN26IE	= 0;	_CN26PUE	= 0;	// OUT : (DIGIT) : LED Debug
-	_TRISC6		= 1;	_CN18IE	= 0;	_CN18PUE	= 0;	// IN  : QEA2
-	_TRISC7		= 1;	_CN17IE	= 0;	_CN17PUE	= 0;	// IN  : QEB2
-	_TRISC8		= 1;	_CN20IE	= 0;	_CN20PUE	= 0;	// IN  : QEA1
-	_TRISC9		= 1;	_CN19IE	= 0;	_CN19PUE	= 0;	// IN  : QEB1
-
-    #endif
-
-    #ifdef CARTE_V2
-	//****************
-	// PORT x
-	//****************
-	//_CNxIE  : interrup sur broche	| _CN6PUE : pull-up sur broche
-	// Config PORTA
-	_TRISA0		= 0;	_CN2IE	= 0;	_CN2PUE		= 0;	// OUT : (DIGIT) : Inhibit AX12
-	_TRISA1		= 0;	_CN3IE	= 0;	_CN3PUE		= 0;	// OUT : (DIGIT) : DIR_UART_AX12
-        _TRISA2         = 1;                                            // IN  : (DIGIT) : Capteur 1
-	_TRISA3		= 1;	_CN29IE	= 0;	_CN29PUE	= 0;	// IN  : (DIGIT) : capteur 2
-	_TRISA4		= 1;	_CN0IE	= 0;	_CN0PUE		= 0;	// IN  : (DIGIT) : capteur 3
-        _TRISA7		= 0;						// OUT : PWM Y
-	_TRISA8		= 1;						// IN  : (DIGIT) : capteur 4
-	_TRISA9		= 1;						// IN  : (DIGIT) : couleur
-	_TRISA10	= 0;						// OUT : (DIGIT) : Commande Alim AX12
-
-	// Config PORTB
-	_TRISB0		= 0;	_CN4IE	= 0;	_CN4PUE		= 0;	// RES : PGED1 pour programmation
-	_TRISB1		= 0;	_CN5IE	= 0;	_CN5PUE		= 0;	// RES : PGEC1 pour programmation
-	_TRISB2		= 0;	_CN6IE	= 0;	_CN6PUE		= 0;	// INT : (UART)  : TX AX12
-	_TRISB3		= 1;	_CN7IE	= 0;	_CN7PUE		= 0;	// OUT : (UART)  : RX AX12
-	_TRISB4		= 1;	_CN1IE	= 0;	_CN1PUE		= 0;	// IN  : (DIGIT) : Capteur 5
-	_TRISB5		= 1;	_CN27IE	= 0;	_CN27PUE	= 0;	// IN  : (UART)  : RX XBEE
-	_TRISB6		= 0;	_CN24IE	= 0;	_CN24PUE	= 0;	// OUT : (UART)  : TX XBEE
-	_TRISB7		= 0;	_CN23IE	= 0;	_CN23PUE	= 0;	// OUT : (DIGIT) : RESET XBEE
-	_TRISB8		= 0;	_CN22IE	= 0;	_CN22PUE	= 0;	// RES : (I²C)   : SCL1
-	_TRISB9		= 0;	_CN21IE	= 0;	_CN21PUE	= 0;	// RES : (I²C)   : SDA1
-	_TRISB10	= 0;	_CN16IE	= 0;	_CN16PUE	= 0;	// OUT : (DIGIT) : sens moteur gauche
-	_TRISB11	= 0;	_CN15IE	= 0;	_CN15PUE	= 0;	// OUT : (PWM)   : PWM1L3 (moteur gauche)
-	_TRISB12	= 0;	_CN14IE	= 0;	_CN14PUE	= 0;	// OUT : (DIGIT) : sens moteur droit
-	_TRISB13	= 0;	_CN13IE	= 0;	_CN13PUE	= 0;	// OUT : (PWM)   : PWM1L2 (moteur droit)
-	_TRISB14	= 0;	_CN12IE	= 0;	_CN12PUE	= 0;	// OUT : (DIGIT) : sens moteur X
-	_TRISB15	= 0;	_CN11IE	= 0;	_CN11PUE	= 0;	// OUT : (PWM)   : PWM1H1 (moteur X)
-
-	// Config PORTC
-	_TRISC0		= 1;	_CN8IE	= 0;	_CN8PUE		= 0;	// IN  : (ANALOG/DIGIT) : capteur 6 (AN6)
-	_TRISC1		= 1;	_CN9IE	= 0;	_CN9PUE		= 0;	// IN  : (ANALOG/DIGIT) : capteur 7 (AN7)
-	_TRISC2		= 1;	_CN10IE	= 0;	_CN10PUE	= 0;	// IN  : (ANALOG/DIGIT) : capteur 8 (AN8)
-	_TRISC3		= 1;	_CN28IE	= 0;	_CN28PUE	= 0;	// IN  : (DIGIT) : Jack
-	_TRISC4		= 1;	_CN25IE	= 0;	_CN25PUE	= 0;	// IN  : (DIGIT) : Strat
-	_TRISC5		= 0;	_CN26IE	= 0;	_CN26PUE	= 0;	// OUT : (DIGIT) : LED Debug
-	_TRISC6		= 1;	_CN18IE	= 0;	_CN18PUE	= 0;	// IN  : QEA2
-	_TRISC7		= 1;	_CN17IE	= 0;	_CN17PUE	= 0;	// IN  : QEB2
-	_TRISC8		= 1;	_CN20IE	= 0;	_CN20PUE	= 0;	// IN  : QEA1
-	_TRISC9		= 1;	_CN19IE	= 0;	_CN19PUE	= 0;	// IN  : QEB1
-
-    #endif
 
 	//****************
 	// INITIALISATION
 	//****************
 
-	// Init PORTA
-	_LATA0		= 0;	// Valeur initiale a  l'etat bas
-	_LATA1		= 0;	// Valeur initiale a  l'etat bas
-	_LATA3		= 0;	// Valeur initiale a  l'etat bas
-	_LATA4		= 0;	// Valeur initiale a  l'etat bas
-	_LATA7		= 0;	// Valeur initiale a  l'etat bas
-	_LATA8		= 0;	// Valeur initiale a  l'etat bas
-	_LATA9		= 0;	// Valeur initiale a  l'etat bas
-	_LATA10		= 0;	// Valeur initiale a  l'etat bas
+	// INIT PORT A
+	LATA0           = 0;	// Valeur initiale a  l'etat bas
+	LATA1           = 0;	// Valeur initiale a  l'etat bas
+	LATA2           = 0;	// Valeur initiale a  l'etat bas
+	LATA3           = 0;	// Valeur initiale a  l'etat bas
+	LATA4           = 0;	// Valeur initiale a  l'etat bas
+	LATA5           = 0;	// Valeur initiale a  l'etat bas
+	LATA6           = 0;	// Valeur initiale a  l'etat bas
+	LATA7           = 0;	// Valeur initiale a  l'etat bas
 
-	// Init PORTB
-	_LATB0		= 0;	// Valeur initiale a  l'etat bas
-	_LATB1		= 0;	// Valeur initiale a  l'etat bas
-	_LATB2		= 0;	// Valeur initiale a  l'etat bas
-	_LATB3		= 0;	// Valeur initiale a  l'etat bas
-	_LATB4		= 0;	// Valeur initiale a  l'etat bas
-	_LATB5		= 0;	// Valeur initiale a  l'etat bas
-	_LATB6		= 0;	// Valeur initiale a  l'etat bas
-	_LATB7		= 0;	// Valeur initiale a  l'etat bas
-	_LATB8		= 0;	// Valeur initiale a  l'etat bas
-	_LATB9		= 0;	// Valeur initiale a  l'etat bas
-	_LATB10		= 0;	// Valeur initiale a  l'etat bas
-	_LATB11		= 0;	// Valeur initiale a  l'etat bas
-	_LATB12		= 0;	// Valeur initiale a  l'etat bas
-	_LATB13		= 0;	// Valeur initiale a  l'etat bas
-	_LATB14		= 0;	// Valeur initiale a  l'etat bas
-	_LATB15		= 0;	// Valeur initiale a  l'etat bas
+	// INIT PORT B
+	LATB0           = 0;	// Valeur initiale a  l'etat bas
+	LATB1           = 0;	// Valeur initiale a  l'etat bas
+	LATB2           = 0;	// Valeur initiale a  l'etat bas
+	LATB3           = 0;	// Valeur initiale a  l'etat bas
+	LATB4           = 0;	// Valeur initiale a  l'etat bas
+	LATB5           = 0;	// Valeur initiale a  l'etat bas
+	LATB6           = 0;	// Valeur initiale a  l'etat bas
+	LATB7           = 0;	// Valeur initiale a  l'etat bas
 
-	// Init PORTC
-	_LATC0		= 0;	// Valeur initiale a  l'etat bas
-	_LATC1		= 0;	// Valeur initiale a  l'etat bas
-	_LATC2		= 0;	// Valeur initiale a  l'etat bas
-	_LATC3		= 0;	// Valeur initiale a  l'etat bas
-	_LATC4		= 0;	// Valeur initiale a  l'etat bas
-	_LATC5		= 0;	// Valeur initiale a  l'etat bas
-	_LATC6		= 0;	// Valeur initiale a  l'etat bas
-	_LATC7		= 0;	// Valeur initiale a  l'etat bas
-	_LATC8		= 0;	// Valeur initiale a  l'etat bas
-	_LATC9		= 0;	// Valeur initiale a  l'etat bas
+	// INIT PORT C
+	LATC0           = 0;	// Valeur initiale a  l'etat bas
+	LATC1           = 0;	// Valeur initiale a  l'etat bas
+	LATC2           = 0;	// Valeur initiale a  l'etat bas
+	LATC3           = 0;	// Valeur initiale a  l'etat bas
+	LATC4           = 0;	// Valeur initiale a  l'etat bas
+	LATC5           = 0;	// Valeur initiale a  l'etat bas
+	LATC6           = 0;	// Valeur initiale a  l'etat bas
+	LATC7           = 0;	// Valeur initiale a  l'etat bas
+
+	// INIT PORT D
+	LATD0           = 0;	// Valeur initiale a  l'etat bas
+	LATD1           = 0;	// Valeur initiale a  l'etat bas
+	LATD2           = 0;	// Valeur initiale a  l'etat bas
+	LATD3           = 0;	// Valeur initiale a  l'etat bas
+	LATD4           = 0;	// Valeur initiale a  l'etat bas
+	LATD5           = 0;	// Valeur initiale a  l'etat bas
+	LATD6           = 0;	// Valeur initiale a  l'etat bas
+	LATD7           = 0;	// Valeur initiale a  l'etat bas
+
+	// INIT PORT E
+	LATE0           = 0;	// Valeur initiale a  l'etat bas
+	LATE1           = 0;	// Valeur initiale a  l'etat bas
+	LATE2           = 0;	// Valeur initiale a  l'etat bas
 }
 
 /******************************************************************************/
@@ -270,241 +155,111 @@ void ConfigPorts (void)
 
 void ConfigInterrupt (void)
 {
-	// INTCON2
-	INTCON2bits.ALTIVT	= 0;			// Table de Vecteur standard
-	INTCON2bits.INT0EP	= 0;			// Interruption INT0 sur front montant
+    // INTCON
+    INTCONbits.GIEH	;                               // A FAIRE
+    INTCONbits.GIEL ;                               // A FAIRE
+    INTCONbits.TMR0IE       = ACTIV_INTER_TIMER0;   // Activation du TIMER 0
+    INTCONbits.INT0IE       = ACTIV_INTER_INT0;     // INTO : ACTIVATION
+    INTCONbits.RBIE         = 0;                    //
+    INTCONbits.TMR0IF       = 0;                    // FLAG TIMER0
+    INTCONbits.INT0IF       = 0;                    // INT0 : FLAG
+    INTCONbits.RBIF         = 0;                    //
 
 
-	//****************
-	// FLAG
-	//****************
-	// IFS0 : Remise a  zero des Flags
-	IFS0bits.DMA1IF		= 0;			//
-	IFS0bits.AD1IF		= 0;			//
-	IFS0bits.U1TXIF		= 0;			//
-	IFS0bits.U1RXIF		= 0;			//
-	IFS0bits.SPI1IF		= 0;			//
-	IFS0bits.SPI1EIF	= 0;			//
-	IFS0bits.T3IF		= 0;			//
-	IFS0bits.T2IF		= 0;			//
-	IFS0bits.OC2IF		= 0;			//
-	IFS0bits.IC2IF		= 0;			//
-	IFS0bits.DMA0IF		= 0;			//
-	IFS0bits.T1IF		= 0;			//
-	IFS0bits.OC1IF		= 0;			//
-	IFS0bits.IC1IF		= 0;			//
-	IFS0bits.INT0IF		= 0;			//
+    // INTCON2
+    INTCON2bits.INTEDG0     = 0;                    // INT0 : rising edge
+    INTCON2bits.INTEDG1     = 0;                    // INT1 : rising edge
+    INTCON2bits.INTEDG2     = 0;                    // INT2 : rising edge
+    INTCON2bits.TMR0IP      = PRIO_INTER_TIMER0;          // TIMER0
 
-	// IFS1 : Remise a  zero des Flags
-	IFS1bits.U2TXIF		= 0;			//
-	IFS1bits.U2RXIF		= 0;			//
-	IFS1bits.INT2IF		= 0;			//
-	IFS1bits.T5IF		= 0;			//
-	IFS1bits.T4IF		= 0;			//
-	IFS1bits.OC4IF		= 0;			//
-	IFS1bits.OC3IF		= 0;			//
-	IFS1bits.DMA2IF		= 0;			//
-	IFS1bits.IC8IF		= 0;			//
-	IFS1bits.IC7IF		= 0;			//
-	IFS1bits.INT1IF		= 0;			//
-	IFS1bits.CNIF		= 0;			//
-	IFS1bits.CMIF		= 0;			//
-	IFS1bits.MI2C1IF	= 0;			//
-	IFS1bits.SI2C1IF	= 0;			//
-
-	// IFS2 : Remise a  zero des Flags
-	IFS2bits.DMA4IF		= 0;			//
-	IFS2bits.PMPIF		= 0;			//
-	IFS2bits.DMA3IF		= 0;			//
-	IFS2bits.C1IF		= 0;			//
-	IFS2bits.C1RXIF		= 0;			//
-	IFS2bits.SPI2IF		= 0;			//
-	IFS2bits.SPI2EIF	= 0;			//
-
-	// IFS3 : Remise a  zero des Flags
-	IFS3bits.FLTA1IF	= 0;			//
-	IFS3bits.RTCIF		= 0;			//
-	IFS3bits.DMA5IF		= 0;			//
-	IFS3bits.QEI1IF		= 0;			//
-	IFS3bits.PWM1IF		= 0;			//
-
-	// IFS4 : Remise a  zero des Flags
-	IFS4bits.DAC1LIF	= 0;			//
-	IFS4bits.DAC1RIF	= 0;			//
-	IFS4bits.QEI2IF		= 0;			//
-	IFS4bits.FLTA2IF	= 0;			//
-	IFS4bits.PWM2IF		= 0;			//
-	IFS4bits.C1TXIF		= 0;			//
-	IFS4bits.DMA7IF		= 0;			//
-	IFS4bits.DMA6IF		= 0;			//
-	IFS4bits.CRCIF		= 0;			//
-	IFS4bits.U2EIF		= 0;			//
-	IFS4bits.U1EIF		= 0;			//
+    // INTCON3
+    INTCON3bits.INT2IP      = PRIO_INTER_INT2 ;     // INT2 : PRIORItE INTERRUPTION
+    INTCON3bits.INT1IP      = PRIO_INTER_INT1;      // INT1 : PRIORITE INTERRUPTION
+    INTCON3bits.INT2IE      = ACTIV_INTER_INT2;     // INT2 : ACTIVATION
+    INTCON3bits.INT2IP      = ACTIV_INTER_INT1;     // INT1 : ACTIVATION
+    INTCON3bits.INT2IF      = 0;                    // INT2 : FLAG
+    INTCON3bits.INT1IF      = 0;                    // INT1 : FLAG
 
 
-	//****************
-	// Priorites
-	//****************
-	// IPC0
-	IPC0bits.T1IP		= PRIO_INTER_TIMER1;		//
-	IPC0bits.OC1IP		= 0x00;				//
-	IPC0bits.IC1IP		= 0x00;				//
-	IPC0bits.INT0IP		= 0x00;                         //Pas de INT0
+    //****************
+    // FLAG
+    //****************
+    // PIR1 : Remise à zéro des Flags
+    PIR1bits.ADIF           = 0;                    // A/D : FLAG
+    PIR1bits.RCIF           = 0;                    // UART RX : FLAG
+    PIR1bits.TXIF           = 0;                    // UART TX : FLAG
+    PIR1bits.SSPIF          = 0;                    //
+    PIR1bits.CCP1IF         = 0;                    //
+    PIR1bits.TMR2IF         = 0;                    // TMR2 : FLAG
+    PIR1bits.TMR1IF         = 0;                    // TMR1 : FLAG
 
-	// IPC1
-	IPC1bits.T2IP		= PRIO_INTER_TIMER2;		// Timer2
-	IPC1bits.OC2IP		= 0x00;				//
-	IPC1bits.IC2IP		= 0x00;				//
-	IPC1bits.DMA0IP		= 0x00;				//
+    // PIR2 : remise à zéro des flags
+    PIR2bits.OSFIF          = 0;                    //
+    PIR2bits.EEIF           = 0;                    //
+    PIR2bits.LVDIF          = 0;                    //
+    PIR2bits.CCP2IF         = 0;                    //
 
-	// IPC2
-	IPC2bits.U1RXIP		= PRIO_INTER_UART1_RX;		// UART1 RX
-	IPC2bits.SPI1IP		= 0x00;				//
-	IPC2bits.SPI1EIP	= 0x00;				//
-	IPC2bits.T3IP		= PRIO_INTER_TIMER3;		// Timer 3
-
-	// IPC3
-	IPC3bits.DMA1IP		= 0x00;				//
-	IPC3bits.AD1IP		= 0x00;				//
-	IPC3bits.U1TXIP		= 0x00;				//
-
-	// IPC4
-	IPC4bits.CNIP		= 0x00;				//
-	IPC4bits.MI2C1IP	= PRIO_INTER_I2C_MAITRE;	// Maitre I2C1
-	IPC4bits.SI2C1IP	= PRIO_INTER_I2C_ESCLAVE; 	// Esclave I2C1
-
-	// IPC5
-	IPC5bits.IC8IP		= 0x00;				//
-	IPC5bits.IC7IP		= 0x00;				//
-	IPC5bits.INT1IP		= 0x00;				//
-
-	// IPC6
-	IPC6bits.T4IP		= PRIO_INTER_TIMER4;		// Timer 4
-	IPC6bits.OC4IP		= 0x00;				//
-	IPC6bits.OC3IP		= 0x00;				//
-	IPC6bits.DMA2IP		= 0x00;				//
-
-	// IPC7
-	IPC7bits.U2TXIP		= PRIO_INTER_UART2_TX;
-	IPC7bits.U2RXIP		= PRIO_INTER_UART2_RX;		// UART2 RX
-	IPC7bits.INT2IP		= 0x00;				//
-	IPC7bits.T5IP		= PRIO_INTER_TIMER5;		//
-
-	// IPC8
-	IPC8bits.C1IP		= 0x00;				//
-	IPC8bits.C1RXIP		= 0x00;				//
-	IPC8bits.SPI2IP		= 0x00;				//
-	IPC8bits.SPI2EIP	= 0x00;				//
-
-	// IPC9
-	IPC9bits.DMA3IP		= 0x00;
-
-	// IPC10
-	// PAS de IPC10
-
-	// IPC11
-	IPC11bits.DMA4IP	= 0x00;
-	IPC11bits.PMPIP		= 0x00;
-
-	// IPC12
-	// PAS de IPC12
-
-	// IPC13
-	// PAS de IPC13
-
-	// IPC14
-	IPC14bits.QEI1IP	= PRIO_INTER_QEI1;          // Overflow sur QEI1 -> Codeur Droit
-	IPC14bits.PWM1IP	= 0x00;                     //
-
-	// IPC15
-	IPC15bits.FLTA1IP	= 0x00;                     //
-	IPC15bits.RTCIP		= 0x00;                     //
-	IPC15bits.DMA5IP	= 0x00;                     //
-
-	// IPC16
-	IPC16bits.U2EIP		= 0x00;                     //
-	IPC16bits.U1EIP		= 0x00;                     //
-	IPC16bits.CRCIP		= 0x00;                     //
-
-	// IPC17
-	IPC17bits.C1TXIP	= 0x00;                     //
-	IPC17bits.DMA7IP	= 0x00;                     //
-	IPC17bits.DMA6IP	= 0x00;                     //
-
-	// IPC18
-	IPC18bits.QEI2IP	= PRIO_INTER_QEI2;          // Overflow sur QEI2 -> Codeur Gauche
-	IPC18bits.FLTA2IP	= 0x00;                     //
-	IPC18bits.PWM2IP	= 0x00;                     //
-
-	// IPC19
-	IPC19bits.DAC1LIP	= 0x00;                     //
-	IPC19bits.DAC1RIP	= 0x00;                     //
+    // PIR3 : remise à zéro des flags
+    PIR3bits.PTIF           = 0;                    //
+    PIR3bits.IC3DRIF        = 0;                    // QEI : FLAG -> changement sens rotation
+    PIR3bits.IC2QEIF        = 0;                    // QEI : FLAG -> Overflow
+    PIR3bits.IC1IF          = 0;                    // QEI : FLAG -> ...
+    PIR3bits.TMR5IF         = 0;
 
 
-	//****************
-	// Activation
-	//****************
-	// IEC0
-	IEC0bits.DMA1IE		= 0;                            // NC
-	IEC0bits.AD1IE		= 0;                    	// NC
-	IEC0bits.U1TXIE		= 0;                            // NC
-	IEC0bits.U1RXIE		= ACTIV_INTER_UART1_RX;         // Interruption RX sur UART1
-	IEC0bits.SPI1IE		= 0;                            // NC
-	IEC0bits.SPI1EIE	= 0;            		// NC
-	IEC0bits.T3IE		= ACTIV_INTER_TIMER3;		// Interruption sur Timer3
-	IEC0bits.T2IE		= ACTIV_INTER_TIMER2;		// Interruption sur Timer2
-	IEC0bits.OC2IE		= 0;				// NC
-	IEC0bits.IC2IE		= 0;				// NC
-	IEC0bits.DMA0IE		= 0;				// NC
-	IEC0bits.T1IE		= ACTIV_INTER_TIMER1;		// Interruption Timer1
-	IEC0bits.OC1IE		= 0;				// NC
-	IEC0bits.IC1IE		= 0;				// NC
-	IEC0bits.INT0IE		= 0;                            // NC
+    //****************
+    // Priorites
+    //****************
+    // RCON
+    RCONbits.IPEN           = 1;                    // Activation des priorités d'interruptions
 
-	// IEC1
-	IEC1bits.U2TXIE		= ACTIV_INTER_UART2_TX;         // Interruption TX sur UART2
-	IEC1bits.U2RXIE		= ACTIV_INTER_UART2_RX;		// Interruption RX sur UART2
-	IEC1bits.INT2IE		= 0;                    	// NC
-	IEC1bits.T5IE		= ACTIV_INTER_TIMER5;    	// Interruption sur Timer5
-	IEC1bits.T4IE		= ACTIV_INTER_TIMER4;		// Interruption sur Timer4
-	IEC1bits.OC4IE		= 0;                            // NC
-	IEC1bits.OC3IE		= 0;            		// NC
-	IEC1bits.DMA2IE		= 0;				// NC
-	IEC1bits.IC8IE		= 0;				// NC
-	IEC1bits.IC7IE		= 0;				// NC
-	IEC1bits.INT1IE		= 0;				// NC
-	IEC1bits.CNIE		= 0;				// NC
-	IEC1bits.MI2C1IE	= ACTIV_INTER_I2C_MAITRE;	// Interruption I2C MAITRE
-	IEC1bits.SI2C1IE	= ACTIV_INTER_I2C_ESCLAVE;	// Interruption I2C ESCLAVE
+    // IPR1
+    IPR1bits.ADIP           = PRIO_INTER_ADC;       //
+    IPR1bits.RC1IP          = PRIO_INTER_RX;                    //
+    IPR1bits.TX1IP          = PRIO_INTER_TX;                    //
+    IPR1bits.SSPIP          = 0;                    //
+    IPR1bits.CCP1IP         = 0;                    //
+    IPR1bits.TMR2IP         = PRIO_INTER_TIMER2;    //
+    IPR1bits.TMR1IP         = PRIO_INTER_TIMER1;    //
 
-	// IEC2
-	IEC2bits.DMA4IE		= 0;				// NC
-	IEC2bits.PMPIE		= 0;				// NC
-	IEC2bits.DMA3IE		= 0;				// NC
-	IEC2bits.C1IE		= 0;				// NC
-	IEC2bits.C1RXIE		= 0;				// NC
-	IEC2bits.SPI2IE		= 0;				// NC
-	IEC2bits.SPI2EIE	= 0;				// NC
+    // IPR2
+    IPR2bits.OSFIP          = 0;                    //
+    IPR2bits.EEIP           = 1;                    // interrupt priority bit
+    IPR2bits.LVDIP          = 0;                    //
+    IPR2bits.CCP2IP         = 0;                    //
 
-	// IEC3
-	IEC3bits.FLTA1IE	= 0;				// NC
-	IEC3bits.RTCIE		= 0;				// NC
-	IEC3bits.DMA5IE		= 0;				// NC
-	IEC3bits.QEI1IE		= ACTIV_INTER_QEI1;             // Interrupt Codeur Droit
-	IEC3bits.PWM1IE		= 0;            		// NC
+    // IPR3
+    IPR3bits.PTIP           = 0;                    // pwm time base
+    IPR3bits.IC3DRIP        = PRIO_INTER_QEI_SENS;  // QEI : Priorité changement de sens
+    IPR3bits.IC2QEIP        = PRIO_INTER_QEI;       // QEI :
+    IPR3bits.IC1IP          = 0;                    // IC1 : priorité
+    IPR3bits.TMR5IP         = PRIO_INTER_TIMER5;    //
 
-	// IEC4
-	IEC4bits.DAC1LIE	= 0;				// NC
-	IEC4bits.DAC1RIE	= 0;				// NC
-	IEC4bits.QEI2IE		= ACTIV_INTER_QEI2;             // Interrupt Codeur Gauche
-	IEC4bits.FLTA2IE	= 0;				// NC
-	IEC4bits.PWM2IE		= 0;				// NC
-	IEC4bits.C1TXIE		= 0;				// NC
-	IEC4bits.DMA7IE		= 0;				// NC
-	IEC4bits.DMA6IE		= 0;				// NC
-	IEC4bits.CRCIE		= 0;				// NC
-	IEC4bits.U2EIE		= 0;				// NC
-	IEC4bits.U1EIE		= 0;				// NC
+
+    //****************
+    // Activation
+    //****************
+    // PIE1
+    PIE1bits.ADIE           = ACTIV_INTER_ADC;      // ADC
+    PIE1bits.RC1IE          = ACTIV_INTER_RX;                    //
+    PIE1bits.TXIE           = ACTIV_INTER_TX;                    //
+    PIE1bits.SSPIE          = 0;                    //
+    PIE1bits.CCP1IE         = 0;                    //
+    PIE1bits.TMR2IE         = ACTIV_INTER_TIMER2;   //
+    PIE1bits.TMR1IE         = ACTIV_INTER_TIMER1;   //
+
+    // PIE2
+    PIE2bits.OSFIE          = 0;                    // Oscillateur fail interrupt
+    PIE2bits.EEIE           = 1;                    // Activation des interruptions
+    PIE2bits.LVDIE          = 0;                    //
+    PIE2bits.CCP2IE         = 0;                    //
+
+    // PIE3
+    PIE3bits.PTIE           = 0;                    // PWM TIME BASE INTERRUPT
+    PIE3bits.IC3DRIE        = ACTIV_INTER_QEI_SENS; //
+    PIE3bits.IC2QEIE        = ACTIV_INTER_QEI;      //
+    PIE3bits.IC1IE          = 0;                    // IC1 interrupt
+    PIE3bits.TMR5IE         = ACTIV_INTER_TIMER5;   //
 }
 
 /******************************************************************************/
@@ -516,5 +271,5 @@ void ConfigADC (void)
 {
 	// #if CONFIG_CAPTEUR_1 == CAPTEUR_ANALOGIQUE
 
-	Nop ();
+	NOP ();
 }
