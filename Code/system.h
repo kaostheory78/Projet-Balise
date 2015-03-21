@@ -17,9 +17,14 @@ extern "C" {
 /******************************************************************************/
 
     #include <p18f4431.h>
+    #include <xc.h>
+    #include <stdio.h>
     #include <stdint.h>
     #include <stdlib.h>
     #include <math.h>
+    #include "uart.h"
+    #include <stdbool.h>
+    #include "interruptions.h"
 
 
 /******************************************************************************/
@@ -28,8 +33,8 @@ extern "C" {
 
 
     //Macro pour les tempos
-#define FOSC             80017142LL      //80000000
-#define FCY             (FOSC/2)
+#define FOSC             16000000LL
+#define FCY             (FOSC/4)
 #define delay_us(x) __delay32(((x*FCY)/1000000L)) // delays x us
 #define delay_ms(x) __delay32(((x*FCY)/1000L))      // delays x ms
 
@@ -95,6 +100,25 @@ extern "C" {
 #define ACTIV_INTER_TX                  DESACTIVE
 
 
+    //Flag interruptions
+#define FLAG_TIMER0                     INTCONbits.TMR0IF
+#define FLAG_TIMER1                     PIR1bits.TMR1IF
+#define FLAG_TIMER2                     PIR1bits.TMR2IF
+#define FLAG_TIMER5                     PIR3bits.TMR5IF 
+
+#define FLAG_INT0                       INTCONbits.INT0IF
+#define FLAG_INT1                       INTCON3bits.INT1IF
+#define FLAG_INT2                       INTCON3bits.INT2IF
+
+#define FLAG_QEI                        PIR3bits.IC2QEIF
+#define FLAG_QEI_SENS                   PIR3bits.IC3DRIF
+
+#define FLAG_ADC                        PIR1bits.ADIF
+
+#define FLAG_RX                         PIR1bits.RCIF
+#define FLAG_TX                         PIR1bits.TXIF
+
+
 /******************************************************************************/
 /*************************** Variables Globales *******************************/
 /******************************************************************************/
@@ -128,6 +152,14 @@ extern "C" {
      * Fonction qui configure toures les broches entrées sorties
      */
     void ConfigPorts (void);
+
+
+    void init_timer_0 ();
+
+
+    /**************************************************************************/
+    /**************************************************************************/
+    /**************************************************************************/
     
 
 

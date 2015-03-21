@@ -5,7 +5,7 @@
 /* Fichier 	: system.c
  * Auteur  	: M1E11
  * Revision	: 1.0
- * Date		: 09 Mars 2014, 17:02
+ * Date		: 09 Mars 2015, 17:02
  *******************************************************************************
  *
  *
@@ -14,15 +14,17 @@
 
 #include "system.h"
 
+
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
 
 void init_system (void)
 {
-    init_clock();
+    //init_clock();
     ConfigPorts();
     ConfigInterrupt();
+    init_timer_0();
     //init_flag();
 }
 
@@ -33,6 +35,19 @@ void init_system (void)
 /******************************************************************************/
 
 
+void init_timer_0 () //1ms
+{
+    T0CONbits.T016BIT = 1;      // Timer 8 bits
+    T0CONbits.T0PS = 0b100;     // Prescaler 1:32
+    T0CONbits.T0CS = 0;         // INternal Clock FOSC/4 = 4 Mhz
+    T0CONbits.PSA = 0;          // Prescaler actif
+
+    TMR0L = 131;                  //32 * 125 * 1/4Mhz = 1 ms
+
+    TMR0ON = 1;                 //TIMER 0 activé
+}
+
+
 /******************************************************************************/
 /********************************** Init Clock ********************************/
 /******************************************************************************/
@@ -41,7 +56,7 @@ void init_clock(void)
 {
     //Oscillateur externe sur osc1 et 2 avec PLL
     OSCCONbits.SCS = 0; //Primary Oscillator
-    while(OSCCONbits.IOFS == 0); //on attends que la pll soit stable
+    //while(OSCCONbits.IOFS == 0); //on attends que la pll soit stable
 }
 
 /******************************************************************************/
@@ -156,13 +171,13 @@ void ConfigPorts (void)
 void ConfigInterrupt (void)
 {
     // INTCON
-    INTCONbits.GIEH	;                               // A FAIRE
-    INTCONbits.GIEL ;                               // A FAIRE
+    INTCONbits.GIEH         = 1;                    // Activation des interruptions de priorités hautes
+    INTCONbits.GIEL         = 1;                    // Activation des interruptions de priorités basses
     INTCONbits.TMR0IE       = ACTIV_INTER_TIMER0;   // Activation du TIMER 0
     INTCONbits.INT0IE       = ACTIV_INTER_INT0;     // INTO : ACTIVATION
     INTCONbits.RBIE         = 0;                    //
-    INTCONbits.TMR0IF       = 0;                    // FLAG TIMER0
-    INTCONbits.INT0IF       = 0;                    // INT0 : FLAG
+    FLAG_TIMER0             = 0;                    // FLAG TIMER0
+    FLAG_INT0               = 0;                    // INT0 : FLAG
     INTCONbits.RBIF         = 0;                    //
 
 
@@ -177,21 +192,21 @@ void ConfigInterrupt (void)
     INTCON3bits.INT1IP      = PRIO_INTER_INT1;      // INT1 : PRIORITE INTERRUPTION
     INTCON3bits.INT2IE      = ACTIV_INTER_INT2;     // INT2 : ACTIVATION
     INTCON3bits.INT2IP      = ACTIV_INTER_INT1;     // INT1 : ACTIVATION
-    INTCON3bits.INT2IF      = 0;                    // INT2 : FLAG
-    INTCON3bits.INT1IF      = 0;                    // INT1 : FLAG
+    FLAG_INT2               = 0;                    // INT2 : FLAG
+    FLAG_INT1               = 0;                    // INT1 : FLAG
 
 
     //****************
     // FLAG
     //****************
     // PIR1 : Remise à zéro des Flags
-    PIR1bits.ADIF           = 0;                    // A/D : FLAG
-    PIR1bits.RCIF           = 0;                    // UART RX : FLAG
-    PIR1bits.TXIF           = 0;                    // UART TX : FLAG
+    FLAG_ADC                = 0;                    // A/D : FLAG
+    FLAG_RX                 = 0;                    // UART RX : FLAG
+    FLAG_TX                 = 0;                    // UART TX : FLAG
     PIR1bits.SSPIF          = 0;                    //
     PIR1bits.CCP1IF         = 0;                    //
-    PIR1bits.TMR2IF         = 0;                    // TMR2 : FLAG
-    PIR1bits.TMR1IF         = 0;                    // TMR1 : FLAG
+    FLAG_TIMER2             = 0;                    // TMR2 : FLAG
+    FLAG_TIMER1             = 0;                    // TMR1 : FLAG
 
     // PIR2 : remise à zéro des flags
     PIR2bits.OSFIF          = 0;                    //
@@ -201,10 +216,10 @@ void ConfigInterrupt (void)
 
     // PIR3 : remise à zéro des flags
     PIR3bits.PTIF           = 0;                    //
-    PIR3bits.IC3DRIF        = 0;                    // QEI : FLAG -> changement sens rotation
-    PIR3bits.IC2QEIF        = 0;                    // QEI : FLAG -> Overflow
+    FLAG_QEI_SENS           = 0;                    // QEI : FLAG -> changement sens rotation
+    FLAG_QEI                = 0;                    // QEI : FLAG -> Overflow
     PIR3bits.IC1IF          = 0;                    // QEI : FLAG -> ...
-    PIR3bits.TMR5IF         = 0;
+    FLAG_TIMER5             = 0;                    // TMR5: FLAG
 
 
     //****************
