@@ -1,0 +1,27 @@
+_ConfigInterrupt: CODE, 320 0 136
+i2_interruption_timer1: CODE, 958 0 4
+i2_interrupt_RX: CODE, 938 0 4
+i2_interrupt_TX: CODE, 934 0 4
+_interuption_QEI_sens: CODE, 926 0 4
+i2_interruption_QEI: CODE, 946 0 4
+i2_interruption_timer2: CODE, 954 0 4
+_init_system: CODE, 886 0 14
+_ConfigPorts: CODE, 178 0 142
+i2_subroutine_interruptions: CODE, 646 0 72
+_main: CODE, 900 0 6
+_interruption_timer0: CODE, 718 0 62
+_interruption_timer1: CODE, 922 0 4
+_interruption_QEI: CODE, 930 0 4
+_high_isr: CODE, 8 0 566
+_interruption_timer2: CODE, 918 0 4
+i2_interruption_INT0: CODE, 950 0 4
+__initialization: CODE, 842 0 12
+_init_timer_0: CODE, 864 0 22
+i2_interuption_QEI_sens: CODE, 942 0 4
+_interrupt_RX: CODE, 910 0 4
+_interrupt_TX: CODE, 906 0 4
+_subroutine_interruptions: CODE, 574 0 72
+i2_interruption_timer0: CODE, 780 0 62
+_low_isr: CODE, 24 0 150
+_interruption_INT0: CODE, 914 0 4
+Total: 1372
