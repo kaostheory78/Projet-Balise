@@ -86,7 +86,7 @@ void subroutine_interruptions (bool priorite)
     {
         interrupt_RX();
     }
-    else if (FLAG_TX == true && ACTIV_INTER_TX == true && priorite == PRIO_INTER_RX)
+    else if (FLAG_TX == true && ACTIV_INTER_TX == true && priorite == PRIO_INTER_TX)
     {
         interrupt_TX();
     }
@@ -117,7 +117,7 @@ void interruption_timer0 ()
         else
             led = true;
 
-        PORTBbits.RB0 = led;
+        //PORTBbits.RB0 = led;
         compteur = 0;
     }
 }
@@ -178,6 +178,10 @@ void interrupt_ADC ()
 void interrupt_RX()
 {
     FLAG_RX = false;
+    //CREN = 0;
+    uint8_t temp = RCREG;
+    PutcUART(temp);
+    //CREN = 1;
 }
 
 void interrupt_TX()

@@ -84,6 +84,8 @@ int main(int argc, char** argv)
 
     init_system ();
 
+    config_uart (115200);
+    
     while(1);
 
     return (EXIT_SUCCESS);

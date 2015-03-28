@@ -70,17 +70,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _interrupt_TX `(v ~T0 @X0 0 ef ]
 "7125 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic18f4431.h
 [v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
-"1164
-[s S43 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S43 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"1174
-[s S44 :3 `uc 1 :1 `uc 1 ]
-[n S44 . . CCP2_PA2 ]
-"1163
-[u S42 `S43 1 `S44 1 ]
-[n S42 . . . ]
-"1179
-[v _PORTBbits `VS42 ~T0 @X0 0 e@3969 ]
 "7377
 [s S390 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S390 . INT1IF INT2IF . INT1IE INT2IE . INT1IP INT2IP ]
@@ -92,6 +81,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S389 . . . ]
 "7398
 [v _INTCON3bits `VS389 ~T0 @X0 0 e@4080 ]
+"8060
+[v _CREN `Vb ~T0 @X0 0 e@32092 ]
+"5105
+[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
+"46 uart.h
+[v _PutcUART `(v ~T0 @X0 0 ef1`uc ]
+"1164 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic18f4431.h
+[s S43 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S43 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+"1174
+[s S44 :3 `uc 1 :1 `uc 1 ]
+[n S44 . . CCP2_PA2 ]
+"1163
+[u S42 `S43 1 `S44 1 ]
+[n S42 . . . ]
+"1179
+[v _PORTBbits `VS42 ~T0 @X0 0 e@3969 ]
 [; ;pic18f4431.h: 44: extern volatile unsigned char DFLTCON @ 0xF60;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic18f4431.h
 [; ;pic18f4431.h: 46: asm("DFLTCON equ 0F60h");
@@ -4506,8 +4512,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 460  ]
 "85
 [e :U 459 ]
-[; ;interruptions.c: 85: else if ( PIR1bits.RCIF == 1 && 0b0 == 1 && priorite == 0b0)
-[e $ ! && && == -> . . _PIR1bits 0 5 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 0 `i 461  ]
+[; ;interruptions.c: 85: else if ( PIR1bits.RCIF == 1 && 0b1 == 1 && priorite == 0b0)
+[e $ ! && && == -> . . _PIR1bits 0 5 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 0 `i 461  ]
 [; ;interruptions.c: 86: {
 "86
 {
@@ -4591,9 +4597,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 "118
 [e = F4769 -> -> 1 `i `uc ]
 [e :U 467 ]
-[; ;interruptions.c: 120: PORTBbits.RB0 = led;
-"120
-[e = . . _PORTBbits 0 0 F4769 ]
 [; ;interruptions.c: 121: compteur = 0;
 "121
 [e = F4770 -> -> 0 `i `ui ]
@@ -4741,21 +4744,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interruptions.c: 180: PIR1bits.RCIF = 0;
 "180
 [e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-[; ;interruptions.c: 181: }
+[; ;interruptions.c: 181: CREN = 0;
 "181
-[e :UE 477 ]
-}
+[e = _CREN -> -> 0 `i `b ]
+"182
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;interruptions.c: 182: uint8_t temp = RCREG;
+[e = _temp _RCREG ]
+[; ;interruptions.c: 183: PutcUART(temp);
+"183
+[e ( _PutcUART (1 _temp ]
+[; ;interruptions.c: 184: PORTBbits.RB0 = 1;
 "184
-[v _interrupt_TX `(v ~T0 @X0 1 ef ]
-{
-[; ;interruptions.c: 183: void interrupt_TX()
-[; ;interruptions.c: 184: {
-[e :U _interrupt_TX ]
-[f ]
-[; ;interruptions.c: 185: PIR1bits.TXIF = 0;
+[e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
+[; ;interruptions.c: 185: CREN = 1;
 "185
-[e = . . _PIR1bits 0 4 -> -> 0 `i `uc ]
+[e = _CREN -> -> 1 `i `b ]
 [; ;interruptions.c: 186: }
 "186
+[e :UE 477 ]
+}
+"189
+[v _interrupt_TX `(v ~T0 @X0 1 ef ]
+{
+[; ;interruptions.c: 188: void interrupt_TX()
+[; ;interruptions.c: 189: {
+[e :U _interrupt_TX ]
+[f ]
+[; ;interruptions.c: 190: PIR1bits.TXIF = 0;
+"190
+[e = . . _PIR1bits 0 4 -> -> 0 `i `uc ]
+[; ;interruptions.c: 191: }
+"191
 [e :UE 478 ]
 }

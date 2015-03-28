@@ -5861,10 +5861,8 @@ BAUDCONbits.BRG16 = 1;
 
 BAUDCONbits.ABDEN = 0;
 
-
-
-
-SPBRG = calcul_baud(vitesse_com);
+# 48
+SPBRG = 35;
 
 
 
@@ -5879,16 +5877,16 @@ uint16_t calcul_baud (uint32_t baud)
 switch (baud)
 {
 case 115200 :
-return 34;
+return 35;
 default :
-return (uint16_t) ((((16000000LL/4)/baud)/4) - 1);
+return (uint16_t) (16000000LL/(4 * (baud + 1)));
 }
 }
 
-# 86
+# 87
 void PutcUART (uint8_t octet)
 {
-while (PIR1bits.TXIF == 1);
+while (PIR1bits.TXIF == 0);
 TXREG = octet;
 }
 

@@ -44,7 +44,8 @@ void config_uart (uint16_t vitesse_com)
     #ifdef FOSC_40MHz
         SPBRG = 86;         // 115200 bauds : - 0,22 % d'erreur
     #else
-        SPBRG = calcul_baud(vitesse_com);             // 115200 bauds : + 0,79 % d'erreur
+        //SPBRG = 34;
+        SPBRG = 35;// 115200 bauds : + 0,79 % d'erreur
     #endif
 
     // RCSTA
@@ -59,9 +60,9 @@ uint16_t calcul_baud (uint32_t baud)
     switch (baud)
     {
         case 115200 :
-            return 34;
+            return 35;
         default :
-            return (uint16_t) (((FCY/baud)/4) - 1);
+            return (uint16_t) (FOSC/(4 * (baud + 1)));
     }
 }
 
@@ -85,7 +86,7 @@ uint16_t calcul_baud (uint32_t baud)
 
 void PutcUART (uint8_t octet)
 {
-    while (PIR1bits.TXIF == 1);
+    while (PIR1bits.TXIF == 0);
     TXREG = octet;
 }
 

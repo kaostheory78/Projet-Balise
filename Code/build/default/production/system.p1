@@ -5103,9 +5103,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.c: 258: PIE1bits.ADIE = 0b0;
 "258
 [e = . . _PIE1bits 0 6 -> -> 0 `i `uc ]
-[; ;system.c: 259: PIE1bits.RC1IE = 0b0;
+[; ;system.c: 259: PIE1bits.RC1IE = 0b1;
 "259
-[e = . . _PIE1bits 2 1 -> -> 0 `i `uc ]
+[e = . . _PIE1bits 2 1 -> -> 1 `i `uc ]
 [; ;system.c: 260: PIE1bits.TXIE = 0b0;
 "260
 [e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]

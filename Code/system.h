@@ -96,7 +96,7 @@ extern "C" {
 
 #define ACTIV_INTER_ADC                 DESACTIVE   //
 
-#define ACTIV_INTER_RX                  DESACTIVE
+#define ACTIV_INTER_RX                  ACTIVE
 #define ACTIV_INTER_TX                  DESACTIVE
 
 

@@ -5885,7 +5885,7 @@ interruption_INT0();
 }
 
 # 85
-else if ( PIR1bits.RCIF == 1 && 0b0 == 1 && priorite == 0b0)
+else if ( PIR1bits.RCIF == 1 && 0b1 == 1 && priorite == 0b0)
 {
 interrupt_RX();
 }
@@ -5913,7 +5913,7 @@ led = 0;
 else
 led = 1;
 
-PORTBbits.RB0 = led;
+
 compteur = 0;
 }
 }
@@ -5974,6 +5974,11 @@ PIR1bits.ADIF = 0;
 void interrupt_RX()
 {
 PIR1bits.RCIF = 0;
+CREN = 0;
+uint8_t temp = RCREG;
+PutcUART(temp);
+PORTBbits.RB0 = 1;
+CREN = 1;
 }
 
 void interrupt_TX()

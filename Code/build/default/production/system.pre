@@ -6046,7 +6046,7 @@ IPR3bits.TMR5IP = 0b0;
 
 # 258
 PIE1bits.ADIE = 0b0;
-PIE1bits.RC1IE = 0b0;
+PIE1bits.RC1IE = 0b1;
 PIE1bits.TXIE = 0b0;
 PIE1bits.SSPIE = 0;
 PIE1bits.CCP1IE = 0;
