@@ -5760,35 +5760,47 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 29 "uart.h"
-void config_uart (uint16_t vitesse_com);
-
-# 39
-uint16_t calcul_baud (uint32_t baud);
-
-# 46
-void PutcUART (uint8_t octet);
-
-# 53
-void PutsUART (const char *chaine);
-
-# 61
-void Puts2UART (uint8_t *chaine, uint16_t taille_chaine);
-
-# 69
-char *IntToC (int16_t nb);
-
-# 77
-char *LongToC (int32_t nb);
-
-# 84
-void PutIntUART (int16_t nb);
-
-# 91
-void PutLongUART (int32_t nb);
-
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.21\include\stdbool.h"
 typedef unsigned char bool;
+
+# 32 "uart.h"
+typedef struct
+{
+uint8_t buffer_uart[11];
+bool transmission_en_cours;
+uint8_t indice;
+
+}_buf;
+
+# 46
+void init_uart_logiciel ();
+
+# 54
+void config_uart (uint16_t vitesse_com);
+
+# 64
+uint16_t calcul_baud (uint32_t baud);
+
+# 71
+void PutcUART (uint8_t channel, uint8_t octet);
+
+# 78
+void PutsUART (uint8_t type_uart, const char *chaine);
+
+# 86
+void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
+
+# 94
+char *IntToC (int16_t nb);
+
+# 102
+char *LongToC (int32_t nb);
+
+# 109
+void PutIntUART (uint8_t type_uart, int16_t nb);
+
+# 116
+void PutLongUART (uint8_t type_uart, int32_t nb);
 
 # 28 "interruptions.h"
 void subroutine_interruptions (bool priorite);
@@ -5829,20 +5841,24 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 135 "system.h"
+# 130 "system.h"
+extern _buf uart_logiciel;
+
+# 140
 void init_system (void);
 
-# 141
+# 146
 void init_clock(void);
 
-# 148
+# 153
 void ConfigInterrupt (void);
 
-# 154
+# 159
 void ConfigPorts (void);
 
 
 void init_timer_0 ();
+void init_timer_1 ();
 
 # 27 "interruptions.c"
 void interrupt high_isr(void)
@@ -5871,7 +5887,7 @@ else if ( INTCONbits.TMR0IF == 1 && 0b1 == 1 && priorite == 0b1)
 {
 interruption_timer0();
 }
-else if ( PIR1bits.TMR1IF == 1 && 0b0 == 1 && priorite == 0b0)
+else if ( PIR1bits.TMR1IF == 1 && 0b1 == 1 && priorite == 0b1)
 {
 interruption_timer1();
 }
@@ -5900,27 +5916,39 @@ interrupt_TX();
 void interruption_timer0 ()
 {
 INTCONbits.TMR0IF = 0;
-static bool led = 0;
-static uint16_t compteur = 0;
-
 TMR0L = 131;
+}
 
+void interruption_timer1()
+{
+PIR1bits.TMR1IF = 0;
+TMR1 = 65535 - 810;
+
+
+static uint32_t compteur = 0;
+static bool led = 0;
 compteur++;
-if (compteur > 1000)
+
 {
 if (led == 1)
 led = 0;
 else
 led = 1;
 
-
+PORTBbits.RB0 = led;
 compteur = 0;
 }
+
+if (uart_logiciel.transmission_en_cours == 1)
+{
+PORTCbits.RC5 = uart_logiciel.buffer_uart[uart_logiciel.indice];
+uart_logiciel.indice++;
+
+if (uart_logiciel.indice > 10)
+uart_logiciel.transmission_en_cours = 0;
 }
 
-void interruption_timer1()
-{
-PIR1bits.TMR1IF = 0;
+# 143
 }
 
 void interruption_timer2()
@@ -5974,11 +6002,9 @@ PIR1bits.ADIF = 0;
 void interrupt_RX()
 {
 PIR1bits.RCIF = 0;
-CREN = 0;
+
 uint8_t temp = RCREG;
-PutcUART(temp);
-PORTBbits.RB0 = 1;
-CREN = 1;
+
 }
 
 void interrupt_TX()

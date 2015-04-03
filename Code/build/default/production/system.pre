@@ -5760,35 +5760,47 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 29 "uart.h"
-void config_uart (uint16_t vitesse_com);
-
-# 39
-uint16_t calcul_baud (uint32_t baud);
-
-# 46
-void PutcUART (uint8_t octet);
-
-# 53
-void PutsUART (const char *chaine);
-
-# 61
-void Puts2UART (uint8_t *chaine, uint16_t taille_chaine);
-
-# 69
-char *IntToC (int16_t nb);
-
-# 77
-char *LongToC (int32_t nb);
-
-# 84
-void PutIntUART (int16_t nb);
-
-# 91
-void PutLongUART (int32_t nb);
-
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.21\include\stdbool.h"
 typedef unsigned char bool;
+
+# 32 "uart.h"
+typedef struct
+{
+uint8_t buffer_uart[11];
+bool transmission_en_cours;
+uint8_t indice;
+
+}_buf;
+
+# 46
+void init_uart_logiciel ();
+
+# 54
+void config_uart (uint16_t vitesse_com);
+
+# 64
+uint16_t calcul_baud (uint32_t baud);
+
+# 71
+void PutcUART (uint8_t channel, uint8_t octet);
+
+# 78
+void PutsUART (uint8_t type_uart, const char *chaine);
+
+# 86
+void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
+
+# 94
+char *IntToC (int16_t nb);
+
+# 102
+char *LongToC (int32_t nb);
+
+# 109
+void PutIntUART (uint8_t type_uart, int16_t nb);
+
+# 116
+void PutLongUART (uint8_t type_uart, int32_t nb);
 
 # 28 "interruptions.h"
 void subroutine_interruptions (bool priorite);
@@ -5829,20 +5841,24 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 135 "system.h"
+# 130 "system.h"
+extern _buf uart_logiciel;
+
+# 140
 void init_system (void);
 
-# 141
+# 146
 void init_clock(void);
 
-# 148
+# 153
 void ConfigInterrupt (void);
 
-# 154
+# 159
 void ConfigPorts (void);
 
 
 void init_timer_0 ();
+void init_timer_1 ();
 
 # 22 "system.c"
 void init_system (void)
@@ -5851,10 +5867,11 @@ void init_system (void)
 ConfigPorts();
 ConfigInterrupt();
 init_timer_0();
+init_uart_logiciel();
 
 }
 
-# 38
+# 39
 void init_timer_0 ()
 {
 T0CONbits.T016BIT = 1;
@@ -5867,7 +5884,24 @@ TMR0L = 131;
 TMR0ON = 1;
 }
 
-# 55
+void init_timer_1 ()
+{
+T1CONbits.RD16 = 1;
+T1CONbits.T1RUN = 0;
+T1CONbits.TMR1CS = 0;
+T1CONbits.T1OSCEN = 1;
+T1CONbits.T1CKPS0 = 0;
+T1CONbits.T1CKPS1 = 0;
+
+TMR1 = 65519;
+
+
+TMR1ON = 1;
+
+
+}
+
+# 72
 void init_clock(void)
 {
 
@@ -5875,7 +5909,7 @@ OSCCONbits.SCS = 0;
 
 }
 
-# 68
+# 85
 void ConfigPorts (void)
 {
 
@@ -5923,7 +5957,7 @@ TRISEbits.RE0 = 0;
 TRISEbits.RE1 = 0;
 TRISEbits.RE2 = 0;
 
-# 121
+# 138
 LATA0 = 0;
 LATA1 = 0;
 LATA2 = 0;
@@ -5969,7 +6003,7 @@ LATE1 = 0;
 LATE2 = 0;
 }
 
-# 171
+# 188
 void ConfigInterrupt (void)
 {
 
@@ -5997,7 +6031,7 @@ INTCON3bits.INT2IP = 0b0;
 INTCON3bits.INT2IF = 0;
 INTCON3bits.INT1IF = 0;
 
-# 203
+# 220
 PIR1bits.ADIF = 0;
 PIR1bits.RCIF = 0;
 PIR1bits.TXIF = 0;
@@ -6019,7 +6053,7 @@ PIR3bits.IC2QEIF = 0;
 PIR3bits.IC1IF = 0;
 PIR3bits.TMR5IF = 0;
 
-# 229
+# 246
 RCONbits.IPEN = 1;
 
 
@@ -6029,7 +6063,7 @@ IPR1bits.TX1IP = 0b0;
 IPR1bits.SSPIP = 0;
 IPR1bits.CCP1IP = 0;
 IPR1bits.TMR2IP = 0b0;
-IPR1bits.TMR1IP = 0b0;
+IPR1bits.TMR1IP = 0b1;
 
 
 IPR2bits.OSFIP = 0;
@@ -6044,14 +6078,14 @@ IPR3bits.IC2QEIP = 0b1;
 IPR3bits.IC1IP = 0;
 IPR3bits.TMR5IP = 0b0;
 
-# 258
+# 275
 PIE1bits.ADIE = 0b0;
 PIE1bits.RC1IE = 0b1;
 PIE1bits.TXIE = 0b0;
 PIE1bits.SSPIE = 0;
 PIE1bits.CCP1IE = 0;
 PIE1bits.TMR2IE = 0b0;
-PIE1bits.TMR1IE = 0b0;
+PIE1bits.TMR1IE = 0b1;
 
 
 PIE2bits.OSFIE = 0;
@@ -6067,10 +6101,26 @@ PIE3bits.IC1IE = 0;
 PIE3bits.TMR5IE = 0b0;
 }
 
-# 285
+# 302
 void ConfigADC (void)
 {
 
 
 asm(" nop");
+}
+
+void config_pwm ()
+{
+PTCON0bits.PTOPS = 2;
+PTCON0bits.PTCKPS = 0b11;
+PTCON0bits.PTMOD = 0;
+
+PTCON1bits.PTEN = 1;
+PTCON1bits.PTDIR = 0;
+
+PWMCON0bits.PMOD3 = 1;
+PWMCON0bits.PWMEN = 0b111;
+
+PWMCON1bits.UDIS = 0;
+
 }

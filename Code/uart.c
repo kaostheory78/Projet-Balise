@@ -21,6 +21,13 @@
 /******************************************************************************/
 /******************************************************************************/
 
+_buf uart_logiciel;
+_uart_recption uart_reception;
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
 void config_uart (uint16_t vitesse_com)
 {
     //¨Pins initialisé plus tôt
@@ -55,6 +62,20 @@ void config_uart (uint16_t vitesse_com)
 
 }
 
+void init_uart_logiciel ()
+{
+    uart_logiciel.transmission_en_cours = false;
+    uart_logiciel.indice = 0;
+    init_timer_1();
+}
+
+void init_uart_reception()
+{
+    uart_reception.buffer_plein = false;
+    uart_reception.buffer_vide = true;
+    uart_reception.indice = 0;
+}
+
 uint16_t calcul_baud (uint32_t baud)
 {
     switch (baud)
@@ -79,32 +100,63 @@ uint16_t calcul_baud (uint32_t baud)
     }
 }*/
 
+void traitement_reception ()
+{
+    if (uart_reception.buffer_vide != true)
+    {
+        while (uart_reception.indice > 0)
+        {
+            PutcUART(UART_LOGICIEL, uart_reception.buffer_reeption[0]);
+        }
+    }
+}
+
 
 /******************************************************************************/
 /************************* FONCTIONS DE COM UART ******************************/
 /******************************************************************************/
 
-void PutcUART (uint8_t octet)
+void PutcUART (uint8_t type_uart, uint8_t octet)
 {
-    while (PIR1bits.TXIF == 0);
-    TXREG = octet;
+    if (type_uart == UART_BLUETOOTH)
+    {
+        while (PIR1bits.TXIF == 0);
+        TXREG = octet;
+    }
+    else
+    {
+        while(uart_logiciel.transmission_en_cours == true);
+        uart_logiciel.indice = 0;
+        uart_logiciel.buffer_uart[10] = 1;  //bit de stop
+        uart_logiciel.buffer_uart[9] = 1;   //bit de stop
+        uart_logiciel.buffer_uart[8] = octet / 128;
+        uart_logiciel.buffer_uart[7] = (octet - uart_logiciel.buffer_uart[8] * 128) / 64;
+        uart_logiciel.buffer_uart[6] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64) / 32;
+        uart_logiciel.buffer_uart[5] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32) / 16;
+        uart_logiciel.buffer_uart[4] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16) / 8;
+        uart_logiciel.buffer_uart[3] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8) / 4;
+        uart_logiciel.buffer_uart[2] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8 - uart_logiciel.buffer_uart[3]) / 2;
+        uart_logiciel.buffer_uart[1] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8 - uart_logiciel.buffer_uart[3] - uart_logiciel.buffer_uart[2]);
+        uart_logiciel.buffer_uart[0] = 0;
+        uart_logiciel.transmission_en_cours = true;
+    }
 }
 
-void PutsUART (const char *chaine)
+void PutsUART (uint8_t type_uart, const char *chaine)
 {
     do
     {
-        PutcUART (*chaine);
+        PutcUART (type_uart, *chaine);
     }
     while (*chaine++);
 }
 
-void Puts2UART (uint8_t *chaine, uint16_t taille_chaine)
+void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine)
 {
     int i;
     for (i=0; i<taille_chaine; i++)
     {
-        PutcUART (chaine[i]);
+        PutcUART (type_uart, chaine[i]);
     }
 }
 
@@ -190,14 +242,14 @@ char *LongToC (int32_t nb)
     return out;
 }
 
-void PutIntUART (int16_t nb)
+void PutIntUART (uint8_t type_uart, int16_t nb)
 {
-    PutsUART (IntToC (nb));
+    PutsUART (type_uart, IntToC (nb));
 }
 
-void PutLongUART (int32_t nb)
+void PutLongUART (uint8_t type_uart, int32_t nb)
 {
-    PutsUART (LongToC (nb));
+    PutsUART (type_uart, LongToC (nb));
 }
 
 

@@ -7,7 +7,7 @@
  * Date		: 18 Mars 2015, 22:09
  *******************************************************************************
  *
- *
+ *  
  ******************************************************************************/
 
 
@@ -104,27 +104,43 @@ void subroutine_interruptions (bool priorite)
 void interruption_timer0 ()
 {
     FLAG_TIMER0 = false;
+    TMR0L = 131;    
+}
+
+void interruption_timer1()
+{
+    FLAG_TIMER1 = false;
+    TMR1 =  65535  - 810;
+    
+    
+   /* static uint32_t compteur = 0;
     static bool led = false;
-    static uint16_t compteur = 0;
-
-    TMR0L = 131;  
-
-    compteur++;
-    if (compteur > 1000)
+        compteur++;
+    //if (compteur > 9600)
     {
         if (led == true)
             led = false;
         else
             led = true;
 
-        //PORTBbits.RB0 = led;
+        PORTBbits.RB0 = led;
         compteur = 0;
-    }
-}
+    }*/
+    
+        
+    if (uart_logiciel.transmission_en_cours == true)
+    {
+        TX_LOGICIEL = uart_logiciel.buffer_uart[uart_logiciel.indice];
+        uart_logiciel.indice++;
 
-void interruption_timer1()
-{
-    FLAG_TIMER1 = false;
+        if (uart_logiciel.indice > 10)
+            uart_logiciel.transmission_en_cours = false;
+    }
+
+
+
+    
+    
 }
 
 void interruption_timer2()
@@ -178,9 +194,17 @@ void interrupt_ADC ()
 void interrupt_RX()
 {
     FLAG_RX = false;
-    //CREN = 0;
-    uint8_t temp = RCREG;
-    PutcUART(temp);
+    
+    if (uart_reception.indice < 100)
+    {
+        uart_reception.indice++;
+        uart_reception.buffer_reeption[uart_reception.indice] = RCREG;
+    }
+    else
+    {
+        uart_reception.buffer_plein = true;
+        uint8_t temp = RCREG;
+    }
     //CREN = 1;
 }
 

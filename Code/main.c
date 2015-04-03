@@ -83,10 +83,19 @@ int main(int argc, char** argv)
 {
 
     init_system ();
+    int i = 0;
 
     config_uart (115200);
-    
+    PORTCbits.RC0 = 1;
+
+    while(1)
+    {
+        PutcUART(UART_LOGICIEL, '1');
+    }
+
     while(1);
+    
+
 
     return (EXIT_SUCCESS);
 }

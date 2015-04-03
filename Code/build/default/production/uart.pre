@@ -5760,35 +5760,47 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 29 "uart.h"
-void config_uart (uint16_t vitesse_com);
-
-# 39
-uint16_t calcul_baud (uint32_t baud);
-
-# 46
-void PutcUART (uint8_t octet);
-
-# 53
-void PutsUART (const char *chaine);
-
-# 61
-void Puts2UART (uint8_t *chaine, uint16_t taille_chaine);
-
-# 69
-char *IntToC (int16_t nb);
-
-# 77
-char *LongToC (int32_t nb);
-
-# 84
-void PutIntUART (int16_t nb);
-
-# 91
-void PutLongUART (int32_t nb);
-
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.21\include\stdbool.h"
 typedef unsigned char bool;
+
+# 32 "uart.h"
+typedef struct
+{
+uint8_t buffer_uart[11];
+bool transmission_en_cours;
+uint8_t indice;
+
+}_buf;
+
+# 46
+void init_uart_logiciel ();
+
+# 54
+void config_uart (uint16_t vitesse_com);
+
+# 64
+uint16_t calcul_baud (uint32_t baud);
+
+# 71
+void PutcUART (uint8_t channel, uint8_t octet);
+
+# 78
+void PutsUART (uint8_t type_uart, const char *chaine);
+
+# 86
+void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
+
+# 94
+char *IntToC (int16_t nb);
+
+# 102
+char *LongToC (int32_t nb);
+
+# 109
+void PutIntUART (uint8_t type_uart, int16_t nb);
+
+# 116
+void PutLongUART (uint8_t type_uart, int32_t nb);
 
 # 28 "interruptions.h"
 void subroutine_interruptions (bool priorite);
@@ -5829,26 +5841,33 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 135 "system.h"
+# 130 "system.h"
+extern _buf uart_logiciel;
+
+# 140
 void init_system (void);
 
-# 141
+# 146
 void init_clock(void);
 
-# 148
+# 153
 void ConfigInterrupt (void);
 
-# 154
+# 159
 void ConfigPorts (void);
 
 
 void init_timer_0 ();
+void init_timer_1 ();
 
 # 24 "uart.c"
+_buf uart_logiciel;
+
+# 30
 void config_uart (uint16_t vitesse_com)
 {
 
-# 32
+# 38
 TXSTAbits.TXEN = 1;
 TXSTAbits.TX9 = 0;
 TXSTAbits.SYNC = 0;
@@ -5861,7 +5880,7 @@ BAUDCONbits.BRG16 = 1;
 
 BAUDCONbits.ABDEN = 0;
 
-# 48
+# 54
 SPBRG = 35;
 
 
@@ -5870,6 +5889,13 @@ RCSTAbits.SPEN = 1;
 RCSTAbits.RX9 = 0;
 RCSTAbits.CREN = 1;
 
+}
+
+void init_uart_logiciel ()
+{
+uart_logiciel.transmission_en_cours = 0;
+uart_logiciel.indice = 0;
+init_timer_1();
 }
 
 uint16_t calcul_baud (uint32_t baud)
@@ -5883,28 +5909,48 @@ return (uint16_t) (16000000LL/(4 * (baud + 1)));
 }
 }
 
-# 87
-void PutcUART (uint8_t octet)
+# 100
+void PutcUART (uint8_t type_uart, uint8_t octet)
+{
+if (type_uart == 0)
 {
 while (PIR1bits.TXIF == 0);
 TXREG = octet;
 }
+else
+{
+while(uart_logiciel.transmission_en_cours == 1);
+uart_logiciel.indice = 0;
+uart_logiciel.buffer_uart[10] = 1;
+uart_logiciel.buffer_uart[9] = 1;
+uart_logiciel.buffer_uart[8] = octet / 128;
+uart_logiciel.buffer_uart[7] = (octet - uart_logiciel.buffer_uart[8] * 128) / 64;
+uart_logiciel.buffer_uart[6] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64) / 32;
+uart_logiciel.buffer_uart[5] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32) / 16;
+uart_logiciel.buffer_uart[4] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16) / 8;
+uart_logiciel.buffer_uart[3] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8) / 4;
+uart_logiciel.buffer_uart[2] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8 - uart_logiciel.buffer_uart[3]) / 2;
+uart_logiciel.buffer_uart[1] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8 - uart_logiciel.buffer_uart[3] - uart_logiciel.buffer_uart[2]);
+uart_logiciel.buffer_uart[0] = 0;
+uart_logiciel.transmission_en_cours = 1;
+}
+}
 
-void PutsUART (const char *chaine)
+void PutsUART (uint8_t type_uart, const char *chaine)
 {
 do
 {
-PutcUART (*chaine);
+PutcUART (type_uart, *chaine);
 }
 while (*chaine++);
 }
 
-void Puts2UART (uint8_t *chaine, uint16_t taille_chaine)
+void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine)
 {
 int i;
 for (i=0; i<taille_chaine; i++)
 {
-PutcUART (chaine[i]);
+PutcUART (type_uart, chaine[i]);
 }
 }
 
@@ -5990,13 +6036,13 @@ out[j++] = '\0';
 return out;
 }
 
-void PutIntUART (int16_t nb)
+void PutIntUART (uint8_t type_uart, int16_t nb)
 {
-PutsUART (IntToC (nb));
+PutsUART (type_uart, IntToC (nb));
 }
 
-void PutLongUART (int32_t nb)
+void PutLongUART (uint8_t type_uart, int32_t nb)
 {
-PutsUART (LongToC (nb));
+PutsUART (type_uart, LongToC (nb));
 }
 

@@ -25,7 +25,8 @@ void init_system (void)
     ConfigPorts();
     ConfigInterrupt();
     init_timer_0();
-    //init_flag();
+    init_uart_logiciel();
+    init_uart_reception();
 }
 
 
@@ -47,6 +48,22 @@ void init_timer_0 () //1ms
     TMR0ON = 1;                 //TIMER 0 activé
 }
 
+void init_timer_1 ()
+{
+    T1CONbits.RD16 = 1; //entrée 8 bits
+    T1CONbits.T1RUN = 0; //Clock != timer1
+    T1CONbits.TMR1CS = 0; //Fin = FOSC/4
+    T1CONbits.T1OSCEN = 1;
+    T1CONbits.T1CKPS0 = 0; //prescaler
+    T1CONbits.T1CKPS1 = 0; //prescaler
+
+    TMR1 = 65519;
+
+    //enable timer
+    TMR1ON = 1;
+
+
+}
 
 /******************************************************************************/
 /********************************** Init Clock ********************************/
@@ -93,7 +110,7 @@ void ConfigPorts (void)
         TRISCbits.RC2       = 0;        // OUTPUT DIGIT : ENABLE CAPTEUR
         TRISCbits.RC3       = 1;        // INPUT  DIGIT : CAPTEUR 1
         TRISCbits.RC4       = 0;        //
-        TRISCbits.RC5       = 0;        //
+        TRISCbits.RC5       = 0;        //  UART Logiciel
         TRISCbits.RC6       = 1;        //  OUTPUT UART : TX (déclaré input pour configuration uart -> datasheet)
         TRISCbits.RC7       = 1;        //  INPUT  UART : RX
 
@@ -287,4 +304,20 @@ void ConfigADC (void)
 	// #if CONFIG_CAPTEUR_1 == CAPTEUR_ANALOGIQUE
 
 	NOP ();
+}
+
+void config_pwm ()
+{
+    PTCON0bits.PTOPS = 2;       // Postcale = 3
+    PTCON0bits.PTCKPS = 0b11;   // Prescale 1:64
+    PTCON0bits.PTMOD  = 0;      // free running mode
+
+    PTCON1bits.PTEN = 1;        // PWM time base is ON
+    PTCON1bits.PTDIR = 0;       // Compteur
+
+    PWMCON0bits.PMOD3 = 1;      // PWM6 et 7 indépendants
+    PWMCON0bits.PWMEN = 0b111;  // Tous les pwm impaires
+
+    PWMCON1bits.UDIS = 0;       // MAJ duty cycle et period enable
+    
 }

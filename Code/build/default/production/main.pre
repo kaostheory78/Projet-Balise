@@ -5760,35 +5760,47 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 29 "uart.h"
-void config_uart (uint16_t vitesse_com);
-
-# 39
-uint16_t calcul_baud (uint32_t baud);
-
-# 46
-void PutcUART (uint8_t octet);
-
-# 53
-void PutsUART (const char *chaine);
-
-# 61
-void Puts2UART (uint8_t *chaine, uint16_t taille_chaine);
-
-# 69
-char *IntToC (int16_t nb);
-
-# 77
-char *LongToC (int32_t nb);
-
-# 84
-void PutIntUART (int16_t nb);
-
-# 91
-void PutLongUART (int32_t nb);
-
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.21\include\stdbool.h"
 typedef unsigned char bool;
+
+# 32 "uart.h"
+typedef struct
+{
+uint8_t buffer_uart[11];
+bool transmission_en_cours;
+uint8_t indice;
+
+}_buf;
+
+# 46
+void init_uart_logiciel ();
+
+# 54
+void config_uart (uint16_t vitesse_com);
+
+# 64
+uint16_t calcul_baud (uint32_t baud);
+
+# 71
+void PutcUART (uint8_t channel, uint8_t octet);
+
+# 78
+void PutsUART (uint8_t type_uart, const char *chaine);
+
+# 86
+void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
+
+# 94
+char *IntToC (int16_t nb);
+
+# 102
+char *LongToC (int32_t nb);
+
+# 109
+void PutIntUART (uint8_t type_uart, int16_t nb);
+
+# 116
+void PutLongUART (uint8_t type_uart, int32_t nb);
 
 # 28 "interruptions.h"
 void subroutine_interruptions (bool priorite);
@@ -5829,20 +5841,24 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 135 "system.h"
+# 130 "system.h"
+extern _buf uart_logiciel;
+
+# 140
 void init_system (void);
 
-# 141
+# 146
 void init_clock(void);
 
-# 148
+# 153
 void ConfigInterrupt (void);
 
-# 154
+# 159
 void ConfigPorts (void);
 
 
 void init_timer_0 ();
+void init_timer_1 ();
 
 
 # 19 "main.c"
@@ -5913,10 +5929,19 @@ int main(int argc, char** argv)
 {
 
 init_system ();
+int i = 0;
 
 config_uart (115200);
+PORTCbits.RC0 = 1;
+
+while(1)
+{
+PutcUART(1, '1');
+}
 
 while(1);
+
+
 
 return (0);
 }

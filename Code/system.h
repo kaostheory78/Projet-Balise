@@ -34,9 +34,12 @@ extern "C" {
 
     //Macro pour les tempos
 #define FOSC             16000000LL
+#define _XTAL_FREQ       16000000
 #define FCY             (FOSC/4)
-#define delay_us(x) __delay32(((x*FCY)/1000000L)) // delays x us
-#define delay_ms(x) __delay32(((x*FCY)/1000L))      // delays x ms
+#define __delay_us(x) _delay((unsigned long)((x)*(_XTAL_FREQ/4000000.0)))
+#define __delay_ms(x) _delay((unsigned long)((x)*(_XTAL_FREQ/4000.0)))
+//#define delay_us(x) __delay32(((x*FCY)/1000000L)) // delays x us
+//#define delay_ms(x) __delay32(((x*FCY)/1000L))      // delays x ms
 
 
 /******************************************************************************/
@@ -53,6 +56,7 @@ extern "C" {
 /********************************  PORT CARTE   *******************************/
 /******************************************************************************/
 
+#define TX_LOGICIEL             PORTCbits.RC5
 
 /******************************************************************************/
 /******************************* Interruptions  *******************************/
@@ -65,7 +69,7 @@ extern "C" {
 
     // Niveau de priorité
 #define PRIO_INTER_TIMER0               PRIORITE_HAUTE  //
-#define PRIO_INTER_TIMER1               PRIORITE_BASSE  //
+#define PRIO_INTER_TIMER1               PRIORITE_HAUTE  //
 #define PRIO_INTER_TIMER2               PRIORITE_BASSE  //
 #define PRIO_INTER_TIMER5               PRIORITE_BASSE  //
 
@@ -83,7 +87,7 @@ extern "C" {
 
     // ACtivations des interruptions
 #define ACTIV_INTER_TIMER0              ACTIVE      //
-#define ACTIV_INTER_TIMER1              DESACTIVE   //
+#define ACTIV_INTER_TIMER1              ACTIVE   //
 #define ACTIV_INTER_TIMER2              DESACTIVE   //
 #define ACTIV_INTER_TIMER5              DESACTIVE   //
 
@@ -123,6 +127,7 @@ extern "C" {
 /*************************** Variables Globales *******************************/
 /******************************************************************************/
 
+extern _buf uart_logiciel;
 
 /******************************************************************************/
 /****************************** Prototypes ************************************/
@@ -155,6 +160,7 @@ extern "C" {
 
 
     void init_timer_0 ();
+    void init_timer_1 ();
 
 
     /**************************************************************************/
