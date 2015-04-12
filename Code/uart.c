@@ -91,23 +91,26 @@ uint16_t calcul_baud (uint32_t baud)
 /*************************** GESTION DE L'UART ********************************/
 /******************************************************************************/
 
-/*void vider_buffer_reception_uart (void)
-{
-    uint8_t buf;
-    //while(U2STAbits.URXDA == 1)
-    {
-        buf = RCREG;
-    }
-}*/
+
 
 void traitement_reception ()
 {
+    int i = 0;
+    PutsUART(UART_LOGICIEL, "IL y a ");
+    PutIntUART(UART_LOGICIEL, uart_logiciel.indice);
+    PutsUART(UART_LOGICIEL, " dans le buffer \n\n\r");
     if (uart_reception.buffer_vide != true)
     {
-        while (uart_reception.indice > 0)
+        PIE1bits.RC1IE = false;
+        for (i = 0 ; i < uart_reception.indice ; i++)
         {
-            PutcUART(UART_LOGICIEL, uart_reception.buffer_reeption[0]);
+            PutcUART(UART_LOGICIEL, uart_reception.buffer_reeption[i]);
+
         }
+        uart_reception.buffer_vide = true;
+        uart_reception.buffer_plein = false;
+        uart_reception.indice = 0;
+        PIE1bits.RC1IE = true;
     }
 }
 
@@ -127,7 +130,7 @@ void PutcUART (uint8_t type_uart, uint8_t octet)
     {
         while(uart_logiciel.transmission_en_cours == true);
         uart_logiciel.indice = 0;
-        uart_logiciel.buffer_uart[10] = 1;  //bit de stop
+        uart_logiciel.buffer_uart[10] = 1;   //bit de stop
         uart_logiciel.buffer_uart[9] = 1;   //bit de stop
         uart_logiciel.buffer_uart[8] = octet / 128;
         uart_logiciel.buffer_uart[7] = (octet - uart_logiciel.buffer_uart[8] * 128) / 64;
@@ -135,8 +138,8 @@ void PutcUART (uint8_t type_uart, uint8_t octet)
         uart_logiciel.buffer_uart[5] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32) / 16;
         uart_logiciel.buffer_uart[4] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16) / 8;
         uart_logiciel.buffer_uart[3] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8) / 4;
-        uart_logiciel.buffer_uart[2] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8 - uart_logiciel.buffer_uart[3]) / 2;
-        uart_logiciel.buffer_uart[1] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8 - uart_logiciel.buffer_uart[3] - uart_logiciel.buffer_uart[2]);
+        uart_logiciel.buffer_uart[2] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8 - uart_logiciel.buffer_uart[3] * 4) / 2;
+        uart_logiciel.buffer_uart[1] = (octet - uart_logiciel.buffer_uart[8] * 128 - uart_logiciel.buffer_uart[7] * 64 - uart_logiciel.buffer_uart[6] * 32 - uart_logiciel.buffer_uart[5] * 16 - uart_logiciel.buffer_uart[4] * 8 - uart_logiciel.buffer_uart[3] * 4 - uart_logiciel.buffer_uart[2] * 2);
         uart_logiciel.buffer_uart[0] = 0;
         uart_logiciel.transmission_en_cours = true;
     }

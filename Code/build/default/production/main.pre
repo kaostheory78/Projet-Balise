@@ -5772,35 +5772,47 @@ uint8_t indice;
 
 }_buf;
 
-# 46
-void init_uart_logiciel ();
+typedef struct
+{
+uint8_t buffer_reeption[100];
+uint8_t indice;
+bool buffer_plein;
+bool buffer_vide;
+}_uart_recption;
 
 # 54
+void init_uart_logiciel ();
+
+# 62
 void config_uart (uint16_t vitesse_com);
 
-# 64
+# 72
 uint16_t calcul_baud (uint32_t baud);
 
-# 71
+# 79
 void PutcUART (uint8_t channel, uint8_t octet);
 
-# 78
+# 86
 void PutsUART (uint8_t type_uart, const char *chaine);
 
-# 86
+# 94
 void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
 
-# 94
+# 102
 char *IntToC (int16_t nb);
 
-# 102
+# 110
 char *LongToC (int32_t nb);
 
-# 109
+# 117
 void PutIntUART (uint8_t type_uart, int16_t nb);
 
-# 116
+# 124
 void PutLongUART (uint8_t type_uart, int32_t nb);
+
+
+void init_uart_reception();
+void traitement_reception ();
 
 # 28 "interruptions.h"
 void subroutine_interruptions (bool priorite);
@@ -5841,24 +5853,43 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 130 "system.h"
+# 22 "moteur.h"
+typedef struct _codeur
+{
+uint16_t ancien;
+uint16_t nouvelle;
+int32_t ecart;
+double angle;
+}_position;
+
+# 34
+void config_QEI ();
+void get_valeur_codeur (void);
+void conversion_angle ();
+
+# 141 "system.h"
 extern _buf uart_logiciel;
-
-# 140
-void init_system (void);
-
-# 146
-void init_clock(void);
+extern _uart_recption uart_reception;
+extern _position position;
 
 # 153
-void ConfigInterrupt (void);
+void init_system (void);
 
 # 159
+void init_clock(void);
+
+# 166
+void ConfigInterrupt (void);
+
+# 172
 void ConfigPorts (void);
 
 
 void init_timer_0 ();
 void init_timer_1 ();
+
+void envoit_pwm (double valeur);
+void config_pwm ();
 
 
 # 19 "main.c"
@@ -5931,14 +5962,35 @@ int main(int argc, char** argv)
 init_system ();
 int i = 0;
 
-config_uart (115200);
-PORTCbits.RC0 = 1;
+PORTDbits.RD1 = 1;
+
+PORTBbits.RB0 = 1;
+PutsUART(1, "\n\n\n\n\r TEST : \n\n\n\n\r");
+
 
 while(1)
 {
-PutcUART(1, '1');
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+_delay((unsigned long)((10)*(16000000/4000.0)));
+
+get_valeur_codeur();
+conversion_angle();
+
+PutLongUART(1, position.nouvelle);
+PutcUART(1, '\t');
+PutLongUART(1, position.angle);
+PutcUART(1, '\r');
 }
 
+# 152
 while(1);
 
 

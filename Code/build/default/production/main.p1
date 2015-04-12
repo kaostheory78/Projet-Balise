@@ -1,45 +1,46 @@
 Version 3.2 HI-TECH Software Intermediate Code
 [p mainexit ]
-"140 system.h
+"153 system.h
 [v _init_system `(v ~T0 @X0 0 ef ]
-"54 uart.h
-[v _config_uart `(v ~T0 @X0 0 ef1`ui ]
-"1234 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic18f4431.h
-[s S46 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S46 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
-"1244
-[s S47 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S47 . T1OSO T1OSI CCP1 INT0 INT1 INT2 TX RX ]
-"1254
-[s S48 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S48 . T13CKI CCP2 . T0CKI SDA SCK CK DT ]
-"1264
-[s S49 :1 `uc 1 :1 `uc 1 ]
-[n S49 . . NOT_FLTA ]
-"1268
-[s S50 :2 `uc 1 :1 `uc 1 ]
-[n S50 . . NOT_FLTB ]
-"1272
-[s S51 :6 `uc 1 :1 `uc 1 ]
-[n S51 . . NOT_SS ]
-"1276
-[s S52 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S52 . . nFLTA nFLTB T5CKI SDI SCL nSS SDO ]
-"1286
-[s S53 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
-[n S53 . . FLTA FLTB . SS ]
-"1293
-[s S54 :2 `uc 1 :1 `uc 1 ]
-[n S54 . . PA1 ]
-"1297
-[s S55 :1 `uc 1 :1 `uc 1 ]
-[n S55 . . PA2 ]
-"1233
-[u S45 `S46 1 `S47 1 `S48 1 `S49 1 `S50 1 `S51 1 `S52 1 `S53 1 `S54 1 `S55 1 ]
-[n S45 . . . . . . . . . . . ]
-"1302
-[v _PORTCbits `VS45 ~T0 @X0 0 e@3970 ]
-"71 uart.h
+"1502 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic18f4431.h
+[s S57 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S57 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
+"1512
+[s S58 :7 `uc 1 :1 `uc 1 ]
+[n S58 . . SS2 ]
+"1501
+[u S56 `S57 1 `S58 1 ]
+[n S56 . . . ]
+"1517
+[v _PORTDbits `VS56 ~T0 @X0 0 e@3971 ]
+"1164
+[s S43 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S43 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
+"1174
+[s S44 :3 `uc 1 :1 `uc 1 ]
+[n S44 . . CCP2_PA2 ]
+"1163
+[u S42 `S43 1 `S44 1 ]
+[n S42 . . . ]
+"1179
+[v _PORTBbits `VS42 ~T0 @X0 0 e@3969 ]
+"86 uart.h
+[v _PutsUART `(v ~T0 @X0 0 ef2`uc`*Cuc ]
+"144 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic18.h
+[v __delay `(v ~T0 @X0 0 ef1`ul ]
+[p i __delay ]
+"35 moteur.h
+[v _get_valeur_codeur `(v ~T0 @X0 0 ef ]
+"36
+[v _conversion_angle `(v ~T0 @X0 0 ef ]
+"124 uart.h
+[v _PutLongUART `(v ~T0 @X0 0 ef2`uc`l ]
+"28 moteur.h
+[s S448 `ui 1 `ui 1 `l 1 `d 1 ]
+[n S448 _codeur ancien nouvelle ecart angle ]
+"143 system.h
+[v _position `S448 ~T0 @X0 0 e ]
+"79 uart.h
 [v _PutcUART `(v ~T0 @X0 0 ef2`uc`uc ]
 [; ;pic18f4431.h: 44: extern volatile unsigned char DFLTCON @ 0xF60;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.21\include\pic18f4431.h
@@ -4311,16 +4312,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;uart.h: 35: bool transmission_en_cours;
 [; ;uart.h: 36: uint8_t indice;
 [; ;uart.h: 38: }_buf;
-[; ;uart.h: 46: void init_uart_logiciel ();
-[; ;uart.h: 54: void config_uart (uint16_t vitesse_com);
-[; ;uart.h: 64: uint16_t calcul_baud (uint32_t baud);
-[; ;uart.h: 71: void PutcUART (uint8_t channel, uint8_t octet);
-[; ;uart.h: 78: void PutsUART (uint8_t type_uart, const char *chaine);
-[; ;uart.h: 86: void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
-[; ;uart.h: 94: char *IntToC (int16_t nb);
-[; ;uart.h: 102: char *LongToC (int32_t nb);
-[; ;uart.h: 109: void PutIntUART (uint8_t type_uart, int16_t nb);
-[; ;uart.h: 116: void PutLongUART (uint8_t type_uart, int32_t nb);
+[; ;uart.h: 40: typedef struct
+[; ;uart.h: 41: {
+[; ;uart.h: 42: uint8_t buffer_reeption[100];
+[; ;uart.h: 43: uint8_t indice;
+[; ;uart.h: 44: bool buffer_plein;
+[; ;uart.h: 45: bool buffer_vide;
+[; ;uart.h: 46: }_uart_recption;
+[; ;uart.h: 54: void init_uart_logiciel ();
+[; ;uart.h: 62: void config_uart (uint16_t vitesse_com);
+[; ;uart.h: 72: uint16_t calcul_baud (uint32_t baud);
+[; ;uart.h: 79: void PutcUART (uint8_t channel, uint8_t octet);
+[; ;uart.h: 86: void PutsUART (uint8_t type_uart, const char *chaine);
+[; ;uart.h: 94: void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
+[; ;uart.h: 102: char *IntToC (int16_t nb);
+[; ;uart.h: 110: char *LongToC (int32_t nb);
+[; ;uart.h: 117: void PutIntUART (uint8_t type_uart, int16_t nb);
+[; ;uart.h: 124: void PutLongUART (uint8_t type_uart, int32_t nb);
+[; ;uart.h: 127: void init_uart_reception();
+[; ;uart.h: 128: void traitement_reception ();
 [; ;interruptions.h: 28: void subroutine_interruptions (bool priorite);
 [; ;interruptions.h: 34: void interruption_timer0 ();
 [; ;interruptions.h: 40: void interruption_timer1 ();
@@ -4334,13 +4344,27 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interruptions.h: 91: void interrupt_ADC ();
 [; ;interruptions.h: 98: void interrupt_RX();
 [; ;interruptions.h: 103: void interrupt_TX();
-[; ;system.h: 130: extern _buf uart_logiciel;
-[; ;system.h: 140: void init_system (void);
-[; ;system.h: 146: void init_clock(void);
-[; ;system.h: 153: void ConfigInterrupt (void);
-[; ;system.h: 159: void ConfigPorts (void);
-[; ;system.h: 162: void init_timer_0 ();
-[; ;system.h: 163: void init_timer_1 ();
+[; ;moteur.h: 22: typedef struct _codeur
+[; ;moteur.h: 23: {
+[; ;moteur.h: 24: uint16_t ancien;
+[; ;moteur.h: 25: uint16_t nouvelle;
+[; ;moteur.h: 26: int32_t ecart;
+[; ;moteur.h: 27: double angle;
+[; ;moteur.h: 28: }_position;
+[; ;moteur.h: 34: void config_QEI ();
+[; ;moteur.h: 35: void get_valeur_codeur (void);
+[; ;moteur.h: 36: void conversion_angle ();
+[; ;system.h: 141: extern _buf uart_logiciel;
+[; ;system.h: 142: extern _uart_recption uart_reception;
+[; ;system.h: 143: extern _position position;
+[; ;system.h: 153: void init_system (void);
+[; ;system.h: 159: void init_clock(void);
+[; ;system.h: 166: void ConfigInterrupt (void);
+[; ;system.h: 172: void ConfigPorts (void);
+[; ;system.h: 175: void init_timer_0 ();
+[; ;system.h: 176: void init_timer_1 ();
+[; ;system.h: 178: void envoit_pwm (double valeur);
+[; ;system.h: 179: void config_pwm ();
 "19 main.c
 [p x OSC=HSPLL ]
 "21
@@ -4431,39 +4455,89 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _i `i ~T0 @X0 1 a ]
 [; ;main.c: 86: int i = 0;
 [e = _i -> 0 `i ]
-[; ;main.c: 88: config_uart (115200);
+[; ;main.c: 88: PORTDbits.RD1 = 1;
 "88
-[e ( _config_uart (1 -> -> 115200 `l `ui ]
-[; ;main.c: 89: PORTCbits.RC0 = 1;
-"89
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 91: while(1)
+[e = . . _PORTDbits 0 1 -> -> 1 `i `uc ]
+[; ;main.c: 90: PORTBbits.RB0 = 1;
+"90
+[e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
+[; ;main.c: 91: PutsUART(1, "\n\n\n\n\r TEST : \n\n\n\n\r");
 "91
-[e :U 449 ]
-[; ;main.c: 92: {
-"92
-{
-[; ;main.c: 93: PutcUART(1, '1');
-"93
-[e ( _PutcUART (2 , -> -> 1 `i `uc -> -> 49 `ui `uc ]
+[e ( _PutsUART (2 , -> -> 1 `i `uc :s 1C ]
+[; ;main.c: 94: while(1)
 "94
-}
-[e :U 448 ]
-"91
-[e $U 449  ]
-[e :U 450 ]
-[; ;main.c: 94: }
-[; ;main.c: 96: while(1);
-"96
-[e :U 452 ]
 [e :U 451 ]
-[e $U 452  ]
-[e :U 453 ]
-[; ;main.c: 100: return (0);
+[; ;main.c: 95: {
+"95
+{
+[; ;main.c: 96: _delay((unsigned long)((10)*(16000000/4000.0)));
+"96
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 97: _delay((unsigned long)((10)*(16000000/4000.0)));
+"97
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 98: _delay((unsigned long)((10)*(16000000/4000.0)));
+"98
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 99: _delay((unsigned long)((10)*(16000000/4000.0)));
+"99
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 100: _delay((unsigned long)((10)*(16000000/4000.0)));
 "100
-[e ) -> 0 `i ]
-[e $UE 447  ]
-[; ;main.c: 101: }
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 101: _delay((unsigned long)((10)*(16000000/4000.0)));
 "101
-[e :UE 447 ]
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 102: _delay((unsigned long)((10)*(16000000/4000.0)));
+"102
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 103: _delay((unsigned long)((10)*(16000000/4000.0)));
+"103
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 104: _delay((unsigned long)((10)*(16000000/4000.0)));
+"104
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 105: _delay((unsigned long)((10)*(16000000/4000.0)));
+"105
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+[; ;main.c: 107: get_valeur_codeur();
+"107
+[e ( _get_valeur_codeur ..  ]
+[; ;main.c: 108: conversion_angle();
+"108
+[e ( _conversion_angle ..  ]
+[; ;main.c: 110: PutLongUART(1, position.nouvelle);
+"110
+[e ( _PutLongUART (2 , -> -> 1 `i `uc -> . _position 1 `l ]
+[; ;main.c: 111: PutcUART(1, '\t');
+"111
+[e ( _PutcUART (2 , -> -> 1 `i `uc -> -> 9 `ui `uc ]
+[; ;main.c: 112: PutLongUART(1, position.angle);
+"112
+[e ( _PutLongUART (2 , -> -> 1 `i `uc -> . _position 3 `l ]
+[; ;main.c: 113: PutcUART(1, '\r');
+"113
+[e ( _PutcUART (2 , -> -> 1 `i `uc -> -> 13 `ui `uc ]
+"114
 }
+[e :U 450 ]
+"94
+[e $U 451  ]
+[e :U 452 ]
+[; ;main.c: 114: }
+[; ;main.c: 152: while(1);
+"152
+[e :U 454 ]
+[e :U 453 ]
+[e $U 454  ]
+[e :U 455 ]
+[; ;main.c: 156: return (0);
+"156
+[e ) -> 0 `i ]
+[e $UE 449  ]
+[; ;main.c: 157: }
+"157
+[e :UE 449 ]
+}
+[a 1C 10 10 10 10 13 32 84 69 83 84 32 58 32 10 10 10 10 13 0 ]
+

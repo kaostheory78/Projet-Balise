@@ -5772,35 +5772,47 @@ uint8_t indice;
 
 }_buf;
 
-# 46
-void init_uart_logiciel ();
+typedef struct
+{
+uint8_t buffer_reeption[100];
+uint8_t indice;
+bool buffer_plein;
+bool buffer_vide;
+}_uart_recption;
 
 # 54
+void init_uart_logiciel ();
+
+# 62
 void config_uart (uint16_t vitesse_com);
 
-# 64
+# 72
 uint16_t calcul_baud (uint32_t baud);
 
-# 71
+# 79
 void PutcUART (uint8_t channel, uint8_t octet);
 
-# 78
+# 86
 void PutsUART (uint8_t type_uart, const char *chaine);
 
-# 86
+# 94
 void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
 
-# 94
+# 102
 char *IntToC (int16_t nb);
 
-# 102
+# 110
 char *LongToC (int32_t nb);
 
-# 109
+# 117
 void PutIntUART (uint8_t type_uart, int16_t nb);
 
-# 116
+# 124
 void PutLongUART (uint8_t type_uart, int32_t nb);
+
+
+void init_uart_reception();
+void traitement_reception ();
 
 # 28 "interruptions.h"
 void subroutine_interruptions (bool priorite);
@@ -5841,24 +5853,43 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 130 "system.h"
+# 22 "moteur.h"
+typedef struct _codeur
+{
+uint16_t ancien;
+uint16_t nouvelle;
+int32_t ecart;
+double angle;
+}_position;
+
+# 34
+void config_QEI ();
+void get_valeur_codeur (void);
+void conversion_angle ();
+
+# 141 "system.h"
 extern _buf uart_logiciel;
-
-# 140
-void init_system (void);
-
-# 146
-void init_clock(void);
+extern _uart_recption uart_reception;
+extern _position position;
 
 # 153
-void ConfigInterrupt (void);
+void init_system (void);
 
 # 159
+void init_clock(void);
+
+# 166
+void ConfigInterrupt (void);
+
+# 172
 void ConfigPorts (void);
 
 
 void init_timer_0 ();
 void init_timer_1 ();
+
+void envoit_pwm (double valeur);
+void config_pwm ();
 
 # 22 "system.c"
 void init_system (void)
@@ -5868,10 +5899,13 @@ ConfigPorts();
 ConfigInterrupt();
 init_timer_0();
 init_uart_logiciel();
-
+init_uart_reception();
+config_uart (115200);
+config_pwm();
+config_QEI();
 }
 
-# 39
+# 42
 void init_timer_0 ()
 {
 T0CONbits.T016BIT = 1;
@@ -5901,7 +5935,7 @@ TMR1ON = 1;
 
 }
 
-# 72
+# 75
 void init_clock(void)
 {
 
@@ -5909,7 +5943,7 @@ OSCCONbits.SCS = 0;
 
 }
 
-# 85
+# 88
 void ConfigPorts (void)
 {
 
@@ -5957,7 +5991,7 @@ TRISEbits.RE0 = 0;
 TRISEbits.RE1 = 0;
 TRISEbits.RE2 = 0;
 
-# 138
+# 141
 LATA0 = 0;
 LATA1 = 0;
 LATA2 = 0;
@@ -6003,7 +6037,7 @@ LATE1 = 0;
 LATE2 = 0;
 }
 
-# 188
+# 191
 void ConfigInterrupt (void)
 {
 
@@ -6031,7 +6065,7 @@ INTCON3bits.INT2IP = 0b0;
 INTCON3bits.INT2IF = 0;
 INTCON3bits.INT1IF = 0;
 
-# 220
+# 223
 PIR1bits.ADIF = 0;
 PIR1bits.RCIF = 0;
 PIR1bits.TXIF = 0;
@@ -6053,12 +6087,12 @@ PIR3bits.IC2QEIF = 0;
 PIR3bits.IC1IF = 0;
 PIR3bits.TMR5IF = 0;
 
-# 246
+# 249
 RCONbits.IPEN = 1;
 
 
 IPR1bits.ADIP = 0b0;
-IPR1bits.RC1IP = 0b0;
+IPR1bits.RC1IP = 0b1;
 IPR1bits.TX1IP = 0b0;
 IPR1bits.SSPIP = 0;
 IPR1bits.CCP1IP = 0;
@@ -6078,7 +6112,7 @@ IPR3bits.IC2QEIP = 0b1;
 IPR3bits.IC1IP = 0;
 IPR3bits.TMR5IP = 0b0;
 
-# 275
+# 278
 PIE1bits.ADIE = 0b0;
 PIE1bits.RC1IE = 0b1;
 PIE1bits.TXIE = 0b0;
@@ -6095,13 +6129,13 @@ PIE2bits.CCP2IE = 0;
 
 
 PIE3bits.PTIE = 0;
-PIE3bits.IC3DRIE = 0b1;
-PIE3bits.IC2QEIE = 0b1;
+PIE3bits.IC3DRIE = 0b0;
+PIE3bits.IC2QEIE = 0b0;
 PIE3bits.IC1IE = 0;
 PIE3bits.TMR5IE = 0b0;
 }
 
-# 302
+# 305
 void ConfigADC (void)
 {
 
@@ -6109,18 +6143,3 @@ void ConfigADC (void)
 asm(" nop");
 }
 
-void config_pwm ()
-{
-PTCON0bits.PTOPS = 2;
-PTCON0bits.PTCKPS = 0b11;
-PTCON0bits.PTMOD = 0;
-
-PTCON1bits.PTEN = 1;
-PTCON1bits.PTDIR = 0;
-
-PWMCON0bits.PMOD3 = 1;
-PWMCON0bits.PWMEN = 0b111;
-
-PWMCON1bits.UDIS = 0;
-
-}

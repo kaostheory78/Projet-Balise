@@ -27,6 +27,9 @@ void init_system (void)
     init_timer_0();
     init_uart_logiciel();
     init_uart_reception();
+    config_uart (115200);
+    config_pwm();
+    config_QEI();
 }
 
 
@@ -95,28 +98,28 @@ void ConfigPorts (void)
         TRISAbits.RA7       = 1;        // OSC1
 
         // PORT B
-        TRISBbits.RB0       = 0;        // OUTPUT DIGIT : LED1
-        TRISBbits.RB1       = 0;        // OUTPUT DIGIT : LED2
+        TRISBbits.RB0       = 0;        // 
+        TRISBbits.RB1       = 0;        // OUTPUT PWM : PWM MOTEUR
         TRISBbits.RB2       = 0;        //
         TRISBbits.RB3       = 0;        //
-        TRISBbits.RB4       = 0;        //
-        TRISBbits.RB5       = 0;        //
+        TRISBbits.RB4       = 0;        // OUTPUT DIGIT : LED 5
+        TRISBbits.RB5       = 0;        // OUTPUT DIGIT : LED 6
         TRISBbits.RB6       = 0;        //  PGC
         TRISBbits.RB7       = 0;        //  PGC
 
         // PORT C
-        TRISCbits.RC0       = 0;        // OUTPUT DIGIT : RESET BLUETOOTH
+        TRISCbits.RC0       = 0;        //
         TRISCbits.RC1       = 0;        //
         TRISCbits.RC2       = 0;        // OUTPUT DIGIT : ENABLE CAPTEUR
         TRISCbits.RC3       = 1;        // INPUT  DIGIT : CAPTEUR 1
-        TRISCbits.RC4       = 0;        //
-        TRISCbits.RC5       = 0;        //  UART Logiciel
-        TRISCbits.RC6       = 1;        //  OUTPUT UART : TX (déclaré input pour configuration uart -> datasheet)
-        TRISCbits.RC7       = 1;        //  INPUT  UART : RX
+        TRISCbits.RC4       = 0;        // OUTPUT DIGIT : STATUT BLUETOOTH
+        TRISCbits.RC5       = 0;        // UART Logiciel
+        TRISCbits.RC6       = 1;        // OUTPUT UART : TX (déclaré input pour configuration uart -> datasheet)
+        TRISCbits.RC7       = 1;        // INPUT  UART : RX
 
         // PORT D
         TRISDbits.RD0       = 0;        //
-        TRISDbits.RD1       = 0;        //
+        TRISDbits.RD1       = 0;        // OUTPUT DIGIT : RESET BL
         TRISDbits.RD2       = 1;        // I²C : SDA
         TRISDbits.RD3       = 0;        // I²C : SCL
         TRISDbits.RD4       = 0;        // OUTPUT DIGIT : SENS MOTEUR
@@ -306,18 +309,3 @@ void ConfigADC (void)
 	NOP ();
 }
 
-void config_pwm ()
-{
-    PTCON0bits.PTOPS = 2;       // Postcale = 3
-    PTCON0bits.PTCKPS = 0b11;   // Prescale 1:64
-    PTCON0bits.PTMOD  = 0;      // free running mode
-
-    PTCON1bits.PTEN = 1;        // PWM time base is ON
-    PTCON1bits.PTDIR = 0;       // Compteur
-
-    PWMCON0bits.PMOD3 = 1;      // PWM6 et 7 indépendants
-    PWMCON0bits.PWMEN = 0b111;  // Tous les pwm impaires
-
-    PWMCON1bits.UDIS = 0;       // MAJ duty cycle et period enable
-    
-}

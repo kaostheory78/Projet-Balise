@@ -85,14 +85,70 @@ int main(int argc, char** argv)
     init_system ();
     int i = 0;
 
-    config_uart (115200);
-    PORTCbits.RC0 = 1;
+    ENABLE_BLUETOOTH = 1;
+
+  LED0 = 1;
+    PutsUART(UART_LOGICIEL, "\n\n\n\n\r TEST : \n\n\n\n\r");
+
 
     while(1)
     {
-        PutcUART(UART_LOGICIEL, '1');
+        __delay_ms(10);
+        __delay_ms(10);
+        __delay_ms(10);
+        __delay_ms(10);
+        __delay_ms(10);
+        __delay_ms(10);
+        __delay_ms(10);
+        __delay_ms(10);
+        __delay_ms(10);
+        __delay_ms(10);
+
+        get_valeur_codeur();
+        conversion_angle();
+
+        PutLongUART(UART_LOGICIEL, position.nouvelle);
+        PutcUART(UART_LOGICIEL, '\t');
+        PutLongUART(UART_LOGICIEL, position.angle);
+        PutcUART(UART_LOGICIEL, '\r');
     }
 
+   /* ENABLE_BLUETOOTH = 0;
+
+    PORTCbits.RC2 = 1;
+
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    ENABLE_BLUETOOTH = 1;
+    while(STATUS_BLUETOOTH == 0);
+    LED0 = 0;
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+
+
+    PutsUART(UART_BLUETOOTH, "Bonjour les amis !!! =)");
+
+
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    __delay_ms(10);
+    
+
+    traitement_reception();*/
+
+    //envoit_pwm(50);
     while(1);
     
 

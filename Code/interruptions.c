@@ -104,29 +104,13 @@ void subroutine_interruptions (bool priorite)
 void interruption_timer0 ()
 {
     FLAG_TIMER0 = false;
-    TMR0L = 131;    
+    TMR0L = 131;
 }
 
 void interruption_timer1()
 {
     FLAG_TIMER1 = false;
-    TMR1 =  65535  - 810;
-    
-    
-   /* static uint32_t compteur = 0;
-    static bool led = false;
-        compteur++;
-    //if (compteur > 9600)
-    {
-        if (led == true)
-            led = false;
-        else
-            led = true;
-
-        PORTBbits.RB0 = led;
-        compteur = 0;
-    }*/
-    
+    TMR1 =  65535  - 810; 
         
     if (uart_logiciel.transmission_en_cours == true)
     {
@@ -136,11 +120,8 @@ void interruption_timer1()
         if (uart_logiciel.indice > 10)
             uart_logiciel.transmission_en_cours = false;
     }
-
-
-
-    
-    
+    else
+        TX_LOGICIEL = 1;
 }
 
 void interruption_timer2()
@@ -175,6 +156,7 @@ void interruption_INT2()
 void interruption_QEI()
 {
     FLAG_QEI = false;
+
 }
 
 void interuption_QEI_sens()
@@ -194,11 +176,13 @@ void interrupt_ADC ()
 void interrupt_RX()
 {
     FLAG_RX = false;
+    LED0 = 1;
     
     if (uart_reception.indice < 100)
     {
-        uart_reception.indice++;
         uart_reception.buffer_reeption[uart_reception.indice] = RCREG;
+        uart_reception.buffer_vide = false;
+        uart_reception.indice++;
     }
     else
     {

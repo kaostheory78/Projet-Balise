@@ -25,6 +25,7 @@ extern "C" {
     #include "uart.h"
     #include <stdbool.h>
     #include "interruptions.h"
+    #include "moteur.h"
 
 
 /******************************************************************************/
@@ -42,6 +43,7 @@ extern "C" {
 //#define delay_ms(x) __delay32(((x*FCY)/1000L))      // delays x ms
 
 
+
 /******************************************************************************/
 /********************************* Timers *************************************/
 /******************************************************************************/
@@ -57,6 +59,15 @@ extern "C" {
 /******************************************************************************/
 
 #define TX_LOGICIEL             PORTCbits.RC5
+
+#define SENS_MOTEUR             PORTDbits.RD4
+
+#define ENABLE_BLUETOOTH        PORTDbits.RD1
+#define STATUS_BLUETOOTH        PORTCbits.RC4
+
+#define LED0                    PORTBbits.RB0
+#define LED5                    PORTBbits.RB4
+#define LED6                    PORTBbits.RB5
 
 /******************************************************************************/
 /******************************* Interruptions  *******************************/
@@ -82,7 +93,7 @@ extern "C" {
 
 #define PRIO_INTER_ADC                  PRIORITE_BASSE  //
 
-#define PRIO_INTER_RX                   PRIORITE_BASSE
+#define PRIO_INTER_RX                   PRIORITE_HAUTE
 #define PRIO_INTER_TX                   PRIORITE_BASSE
 
     // ACtivations des interruptions
@@ -95,8 +106,8 @@ extern "C" {
 #define ACTIV_INTER_INT1                DESACTIVE   //
 #define ACTIV_INTER_INT2                DESACTIVE   //
 
-#define ACTIV_INTER_QEI                 ACTIVE      //
-#define ACTIV_INTER_QEI_SENS            ACTIVE      //
+#define ACTIV_INTER_QEI                 DESACTIVE      //
+#define ACTIV_INTER_QEI_SENS            DESACTIVE      //
 
 #define ACTIV_INTER_ADC                 DESACTIVE   //
 
@@ -128,6 +139,8 @@ extern "C" {
 /******************************************************************************/
 
 extern _buf uart_logiciel;
+extern _uart_recption uart_reception;
+extern _position position;
 
 /******************************************************************************/
 /****************************** Prototypes ************************************/
@@ -162,6 +175,8 @@ extern _buf uart_logiciel;
     void init_timer_0 ();
     void init_timer_1 ();
 
+    void envoit_pwm (double valeur);
+    void config_pwm ();
 
     /**************************************************************************/
     /**************************************************************************/

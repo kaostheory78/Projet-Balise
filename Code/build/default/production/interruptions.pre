@@ -5772,35 +5772,47 @@ uint8_t indice;
 
 }_buf;
 
-# 46
-void init_uart_logiciel ();
+typedef struct
+{
+uint8_t buffer_reeption[100];
+uint8_t indice;
+bool buffer_plein;
+bool buffer_vide;
+}_uart_recption;
 
 # 54
+void init_uart_logiciel ();
+
+# 62
 void config_uart (uint16_t vitesse_com);
 
-# 64
+# 72
 uint16_t calcul_baud (uint32_t baud);
 
-# 71
+# 79
 void PutcUART (uint8_t channel, uint8_t octet);
 
-# 78
+# 86
 void PutsUART (uint8_t type_uart, const char *chaine);
 
-# 86
+# 94
 void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
 
-# 94
+# 102
 char *IntToC (int16_t nb);
 
-# 102
+# 110
 char *LongToC (int32_t nb);
 
-# 109
+# 117
 void PutIntUART (uint8_t type_uart, int16_t nb);
 
-# 116
+# 124
 void PutLongUART (uint8_t type_uart, int32_t nb);
+
+
+void init_uart_reception();
+void traitement_reception ();
 
 # 28 "interruptions.h"
 void subroutine_interruptions (bool priorite);
@@ -5841,24 +5853,43 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 130 "system.h"
+# 22 "moteur.h"
+typedef struct _codeur
+{
+uint16_t ancien;
+uint16_t nouvelle;
+int32_t ecart;
+double angle;
+}_position;
+
+# 34
+void config_QEI ();
+void get_valeur_codeur (void);
+void conversion_angle ();
+
+# 141 "system.h"
 extern _buf uart_logiciel;
-
-# 140
-void init_system (void);
-
-# 146
-void init_clock(void);
+extern _uart_recption uart_reception;
+extern _position position;
 
 # 153
-void ConfigInterrupt (void);
+void init_system (void);
 
 # 159
+void init_clock(void);
+
+# 166
+void ConfigInterrupt (void);
+
+# 172
 void ConfigPorts (void);
 
 
 void init_timer_0 ();
 void init_timer_1 ();
+
+void envoit_pwm (double valeur);
+void config_pwm ();
 
 # 27 "interruptions.c"
 void interrupt high_isr(void)
@@ -5875,11 +5906,11 @@ subroutine_interruptions(0b0);
 # 43
 void subroutine_interruptions (bool priorite)
 {
-if ( PIR3bits.IC2QEIF == 1 && 0b1 == 1 && priorite == 0b1)
+if ( PIR3bits.IC2QEIF == 1 && 0b0 == 1 && priorite == 0b1)
 {
 interruption_QEI();
 }
-else if ( PIR3bits.IC3DRIF == 1 && 0b1 == 1 && priorite == 0b1)
+else if ( PIR3bits.IC3DRIF == 1 && 0b0 == 1 && priorite == 0b1)
 {
 interuption_QEI_sens();
 }
@@ -5901,7 +5932,7 @@ interruption_INT0();
 }
 
 # 85
-else if ( PIR1bits.RCIF == 1 && 0b1 == 1 && priorite == 0b0)
+else if ( PIR1bits.RCIF == 1 && 0b1 == 1 && priorite == 0b1)
 {
 interrupt_RX();
 }
@@ -5924,21 +5955,6 @@ void interruption_timer1()
 PIR1bits.TMR1IF = 0;
 TMR1 = 65535 - 810;
 
-
-static uint32_t compteur = 0;
-static bool led = 0;
-compteur++;
-
-{
-if (led == 1)
-led = 0;
-else
-led = 1;
-
-PORTBbits.RB0 = led;
-compteur = 0;
-}
-
 if (uart_logiciel.transmission_en_cours == 1)
 {
 PORTCbits.RC5 = uart_logiciel.buffer_uart[uart_logiciel.indice];
@@ -5947,8 +5963,8 @@ uart_logiciel.indice++;
 if (uart_logiciel.indice > 10)
 uart_logiciel.transmission_en_cours = 0;
 }
-
-# 143
+else
+PORTCbits.RC5 = 1;
 }
 
 void interruption_timer2()
@@ -5983,6 +5999,7 @@ INTCON3bits.INT2IF = 0;
 void interruption_QEI()
 {
 PIR3bits.IC2QEIF = 0;
+
 }
 
 void interuption_QEI_sens()
@@ -6002,8 +6019,19 @@ PIR1bits.ADIF = 0;
 void interrupt_RX()
 {
 PIR1bits.RCIF = 0;
+PORTBbits.RB0 = 1;
 
+if (uart_reception.indice < 100)
+{
+uart_reception.buffer_reeption[uart_reception.indice] = RCREG;
+uart_reception.buffer_vide = 0;
+uart_reception.indice++;
+}
+else
+{
+uart_reception.buffer_plein = 1;
 uint8_t temp = RCREG;
+}
 
 }
 
