@@ -59,7 +59,7 @@ extern "C" {
  * @param	: channel	: channel a initialiser (UART_XBEE | UART_AX12)
  * @param	: baud		: vitesse de communication
  */
-void config_uart (uint16_t vitesse_com);
+void config_uart ();
 
 
 /**
@@ -102,12 +102,12 @@ void Puts2UART (uint8_t type_uart, uint8_t *chaine, uint16_t taille_chaine);
 char *IntToC (int16_t nb);
 
 
-/**
- * @brief	: Fonction permettant de convertir un long en chaine de caractere
- * @param	: nb	: nombre a convertir
- * @return	: une chaine contenant le nombre
- */
-char *LongToC (int32_t nb);
+///**
+// * @brief	: Fonction permettant de convertir un long en chaine de caractere
+// * @param	: nb	: nombre a convertir
+// * @return	: une chaine contenant le nombre
+// */
+//char *LongToC (int32_t nb);
 
 
 /**
@@ -117,11 +117,11 @@ char *LongToC (int32_t nb);
 void PutIntUART (uint8_t type_uart, int16_t nb);
 
 
-/**
- * @brief	: Fonction permettant d'afficher un long sur la console
- * @param	: nb	: nombre a afficher
- */
-void PutLongUART (uint8_t type_uart, int32_t nb);
+///**
+// * @brief	: Fonction permettant d'afficher un long sur la console
+// * @param	: nb	: nombre a afficher
+// */
+//void PutLongUART (uint8_t type_uart, int32_t nb);
 
 
 void init_uart_reception();

@@ -105,6 +105,8 @@ void interruption_timer0 ()
 {
     FLAG_TIMER0 = false;
     TMR0L = 131;
+
+    asserv();
 }
 
 void interruption_timer1()
@@ -156,6 +158,16 @@ void interruption_INT2()
 void interruption_QEI()
 {
     FLAG_QEI = false;
+    QEICONbits.QERR = 0;
+
+    if (QEICONbits.UPDOWN == 1)
+    {
+        OVERFLOW_CODEUR++;
+    }
+    else
+    {
+        OVERFLOW_CODEUR--;
+    }
 
 }
 

@@ -27,9 +27,10 @@ void init_system (void)
     init_timer_0();
     init_uart_logiciel();
     init_uart_reception();
-    config_uart (115200);
+    config_uart ();
     config_pwm();
     config_QEI();
+    reglage_PID();
 }
 
 
@@ -72,12 +73,12 @@ void init_timer_1 ()
 /********************************** Init Clock ********************************/
 /******************************************************************************/
 
-void init_clock(void)
-{
-    //Oscillateur externe sur osc1 et 2 avec PLL
-    OSCCONbits.SCS = 0; //Primary Oscillator
-    //while(OSCCONbits.IOFS == 0); //on attends que la pll soit stable
-}
+//void init_clock(void)
+//{
+//    //Oscillateur externe sur osc1 et 2 avec PLL
+//    OSCCONbits.SCS = 0; //Primary Oscillator
+//    //while(OSCCONbits.IOFS == 0); //on attends que la pll soit stable
+//}
 
 /******************************************************************************/
 /************************ Mapping des pins de la carte ************************/

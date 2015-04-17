@@ -26,6 +26,7 @@ extern "C" {
     #include <stdbool.h>
     #include "interruptions.h"
     #include "moteur.h"
+    #include "asserv.h"
 
 
 /******************************************************************************/
@@ -106,7 +107,7 @@ extern "C" {
 #define ACTIV_INTER_INT1                DESACTIVE   //
 #define ACTIV_INTER_INT2                DESACTIVE   //
 
-#define ACTIV_INTER_QEI                 DESACTIVE      //
+#define ACTIV_INTER_QEI                 ACTIVE      //
 #define ACTIV_INTER_QEI_SENS            DESACTIVE      //
 
 #define ACTIV_INTER_ADC                 DESACTIVE   //
@@ -141,6 +142,10 @@ extern "C" {
 extern _buf uart_logiciel;
 extern _uart_recption uart_reception;
 extern _position position;
+extern int8_t  OVERFLOW_CODEUR;
+//extern _coef_PID PID;
+//extern _systeme_asserv VITESSE;
+//extern _erreur ERREUR_VITESSE;
 
 /******************************************************************************/
 /****************************** Prototypes ************************************/

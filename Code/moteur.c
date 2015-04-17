@@ -16,6 +16,7 @@
 
 
 _position position;
+int8_t  OVERFLOW_CODEUR;
 
 /******************************************************************************/
 /******************************************************************************/
@@ -99,13 +100,32 @@ void config_QEI ()
     POSCNTL = 0;
 
     MAXCNTH = (uint8_t) (NOMBRE_DE_TICKS / 256);
-    MAXCNTL = (uint8_t) (NOMBRE_DE_TICKS % 256);    
+    MAXCNTL = (uint8_t) (NOMBRE_DE_TICKS % 256);
+
+    position.ancien = 0;
+    position.ecart = 0;
+    position.nouvelle = 0;
 }
 
 
 void get_valeur_codeur (void)
 {
-    position.nouvelle = POSCNTH * 256 + POSCNTL;
+    static int32_t res = 0;
+    int etat_overflow;
+
+    etat_overflow = OVERFLOW_CODEUR;
+    OVERFLOW_CODEUR = PAS_D_OVERFLOW_CODEUR;
+
+    position.nouvelle = - POSCNTH * 256 - POSCNTL;
+
+    res = (int32_t)( (int32_t) position.nouvelle - (int32_t) position.ancien );
+    if (etat_overflow != PAS_D_OVERFLOW_CODEUR)
+    {
+        res+= (int32_t) etat_overflow * (NOMBRE_DE_TICKS);
+    }
+
+    position.ecart = res;
+    position.ancien = position.nouvelle;
 }
 
 void conversion_angle ()
@@ -114,10 +134,4 @@ void conversion_angle ()
     angle  = (double) (position.nouvelle) / 8000.;
     angle *= 360;
     position.angle = angle;
-}
-
-void asserv_vitesse ()
-{
-
-    
 }

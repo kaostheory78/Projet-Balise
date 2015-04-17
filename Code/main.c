@@ -86,32 +86,9 @@ int main(int argc, char** argv)
     int i = 0;
 
     ENABLE_BLUETOOTH = 1;
+    LED0 = 1;
 
-  LED0 = 1;
-    PutsUART(UART_LOGICIEL, "\n\n\n\n\r TEST : \n\n\n\n\r");
-
-
-    while(1)
-    {
-        __delay_ms(10);
-        __delay_ms(10);
-        __delay_ms(10);
-        __delay_ms(10);
-        __delay_ms(10);
-        __delay_ms(10);
-        __delay_ms(10);
-        __delay_ms(10);
-        __delay_ms(10);
-        __delay_ms(10);
-
-        get_valeur_codeur();
-        conversion_angle();
-
-        PutLongUART(UART_LOGICIEL, position.nouvelle);
-        PutcUART(UART_LOGICIEL, '\t');
-        PutLongUART(UART_LOGICIEL, position.angle);
-        PutcUART(UART_LOGICIEL, '\r');
-    }
+    while(1);
 
    /* ENABLE_BLUETOOTH = 0;
 

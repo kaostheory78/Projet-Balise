@@ -1,188 +1,27 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"28 interruptions.h
-[v _subroutine_interruptions `(v ~T0 @X0 0 ef1`uc ]
-"4215 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[s S206 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S206 . TMR5IF IC1IF IC2QEIF IC3DRIF PTIF ]
-"4222
-[s S207 :1 `uc 1 :1 `uc 1 ]
-[n S207 . . RXBNIF ]
-"4226
-[s S208 :4 `uc 1 :1 `uc 1 ]
-[n S208 . . TXBNIF ]
-"4214
-[u S205 `S206 1 `S207 1 `S208 1 ]
-[n S205 . . . . ]
-"4231
-[v _PIR3bits `VS205 ~T0 @X0 0 e@4004 ]
-"77 interruptions.h
-[v _interruption_QEI `(v ~T0 @X0 0 ef ]
-"83
-[v _interuption_QEI_sens `(v ~T0 @X0 0 ef ]
-"7549 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[s S397 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S397 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
-"7559
-[s S398 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S398 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE GIE ]
-"7569
-[s S399 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S399 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE GIEL GIEH ]
-"7579
-[s S400 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S400 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
-"7589
-[s S401 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S401 . . GIEL GIEH ]
-"7548
-[u S396 `S397 1 `S398 1 `S399 1 `S400 1 `S401 1 ]
-[n S396 . . . . . . ]
-"7595
-[v _INTCONbits `VS396 ~T0 @X0 0 e@4082 ]
-"34 interruptions.h
-[v _interruption_timer0 `(v ~T0 @X0 0 ef ]
-"3826 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[s S181 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S181 . TMR1IF TMR2IF CCP1IF SSPIF TXIF RCIF ADIF ]
-"3835
-[s S182 :4 `uc 1 :1 `uc 1 ]
-[n S182 . . TBIF ]
-"3839
-[s S183 :5 `uc 1 :1 `uc 1 ]
-[n S183 . . RC1IF ]
-"3843
-[s S184 :4 `uc 1 :1 `uc 1 ]
-[n S184 . . TX1IF ]
-"3825
-[u S180 `S181 1 `S182 1 `S183 1 `S184 1 ]
-[n S180 . . . . . ]
-"3848
-[v _PIR1bits `VS180 ~T0 @X0 0 e@3998 ]
-"40 interruptions.h
-[v _interruption_timer1 `(v ~T0 @X0 0 ef ]
-"46
-[v _interruption_timer2 `(v ~T0 @X0 0 ef ]
-"58
-[v _interruption_INT0 `(v ~T0 @X0 0 ef ]
-"98
-[v _interrupt_RX `(v ~T0 @X0 0 ef ]
-"103
-[v _interrupt_TX `(v ~T0 @X0 0 ef ]
-"7130 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[v _TMR0L `Vuc ~T0 @X0 0 e@4054 ]
-"71 asserv.h
-[v _asserv `(v ~T0 @X0 0 ef ]
-"6714 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[v _TMR1 `Vus ~T0 @X0 0 e@4046 ]
-"33 uart.h
-[s S446 `uc -> 11 `i `uc 1 `uc 1 ]
-[n S446 . buffer_uart transmission_en_cours indice ]
-"142 system.h
-[v _uart_logiciel `S446 ~T0 @X0 0 e ]
-"1239 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[s S46 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S46 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
-"1249
-[s S47 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S47 . T1OSO T1OSI CCP1 INT0 INT1 INT2 TX RX ]
-"1259
-[s S48 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S48 . T13CKI CCP2 . T0CKI SDA SCK CK DT ]
-"1269
-[s S49 :1 `uc 1 :1 `uc 1 ]
-[n S49 . . NOT_FLTA ]
-"1273
-[s S50 :2 `uc 1 :1 `uc 1 ]
-[n S50 . . NOT_FLTB ]
-"1277
-[s S51 :6 `uc 1 :1 `uc 1 ]
-[n S51 . . NOT_SS ]
-"1281
-[s S52 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S52 . . nFLTA nFLTB T5CKI SDI SCL nSS SDO ]
-"1291
-[s S53 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
-[n S53 . . FLTA FLTB . SS ]
-"1298
-[s S54 :2 `uc 1 :1 `uc 1 ]
-[n S54 . . PA1 ]
-"1302
-[s S55 :1 `uc 1 :1 `uc 1 ]
-[n S55 . . PA2 ]
-"1238
-[u S45 `S46 1 `S47 1 `S48 1 `S49 1 `S50 1 `S51 1 `S52 1 `S53 1 `S54 1 `S55 1 ]
-[n S45 . . . . . . . . . . . ]
-"1307
-[v _PORTCbits `VS45 ~T0 @X0 0 e@3970 ]
-"7382
-[s S390 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S390 . INT1IF INT2IF . INT1IE INT2IE . INT1IP INT2IP ]
-"7392
-[s S391 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S391 . INT1F INT2F . INT1E INT2E . INT1P INT2P ]
-"7381
-[u S389 `S390 1 `S391 1 ]
-[n S389 . . . ]
-"7403
-[v _INTCON3bits `VS389 ~T0 @X0 0 e@4080 ]
-"5144
-[s S265 :5 `uc 1 :1 `uc 1 ]
-[n S265 . . UP_NOT_DOWN ]
-"5148
-[s S266 :7 `uc 1 :1 `uc 1 ]
-[n S266 . . NOT_VELM ]
-"5152
-[s S267 :2 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S267 . PDEC QEIM UP_nDOWN QERR nVELM ]
-"5159
-[s S268 :5 `uc 1 :1 `uc 1 ]
-[n S268 . . UP_NOT_DOWN ]
-"5163
-[s S269 :7 `uc 1 :1 `uc 1 ]
-[n S269 . . NOT_VELM ]
-"5167
-[s S270 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S270 . PDEC0 PDEC1 QEIM0 QEIM1 QEIM2 UP_DOWN . VELM ]
-"5177
-[s S271 :5 `uc 1 :1 `uc 1 ]
-[n S271 . . UP ]
-"5181
-[s S272 :5 `uc 1 :1 `uc 1 ]
-[n S272 . . DOWN ]
-"5185
-[s S273 :5 `uc 1 :1 `uc 1 ]
-[n S273 . . NOT_DOWN ]
-"5189
-[s S274 :5 `uc 1 :1 `uc 1 ]
-[n S274 . . nDOWN ]
-"5193
-[s S275 :5 `uc 1 :1 `uc 1 ]
-[n S275 . . UPDOWN ]
-"5143
-[u S264 `S265 1 `S266 1 `S267 1 `S268 1 `S269 1 `S270 1 `S271 1 `S272 1 `S273 1 `S274 1 `S275 1 ]
-[n S264 . . . . . . . . . . . . ]
-"5198
-[v _QEICONbits `VS264 ~T0 @X0 0 e@4022 ]
-"145 system.h
-[v _OVERFLOW_CODEUR `c ~T0 @X0 0 e ]
-"1169 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[s S43 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S43 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"1179
-[s S44 :3 `uc 1 :1 `uc 1 ]
-[n S44 . . CCP2_PA2 ]
-"1168
-[u S42 `S43 1 `S44 1 ]
-[n S42 . . . ]
-"1184
-[v _PORTBbits `VS42 ~T0 @X0 0 e@3969 ]
-"41 uart.h
-[s S447 `uc -> 100 `i `uc 1 `uc 1 `uc 1 ]
-[n S447 . buffer_reeption indice buffer_plein buffer_vide ]
-"143 system.h
-[v _uart_reception `S447 ~T0 @X0 0 e ]
-"5110 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
+"47 asserv.h
+[s S449 `d 1 `d 1 `d 1 ]
+[n S449 . KP KI KD ]
+"54
+[s S450 `d 1 `d 1 ]
+[n S450 . consigne actuelle ]
+"60
+[s S451 `d 1 `d 1 `d 1 ]
+[n S451 . actuelle integralle precedente ]
+"42 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18.h
+[v ___nop `(v ~T0 @X0 0 ef ]
+[p i ___nop ]
+"183 system.h
+[v _envoit_pwm `(v ~T0 @X0 0 ef1`d ]
+"41 moteur.h
+[v _get_valeur_codeur `(v ~T0 @X0 0 ef ]
+"29
+[s S448 `ui 1 `ui 1 `l 1 `d 1 ]
+[n S448 . ancien nouvelle ecart angle ]
+"144 system.h
+[v _position `S448 ~T0 @X0 0 e ]
+"42 moteur.h
+[v _conversion_angle `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4431.h: 49: extern volatile unsigned char DFLTCON @ 0xF60;
@@ -4529,455 +4368,201 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 181: void init_timer_1 ();
 [; ;system.h: 183: void envoit_pwm (double valeur);
 [; ;system.h: 184: void config_pwm ();
-[v F4825 `(v ~T0 @X0 1 tf ]
-"27 interruptions.c
-[v _high_isr `IF4825 ~T0 @X0 1 e ]
-"28
+"24 asserv.c
+[v _PID `S449 ~T0 @X0 1 e ]
+[; ;asserv.c: 24: _coef_PID PID;
+"25
+[v _VITESSE `S450 ~T0 @X0 1 e ]
+[; ;asserv.c: 25: _systeme_asserv VITESSE;
+"26
+[v _ERREUR_VITESSE `S451 ~T0 @X0 1 e ]
+[; ;asserv.c: 26: _erreur ERREUR_VITESSE;
+"32
+[v _init_angle `(v ~T0 @X0 1 ef1`d ]
+"33
 {
-[; ;interruptions.c: 27: void interrupt high_isr(void)
-[; ;interruptions.c: 28: {
-[e :U _high_isr ]
+[; ;asserv.c: 32: void init_angle (double angle)
+[; ;asserv.c: 33: {
+[e :U _init_angle ]
+"32
+[v _angle `d ~T0 @X0 1 r1 ]
+"33
 [f ]
-[; ;interruptions.c: 29: subroutine_interruptions(0b1);
-"29
-[e ( _subroutine_interruptions (1 -> -> 1 `i `uc ]
-[; ;interruptions.c: 30: }
-"30
+[; ;asserv.c: 34: __nop();
+"34
+[e ( ___nop ..  ]
+[; ;asserv.c: 35: }
+"35
 [e :UE 452 ]
 }
-[v F4828 `(v ~T0 @X0 1 tf ]
-"33
-[v _low_isr `ILF4828 ~T0 @X0 1 e ]
-"34
+"44
+[v _ecretage_consignes `(v ~T0 @X0 1 ef1`*d ]
+"45
 {
-[; ;interruptions.c: 33: void low_priority interrupt low_isr(void)
-[; ;interruptions.c: 34: {
-[e :U _low_isr ]
+[; ;asserv.c: 44: void ecretage_consignes(double *commande)
+[; ;asserv.c: 45: {
+[e :U _ecretage_consignes ]
+"44
+[v _commande `*d ~T0 @X0 1 r1 ]
+"45
 [f ]
-[; ;interruptions.c: 35: subroutine_interruptions(0b0);
-"35
-[e ( _subroutine_interruptions (1 -> -> 0 `i `uc ]
-[; ;interruptions.c: 36: }
-"36
+[; ;asserv.c: 46: if (*commande > (double) (12. * 100. / 12.))
+"46
+[e $ ! > *U _commande / * .12. .100. .12. 454  ]
+[; ;asserv.c: 47: *commande = (double) (12. * 100. / 12.);
+"47
+[e = *U _commande / * .12. .100. .12. ]
+[e $U 455  ]
+"48
+[e :U 454 ]
+[; ;asserv.c: 48: else if (*commande < - (double) (12. * 100. / 12.))
+[e $ ! < *U _commande -U / * .12. .100. .12. 456  ]
+[; ;asserv.c: 49: *commande = - (double) (12. * 100. / 12.);
+"49
+[e = *U _commande -U / * .12. .100. .12. ]
+[e :U 456 ]
+"50
+[e :U 455 ]
+[; ;asserv.c: 50: }
 [e :UE 453 ]
 }
-"43
-[v _subroutine_interruptions `(v ~T0 @X0 1 ef1`uc ]
-"44
-{
-[; ;interruptions.c: 43: void subroutine_interruptions (bool priorite)
-[; ;interruptions.c: 44: {
-[e :U _subroutine_interruptions ]
-"43
-[v _priorite `uc ~T0 @X0 1 r1 ]
-"44
-[f ]
-[; ;interruptions.c: 45: if ( PIR3bits.IC2QEIF == 1 && 0b1 == 1 && priorite == 0b1)
-"45
-[e $ ! && && == -> . . _PIR3bits 0 2 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 455  ]
-[; ;interruptions.c: 46: {
-"46
-{
-[; ;interruptions.c: 47: interruption_QEI();
-"47
-[e ( _interruption_QEI ..  ]
-"48
-}
-[; ;interruptions.c: 48: }
-[e $U 456  ]
-"49
-[e :U 455 ]
-[; ;interruptions.c: 49: else if ( PIR3bits.IC3DRIF == 1 && 0b0 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _PIR3bits 0 3 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 1 `i 457  ]
-[; ;interruptions.c: 50: {
-"50
-{
-[; ;interruptions.c: 51: interuption_QEI_sens();
-"51
-[e ( _interuption_QEI_sens ..  ]
 "52
-}
-[; ;interruptions.c: 52: }
-[e $U 458  ]
+[v _saturation_erreur_integralle_vitesse `(v ~T0 @X0 1 ef ]
 "53
-[e :U 457 ]
-[; ;interruptions.c: 53: else if ( INTCONbits.TMR0IF == 1 && 0b1 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _INTCONbits 0 2 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 459  ]
-[; ;interruptions.c: 54: {
+{
+[; ;asserv.c: 52: void saturation_erreur_integralle_vitesse (void)
+[; ;asserv.c: 53: {
+[e :U _saturation_erreur_integralle_vitesse ]
+[f ]
+[; ;asserv.c: 54: if (ERREUR_VITESSE.integralle > 1000.)
 "54
-{
-[; ;interruptions.c: 55: interruption_timer0();
+[e $ ! > . _ERREUR_VITESSE 1 .1000. 458  ]
+[; ;asserv.c: 55: ERREUR_VITESSE.integralle = 1000.;
 "55
-[e ( _interruption_timer0 ..  ]
+[e = . _ERREUR_VITESSE 1 .1000. ]
+[e $U 459  ]
 "56
-}
-[; ;interruptions.c: 56: }
-[e $U 460  ]
-"57
-[e :U 459 ]
-[; ;interruptions.c: 57: else if ( PIR1bits.TMR1IF == 1 && 0b1 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _PIR1bits 0 0 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 461  ]
-[; ;interruptions.c: 58: {
-"58
-{
-[; ;interruptions.c: 59: interruption_timer1();
-"59
-[e ( _interruption_timer1 ..  ]
-"60
-}
-[; ;interruptions.c: 60: }
-[e $U 462  ]
-"61
-[e :U 461 ]
-[; ;interruptions.c: 61: else if ( PIR1bits.TMR2IF == 1 && 0b0 == 1 && priorite == 0b0)
-[e $ ! && && == -> . . _PIR1bits 0 1 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 0 `i 463  ]
-[; ;interruptions.c: 62: {
-"62
-{
-[; ;interruptions.c: 63: interruption_timer2();
-"63
-[e ( _interruption_timer2 ..  ]
-"64
-}
-[; ;interruptions.c: 64: }
-[e $U 464  ]
-"65
-[e :U 463 ]
-[; ;interruptions.c: 65: else if (INTCONbits.INT0IF == 1 && 0b1 == 1 && priorite == 0b0)
-[e $ ! && && == -> . . _INTCONbits 0 1 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 0 `i 465  ]
-[; ;interruptions.c: 66: {
-"66
-{
-[; ;interruptions.c: 67: interruption_INT0();
-"67
-[e ( _interruption_INT0 ..  ]
-"68
-}
-[; ;interruptions.c: 68: }
-[e $U 466  ]
-"85
-[e :U 465 ]
-[; ;interruptions.c: 85: else if ( PIR1bits.RCIF == 1 && 0b1 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _PIR1bits 0 5 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 467  ]
-[; ;interruptions.c: 86: {
-"86
-{
-[; ;interruptions.c: 87: interrupt_RX();
-"87
-[e ( _interrupt_RX ..  ]
-"88
-}
-[; ;interruptions.c: 88: }
-[e $U 468  ]
-"89
-[e :U 467 ]
-[; ;interruptions.c: 89: else if (PIR1bits.TXIF == 1 && 0b0 == 1 && priorite == 0b0)
-[e $ ! && && == -> . . _PIR1bits 0 4 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 0 `i 469  ]
-[; ;interruptions.c: 90: {
-"90
-{
-[; ;interruptions.c: 91: interrupt_TX();
-"91
-[e ( _interrupt_TX ..  ]
-"92
-}
-[e :U 469 ]
-"94
-[e :U 468 ]
-[e :U 466 ]
-[e :U 464 ]
-[e :U 462 ]
-[e :U 460 ]
 [e :U 458 ]
-[e :U 456 ]
-[; ;interruptions.c: 92: }
-[; ;interruptions.c: 94: }
-[e :UE 454 ]
+[; ;asserv.c: 56: else if (ERREUR_VITESSE.integralle < - 1000.)
+[e $ ! < . _ERREUR_VITESSE 1 -U .1000. 460  ]
+[; ;asserv.c: 57: ERREUR_VITESSE.integralle = - 1000.;
+"57
+[e = . _ERREUR_VITESSE 1 -U .1000. ]
+[e :U 460 ]
+"58
+[e :U 459 ]
+[; ;asserv.c: 58: }
+[e :UE 457 ]
+}
+"64
+[v _reglage_PID `(v ~T0 @X0 1 ef ]
+"65
+{
+[; ;asserv.c: 64: void reglage_PID (void)
+[; ;asserv.c: 65: {
+[e :U _reglage_PID ]
+[f ]
+[; ;asserv.c: 67: PID.KP = 0.;
+"67
+[e = . _PID 0 .0. ]
+[; ;asserv.c: 68: PID.KI = 10.;
+"68
+[e = . _PID 1 .10. ]
+[; ;asserv.c: 69: PID.KD = 0.;
+"69
+[e = . _PID 2 .0. ]
+[; ;asserv.c: 70: }
+"70
+[e :UE 461 ]
+}
+"72
+[v _fonction_PID `(d ~T0 @X0 1 ef ]
+"73
+{
+[; ;asserv.c: 72: double fonction_PID (void)
+[; ;asserv.c: 73: {
+[e :U _fonction_PID ]
+[f ]
+"74
+[v F4836 `d ~T0 @X0 1 s commande ]
+[; ;asserv.c: 74: static double commande;
+[; ;asserv.c: 75: ERREUR_VITESSE.actuelle = VITESSE.consigne - VITESSE.actuelle;
+"75
+[e = . _ERREUR_VITESSE 0 - . _VITESSE 0 . _VITESSE 1 ]
+[; ;asserv.c: 76: ERREUR_VITESSE.integralle += ERREUR_VITESSE.actuelle;
+"76
+[e =+ . _ERREUR_VITESSE 1 . _ERREUR_VITESSE 0 ]
+[; ;asserv.c: 78: saturation_erreur_integralle_vitesse();
+"78
+[e ( _saturation_erreur_integralle_vitesse ..  ]
+[; ;asserv.c: 81: commande = ERREUR_VITESSE.actuelle * PID.KP + ERREUR_VITESSE.integralle * PID.KI + (ERREUR_VITESSE.actuelle - ERREUR_VITESSE.precedente ) * PID.KD;
+"81
+[e = F4836 + + * . _ERREUR_VITESSE 0 . _PID 0 * . _ERREUR_VITESSE 1 . _PID 1 * - . _ERREUR_VITESSE 0 . _ERREUR_VITESSE 2 . _PID 2 ]
+[; ;asserv.c: 83: ERREUR_VITESSE.precedente = ERREUR_VITESSE.actuelle;
+"83
+[e = . _ERREUR_VITESSE 2 . _ERREUR_VITESSE 0 ]
+[; ;asserv.c: 85: return commande;
+"85
+[e ) F4836 ]
+[e $UE 462  ]
+[; ;asserv.c: 86: }
+"86
+[e :UE 462 ]
+}
+"92
+[v _asserv `(v ~T0 @X0 1 ef ]
+"93
+{
+[; ;asserv.c: 92: void asserv (void)
+[; ;asserv.c: 93: {
+[e :U _asserv ]
+[f ]
+"94
+[v F4838 `d ~T0 @X0 1 s commande ]
+[i F4838
+-> -> 0 `i `d
+]
+[; ;asserv.c: 94: static double commande = 0;
+[; ;asserv.c: 96: VITESSE.consigne = 0.00005;
+"96
+[e = . _VITESSE 0 .0.00005 ]
+[; ;asserv.c: 98: commande = fonction_PID();
+"98
+[e = F4838 ( _fonction_PID ..  ]
+[; ;asserv.c: 99: ecretage_consignes(&commande);
+"99
+[e ( _ecretage_consignes (1 &U F4838 ]
+[; ;asserv.c: 100: envoit_pwm(commande);
+"100
+[e ( _envoit_pwm (1 F4838 ]
+[; ;asserv.c: 101: }
+"101
+[e :UE 463 ]
 }
 "104
-[v _interruption_timer0 `(v ~T0 @X0 1 ef ]
+[v _mesure_vitesse `(v ~T0 @X0 1 ef ]
 "105
 {
-[; ;interruptions.c: 104: void interruption_timer0 ()
-[; ;interruptions.c: 105: {
-[e :U _interruption_timer0 ]
+[; ;asserv.c: 104: void mesure_vitesse (void)
+[; ;asserv.c: 105: {
+[e :U _mesure_vitesse ]
 [f ]
-[; ;interruptions.c: 106: INTCONbits.TMR0IF = 0;
+[; ;asserv.c: 106: get_valeur_codeur();
 "106
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;interruptions.c: 107: TMR0L = 131;
-"107
-[e = _TMR0L -> -> 131 `i `uc ]
-[; ;interruptions.c: 109: asserv();
+[e ( _get_valeur_codeur ..  ]
+[; ;asserv.c: 108: VITESSE.actuelle = position.ecart;
+"108
+[e = . _VITESSE 1 -> . _position 2 `d ]
+[; ;asserv.c: 109: VITESSE.actuelle /= ((4 * 2000) );
 "109
-[e ( _asserv ..  ]
-[; ;interruptions.c: 110: }
+[e =/ . _VITESSE 1 -> * -> 4 `i -> 2000 `i `d ]
+[; ;asserv.c: 110: VITESSE.actuelle *= 1000;
 "110
-[e :UE 470 ]
-}
+[e =* . _VITESSE 1 -> -> 1000 `i `d ]
+[; ;asserv.c: 111: conversion_angle();
+"111
+[e ( _conversion_angle ..  ]
+[; ;asserv.c: 112: }
 "112
-[v _interruption_timer1 `(v ~T0 @X0 1 ef ]
-"113
-{
-[; ;interruptions.c: 112: void interruption_timer1()
-[; ;interruptions.c: 113: {
-[e :U _interruption_timer1 ]
-[f ]
-[; ;interruptions.c: 114: PIR1bits.TMR1IF = 0;
-"114
-[e = . . _PIR1bits 0 0 -> -> 0 `i `uc ]
-[; ;interruptions.c: 115: TMR1 = 65535 - 810;
-"115
-[e = _TMR1 -> - -> 65535 `l -> -> 810 `i `l `us ]
-[; ;interruptions.c: 117: if (uart_logiciel.transmission_en_cours == 1)
-"117
-[e $ ! == -> . _uart_logiciel 1 `i -> 1 `i 472  ]
-[; ;interruptions.c: 118: {
-"118
-{
-[; ;interruptions.c: 119: PORTCbits.RC5 = uart_logiciel.buffer_uart[uart_logiciel.indice];
-"119
-[e = . . _PORTCbits 0 5 *U + &U . _uart_logiciel 0 * -> . _uart_logiciel 2 `ux -> -> # *U &U . _uart_logiciel 0 `ui `ux ]
-[; ;interruptions.c: 120: uart_logiciel.indice++;
-"120
-[e ++ . _uart_logiciel 2 -> -> 1 `i `uc ]
-[; ;interruptions.c: 122: if (uart_logiciel.indice > 10)
-"122
-[e $ ! > -> . _uart_logiciel 2 `i -> 10 `i 473  ]
-[; ;interruptions.c: 123: uart_logiciel.transmission_en_cours = 0;
-"123
-[e = . _uart_logiciel 1 -> -> 0 `i `uc ]
-[e :U 473 ]
-"124
-}
-[; ;interruptions.c: 124: }
-[e $U 474  ]
-"125
-[e :U 472 ]
-[; ;interruptions.c: 125: else
-[; ;interruptions.c: 126: PORTCbits.RC5 = 1;
-"126
-[e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
-[e :U 474 ]
-[; ;interruptions.c: 127: }
-"127
-[e :UE 471 ]
-}
-"129
-[v _interruption_timer2 `(v ~T0 @X0 1 ef ]
-"130
-{
-[; ;interruptions.c: 129: void interruption_timer2()
-[; ;interruptions.c: 130: {
-[e :U _interruption_timer2 ]
-[f ]
-[; ;interruptions.c: 131: PIR1bits.TMR2IF = 0;
-"131
-[e = . . _PIR1bits 0 1 -> -> 0 `i `uc ]
-[; ;interruptions.c: 132: }
-"132
-[e :UE 475 ]
-}
-"134
-[v _interruption_timer5 `(v ~T0 @X0 1 ef ]
-"135
-{
-[; ;interruptions.c: 134: void interruption_timer5()
-[; ;interruptions.c: 135: {
-[e :U _interruption_timer5 ]
-[f ]
-[; ;interruptions.c: 136: PIR3bits.TMR5IF = 0;
-"136
-[e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
-[; ;interruptions.c: 137: }
-"137
-[e :UE 476 ]
-}
-"141
-[v _interruption_INT0 `(v ~T0 @X0 1 ef ]
-"142
-{
-[; ;interruptions.c: 141: void interruption_INT0()
-[; ;interruptions.c: 142: {
-[e :U _interruption_INT0 ]
-[f ]
-[; ;interruptions.c: 143: INTCONbits.INT0IF = 0;
-"143
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-[; ;interruptions.c: 144: }
-"144
-[e :UE 477 ]
-}
-"146
-[v _interruption_INT1 `(v ~T0 @X0 1 ef ]
-"147
-{
-[; ;interruptions.c: 146: void interruption_INT1()
-[; ;interruptions.c: 147: {
-[e :U _interruption_INT1 ]
-[f ]
-[; ;interruptions.c: 148: INTCON3bits.INT1IF = 0;
-"148
-[e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
-[; ;interruptions.c: 149: }
-"149
-[e :UE 478 ]
-}
-"151
-[v _interruption_INT2 `(v ~T0 @X0 1 ef ]
-"152
-{
-[; ;interruptions.c: 151: void interruption_INT2()
-[; ;interruptions.c: 152: {
-[e :U _interruption_INT2 ]
-[f ]
-[; ;interruptions.c: 153: INTCON3bits.INT2IF = 0;
-"153
-[e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
-[; ;interruptions.c: 154: }
-"154
-[e :UE 479 ]
-}
-"158
-[v _interruption_QEI `(v ~T0 @X0 1 ef ]
-"159
-{
-[; ;interruptions.c: 158: void interruption_QEI()
-[; ;interruptions.c: 159: {
-[e :U _interruption_QEI ]
-[f ]
-[; ;interruptions.c: 160: PIR3bits.IC2QEIF = 0;
-"160
-[e = . . _PIR3bits 0 2 -> -> 0 `i `uc ]
-[; ;interruptions.c: 161: QEICONbits.QERR = 0;
-"161
-[e = . . _QEICONbits 2 3 -> -> 0 `i `uc ]
-[; ;interruptions.c: 163: if (QEICONbits.UPDOWN == 1)
-"163
-[e $ ! == -> . . _QEICONbits 10 1 `i -> 1 `i 481  ]
-[; ;interruptions.c: 164: {
-"164
-{
-[; ;interruptions.c: 165: OVERFLOW_CODEUR++;
-"165
-[e ++ _OVERFLOW_CODEUR -> -> 1 `i `c ]
-"166
-}
-[; ;interruptions.c: 166: }
-[e $U 482  ]
-"167
-[e :U 481 ]
-[; ;interruptions.c: 167: else
-[; ;interruptions.c: 168: {
-"168
-{
-[; ;interruptions.c: 169: OVERFLOW_CODEUR--;
-"169
-[e -- _OVERFLOW_CODEUR -> -> 1 `i `c ]
-"170
-}
-[e :U 482 ]
-[; ;interruptions.c: 170: }
-[; ;interruptions.c: 172: }
-"172
-[e :UE 480 ]
-}
-"174
-[v _interuption_QEI_sens `(v ~T0 @X0 1 ef ]
-"175
-{
-[; ;interruptions.c: 174: void interuption_QEI_sens()
-[; ;interruptions.c: 175: {
-[e :U _interuption_QEI_sens ]
-[f ]
-[; ;interruptions.c: 176: PIR3bits.IC3DRIF = 0;
-"176
-[e = . . _PIR3bits 0 3 -> -> 0 `i `uc ]
-[; ;interruptions.c: 177: }
-"177
-[e :UE 483 ]
-}
-"181
-[v _interrupt_ADC `(v ~T0 @X0 1 ef ]
-"182
-{
-[; ;interruptions.c: 181: void interrupt_ADC ()
-[; ;interruptions.c: 182: {
-[e :U _interrupt_ADC ]
-[f ]
-[; ;interruptions.c: 183: PIR1bits.ADIF = 0;
-"183
-[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
-[; ;interruptions.c: 184: }
-"184
-[e :UE 484 ]
-}
-"188
-[v _interrupt_RX `(v ~T0 @X0 1 ef ]
-"189
-{
-[; ;interruptions.c: 188: void interrupt_RX()
-[; ;interruptions.c: 189: {
-[e :U _interrupt_RX ]
-[f ]
-[; ;interruptions.c: 190: PIR1bits.RCIF = 0;
-"190
-[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-[; ;interruptions.c: 191: PORTBbits.RB0 = 1;
-"191
-[e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
-[; ;interruptions.c: 193: if (uart_reception.indice < 100)
-"193
-[e $ ! < -> . _uart_reception 1 `i -> 100 `i 486  ]
-[; ;interruptions.c: 194: {
-"194
-{
-[; ;interruptions.c: 195: uart_reception.buffer_reeption[uart_reception.indice] = RCREG;
-"195
-[e = *U + &U . _uart_reception 0 * -> . _uart_reception 1 `ux -> -> # *U &U . _uart_reception 0 `ui `ux _RCREG ]
-[; ;interruptions.c: 196: uart_reception.buffer_vide = 0;
-"196
-[e = . _uart_reception 3 -> -> 0 `i `uc ]
-[; ;interruptions.c: 197: uart_reception.indice++;
-"197
-[e ++ . _uart_reception 1 -> -> 1 `i `uc ]
-"198
-}
-[; ;interruptions.c: 198: }
-[e $U 487  ]
-"199
-[e :U 486 ]
-[; ;interruptions.c: 199: else
-[; ;interruptions.c: 200: {
-"200
-{
-[; ;interruptions.c: 201: uart_reception.buffer_plein = 1;
-"201
-[e = . _uart_reception 2 -> -> 1 `i `uc ]
-"202
-[v _temp `uc ~T0 @X0 1 a ]
-[; ;interruptions.c: 202: uint8_t temp = RCREG;
-[e = _temp _RCREG ]
-"203
-}
-[e :U 487 ]
-[; ;interruptions.c: 203: }
-[; ;interruptions.c: 205: }
-"205
-[e :UE 485 ]
-}
-"207
-[v _interrupt_TX `(v ~T0 @X0 1 ef ]
-"208
-{
-[; ;interruptions.c: 207: void interrupt_TX()
-[; ;interruptions.c: 208: {
-[e :U _interrupt_TX ]
-[f ]
-[; ;interruptions.c: 209: PIR1bits.TXIF = 0;
-"209
-[e = . . _PIR1bits 0 4 -> -> 0 `i `uc ]
-[; ;interruptions.c: 210: }
-"210
-[e :UE 488 ]
+[e :UE 464 ]
 }
