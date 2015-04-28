@@ -33,6 +33,16 @@ extern "C" {
         double angle;
     }_position;
 
+    typedef struct
+    {
+        bool tour_en_cours;
+        bool synchro_debut_tour;
+        bool flag_capteur;
+        double angle[3];
+        uint16_t position[3];
+        uint8_t indice;
+    }_capteur;
+
 /******************************************************************************/
 /****************************** Prototypes ************************************/
 /******************************************************************************/
@@ -40,6 +50,8 @@ extern "C" {
     void config_QEI ();
     void get_valeur_codeur (void);
     void conversion_angle ();
+    void init_capteur();
+    double obtention_angle (uint16_t position);
 
 
 #ifdef	__cplusplus

@@ -5908,16 +5908,18 @@ extern _uart_recption uart_reception;
 extern _position position;
 extern int8_t OVERFLOW_CODEUR;
 
-# 158
+extern uint8_t flag_cpateur;
+
+# 160
 void init_system (void);
 
-# 164
+# 166
 void init_clock(void);
 
-# 171
+# 173
 void ConfigInterrupt (void);
 
-# 177
+# 179
 void ConfigPorts (void);
 
 

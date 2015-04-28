@@ -86,9 +86,30 @@ int main(int argc, char** argv)
     int i = 0;
 
     ENABLE_BLUETOOTH = 1;
+    LATCbits.LATC2 = 1;
     LED0 = 1;
 
-    while(1);
+    PutsUART(UART_BLUETOOTH, "Bonjour les amis !!! =)");
+    // Attente de connexion sur le bluetooth
+    while(STATUS_BLUETOOTH == 0);
+    LED0= 0;
+    LED5 =1;
+    envoit_pwm(50);
+
+    while(1)
+    {
+        if (flag_cpateur == 1)
+        {
+            //LED0 = 0;
+            conversion_angle();
+            flag_cpateur = 0;
+            //PutcUART(UART_BLUETOOTH, 'a');
+            int16_t angle = (int16_t) position.angle;
+            PutIntUART(UART_BLUETOOTH, position.angle);
+            PutsUART(UART_BLUETOOTH, "\n\r");
+            //putsUART(UART_LOGICIEL, "\r");
+        }
+    }
 
    /* ENABLE_BLUETOOTH = 0;
 

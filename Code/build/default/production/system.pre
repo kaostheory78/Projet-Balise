@@ -5908,16 +5908,18 @@ extern _uart_recption uart_reception;
 extern _position position;
 extern int8_t OVERFLOW_CODEUR;
 
-# 158
+extern uint8_t flag_cpateur;
+
+# 160
 void init_system (void);
 
-# 164
+# 166
 void init_clock(void);
 
-# 171
+# 173
 void ConfigInterrupt (void);
 
-# 177
+# 179
 void ConfigPorts (void);
 
 
@@ -5940,9 +5942,11 @@ config_uart ();
 config_pwm();
 config_QEI();
 reglage_PID();
+
+flag_cpateur = 0;
 }
 
-# 43
+# 45
 void init_timer_0 ()
 {
 T0CONbits.T016BIT = 1;
@@ -5972,7 +5976,7 @@ TMR1ON = 1;
 
 }
 
-# 89
+# 91
 void ConfigPorts (void)
 {
 
@@ -6020,7 +6024,7 @@ TRISEbits.RE0 = 0;
 TRISEbits.RE1 = 0;
 TRISEbits.RE2 = 0;
 
-# 142
+# 144
 LATA0 = 0;
 LATA1 = 0;
 LATA2 = 0;
@@ -6066,13 +6070,13 @@ LATE1 = 0;
 LATE2 = 0;
 }
 
-# 192
+# 194
 void ConfigInterrupt (void)
 {
 
 INTCONbits.GIEH = 1;
 INTCONbits.GIEL = 1;
-INTCONbits.TMR0IE = 0b1;
+INTCONbits.TMR0IE = 0b0;
 INTCONbits.INT0IE = 0b1;
 INTCONbits.RBIE = 0;
 INTCONbits.TMR0IF = 0;
@@ -6081,9 +6085,9 @@ INTCONbits.RBIF = 0;
 
 
 
-INTCON2bits.INTEDG0 = 0;
-INTCON2bits.INTEDG1 = 0;
-INTCON2bits.INTEDG2 = 0;
+INTCON2bits.INTEDG0 = 1;
+INTCON2bits.INTEDG1 = 1;
+INTCON2bits.INTEDG2 = 1;
 INTCON2bits.TMR0IP = 0b1;
 
 
@@ -6094,7 +6098,7 @@ INTCON3bits.INT2IP = 0b0;
 INTCON3bits.INT2IF = 0;
 INTCON3bits.INT1IF = 0;
 
-# 224
+# 226
 PIR1bits.ADIF = 0;
 PIR1bits.RCIF = 0;
 PIR1bits.TXIF = 0;
@@ -6116,7 +6120,7 @@ PIR3bits.IC2QEIF = 0;
 PIR3bits.IC1IF = 0;
 PIR3bits.TMR5IF = 0;
 
-# 250
+# 252
 RCONbits.IPEN = 1;
 
 
@@ -6141,7 +6145,7 @@ IPR3bits.IC2QEIP = 0b1;
 IPR3bits.IC1IP = 0;
 IPR3bits.TMR5IP = 0b0;
 
-# 279
+# 281
 PIE1bits.ADIE = 0b0;
 PIE1bits.RC1IE = 0b1;
 PIE1bits.TXIE = 0b0;
@@ -6159,12 +6163,12 @@ PIE2bits.CCP2IE = 0;
 
 PIE3bits.PTIE = 0;
 PIE3bits.IC3DRIE = 0b0;
-PIE3bits.IC2QEIE = 0b1;
+PIE3bits.IC2QEIE = 0b0;
 PIE3bits.IC1IE = 0;
 PIE3bits.TMR5IE = 0b0;
 }
 
-# 306
+# 308
 void ConfigADC (void)
 {
 

@@ -31,6 +31,9 @@ void init_system (void)
     config_pwm();
     config_QEI();
     reglage_PID();
+
+    flag_cpateur = 0;
+    capteur.tour_fini = false;
 }
 
 
@@ -203,9 +206,9 @@ void ConfigInterrupt (void)
 
 
     // INTCON2
-    INTCON2bits.INTEDG0     = 0;                    // INT0 : rising edge
-    INTCON2bits.INTEDG1     = 0;                    // INT1 : rising edge
-    INTCON2bits.INTEDG2     = 0;                    // INT2 : rising edge
+    INTCON2bits.INTEDG0     = 1;                    // INT0 : rising edge
+    INTCON2bits.INTEDG1     = 1;                    // INT1 : rising edge
+    INTCON2bits.INTEDG2     = 1;                    // INT2 : rising edge
     INTCON2bits.TMR0IP      = PRIO_INTER_TIMER0;          // TIMER0
 
     // INTCON3

@@ -5908,16 +5908,18 @@ extern _uart_recption uart_reception;
 extern _position position;
 extern int8_t OVERFLOW_CODEUR;
 
-# 158
+extern uint8_t flag_cpateur;
+
+# 160
 void init_system (void);
 
-# 164
+# 166
 void init_clock(void);
 
-# 171
+# 173
 void ConfigInterrupt (void);
 
-# 177
+# 179
 void ConfigPorts (void);
 
 
@@ -6025,7 +6027,7 @@ int etat_overflow;
 etat_overflow = OVERFLOW_CODEUR;
 OVERFLOW_CODEUR = 0;
 
-position.nouvelle = - POSCNTH * 256 - POSCNTL;
+position.nouvelle = POSCNTH * 256 + POSCNTL;
 
 res = (int32_t)( (int32_t) position.nouvelle - (int32_t) position.ancien );
 if (etat_overflow != 0)
@@ -6040,7 +6042,7 @@ position.ancien = position.nouvelle;
 void conversion_angle ()
 {
 double angle;
-angle = (double) (position.nouvelle) / 8000.;
+angle = (double) ((position.nouvelle) / 8000.);
 angle *= 360;
 position.angle = angle;
 }

@@ -5908,16 +5908,18 @@ extern _uart_recption uart_reception;
 extern _position position;
 extern int8_t OVERFLOW_CODEUR;
 
-# 158
+extern uint8_t flag_cpateur;
+
+# 160
 void init_system (void);
 
-# 164
+# 166
 void init_clock(void);
 
-# 171
+# 173
 void ConfigInterrupt (void);
 
-# 177
+# 179
 void ConfigPorts (void);
 
 
@@ -5927,7 +5929,10 @@ void init_timer_1 ();
 void envoit_pwm (double valeur);
 void config_pwm ();
 
-# 27 "interruptions.c"
+# 20 "interruptions.c"
+uint8_t flag_cpateur;
+
+# 27
 void interrupt high_isr(void)
 {
 subroutine_interruptions(0b1);
@@ -5942,7 +5947,7 @@ subroutine_interruptions(0b0);
 # 43
 void subroutine_interruptions (bool priorite)
 {
-if ( PIR3bits.IC2QEIF == 1 && 0b1 == 1 && priorite == 0b1)
+if ( PIR3bits.IC2QEIF == 1 && 0b0 == 1 && priorite == 0b1)
 {
 interruption_QEI();
 }
@@ -5950,7 +5955,7 @@ else if ( PIR3bits.IC3DRIF == 1 && 0b0 == 1 && priorite == 0b1)
 {
 interuption_QEI_sens();
 }
-else if ( INTCONbits.TMR0IF == 1 && 0b1 == 1 && priorite == 0b1)
+else if ( INTCONbits.TMR0IF == 1 && 0b0 == 1 && priorite == 0b1)
 {
 interruption_timer0();
 }
@@ -5962,7 +5967,7 @@ else if ( PIR1bits.TMR2IF == 1 && 0b0 == 1 && priorite == 0b0)
 {
 interruption_timer2();
 }
-else if (INTCONbits.INT0IF == 1 && 0b1 == 1 && priorite == 0b0)
+else if (INTCONbits.INT0IF == 1 && 0b1 == 1 && priorite == 0b1)
 {
 interruption_INT0();
 }
@@ -5985,7 +5990,7 @@ void interruption_timer0 ()
 INTCONbits.TMR0IF = 0;
 TMR0L = 131;
 
-asserv();
+
 }
 
 void interruption_timer1()
@@ -6019,7 +6024,19 @@ PIR3bits.TMR5IF = 0;
 
 void interruption_INT0()
 {
+if (flag_cpateur == 0)
+{
+
+flag_cpateur = 1;
+
+position.nouvelle = POSCNTH * 256 + POSCNTL;
+
+
+
+
+}
 INTCONbits.INT0IF = 0;
+
 }
 
 void interruption_INT1()

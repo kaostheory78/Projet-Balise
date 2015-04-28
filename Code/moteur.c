@@ -16,6 +16,7 @@
 
 
 _position position;
+_capteur capteur;
 int8_t  OVERFLOW_CODEUR;
 
 /******************************************************************************/
@@ -116,7 +117,7 @@ void get_valeur_codeur (void)
     etat_overflow = OVERFLOW_CODEUR;
     OVERFLOW_CODEUR = PAS_D_OVERFLOW_CODEUR;
 
-    position.nouvelle = - POSCNTH * 256 - POSCNTL;
+    position.nouvelle =  POSCNTH * 256 + POSCNTL;
 
     res = (int32_t)( (int32_t) position.nouvelle - (int32_t) position.ancien );
     if (etat_overflow != PAS_D_OVERFLOW_CODEUR)
@@ -131,7 +132,30 @@ void get_valeur_codeur (void)
 void conversion_angle ()
 {
     double angle;
-    angle  = (double) (position.nouvelle) / 8000.;
+    angle  = (double) ((position.nouvelle) / 8000.);
     angle *= 360;
     position.angle = angle;
+}
+
+double obtention_angle (uint16_t position)
+{
+        double angle;
+    angle  = (double) ((position) / 8000.);
+    angle *= 360;
+    return angle;
+}
+
+void init_capteur()
+{
+    capteur.angle[0] = 0.;
+    capteur.angle[1] = 0.;
+    capteur.angle[2] = 0.;
+    capteur.flag_capteur = false;
+    capteur.indice = 0;
+    capteur.position[0] = 0;
+    capteur.position[1] = 0;
+    capteur.position[2] = 0;
+    capteur.synchro_debut_tour = false;
+    capteur.tour_en_cours = false;
+
 }

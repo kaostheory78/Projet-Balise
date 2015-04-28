@@ -85,7 +85,7 @@ extern "C" {
 #define PRIO_INTER_TIMER2               PRIORITE_BASSE  //
 #define PRIO_INTER_TIMER5               PRIORITE_BASSE  //
 
-#define PRIO_INTER_INT0                 PRIORITE_BASSE  //
+#define PRIO_INTER_INT0                 PRIORITE_HAUTE  //
 #define PRIO_INTER_INT1                 PRIORITE_BASSE  //
 #define PRIO_INTER_INT2                 PRIORITE_BASSE  //
 
@@ -98,7 +98,7 @@ extern "C" {
 #define PRIO_INTER_TX                   PRIORITE_BASSE
 
     // ACtivations des interruptions
-#define ACTIV_INTER_TIMER0              ACTIVE      //
+#define ACTIV_INTER_TIMER0              DESACTIVE     //
 #define ACTIV_INTER_TIMER1              ACTIVE   //
 #define ACTIV_INTER_TIMER2              DESACTIVE   //
 #define ACTIV_INTER_TIMER5              DESACTIVE   //
@@ -107,7 +107,7 @@ extern "C" {
 #define ACTIV_INTER_INT1                DESACTIVE   //
 #define ACTIV_INTER_INT2                DESACTIVE   //
 
-#define ACTIV_INTER_QEI                 ACTIVE      //
+#define ACTIV_INTER_QEI                 ACTIVE   //
 #define ACTIV_INTER_QEI_SENS            DESACTIVE      //
 
 #define ACTIV_INTER_ADC                 DESACTIVE   //
@@ -143,6 +143,9 @@ extern _buf uart_logiciel;
 extern _uart_recption uart_reception;
 extern _position position;
 extern int8_t  OVERFLOW_CODEUR;
+
+extern uint8_t flag_cpateur;
+extern _capteur capteur;
 //extern _coef_PID PID;
 //extern _systeme_asserv VITESSE;
 //extern _erreur ERREUR_VITESSE;

@@ -17,7 +17,7 @@
 
 #include "system.h"
 
-
+uint8_t flag_cpateur;
 /******************************************************************************/
 /*********************** Vecteurs interruptions L et H ************************/
 /******************************************************************************/
@@ -106,7 +106,7 @@ void interruption_timer0 ()
     FLAG_TIMER0 = false;
     TMR0L = 131;
 
-    asserv();
+    //asserv();
 }
 
 void interruption_timer1()
@@ -140,7 +140,15 @@ void interruption_timer5()
 
 void interruption_INT0()
 {
+    if (capteur.tour_en_cours == true)
+    {
+        if (capteur.indice < 3)
+        {
+            capteur.position[capteur.indice++] = POSCNTH * 256 + POSCNTL;
+        }
+    }
     FLAG_INT0 = false;
+   
 }
 
 void interruption_INT1()
@@ -160,14 +168,23 @@ void interruption_QEI()
     FLAG_QEI = false;
     QEICONbits.QERR = 0;
 
-    if (QEICONbits.UPDOWN == 1)
+    if (capteur.synchro_debut_tour == true)
     {
-        OVERFLOW_CODEUR++;
+        capteur.tour_en_cours = true;
+        capteur.synchro_debut_tour = false;
     }
     else
-    {
-        OVERFLOW_CODEUR--;
-    }
+        capteur.tour_en_cours = false;
+
+
+//    if (QEICONbits.UPDOWN == 1)
+//    {
+//        OVERFLOW_CODEUR++;
+//    }
+//    else
+//    {
+//        OVERFLOW_CODEUR--;
+//    }
 
 }
 
