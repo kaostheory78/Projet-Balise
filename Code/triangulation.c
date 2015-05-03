@@ -91,17 +91,26 @@ int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle )
 
 check_divergence_position (double ancien_x, double ancien_y, double x, double y)
 {
-    double delta_x, delta_y, distance;
-
-    delta_x = ancien_x - x;
-    delta_y = ancien_y - y;
-    distance = sqrt (delta_x * delta_x + delta_y * delta_y);
+    double distance = get_distance(ancien_x, ancien_y, x, y);
 
     if (distance < 200.)
         return OK;
     else
         return -1;
 }
+
+double get_distance (double ancien_x, double ancien_y, double x, double y)
+{
+    double delta_x, delta_y, distance;
+
+    delta_x = ancien_x - x;
+    delta_y = ancien_y - y;
+    distance = sqrt (delta_x * delta_x + delta_y * delta_y);
+
+    return distance;
+}
+
+
 
 int8_t retrouver_balise_mere ()
 {

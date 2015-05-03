@@ -5929,6 +5929,7 @@ void inversion_balises(uint8_t id_balise_mere);
 void modulo_id_balise_mere ();
 check_divergence_position (double ancien_x, double ancien_y, double x, double y);
 void affichage_position (double x, double y);
+double get_distance (double ancien_x, double ancien_y, double x, double y);
 
 # 145 "system.h"
 extern _buf uart_logiciel;
@@ -6029,17 +6030,26 @@ return 0;
 
 check_divergence_position (double ancien_x, double ancien_y, double x, double y)
 {
-double delta_x, delta_y, distance;
-
-delta_x = ancien_x - x;
-delta_y = ancien_y - y;
-distance = sqrt (delta_x * delta_x + delta_y * delta_y);
+double distance = get_distance(ancien_x, ancien_y, x, y);
 
 if (distance < 200.)
 return 0;
 else
 return -1;
 }
+
+double get_distance (double ancien_x, double ancien_y, double x, double y)
+{
+double delta_x, delta_y, distance;
+
+delta_x = ancien_x - x;
+delta_y = ancien_y - y;
+distance = sqrt (delta_x * delta_x + delta_y * delta_y);
+
+return distance;
+}
+
+
 
 int8_t retrouver_balise_mere ()
 {

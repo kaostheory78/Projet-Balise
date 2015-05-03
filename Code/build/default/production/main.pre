@@ -5929,6 +5929,7 @@ void inversion_balises(uint8_t id_balise_mere);
 void modulo_id_balise_mere ();
 check_divergence_position (double ancien_x, double ancien_y, double x, double y);
 void affichage_position (double x, double y);
+double get_distance (double ancien_x, double ancien_y, double x, double y);
 
 # 145 "system.h"
 extern _buf uart_logiciel;
@@ -6067,7 +6068,7 @@ _delay((unsigned long)((10)*(40000000/4000.0)));
 
 while(1)
 {
-static double x, y, ancien_x = 0, ancien_y = 0;
+static double x[3], y[3], distance[3], ancien_x = 0, ancien_y = 0;
 static bool premiere_fois = 1;
 
 capteur.indice = 0;
@@ -6088,78 +6089,63 @@ for (i = 0; i < 3 ; i++)
 capteur.angle[i] = obtention_angle(capteur.position[i]);
 
 
-inversion_balises(capteur.id_balise_mere);
 
 
-if (retrouver_balise_mere() == 0)
+if (premiere_fois == 1)
 {
-triangulation(&x, &y, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
-affichage_position(x, y);
-ancien_x = x;
-ancien_y = y;
+triangulation(&x[0], &y[0], capteur.angle[0], capteur.angle[1], capteur.angle[2]);
+ancien_x = x[0];
+ancien_y = y[0];
+premiere_fois = 0;
 }
-
 else
 {
-double x_temp = 0, y_temp = 0;
-PutsUART(0, "\n\n\n\r BALISE MERE PERDUE !!!!!! \n\r");
-PutsUART(0, "Ancienne position connue : \n\r");
+triangulation(&x[0], &y[0], capteur.angle[0], capteur.angle[1], capteur.angle[2]);
+triangulation(&x[1], &y[1], capteur.angle[1], capteur.angle[2], capteur.angle[0]);
+triangulation(&x[2], &y[2], capteur.angle[2], capteur.angle[0], capteur.angle[1]);
+
+for (i = 0 ; i < 3 ; i++)
+distance[i] = get_distance(ancien_x, ancien_y, x[i], y[i]);
+
+if (distance[0] < distance[1])
+{
+if (distance[0] < distance[2])
+{
+ancien_x = x[0];
+ancien_y = y[0];
+
+}
+else
+{
+
+ancien_x = x[2];
+ancien_y = y[2];
+}
+}
+else if (distance[1] < distance[2])
+{
+
+ancien_x = x[1];
+ancien_y = y[1];
+}
+else
+{
+
+ancien_x = x[2];
+ancien_y = y[2];
+}
+
+}
+
 affichage_position(ancien_x, ancien_y);
 
-triangulation(&x_temp, &y_temp, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
-PutsUART(0, "\n\rTenative de base :  \n\r");
-affichage_position(x_temp, y_temp);
-
-
-if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0 )
-{
-PutsUART(0, "\n\n\n\r BALISE MERE INCHANGEE !!!!!! \n\r");
-affichage_position(x_temp, y_temp);
-ancien_x = x_temp;
-ancien_y = y_temp;
-}
-else
-{
-triangulation(&x_temp, &y_temp, capteur.angle[1], capteur.angle[2], capteur.angle[0]);
-PutsUART(0, "\n\rTenative 1 :  \n\r");
-affichage_position(x_temp, y_temp);
-if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0 )
-{
-PutsUART(0, "\n\n\n\r BALISE MERE RETROUVEE 1 !!!!!! \n\r");
-affichage_position(x_temp, y_temp);
-capteur.id_balise_mere ++;
-modulo_id_balise_mere();
-ancien_x = x_temp;
-ancien_y = y_temp;
-}
-else
-{
-triangulation(&x_temp, &y_temp, capteur.angle[2], capteur.angle[0], capteur.angle[1]);
-PutsUART(0, "\n\r Tenative 2 :  \n\r");
-affichage_position(x_temp, y_temp);
-if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0)
-{
-PutsUART(0, "\n\n\n\r BALISE MERE RETROUVEE 2 !!!!!! \n\r");
-affichage_position(x_temp, y_temp);
-capteur.id_balise_mere --;
-modulo_id_balise_mere();
-ancien_x = x_temp;
-ancien_y = y_temp;
-}
-else
-PutsUART(0, "\n\r/!\\/!\\ BALISE MERE NON RETROUVE  !!!!!! /!\\/!\\\n\r");
-}
-
-}
-}
-
-
+# 266
 for (i = 0 ; i < 3 ; i++)
 capteur.ancien_angle[i] = capteur.angle[i];
 }
 }
 
-# 255
+# 307
 while(1);
 
 

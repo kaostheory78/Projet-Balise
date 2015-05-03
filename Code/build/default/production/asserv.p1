@@ -4380,6 +4380,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;triangulation.h: 41: void modulo_id_balise_mere ();
 [; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
 [; ;triangulation.h: 43: void affichage_position (double x, double y);
+[; ;triangulation.h: 44: double get_distance (double ancien_x, double ancien_y, double x, double y);
 [; ;system.h: 145: extern _buf uart_logiciel;
 [; ;system.h: 146: extern _uart_recption uart_reception;
 [; ;system.h: 147: extern _position position;
@@ -4510,7 +4511,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _fonction_PID ]
 [f ]
 "74
-[v F4881 `d ~T0 @X0 1 s commande ]
+[v F4886 `d ~T0 @X0 1 s commande ]
 [; ;asserv.c: 74: static double commande;
 [; ;asserv.c: 75: ERREUR_VITESSE.actuelle = VITESSE.consigne - VITESSE.actuelle;
 "75
@@ -4523,13 +4524,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _saturation_erreur_integralle_vitesse ..  ]
 [; ;asserv.c: 81: commande = ERREUR_VITESSE.actuelle * PID.KP + ERREUR_VITESSE.integralle * PID.KI + (ERREUR_VITESSE.actuelle - ERREUR_VITESSE.precedente ) * PID.KD;
 "81
-[e = F4881 + + * . _ERREUR_VITESSE 0 . _PID 0 * . _ERREUR_VITESSE 1 . _PID 1 * - . _ERREUR_VITESSE 0 . _ERREUR_VITESSE 2 . _PID 2 ]
+[e = F4886 + + * . _ERREUR_VITESSE 0 . _PID 0 * . _ERREUR_VITESSE 1 . _PID 1 * - . _ERREUR_VITESSE 0 . _ERREUR_VITESSE 2 . _PID 2 ]
 [; ;asserv.c: 83: ERREUR_VITESSE.precedente = ERREUR_VITESSE.actuelle;
 "83
 [e = . _ERREUR_VITESSE 2 . _ERREUR_VITESSE 0 ]
 [; ;asserv.c: 85: return commande;
 "85
-[e ) F4881 ]
+[e ) F4886 ]
 [e $UE 463  ]
 [; ;asserv.c: 86: }
 "86
@@ -4544,8 +4545,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _asserv ]
 [f ]
 "94
-[v F4883 `d ~T0 @X0 1 s commande ]
-[i F4883
+[v F4888 `d ~T0 @X0 1 s commande ]
+[i F4888
 -> -> 0 `i `d
 ]
 [; ;asserv.c: 94: static double commande = 0;
@@ -4554,13 +4555,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . _VITESSE 0 .0.00005 ]
 [; ;asserv.c: 98: commande = fonction_PID();
 "98
-[e = F4883 ( _fonction_PID ..  ]
+[e = F4888 ( _fonction_PID ..  ]
 [; ;asserv.c: 99: ecretage_consignes(&commande);
 "99
-[e ( _ecretage_consignes (1 &U F4883 ]
+[e ( _ecretage_consignes (1 &U F4888 ]
 [; ;asserv.c: 100: envoit_pwm(commande);
 "100
-[e ( _envoit_pwm (1 F4883 ]
+[e ( _envoit_pwm (1 F4888 ]
 [; ;asserv.c: 101: }
 "101
 [e :UE 464 ]

@@ -41,6 +41,7 @@ void inversion_balises(uint8_t id_balise_mere);
 void modulo_id_balise_mere ();
 check_divergence_position (double ancien_x, double ancien_y, double x, double y);
 void affichage_position (double x, double y);
+double get_distance (double ancien_x, double ancien_y, double x, double y);
 
 #ifdef	__cplusplus
 }

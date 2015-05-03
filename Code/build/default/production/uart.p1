@@ -4487,6 +4487,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;triangulation.h: 41: void modulo_id_balise_mere ();
 [; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
 [; ;triangulation.h: 43: void affichage_position (double x, double y);
+[; ;triangulation.h: 44: double get_distance (double ancien_x, double ancien_y, double x, double y);
 [; ;system.h: 145: extern _buf uart_logiciel;
 [; ;system.h: 146: extern _uart_recption uart_reception;
 [; ;system.h: 147: extern _position position;
@@ -4854,7 +4855,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;uart.c: 171: int j = 0;
 [e = _j -> 0 `i ]
 "172
-[v F4880 `uc ~T0 @X0 -> 8 `i s out ]
+[v F4885 `uc ~T0 @X0 -> 8 `i s out ]
 [; ;uart.c: 172: static char out[8];
 [; ;uart.c: 175: if (nb < 0)
 "175
@@ -4867,7 +4868,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e =* _nb -U -> 1 `i ]
 [; ;uart.c: 178: out[j++] = '-';
 "178
-[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> -> 45 `ui `uc ]
+[e = *U + &U F4885 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4885 `ui `ux -> -> 45 `ui `uc ]
 "179
 }
 [e :U 481 ]
@@ -4889,25 +4890,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = *U + &U _i * -> -> -> 4 `i `ui `ux -> -> # *U &U _i `ui `ux - - - - _nb * *U + &U _i * -> -> -> 0 `i `ui `ux -> -> # *U &U _i `ui `ux -> 10000 `i * *U + &U _i * -> -> -> 1 `i `ui `ux -> -> # *U &U _i `ui `ux -> 1000 `i * *U + &U _i * -> -> -> 2 `i `ui `ux -> -> # *U &U _i `ui `ux -> 100 `i * *U + &U _i * -> -> -> 3 `i `ui `ux -> -> # *U &U _i `ui `ux -> 10 `i ]
 [; ;uart.c: 189: out[j++] = (unsigned char)(i[0] + 48);
 "189
-[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 0 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4885 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4885 `ui `ux -> + *U + &U _i * -> -> -> 0 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 190: out[j++] = (unsigned char)(i[1] + 48);
 "190
-[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 1 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4885 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4885 `ui `ux -> + *U + &U _i * -> -> -> 1 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 191: out[j++] = (unsigned char)(i[2] + 48);
 "191
-[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 2 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4885 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4885 `ui `ux -> + *U + &U _i * -> -> -> 2 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 192: out[j++] = (unsigned char)(i[3] + 48);
 "192
-[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 3 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4885 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4885 `ui `ux -> + *U + &U _i * -> -> -> 3 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 193: out[j++] = (unsigned char)(i[4] + 48);
 "193
-[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 4 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4885 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4885 `ui `ux -> + *U + &U _i * -> -> -> 4 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 194: out[j++] = '\0';
 "194
-[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> -> 0 `ui `uc ]
+[e = *U + &U F4885 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4885 `ui `ux -> -> 0 `ui `uc ]
 [; ;uart.c: 196: return out;
 "196
-[e ) &U F4880 ]
+[e ) &U F4885 ]
 [e $UE 480  ]
 [; ;uart.c: 197: }
 "197

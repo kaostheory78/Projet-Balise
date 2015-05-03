@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 
     while(1)
     {
-        static double x, y, ancien_x = 0, ancien_y = 0;
+        static double x[3], y[3], distance[3], ancien_x = 0, ancien_y = 0;
         static bool premiere_fois = true;
 
         capteur.indice = 0;
@@ -145,70 +145,122 @@ int main(int argc, char** argv)
                     capteur.angle[i] = obtention_angle(capteur.position[i]);
 
             // On remet les angles dans l'ordre en fonction du n° de l'angle correspondant à la balise mère au derneir calcul
-            inversion_balises(capteur.id_balise_mere);
-
-            // On cherche quel angle et le plus proche du dernier angle de la balise mère
-            if (retrouver_balise_mere() == OK)
+            //inversion_balises(capteur.id_balise_mere);
+            
+            if (premiere_fois == true)
             {
-                triangulation(&x, &y, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
-                affichage_position(x, y);
-                ancien_x = x;
-                ancien_y = y;
+                triangulation(&x[0], &y[0], capteur.angle[0], capteur.angle[1], capteur.angle[2]);
+                ancien_x = x[0];
+                ancien_y = y[0];
+                premiere_fois = false;
             }
-            // si on en trouve aucun, alors on refait les calculs de triangulations 
             else
             {
-                double x_temp = 0, y_temp = 0;
-                PutsUART(UART_BLUETOOTH, "\n\n\n\r BALISE MERE PERDUE !!!!!! \n\r");
-                PutsUART(UART_BLUETOOTH, "Ancienne position connue : \n\r");
-                affichage_position(ancien_x, ancien_y);
+                triangulation(&x[0], &y[0], capteur.angle[0], capteur.angle[1], capteur.angle[2]);
+                triangulation(&x[1], &y[1], capteur.angle[1], capteur.angle[2], capteur.angle[0]);
+                triangulation(&x[2], &y[2], capteur.angle[2], capteur.angle[0], capteur.angle[1]);
 
-                triangulation(&x_temp, &y_temp, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
-                PutsUART(UART_BLUETOOTH, "\n\rTenative de base :  \n\r");
-                affichage_position(x_temp, y_temp);
+                for (i = 0 ; i < 3 ; i++)
+                    distance[i] = get_distance(ancien_x, ancien_y, x[i], y[i]);
 
-                // Si calcul de trianguation normal donne une position correcte
-                if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == OK )
+                if (distance[0] < distance[1])
                 {
-                    PutsUART(UART_BLUETOOTH, "\n\n\n\r BALISE MERE INCHANGEE !!!!!! \n\r");
-                    affichage_position(x_temp, y_temp);
-                    ancien_x = x_temp;
-                    ancien_y = y_temp;
+                    if (distance[0] < distance[2])
+                    {
+                        ancien_x = x[0];
+                        ancien_y = y[0];
+                        // x[0] et y[0]
+                    }
+                    else
+                    {
+                        // x[2] et y [2]
+                        ancien_x = x[2];
+                        ancien_y = y[2];
+                    }
                 }
-                else // Sinon on teste avec la balise 2 comme balise mère
+                else if (distance[1] < distance[2])
                 {
-                    triangulation(&x_temp, &y_temp, capteur.angle[1], capteur.angle[2], capteur.angle[0]);
-                    PutsUART(UART_BLUETOOTH, "\n\rTenative 1 :  \n\r");
-                    affichage_position(x_temp, y_temp);
-                    if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == OK )
-                    {
-                        PutsUART(UART_BLUETOOTH, "\n\n\n\r BALISE MERE RETROUVEE 1 !!!!!! \n\r");
-                        affichage_position(x_temp, y_temp);
-                        capteur.id_balise_mere ++;
-                        modulo_id_balise_mere();
-                        ancien_x = x_temp;
-                        ancien_y = y_temp;
-                    }
-                    else // puis la balise 3
-                    {
-                        triangulation(&x_temp, &y_temp, capteur.angle[2], capteur.angle[0], capteur.angle[1]);
-                        PutsUART(UART_BLUETOOTH, "\n\r Tenative 2 :  \n\r");
-                        affichage_position(x_temp, y_temp);
-                        if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == OK)
-                        {
-                            PutsUART(UART_BLUETOOTH, "\n\n\n\r BALISE MERE RETROUVEE 2 !!!!!! \n\r");
-                            affichage_position(x_temp, y_temp);
-                            capteur.id_balise_mere --;
-                            modulo_id_balise_mere();
-                            ancien_x = x_temp;
-                            ancien_y = y_temp;
-                        }
-                        else
-                            PutsUART(UART_BLUETOOTH, "\n\r/!\\/!\\ BALISE MERE NON RETROUVE  !!!!!! /!\\/!\\\n\r");
-                    }
-
+                    // x[1] et y[1]
+                    ancien_x = x[1];
+                    ancien_y = y[1];
                 }
+                else
+                {
+                    // x[2] y[2]
+                    ancien_x = x[2];
+                    ancien_y = y[2];
+                }
+
             }
+
+            affichage_position(ancien_x, ancien_y);
+
+
+            
+
+
+//            // On cherche quel angle et le plus proche du dernier angle de la balise mère
+//            if (retrouver_balise_mere() == OK)
+//            {
+//                triangulation(&x, &y, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
+//                affichage_position(x, y);
+//                ancien_x = x;
+//                ancien_y = y;
+//            }
+//            // si on en trouve aucun, alors on refait les calculs de triangulations
+//            else
+//            {
+//                double x_temp = 0, y_temp = 0;
+//                PutsUART(UART_BLUETOOTH, "\n\n\n\r BALISE MERE PERDUE !!!!!! \n\r");
+//                PutsUART(UART_BLUETOOTH, "Ancienne position connue : \n\r");
+//                affichage_position(ancien_x, ancien_y);
+//
+//                triangulation(&x_temp, &y_temp, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
+//                PutsUART(UART_BLUETOOTH, "\n\rTenative de base :  \n\r");
+//                affichage_position(x_temp, y_temp);
+//
+//                // Si calcul de trianguation normal donne une position correcte
+//                if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == OK )
+//                {
+//                    PutsUART(UART_BLUETOOTH, "\n\n\n\r BALISE MERE INCHANGEE !!!!!! \n\r");
+//                    affichage_position(x_temp, y_temp);
+//                    ancien_x = x_temp;
+//                    ancien_y = y_temp;
+//                }
+//                else // Sinon on teste avec la balise 2 comme balise mère
+//                {
+//                    triangulation(&x_temp, &y_temp, capteur.angle[1], capteur.angle[2], capteur.angle[0]);
+//                    PutsUART(UART_BLUETOOTH, "\n\rTenative 1 :  \n\r");
+//                    affichage_position(x_temp, y_temp);
+//                    if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == OK )
+//                    {
+//                        PutsUART(UART_BLUETOOTH, "\n\n\n\r BALISE MERE RETROUVEE 1 !!!!!! \n\r");
+//                        affichage_position(x_temp, y_temp);
+//                        capteur.id_balise_mere --;
+//                        modulo_id_balise_mere();
+//                        ancien_x = x_temp;
+//                        ancien_y = y_temp;
+//                    }
+//                    else // puis la balise 3
+//                    {
+//                        triangulation(&x_temp, &y_temp, capteur.angle[2], capteur.angle[0], capteur.angle[1]);
+//                        PutsUART(UART_BLUETOOTH, "\n\r Tenative 2 :  \n\r");
+//                        affichage_position(x_temp, y_temp);
+//                        if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == OK)
+//                        {
+//                            PutsUART(UART_BLUETOOTH, "\n\n\n\r BALISE MERE RETROUVEE 2 !!!!!! \n\r");
+//                            affichage_position(x_temp, y_temp);
+//                            capteur.id_balise_mere ++;
+//                            modulo_id_balise_mere();
+//                            ancien_x = x_temp;
+//                            ancien_y = y_temp;
+//                        }
+//                        else
+//                            PutsUART(UART_BLUETOOTH, "\n\r/!\\/!\\ BALISE MERE NON RETROUVE  !!!!!! /!\\/!\\\n\r");
+//                    }
+//
+//                }
+//            }
                 
 
             for (i = 0 ; i < 3 ; i++)

@@ -4753,6 +4753,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;triangulation.h: 41: void modulo_id_balise_mere ();
 [; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
 [; ;triangulation.h: 43: void affichage_position (double x, double y);
+[; ;triangulation.h: 44: double get_distance (double ancien_x, double ancien_y, double x, double y);
 [; ;system.h: 145: extern _buf uart_logiciel;
 [; ;system.h: 146: extern _uart_recption uart_reception;
 [; ;system.h: 147: extern _position position;

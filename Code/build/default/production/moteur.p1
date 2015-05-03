@@ -4505,6 +4505,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;triangulation.h: 41: void modulo_id_balise_mere ();
 [; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
 [; ;triangulation.h: 43: void affichage_position (double x, double y);
+[; ;triangulation.h: 44: double get_distance (double ancien_x, double ancien_y, double x, double y);
 [; ;system.h: 145: extern _buf uart_logiciel;
 [; ;system.h: 146: extern _uart_recption uart_reception;
 [; ;system.h: 147: extern _position position;
@@ -4734,8 +4735,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _get_valeur_codeur ]
 [f ]
 "114
-[v F4881 `l ~T0 @X0 1 s res ]
-[i F4881
+[v F4886 `l ~T0 @X0 1 s res ]
+[i F4886
 -> -> 0 `i `l
 ]
 "115
@@ -4753,7 +4754,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . _position 1 -> + * -> _POSCNTH `i -> 256 `i -> _POSCNTL `i `ui ]
 [; ;moteur.c: 122: res = (int32_t)( (int32_t) position.nouvelle - (int32_t) position.ancien );
 "122
-[e = F4881 - -> . _position 1 `l -> . _position 0 `l ]
+[e = F4886 - -> . _position 1 `l -> . _position 0 `l ]
 [; ;moteur.c: 123: if (etat_overflow != 0)
 "123
 [e $ ! != _etat_overflow -> 0 `i 462  ]
@@ -4762,14 +4763,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;moteur.c: 125: res+= (int32_t) etat_overflow * (((4 * 2000) - 1));
 "125
-[e =+ F4881 * -> _etat_overflow `l -> - * -> 4 `i -> 2000 `i -> 1 `i `l ]
+[e =+ F4886 * -> _etat_overflow `l -> - * -> 4 `i -> 2000 `i -> 1 `i `l ]
 "126
 }
 [e :U 462 ]
 [; ;moteur.c: 126: }
 [; ;moteur.c: 128: position.ecart = res;
 "128
-[e = . _position 2 F4881 ]
+[e = . _position 2 F4886 ]
 [; ;moteur.c: 129: position.ancien = position.nouvelle;
 "129
 [e = . _position 0 . _position 1 ]
