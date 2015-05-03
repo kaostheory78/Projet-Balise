@@ -5868,10 +5868,24 @@ int32_t ecart;
 double angle;
 }_position;
 
-# 40
+typedef struct
+{
+bool tour_en_cours;
+bool synchro_debut_tour;
+bool flag_capteur;
+double angle[3];
+double ancien_angle[3];
+uint16_t position[3];
+uint8_t indice;
+int8_t id_balise_mere;
+}_capteur;
+
+# 52
 void config_QEI ();
 void get_valeur_codeur (void);
 void conversion_angle ();
+void init_capteur();
+double obtention_angle (uint16_t position);
 
 # 46 "asserv.h"
 typedef struct
@@ -5902,24 +5916,39 @@ void reglage_PID (void);
 void saturation_erreur_integralle_vitesse (void);
 void ecretage_consignes(double *commande);
 
-# 142 "system.h"
+# 32 "triangulation.h"
+void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
+double Cot (double angle);
+double saturation (double valeur, double maximum);
+double conversion_degre_radian (double angle);
+
+double modulo_angle (double angle);
+int8_t retrouver_balise_mere ();
+int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
+void inversion_balises(uint8_t id_balise_mere);
+void modulo_id_balise_mere ();
+check_divergence_position (double ancien_x, double ancien_y, double x, double y);
+void affichage_position (double x, double y);
+
+# 145 "system.h"
 extern _buf uart_logiciel;
 extern _uart_recption uart_reception;
 extern _position position;
 extern int8_t OVERFLOW_CODEUR;
 
 extern uint8_t flag_cpateur;
+extern _capteur capteur;
 
-# 160
+# 164
 void init_system (void);
 
-# 166
+# 170
 void init_clock(void);
 
-# 173
+# 177
 void ConfigInterrupt (void);
 
-# 179
+# 183
 void ConfigPorts (void);
 
 
@@ -5930,7 +5959,7 @@ void envoit_pwm (double valeur);
 void config_pwm ();
 
 
-# 19 "main.c"
+# 20 "main.c"
 #pragma config OSC = HSPLL
 
 #pragma config FCMEN = OFF
@@ -6005,29 +6034,132 @@ LATCbits.LATC2 = 1;
 PORTBbits.RB0 = 1;
 
 PutsUART(0, "Bonjour les amis !!! =)");
+
 while(PORTCbits.RC4 == 0);
 PORTBbits.RB0= 0;
 PORTBbits.RB4 =1;
-envoit_pwm(50);
+envoit_pwm(60);
 
-flag_cpateur = 0;
+
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
+_delay((unsigned long)((10)*(40000000/4000.0)));
 
 while(1)
 {
-if (flag_cpateur == 1)
+static double x, y, ancien_x = 0, ancien_y = 0;
+static bool premiere_fois = 1;
+
+capteur.indice = 0;
+capteur.synchro_debut_tour = 1;
+
+while(capteur.synchro_debut_tour == 1);
+while(capteur.tour_en_cours == 1);
+
+if (capteur.indice != 3)
 {
+PutsUART(0, "\n\nProbleme de detection de balises .... : ");
+PutIntUART(0, (uint16_t) capteur.indice);
+PutsUART(0, " Balises detectees \n\n\n\r");
+}
+else
+{
+for (i = 0; i < 3 ; i++)
+capteur.angle[i] = obtention_angle(capteur.position[i]);
 
-conversion_angle();
-flag_cpateur = 0;
 
-int16_t angle = (int16_t) position.angle;
-PutIntUART(0, position.angle);
-PutsUART(0, "\n\r");
+inversion_balises(capteur.id_balise_mere);
+
+
+if (retrouver_balise_mere() == 0)
+{
+triangulation(&x, &y, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
+affichage_position(x, y);
+ancien_x = x;
+ancien_y = y;
+}
+
+else
+{
+double x_temp = 0, y_temp = 0;
+PutsUART(0, "\n\n\n\r BALISE MERE PERDUE !!!!!! \n\r");
+PutsUART(0, "Ancienne position connue : \n\r");
+affichage_position(ancien_x, ancien_y);
+
+triangulation(&x_temp, &y_temp, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
+PutsUART(0, "\n\rTenative de base :  \n\r");
+affichage_position(x_temp, y_temp);
+
+
+if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0 )
+{
+PutsUART(0, "\n\n\n\r BALISE MERE INCHANGEE !!!!!! \n\r");
+affichage_position(x_temp, y_temp);
+ancien_x = x_temp;
+ancien_y = y_temp;
+}
+else
+{
+triangulation(&x_temp, &y_temp, capteur.angle[1], capteur.angle[2], capteur.angle[0]);
+PutsUART(0, "\n\rTenative 1 :  \n\r");
+affichage_position(x_temp, y_temp);
+if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0 )
+{
+PutsUART(0, "\n\n\n\r BALISE MERE RETROUVEE 1 !!!!!! \n\r");
+affichage_position(x_temp, y_temp);
+capteur.id_balise_mere ++;
+modulo_id_balise_mere();
+ancien_x = x_temp;
+ancien_y = y_temp;
+}
+else
+{
+triangulation(&x_temp, &y_temp, capteur.angle[2], capteur.angle[0], capteur.angle[1]);
+PutsUART(0, "\n\r Tenative 2 :  \n\r");
+affichage_position(x_temp, y_temp);
+if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0)
+{
+PutsUART(0, "\n\n\n\r BALISE MERE RETROUVEE 2 !!!!!! \n\r");
+affichage_position(x_temp, y_temp);
+capteur.id_balise_mere --;
+modulo_id_balise_mere();
+ancien_x = x_temp;
+ancien_y = y_temp;
+}
+else
+PutsUART(0, "\n\r/!\\/!\\ BALISE MERE NON RETROUVE  !!!!!! /!\\/!\\\n\r");
+}
 
 }
 }
 
-# 151
+
+for (i = 0 ; i < 3 ; i++)
+capteur.ancien_angle[i] = capteur.angle[i];
+}
+}
+
+# 255
 while(1);
 
 

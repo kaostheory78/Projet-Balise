@@ -146,6 +146,8 @@ void interruption_INT0()
         {
             capteur.position[capteur.indice++] = POSCNTH * 256 + POSCNTL;
         }
+        else
+            capteur.indice++;
     }
     FLAG_INT0 = false;
    

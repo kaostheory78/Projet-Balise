@@ -1,9 +1,9 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"179 system.h
+"183 system.h
 [v _ConfigPorts `(v ~T0 @X0 0 ef ]
-"173
+"177
 [v _ConfigInterrupt `(v ~T0 @X0 0 ef ]
-"182
+"186
 [v _init_timer_0 `(v ~T0 @X0 0 ef ]
 "54 uart.h
 [v _init_uart_logiciel `(v ~T0 @X0 0 ef ]
@@ -11,14 +11,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _init_uart_reception `(v ~T0 @X0 0 ef ]
 "62
 [v _config_uart `(v ~T0 @X0 0 ef ]
-"186 system.h
+"190 system.h
 [v _config_pwm `(v ~T0 @X0 0 ef ]
-"40 moteur.h
+"52 moteur.h
 [v _config_QEI `(v ~T0 @X0 0 ef ]
 "73 asserv.h
 [v _reglage_PID `(v ~T0 @X0 0 ef ]
-"147 system.h
-[v _flag_cpateur `uc ~T0 @X0 0 e ]
+"55 moteur.h
+[v _init_capteur `(v ~T0 @X0 0 ef ]
 "7055 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
 [s S381 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S381 . T0PS PSA T0SE T0CS T016BIT TMR0ON ]
@@ -4703,9 +4703,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;moteur.h: 32: int32_t ecart;
 [; ;moteur.h: 33: double angle;
 [; ;moteur.h: 34: }_position;
-[; ;moteur.h: 40: void config_QEI ();
-[; ;moteur.h: 41: void get_valeur_codeur (void);
-[; ;moteur.h: 42: void conversion_angle ();
+[; ;moteur.h: 36: typedef struct
+[; ;moteur.h: 37: {
+[; ;moteur.h: 38: bool tour_en_cours;
+[; ;moteur.h: 39: bool synchro_debut_tour;
+[; ;moteur.h: 40: bool flag_capteur;
+[; ;moteur.h: 41: double angle[3];
+[; ;moteur.h: 42: double ancien_angle[3];
+[; ;moteur.h: 43: uint16_t position[3];
+[; ;moteur.h: 44: uint8_t indice;
+[; ;moteur.h: 45: int8_t id_balise_mere;
+[; ;moteur.h: 46: }_capteur;
+[; ;moteur.h: 52: void config_QEI ();
+[; ;moteur.h: 53: void get_valeur_codeur (void);
+[; ;moteur.h: 54: void conversion_angle ();
+[; ;moteur.h: 55: void init_capteur();
+[; ;moteur.h: 56: double obtention_angle (uint16_t position);
 [; ;asserv.h: 46: typedef struct
 [; ;asserv.h: 47: {
 [; ;asserv.h: 48: double KP;
@@ -4729,19 +4742,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;asserv.h: 73: void reglage_PID (void);
 [; ;asserv.h: 74: void saturation_erreur_integralle_vitesse (void);
 [; ;asserv.h: 75: void ecretage_consignes(double *commande);
-[; ;system.h: 142: extern _buf uart_logiciel;
-[; ;system.h: 143: extern _uart_recption uart_reception;
-[; ;system.h: 144: extern _position position;
-[; ;system.h: 145: extern int8_t OVERFLOW_CODEUR;
-[; ;system.h: 147: extern uint8_t flag_cpateur;
-[; ;system.h: 160: void init_system (void);
-[; ;system.h: 166: void init_clock(void);
-[; ;system.h: 173: void ConfigInterrupt (void);
-[; ;system.h: 179: void ConfigPorts (void);
-[; ;system.h: 182: void init_timer_0 ();
-[; ;system.h: 183: void init_timer_1 ();
-[; ;system.h: 185: void envoit_pwm (double valeur);
-[; ;system.h: 186: void config_pwm ();
+[; ;triangulation.h: 32: void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
+[; ;triangulation.h: 33: double Cot (double angle);
+[; ;triangulation.h: 34: double saturation (double valeur, double maximum);
+[; ;triangulation.h: 35: double conversion_degre_radian (double angle);
+[; ;triangulation.h: 37: double modulo_angle (double angle);
+[; ;triangulation.h: 38: int8_t retrouver_balise_mere ();
+[; ;triangulation.h: 39: int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
+[; ;triangulation.h: 40: void inversion_balises(uint8_t id_balise_mere);
+[; ;triangulation.h: 41: void modulo_id_balise_mere ();
+[; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
+[; ;triangulation.h: 43: void affichage_position (double x, double y);
+[; ;system.h: 145: extern _buf uart_logiciel;
+[; ;system.h: 146: extern _uart_recption uart_reception;
+[; ;system.h: 147: extern _position position;
+[; ;system.h: 148: extern int8_t OVERFLOW_CODEUR;
+[; ;system.h: 150: extern uint8_t flag_cpateur;
+[; ;system.h: 151: extern _capteur capteur;
+[; ;system.h: 164: void init_system (void);
+[; ;system.h: 170: void init_clock(void);
+[; ;system.h: 177: void ConfigInterrupt (void);
+[; ;system.h: 183: void ConfigPorts (void);
+[; ;system.h: 186: void init_timer_0 ();
+[; ;system.h: 187: void init_timer_1 ();
+[; ;system.h: 189: void envoit_pwm (double valeur);
+[; ;system.h: 190: void config_pwm ();
 "22 system.c
 [v _init_system `(v ~T0 @X0 1 ef ]
 "23
@@ -4777,12 +4802,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.c: 33: reglage_PID();
 "33
 [e ( _reglage_PID ..  ]
-[; ;system.c: 35: flag_cpateur = 0;
+[; ;system.c: 35: init_capteur();
 "35
-[e = _flag_cpateur -> -> 0 `i `uc ]
+[e ( _init_capteur ..  ]
 [; ;system.c: 36: }
 "36
-[e :UE 452 ]
+[e :UE 453 ]
 }
 "45
 [v _init_timer_0 `(v ~T0 @X0 1 ef ]
@@ -4812,7 +4837,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _TMR0ON -> -> 1 `i `b ]
 [; ;system.c: 55: }
 "55
-[e :UE 453 ]
+[e :UE 454 ]
 }
 "57
 [v _init_timer_1 `(v ~T0 @X0 1 ef ]
@@ -4848,7 +4873,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _TMR1ON -> -> 1 `i `b ]
 [; ;system.c: 72: }
 "72
-[e :UE 454 ]
+[e :UE 455 ]
 }
 "91
 [v _ConfigPorts `(v ~T0 @X0 1 ef ]
@@ -5070,7 +5095,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _LATE2 -> -> 0 `i `b ]
 [; ;system.c: 187: }
 "187
-[e :UE 455 ]
+[e :UE 456 ]
 }
 "194
 [v _ConfigInterrupt `(v ~T0 @X0 1 ef ]
@@ -5272,9 +5297,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.c: 297: PIE3bits.IC3DRIE = 0b0;
 "297
 [e = . . _PIE3bits 0 3 -> -> 0 `i `uc ]
-[; ;system.c: 298: PIE3bits.IC2QEIE = 0b0;
+[; ;system.c: 298: PIE3bits.IC2QEIE = 0b1;
 "298
-[e = . . _PIE3bits 0 2 -> -> 0 `i `uc ]
+[e = . . _PIE3bits 0 2 -> -> 1 `i `uc ]
 [; ;system.c: 299: PIE3bits.IC1IE = 0;
 "299
 [e = . . _PIE3bits 0 1 -> -> 0 `i `uc ]
@@ -5283,7 +5308,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _PIE3bits 0 0 -> -> 0 `i `uc ]
 [; ;system.c: 301: }
 "301
-[e :UE 456 ]
+[e :UE 457 ]
 }
 "308
 [v _ConfigADC `(v ~T0 @X0 1 ef ]
@@ -5298,5 +5323,5 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( ___nop ..  ]
 [; ;system.c: 313: }
 "313
-[e :UE 457 ]
+[e :UE 458 ]
 }

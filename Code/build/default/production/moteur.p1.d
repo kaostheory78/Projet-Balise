@@ -5,4 +5,5 @@ moteur.h  \
 uart.h  \
 asserv.h  \
 system.h  \
-interruptions.h 
+interruptions.h  \
+triangulation.h 

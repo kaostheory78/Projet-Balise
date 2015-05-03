@@ -85,7 +85,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S226 . . . . . . . ]
 "4634
 [v _RCSTAbits `VS226 ~T0 @X0 0 e@4011 ]
-"183 system.h
+"187 system.h
 [v _init_timer_1 `(v ~T0 @X0 0 ef ]
 "86 uart.h
 [v _PutsUART `(v ~T0 @X0 0 ef2`uc`*Cuc ]
@@ -4437,9 +4437,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;moteur.h: 32: int32_t ecart;
 [; ;moteur.h: 33: double angle;
 [; ;moteur.h: 34: }_position;
-[; ;moteur.h: 40: void config_QEI ();
-[; ;moteur.h: 41: void get_valeur_codeur (void);
-[; ;moteur.h: 42: void conversion_angle ();
+[; ;moteur.h: 36: typedef struct
+[; ;moteur.h: 37: {
+[; ;moteur.h: 38: bool tour_en_cours;
+[; ;moteur.h: 39: bool synchro_debut_tour;
+[; ;moteur.h: 40: bool flag_capteur;
+[; ;moteur.h: 41: double angle[3];
+[; ;moteur.h: 42: double ancien_angle[3];
+[; ;moteur.h: 43: uint16_t position[3];
+[; ;moteur.h: 44: uint8_t indice;
+[; ;moteur.h: 45: int8_t id_balise_mere;
+[; ;moteur.h: 46: }_capteur;
+[; ;moteur.h: 52: void config_QEI ();
+[; ;moteur.h: 53: void get_valeur_codeur (void);
+[; ;moteur.h: 54: void conversion_angle ();
+[; ;moteur.h: 55: void init_capteur();
+[; ;moteur.h: 56: double obtention_angle (uint16_t position);
 [; ;asserv.h: 46: typedef struct
 [; ;asserv.h: 47: {
 [; ;asserv.h: 48: double KP;
@@ -4463,19 +4476,31 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;asserv.h: 73: void reglage_PID (void);
 [; ;asserv.h: 74: void saturation_erreur_integralle_vitesse (void);
 [; ;asserv.h: 75: void ecretage_consignes(double *commande);
-[; ;system.h: 142: extern _buf uart_logiciel;
-[; ;system.h: 143: extern _uart_recption uart_reception;
-[; ;system.h: 144: extern _position position;
-[; ;system.h: 145: extern int8_t OVERFLOW_CODEUR;
-[; ;system.h: 147: extern uint8_t flag_cpateur;
-[; ;system.h: 160: void init_system (void);
-[; ;system.h: 166: void init_clock(void);
-[; ;system.h: 173: void ConfigInterrupt (void);
-[; ;system.h: 179: void ConfigPorts (void);
-[; ;system.h: 182: void init_timer_0 ();
-[; ;system.h: 183: void init_timer_1 ();
-[; ;system.h: 185: void envoit_pwm (double valeur);
-[; ;system.h: 186: void config_pwm ();
+[; ;triangulation.h: 32: void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
+[; ;triangulation.h: 33: double Cot (double angle);
+[; ;triangulation.h: 34: double saturation (double valeur, double maximum);
+[; ;triangulation.h: 35: double conversion_degre_radian (double angle);
+[; ;triangulation.h: 37: double modulo_angle (double angle);
+[; ;triangulation.h: 38: int8_t retrouver_balise_mere ();
+[; ;triangulation.h: 39: int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
+[; ;triangulation.h: 40: void inversion_balises(uint8_t id_balise_mere);
+[; ;triangulation.h: 41: void modulo_id_balise_mere ();
+[; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
+[; ;triangulation.h: 43: void affichage_position (double x, double y);
+[; ;system.h: 145: extern _buf uart_logiciel;
+[; ;system.h: 146: extern _uart_recption uart_reception;
+[; ;system.h: 147: extern _position position;
+[; ;system.h: 148: extern int8_t OVERFLOW_CODEUR;
+[; ;system.h: 150: extern uint8_t flag_cpateur;
+[; ;system.h: 151: extern _capteur capteur;
+[; ;system.h: 164: void init_system (void);
+[; ;system.h: 170: void init_clock(void);
+[; ;system.h: 177: void ConfigInterrupt (void);
+[; ;system.h: 183: void ConfigPorts (void);
+[; ;system.h: 186: void init_timer_0 ();
+[; ;system.h: 187: void init_timer_1 ();
+[; ;system.h: 189: void envoit_pwm (double valeur);
+[; ;system.h: 190: void config_pwm ();
 "24 uart.c
 [v _uart_logiciel `S446 ~T0 @X0 1 e ]
 [; ;uart.c: 24: _buf uart_logiciel;
@@ -4514,9 +4539,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;uart.c: 49: BAUDCONbits.ABDEN = 0;
 "49
 [e = . . _BAUDCONbits 0 0 -> -> 0 `i `uc ]
-[; ;uart.c: 55: SPBRG = 35;
-"55
-[e = _SPBRG -> -> 35 `i `uc ]
+[; ;uart.c: 52: SPBRG = 86;
+"52
+[e = _SPBRG -> -> 86 `i `uc ]
 [; ;uart.c: 59: RCSTAbits.SPEN = 1;
 "59
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
@@ -4528,7 +4553,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
 [; ;uart.c: 63: }
 "63
-[e :UE 452 ]
+[e :UE 453 ]
 }
 "65
 [v _init_uart_logiciel `(v ~T0 @X0 1 ef ]
@@ -4549,7 +4574,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _init_timer_1 ..  ]
 [; ;uart.c: 70: }
 "70
-[e :UE 453 ]
+[e :UE 454 ]
 }
 "72
 [v _init_uart_reception `(v ~T0 @X0 1 ef ]
@@ -4570,7 +4595,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . _uart_reception 1 -> -> 0 `i `uc ]
 [; ;uart.c: 77: }
 "77
-[e :UE 454 ]
+[e :UE 455 ]
 }
 "96
 [v _traitement_reception `(v ~T0 @X0 1 ef ]
@@ -4595,7 +4620,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _PutsUART (2 , -> -> 1 `i `uc :s 2C ]
 [; ;uart.c: 102: if (uart_reception.buffer_vide != 1)
 "102
-[e $ ! != -> . _uart_reception 3 `i -> 1 `i 456  ]
+[e $ ! != -> . _uart_reception 3 `i -> 1 `i 457  ]
 [; ;uart.c: 103: {
 "103
 {
@@ -4606,9 +4631,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "105
 {
 [e = _i -> 0 `i ]
-[e $U 460  ]
+[e $U 461  ]
 "106
-[e :U 457 ]
+[e :U 458 ]
 [; ;uart.c: 106: {
 {
 [; ;uart.c: 107: PutcUART(1, uart_reception.buffer_reeption[i]);
@@ -4618,9 +4643,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "105
 [e ++ _i -> 1 `i ]
-[e :U 460 ]
-[e $ < _i -> . _uart_reception 1 `i 457  ]
-[e :U 458 ]
+[e :U 461 ]
+[e $ < _i -> . _uart_reception 1 `i 458  ]
+[e :U 459 ]
 "109
 }
 [; ;uart.c: 109: }
@@ -4638,11 +4663,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _PIE1bits 2 1 -> -> 1 `i `uc ]
 "114
 }
-[e :U 456 ]
+[e :U 457 ]
 [; ;uart.c: 114: }
 [; ;uart.c: 115: }
 "115
-[e :UE 455 ]
+[e :UE 456 ]
 }
 "122
 [v _PutcUART `(v ~T0 @X0 1 ef2`uc`uc ]
@@ -4658,37 +4683,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;uart.c: 124: if (type_uart == 0)
 "124
-[e $ ! == -> _type_uart `i -> 0 `i 462  ]
+[e $ ! == -> _type_uart `i -> 0 `i 463  ]
 [; ;uart.c: 125: {
 "125
 {
 [; ;uart.c: 126: while (PIR1bits.TXIF == 0);
 "126
-[e $U 463  ]
-[e :U 464 ]
-[e :U 463 ]
-[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 464  ]
+[e $U 464  ]
 [e :U 465 ]
+[e :U 464 ]
+[e $ == -> . . _PIR1bits 0 4 `i -> 0 `i 465  ]
+[e :U 466 ]
 [; ;uart.c: 127: TXREG = octet;
 "127
 [e = _TXREG _octet ]
 "128
 }
 [; ;uart.c: 128: }
-[e $U 466  ]
+[e $U 467  ]
 "129
-[e :U 462 ]
+[e :U 463 ]
 [; ;uart.c: 129: else
 [; ;uart.c: 130: {
 "130
 {
 [; ;uart.c: 131: while(uart_logiciel.transmission_en_cours == 1);
 "131
-[e $U 467  ]
-[e :U 468 ]
-[e :U 467 ]
-[e $ == -> . _uart_logiciel 1 `i -> 1 `i 468  ]
+[e $U 468  ]
 [e :U 469 ]
+[e :U 468 ]
+[e $ == -> . _uart_logiciel 1 `i -> 1 `i 469  ]
+[e :U 470 ]
 [; ;uart.c: 132: uart_logiciel.indice = 0;
 "132
 [e = . _uart_logiciel 2 -> -> 0 `i `uc ]
@@ -4730,11 +4755,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . _uart_logiciel 1 -> -> 1 `i `uc ]
 "145
 }
-[e :U 466 ]
+[e :U 467 ]
 [; ;uart.c: 145: }
 [; ;uart.c: 146: }
 "146
-[e :UE 461 ]
+[e :UE 462 ]
 }
 "148
 [v _PutsUART `(v ~T0 @X0 1 ef2`uc`*Cuc ]
@@ -4750,7 +4775,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;uart.c: 150: do
 "150
-[e :U 473 ]
+[e :U 474 ]
 [; ;uart.c: 151: {
 "151
 {
@@ -4762,11 +4787,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;uart.c: 153: }
 [; ;uart.c: 154: while (*chaine++);
 "154
-[e $ != -> *U ++ _chaine * -> -> 1 `i `x -> -> # *U _chaine `i `x `i -> -> -> 0 `i `Cuc `i 473  ]
-[e :U 472 ]
+[e $ != -> *U ++ _chaine * -> -> 1 `i `x -> -> # *U _chaine `i `x `i -> -> -> 0 `i `Cuc `i 474  ]
+[e :U 473 ]
 [; ;uart.c: 155: }
 "155
-[e :UE 470 ]
+[e :UE 471 ]
 }
 "157
 [v _Puts2UART `(v ~T0 @X0 1 ef3`uc`*uc`ui ]
@@ -4788,9 +4813,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "160
 {
 [e = _i -> 0 `i ]
-[e $U 478  ]
+[e $U 479  ]
 "161
-[e :U 475 ]
+[e :U 476 ]
 [; ;uart.c: 161: {
 {
 [; ;uart.c: 162: PutcUART (type_uart, chaine[i]);
@@ -4800,15 +4825,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "160
 [e ++ _i -> 1 `i ]
-[e :U 478 ]
-[e $ < -> _i `ui _taille_chaine 475  ]
-[e :U 476 ]
+[e :U 479 ]
+[e $ < -> _i `ui _taille_chaine 476  ]
+[e :U 477 ]
 "163
 }
 [; ;uart.c: 163: }
 [; ;uart.c: 164: }
 "164
-[e :UE 474 ]
+[e :UE 475 ]
 }
 "167
 [v _IntToC `(*uc ~T0 @X0 1 ef1`i ]
@@ -4829,11 +4854,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;uart.c: 171: int j = 0;
 [e = _j -> 0 `i ]
 "172
-[v F4836 `uc ~T0 @X0 -> 8 `i s out ]
+[v F4880 `uc ~T0 @X0 -> 8 `i s out ]
 [; ;uart.c: 172: static char out[8];
 [; ;uart.c: 175: if (nb < 0)
 "175
-[e $ ! < _nb -> 0 `i 480  ]
+[e $ ! < _nb -> 0 `i 481  ]
 [; ;uart.c: 176: {
 "176
 {
@@ -4842,10 +4867,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e =* _nb -U -> 1 `i ]
 [; ;uart.c: 178: out[j++] = '-';
 "178
-[e = *U + &U F4836 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4836 `ui `ux -> -> 45 `ui `uc ]
+[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> -> 45 `ui `uc ]
 "179
 }
-[e :U 480 ]
+[e :U 481 ]
 [; ;uart.c: 179: }
 [; ;uart.c: 183: i[0] = (nb / 10000);
 "183
@@ -4864,29 +4889,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = *U + &U _i * -> -> -> 4 `i `ui `ux -> -> # *U &U _i `ui `ux - - - - _nb * *U + &U _i * -> -> -> 0 `i `ui `ux -> -> # *U &U _i `ui `ux -> 10000 `i * *U + &U _i * -> -> -> 1 `i `ui `ux -> -> # *U &U _i `ui `ux -> 1000 `i * *U + &U _i * -> -> -> 2 `i `ui `ux -> -> # *U &U _i `ui `ux -> 100 `i * *U + &U _i * -> -> -> 3 `i `ui `ux -> -> # *U &U _i `ui `ux -> 10 `i ]
 [; ;uart.c: 189: out[j++] = (unsigned char)(i[0] + 48);
 "189
-[e = *U + &U F4836 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4836 `ui `ux -> + *U + &U _i * -> -> -> 0 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 0 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 190: out[j++] = (unsigned char)(i[1] + 48);
 "190
-[e = *U + &U F4836 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4836 `ui `ux -> + *U + &U _i * -> -> -> 1 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 1 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 191: out[j++] = (unsigned char)(i[2] + 48);
 "191
-[e = *U + &U F4836 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4836 `ui `ux -> + *U + &U _i * -> -> -> 2 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 2 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 192: out[j++] = (unsigned char)(i[3] + 48);
 "192
-[e = *U + &U F4836 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4836 `ui `ux -> + *U + &U _i * -> -> -> 3 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 3 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 193: out[j++] = (unsigned char)(i[4] + 48);
 "193
-[e = *U + &U F4836 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4836 `ui `ux -> + *U + &U _i * -> -> -> 4 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
+[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> + *U + &U _i * -> -> -> 4 `i `ui `ux -> -> # *U &U _i `ui `ux -> 48 `i `uc ]
 [; ;uart.c: 194: out[j++] = '\0';
 "194
-[e = *U + &U F4836 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4836 `ui `ux -> -> 0 `ui `uc ]
+[e = *U + &U F4880 * -> -> ++ _j -> 1 `i `ui `ux -> -> # *U &U F4880 `ui `ux -> -> 0 `ui `uc ]
 [; ;uart.c: 196: return out;
 "196
-[e ) &U F4836 ]
-[e $UE 479  ]
+[e ) &U F4880 ]
+[e $UE 480  ]
 [; ;uart.c: 197: }
 "197
-[e :UE 479 ]
+[e :UE 480 ]
 }
 "248
 [v _PutIntUART `(v ~T0 @X0 1 ef2`uc`i ]
@@ -4905,7 +4930,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _PutsUART (2 , _type_uart -> ( _IntToC (1 _nb `*Cuc ]
 [; ;uart.c: 251: }
 "251
-[e :UE 481 ]
+[e :UE 482 ]
 }
 [a 1C 73 76 32 121 32 97 32 0 ]
 [a 2C 32 100 97 110 115 32 108 101 32 98 117 102 102 101 114 32 10 10 13 0 ]

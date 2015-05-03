@@ -27,6 +27,7 @@ extern "C" {
     #include "interruptions.h"
     #include "moteur.h"
     #include "asserv.h"
+    #include "triangulation.h"
 
 
 /******************************************************************************/
@@ -35,8 +36,10 @@ extern "C" {
 
 
     //Macro pour les tempos
-#define FOSC             16000000LL
-#define _XTAL_FREQ       16000000
+#define FOSC_40MHz
+
+#define FOSC             40000000LL
+#define _XTAL_FREQ       40000000
 #define FCY             (FOSC/4)
 #define __delay_us(x) _delay((unsigned long)((x)*(_XTAL_FREQ/4000000.0)))
 #define __delay_ms(x) _delay((unsigned long)((x)*(_XTAL_FREQ/4000.0)))

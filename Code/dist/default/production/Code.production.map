@@ -5,9 +5,9 @@ Linker command line:
 --edf=C:\Program Files (x86)\Microchip\xc8\v1.34\dat\en_msgs.txt -cs \
   -h+dist/default/production\Code.production.sym \
   --cmf=dist/default/production\Code.production.cmf -z -Q18F4431 \
-  -oC:\Users\Quentin\AppData\Local\Temp\s734.6 \
+  -oC:\Users\Quentin\AppData\Local\Temp\s88o.6 \
   -Mdist/default/production/Code.production.map -E1 -ver=XC8 \
-  -ASTACK=0167h-02ffh -pstack=STACK -ACODE=00h-03FFFh -ACONST=00h-03FFFh \
+  -ASTACK=01E7h-02ffh -pstack=STACK -ACODE=00h-03FFFh -ACONST=00h-03FFFh \
   -ASMALLCONST=0300h-03FFhx61 -AMEDIUMCONST=0300h-03FFFh -ACOMRAM=01h-05Fh \
   -AABS1=00h-02FFh -ABIGRAM=01h-02FFh -ARAM=060h-0FFh,0100h-01FFhx2 \
   -ABANK0=060h-0FFh -ABANK1=0100h-01FFh -ABANK2=0200h-02FFh \
@@ -21,7 +21,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\Quentin\AppData\Local\Temp\s734.obj \
+  C:\Users\Quentin\AppData\Local\Temp\s88o.obj \
   dist/default/production\Code.production.obj 
 
 Object code version is 3.11
@@ -34,7 +34,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Quentin\AppData\Local\Temp\s734.obj
+C:\Users\Quentin\AppData\Local\Temp\s88o.obj
                 end_init                             A8       A8        4        C       0
                 reset_vec                             0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
@@ -42,59 +42,84 @@ C:\Users\Quentin\AppData\Local\Temp\s734.obj
 dist/default/production\Code.production.obj
                 intcodelo                            18       18       90        C       0
                 intcode                               8        8       10        4       0
-                smallconst                          300      300       36      180       0
-                text46                             16F8     16F8       3C      19B       0
-                text45                             1984     1984        4      19B       0
-                text44                             1884     1884       2A      19B       0
-                text43                             1940     1940       12      19B       0
-                text42                             1968     1968        8      19B       0
-                text41                             1676     1676       46      19B       0
-                text40                             1980     1980        4      19B       0
-                text39                             197C     197C        4      19B       0
-                text38                             13B6     13B6       84      19B       0
-                intcode_body                       151E     151E       6C      19B       0
-                text36                             16BC     16BC       3C      19B       0
-                text35                             1978     1978        4      19B       0
-                text34                             185A     185A       2A      19B       0
-                text33                             192E     192E       12      19B       0
-                text32                             1960     1960        8      19B       0
-                text31                             1630     1630       46      19B       0
-                text30                             1974     1974        4      19B       0
-                text29                             1970     1970        4      19B       0
-                text28                             1332     1332       84      19B       0
-                text26                              FCE      FCE       D0      19B       0
-                text25                             176C     176C       38      19B       0
-                text24                              6B4      6B4      348      19B       0
-                text23                              336      336      37E      19B       0
-                text22                             14B0     14B0       6E      19B       0
-                text21                             18AE     18AE       22      19B       0
-                text20                              DCC      DCC      120      19B       0
-                text19                              B58      B58      142      19B       0
-                text18                              9FC      9FC      15C      19B       0
-                text17                             182E     182E       2C      19B       0
-                text16                             143A     143A       76      19B       0
-                text15                             109E     109E       CE      19B       0
-                text14                             17A4     17A4       30      19B       0
-                text13                              C9A      C9A      132      19B       0
-                text12                              EEC      EEC       E2      19B       0
-                text11                             12AA     12AA       88      19B       0
-                text10                             121C     121C       8E      19B       0
-                text9                              158A     158A       5E      19B       0
-                text8                              15E8     15E8       48      19B       0
-                text7                              18D0     18D0       1C      19B       0
-                text6                              1904     1904       16      19B       0
-                text5                              18EC     18EC       18      19B       0
-                text4                              1952     1952        E      19B       0
-                text3                              191A     191A       14      19B       0
-                text2                              1734     1734       38      19B       0
-                text1                              1802     1802       2C      19B       0
-                text0                              116C     116C       B0      19B       0
+                mediumconst                        3E00     3E00      200     1F00       0
+                text68                             369A     369A       3C        C       0
+                text67                             38E6     38E6        4        C       0
+                text66                             3500     3500       4A        C       0
+                text65                             37F0     37F0       24        C       0
+                text64                             38CA     38CA        8        C       0
+                text63                             35D8     35D8       46        C       0
+                text62                             38E2     38E2        4        C       0
+                text61                             38DE     38DE        4        C       0
+                text60                             3026     3026       84        C       0
+                intcode_body                       3280     3280       6C        C       0
+                text58                             365E     365E       3C        C       0
+                text57                             38DA     38DA        4        C       0
+                text56                             34B6     34B6       4A        C       0
+                text55                             37CC     37CC       24        C       0
+                text54                             38C2     38C2        8        C       0
+                text53                             3592     3592       46        C       0
+                text52                             38D6     38D6        4        C       0
+                text51                             38D2     38D2        4        C       0
+                text50                             2FA2     2FA2       84        C       0
+                text48                             2852     2852       D0        C       0
+                text47                             370E     370E       38        C       0
+                text46                             1466     1466      348        C       0
+                text45                             10E8     10E8      37E        C       0
+                text44                             3212     3212       6E        C       0
+                text43                             3814     3814       22        C       0
+                text42                             212A     212A      132        C       0
+                text41                             319E     319E       74        C       0
+                text40                             3746     3746       30        C       0
+                text39                             2922     2922       CE        C       0
+                text38                             2386     2386      120        C       0
+                text37                             1E8C     1E8C      15C        C       0
+                text36                             1A4A     1A4A      27E        C       0
+                text35                             3466     3466       50        C       0
+                text34                             1CC8     1CC8      1C4        C       0
+                text33                             225C     225C      12A        C       0
+                text32                             2690     2690       E2        C       0
+                text31                             2F1A     2F1A       88        C       0
+                text30                             2E8C     2E8C       8E        C       0
+                text29                             33BA     33BA       58        C       0
+                text28                             354A     354A       48        C       0
+                text27                             3856     3856       1C        C       0
+                text26                             2C20     2C20       AA        C       0
+                text25                             388A     388A       16        C       0
+                text24                             3872     3872       18        C       0
+                text23                             38B4     38B4        E        C       0
+                text22                             38A0     38A0       14        C       0
+                text21                             36D6     36D6       38        C       0
+                text20                             37A2     37A2       2A        C       0
+                text19                             1FE8     1FE8      142        C       0
+                text18                             3776     3776       2C        C       0
+                text17                             3126     3126       78        C       0
+                text16                             29F0     29F0       C0        C       0
+                text15                             2772     2772       E0        C       0
+                text14                             30AA     30AA       7C        C       0
+                text13                             3836     3836       20        C       0
+                text12                             2B68     2B68       B8        C       0
+                text11                             3412     3412       54        C       0
+                text10                             25A2     25A2       EE        C       0
+                text9                              2CCA     2CCA       A2        C       0
+                text8                              2DFC     2DFC       90        C       0
+                text7                              24A6     24A6       FC        C       0
+                text6                              17AE     17AE      29C        C       0
+                text5                              2AB0     2AB0       B8        C       0
+                text4                              3356     3356       64        C       0
+                text3                              32EC     32EC       6A        C       0
+                text2                              2D6C     2D6C       90        C       0
+                text1                                AC       AC      944        C       0
+                text0                               9F0      9F0      6F8        C       0
                 cstackCOMRAM                          1        1       25        1       1
-                cstackBANK0                          60       60       2F       60       1
-                bssBANK1                            100      100       67      100       1
-                bssBANK0                             8F       8F       21       60       1
+                cstackBANK0                          60       60       69       60       1
+                cstackBANK1                         17E      17E       69      100       1
+                bssBANK1                            100      100       7E      100       1
+                bssBANK0                             C9       C9       35       60       1
+                dataCOMRAM                           49       49        1        1       1
                 bssCOMRAM                            26       26       23        1       1
-                cinit                              17D4     17D4       2E      19B       0
+                cinit                              361E     361E       40        C       0
+                idataCOMRAM                        38EA     38EA        1        C       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -104,63 +129,87 @@ TOTAL           Name                               Link     Load   Length     Sp
                 intcodelo                            18       18       90         0
                 intcode                               8        8       10         0
                 reset_vec                             0        0        4         0
-                text46                             16F8     16F8       3C         0
-                text45                             1984     1984        4         0
-                text44                             1884     1884       2A         0
-                text43                             1940     1940       12         0
-                text42                             1968     1968        8         0
-                text41                             1676     1676       46         0
-                text40                             1980     1980        4         0
-                text39                             197C     197C        4         0
-                text38                             13B6     13B6       84         0
-                intcode_body                       151E     151E       6C         0
-                text36                             16BC     16BC       3C         0
-                text35                             1978     1978        4         0
-                text34                             185A     185A       2A         0
-                text33                             192E     192E       12         0
-                text32                             1960     1960        8         0
-                text31                             1630     1630       46         0
-                text30                             1974     1974        4         0
-                text29                             1970     1970        4         0
-                text28                             1332     1332       84         0
-                text26                              FCE      FCE       D0         0
-                text25                             176C     176C       38         0
-                text24                              6B4      6B4      348         0
-                text23                              336      336      37E         0
-                text22                             14B0     14B0       6E         0
-                text21                             18AE     18AE       22         0
-                text20                              DCC      DCC      120         0
-                text19                              B58      B58      142         0
-                text18                              9FC      9FC      15C         0
-                text17                             182E     182E       2C         0
-                text16                             143A     143A       76         0
-                text15                             109E     109E       CE         0
-                text14                             17A4     17A4       30         0
-                text13                              C9A      C9A      132         0
-                text12                              EEC      EEC       E2         0
-                text11                             12AA     12AA       88         0
-                text10                             121C     121C       8E         0
-                text9                              158A     158A       5E         0
-                text8                              15E8     15E8       48         0
-                text7                              18D0     18D0       1C         0
-                text6                              1904     1904       16         0
-                text5                              18EC     18EC       18         0
-                text4                              1952     1952        E         0
-                text3                              191A     191A       14         0
-                text2                              1734     1734       38         0
-                text1                              1802     1802       2C         0
-                text0                              116C     116C       B0         0
-                cinit                              17D4     17D4       2E         0
+                text68                             369A     369A       3C         0
+                text67                             38E6     38E6        4         0
+                text66                             3500     3500       4A         0
+                text65                             37F0     37F0       24         0
+                text64                             38CA     38CA        8         0
+                text63                             35D8     35D8       46         0
+                text62                             38E2     38E2        4         0
+                text61                             38DE     38DE        4         0
+                text60                             3026     3026       84         0
+                intcode_body                       3280     3280       6C         0
+                text58                             365E     365E       3C         0
+                text57                             38DA     38DA        4         0
+                text56                             34B6     34B6       4A         0
+                text55                             37CC     37CC       24         0
+                text54                             38C2     38C2        8         0
+                text53                             3592     3592       46         0
+                text52                             38D6     38D6        4         0
+                text51                             38D2     38D2        4         0
+                text50                             2FA2     2FA2       84         0
+                text48                             2852     2852       D0         0
+                text47                             370E     370E       38         0
+                text46                             1466     1466      348         0
+                text45                             10E8     10E8      37E         0
+                text44                             3212     3212       6E         0
+                text43                             3814     3814       22         0
+                text42                             212A     212A      132         0
+                text41                             319E     319E       74         0
+                text40                             3746     3746       30         0
+                text39                             2922     2922       CE         0
+                text38                             2386     2386      120         0
+                text37                             1E8C     1E8C      15C         0
+                text36                             1A4A     1A4A      27E         0
+                text35                             3466     3466       50         0
+                text34                             1CC8     1CC8      1C4         0
+                text33                             225C     225C      12A         0
+                text32                             2690     2690       E2         0
+                text31                             2F1A     2F1A       88         0
+                text30                             2E8C     2E8C       8E         0
+                text29                             33BA     33BA       58         0
+                text28                             354A     354A       48         0
+                text27                             3856     3856       1C         0
+                text26                             2C20     2C20       AA         0
+                text25                             388A     388A       16         0
+                text24                             3872     3872       18         0
+                text23                             38B4     38B4        E         0
+                text22                             38A0     38A0       14         0
+                text21                             36D6     36D6       38         0
+                text20                             37A2     37A2       2A         0
+                text19                             1FE8     1FE8      142         0
+                text18                             3776     3776       2C         0
+                text17                             3126     3126       78         0
+                text16                             29F0     29F0       C0         0
+                text15                             2772     2772       E0         0
+                text14                             30AA     30AA       7C         0
+                text13                             3836     3836       20         0
+                text12                             2B68     2B68       B8         0
+                text11                             3412     3412       54         0
+                text10                             25A2     25A2       EE         0
+                text9                              2CCA     2CCA       A2         0
+                text8                              2DFC     2DFC       90         0
+                text7                              24A6     24A6       FC         0
+                text6                              17AE     17AE      29C         0
+                text5                              2AB0     2AB0       B8         0
+                text4                              3356     3356       64         0
+                text3                              32EC     32EC       6A         0
+                text2                              2D6C     2D6C       90         0
+                text1                                AC       AC      944         0
+                text0                               9F0      9F0      6F8         0
+                cinit                              361E     361E       40         0
+                idataCOMRAM                        38EA     38EA        1         0
 
         CLASS   CONST          
 
         CLASS   SMALLCONST     
-                smallconst                          300      300       36         0
 
         CLASS   MEDIUMCONST    
+                mediumconst                        3E00     3E00      200         0
 
         CLASS   COMRAM         
                 cstackCOMRAM                          1        1       25         1
+                dataCOMRAM                           49       49        1         1
                 bssCOMRAM                            26       26       23         1
 
         CLASS   ABS1           
@@ -170,11 +219,12 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   RAM            
 
         CLASS   BANK0          
-                cstackBANK0                          60       60       2F         1
-                bssBANK0                             8F       8F       21         1
+                cstackBANK0                          60       60       69         1
+                bssBANK0                             C9       C9       35         1
 
         CLASS   BANK1          
-                bssBANK1                            100      100       67         1
+                cstackBANK1                         17E      17E       69         1
+                bssBANK1                            100      100       7E         1
 
         CLASS   BANK2          
 
@@ -195,13 +245,12 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
-                cstackCOMRAM                   000001  000048  000049         1       1  COMRAM  
+                cstackCOMRAM                   000001  000049  00004A         1       1  COMRAM  
                 intcode                        000008  000010  000018         4       0  CODE    
-                intcodelo                      000018  000094  0000AC         C       0  CODE    
-                cstackBANK0                    000060  000050  0000B0        60       1  BANK0   
-                bssBANK1                       000100  000067  000167       100       1  BANK1   
-                smallconst                     000300  000036  000336       180       0  SMALLCON
-                text23                         000336  001652  001988       19B       0  CODE    
+                intcodelo                      000018  0038D3  0038EB         C       0  CODE    
+                cstackBANK0                    000060  00009E  0000FE        60       1  BANK0   
+                bssBANK1                       000100  0000E7  0001E7       100       1  BANK1   
+                mediumconst                    003E00  000200  004000      1F00       0  MEDIUMCO
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -209,42 +258,56 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 UNUSED ADDRESS RANGES
 
         Name                Unused          Largest block    Delta
-        BANK0            0000B0-0000FF               50
-        BANK1            000167-0001FF               99
+        BANK0            0000FE-0000FF                2
+        BANK1            0001E7-0001FF               19
         BANK2            000200-0002FF              100
-        BIGRAM           000049-00005F               17
-                         0000B0-0000FF               50
-                         000167-0002FF              199
+        BIGRAM           00004A-00005F               16
+                         0000FE-0000FF                2
+                         0001E7-0002FF              119
         CODE             000004-000007                4
-                         0000AC-0002FF              254
-                         001988-003FFF             2678
-        COMRAM           000049-00005F               17
+                         0038EB-003DFF              515
+        COMRAM           00004A-00005F               16
         CONST            000004-000007                4
-                         0000AC-0002FF              254
-                         001988-003FFF             2678
+                         0038EB-003DFF              515
         EEDATA           F00000-F000FF              100
-        MEDIUMCONST      001988-003FFF             2678
-        RAM              0000B0-0000FF               50
-                         000167-0002FF               99
+        MEDIUMCONST      0038EB-003DFF              515
+        RAM              0000FE-0000FF                2
+                         0001E7-0002FF               19
         SFR              000F60-000FFF               A0
-        SMALLCONST       001988-003FFF              100
-        STACK            000167-0002FF              199
+        SMALLCONST       0038EB-003DFF              100
+        STACK            0001E7-0002FF              119
 
                                   Symbol Table
 
+?_Cot                                cstackBANK0  0000BD
 ?_IntToC                             cstackBANK0  00006E
+?___altoft                           cstackBANK0  00006F
 ?___awdiv                            cstackBANK0  000066
-?___ftdiv                            cstackBANK0  00006B
+?___ftadd                            cstackBANK0  00007A
+?___ftdiv                            cstackBANK0  000092
 ?___ftmul                            cstackBANK0  000068
-?___ftneg                            cstackBANK0  000060
+?___ftneg                            cstackBANK0  000077
 ?___ftpack                           cstackBANK0  000060
+?___ftsub                            cstackBANK0  00008E
 ?___fttol                            cstackBANK0  000060
 ?___lwtoft                           cstackBANK0  000068
 ?___wmul                             cstackBANK0  000060
+?_check_divergence_position          cstackBANK0  0000A7
+?_conversion_degre_radian            cstackBANK0  0000A1
+?_cos                                cstackBANK0  0000AE
+?_eval_poly                          cstackBANK0  000086
+?_floor                              cstackBANK0  000086
+?_modulo_angle                       cstackBANK0  000094
+?_obtention_angle                    cstackBANK0  0000A1
+?_saturation                         cstackBANK0  000083
+?_sin                                cstackBANK0  0000A1
+?_sqrt                               cstackBANK0  000094
+?_tan                                cstackBANK0  0000B4
+Cot@angle                            cstackBANK0  0000BD
 IntToC@i                             cstackBANK0  000072
 IntToC@j                             cstackBANK0  00007C
 IntToC@nb                            cstackBANK0  00006E
-IntToC@out                           bssBANK0     0000A8
+IntToC@out                           bssBANK1     000176
 PutIntUART@nb                        cstackBANK0  000083
 PutIntUART@type_uart                 cstackBANK0  000085
 PutcUART@octet                       cstackBANK0  00006E
@@ -254,17 +317,19 @@ PutsUART@type_uart                   cstackBANK0  000082
 _ANSEL0                              (abs)        000FB8
 _BAUDCONbits                         (abs)        000FAA
 _CAP1CONbits                         (abs)        000F63
-_ConfigInterrupt                     text11       0012AA
-_ConfigPorts                         text10       00121C
+_ConfigInterrupt                     text31       002F1A
+_ConfigPorts                         text30       002E8C
+_Cot                                 text3        0032EC
+_Cot$3250                            cstackBANK0  0000C0
 _DFLTCONbits                         (abs)        000F60
-_ERREUR_VITESSE                      bssCOMRAM    000026
+_ERREUR_VITESSE                      bssBANK0     0000C9
 _INTCON2bits                         (abs)        000FF1
 _INTCON3bits                         (abs)        000FF0
 _INTCONbits                          (abs)        000FF2
 _IPR1bits                            (abs)        000F9F
 _IPR2bits                            (abs)        000FA2
 _IPR3bits                            (abs)        000FA5
-_IntToC                              text24       0006B4
+_IntToC                              text46       001466
 _LATA0                               (abs)        007C48
 _LATA1                               (abs)        007C49
 _LATA2                               (abs)        007C4A
@@ -303,7 +368,7 @@ _LATE1                               (abs)        007C69
 _LATE2                               (abs)        007C6A
 _MAXCNTH                             (abs)        000F65
 _MAXCNTL                             (abs)        000F64
-_OVERFLOW_CODEUR                     bssCOMRAM    000038
+_OVERFLOW_CODEUR                     bssCOMRAM    00003A
 _PDC0H                               (abs)        000F78
 _PDC0L                               (abs)        000F79
 _PDC1H                               (abs)        000F76
@@ -312,7 +377,7 @@ _PDC2H                               (abs)        000F74
 _PDC2L                               (abs)        000F75
 _PDC3H                               (abs)        000F72
 _PDC3L                               (abs)        000F73
-_PID                                 bssBANK0     00009A
+_PID                                 bssBANK1     000100
 _PIE1bits                            (abs)        000F9D
 _PIE2bits                            (abs)        000FA0
 _PIE3bits                            (abs)        000FA3
@@ -330,9 +395,9 @@ _PTPERH                              (abs)        000F7A
 _PTPERL                              (abs)        000F7B
 _PWMCON0bits                         (abs)        000F6F
 _PWMCON1bits                         (abs)        000F6E
-_PutIntUART                          text21       0018AE
-_PutcUART                            text23       000336
-_PutsUART                            text22       0014B0
+_PutIntUART                          text43       003814
+_PutcUART                            text45       0010E8
+_PutsUART                            text44       003212
 _QEICONbits                          (abs)        000FB6
 _RCONbits                            (abs)        000FD0
 _RCREG                               (abs)        000FAE
@@ -351,7 +416,7 @@ _TRISDbits                           (abs)        000F95
 _TRISEbits                           (abs)        000F96
 _TXREG                               (abs)        000FAD
 _TXSTAbits                           (abs)        000FAC
-_VITESSE                             bssCOMRAM    00002F
+_VITESSE                             bssCOMRAM    000031
 __CFG_BOREN$OFF                      (abs)        000000
 __CFG_CP0$OFF                        (abs)        000000
 __CFG_CP1$OFF                        (abs)        000000
@@ -407,14 +472,17 @@ __Hcomram                            comram       000000
 __Hconfig                            config       30000E
 __Hconst                             const        000000
 __HcstackBANK0                       cstackBANK0  000000
+__HcstackBANK1                       cstackBANK1  000000
 __HcstackCOMRAM                      cstackCOMRAM 000000
 __Hdata                              data         000000
+__HdataCOMRAM                        dataCOMRAM   000000
 __Heeprom_data                       eeprom_data  000000
 __Hend_init                          end_init     0000AC
 __Hfarbss                            farbss       000000
 __Hfardata                           fardata      000000
 __Hibigdata                          ibigdata     000000
 __Hidata                             idata        000000
+__HidataCOMRAM                       idataCOMRAM  000000
 __Hidloc                             idloc        200008
 __Hifardata                          ifardata     000000
 __Hinit                              init         0000A8
@@ -425,7 +493,7 @@ __Hintentry                          intentry     000000
 __Hintret                            intret       000000
 __Hintsave_regs                      intsave_regs 000000
 __Hirdata                            irdata       000000
-__Hmediumconst                       mediumconst  000000
+__Hmediumconst                       mediumconst  004000
 __HnvFARRAM                          nvFARRAM     000000
 __Hnvbit                             nvbit        000000
 __Hnvrram                            nvrram       000000
@@ -439,9 +507,9 @@ __Hrdata                             rdata        000000
 __Hreset_vec                         reset_vec    000004
 __Hrparam                            rparam       000000
 __Hsfr                               sfr          000000
-__Hsmallconst                        smallconst   000336
+__Hsmallconst                        smallconst   000000
 __Hspace_0                           (abs)        30000E
-__Hspace_1                           (abs)        000167
+__Hspace_1                           (abs)        0001E7
 __Hspace_2                           (abs)        000000
 __Hstack                             stack        000000
 __Hstruct                            struct       000000
@@ -467,6 +535,7 @@ __Htext23                            text23       000000
 __Htext24                            text24       000000
 __Htext25                            text25       000000
 __Htext26                            text26       000000
+__Htext27                            text27       000000
 __Htext28                            text28       000000
 __Htext29                            text29       000000
 __Htext3                             text3        000000
@@ -477,6 +546,7 @@ __Htext33                            text33       000000
 __Htext34                            text34       000000
 __Htext35                            text35       000000
 __Htext36                            text36       000000
+__Htext37                            text37       000000
 __Htext38                            text38       000000
 __Htext39                            text39       000000
 __Htext4                             text4        000000
@@ -487,8 +557,28 @@ __Htext43                            text43       000000
 __Htext44                            text44       000000
 __Htext45                            text45       000000
 __Htext46                            text46       000000
+__Htext47                            text47       000000
+__Htext48                            text48       000000
 __Htext5                             text5        000000
+__Htext50                            text50       000000
+__Htext51                            text51       000000
+__Htext52                            text52       000000
+__Htext53                            text53       000000
+__Htext54                            text54       000000
+__Htext55                            text55       000000
+__Htext56                            text56       000000
+__Htext57                            text57       000000
+__Htext58                            text58       000000
 __Htext6                             text6        000000
+__Htext60                            text60       000000
+__Htext61                            text61       000000
+__Htext62                            text62       000000
+__Htext63                            text63       000000
+__Htext64                            text64       000000
+__Htext65                            text65       000000
+__Htext66                            text66       000000
+__Htext67                            text67       000000
+__Htext68                            text68       000000
 __Htext7                             text7        000000
 __Htext8                             text8        000000
 __Htext9                             text9        000000
@@ -510,14 +600,17 @@ __Lcomram                            comram       000000
 __Lconfig                            config       300000
 __Lconst                             const        000000
 __LcstackBANK0                       cstackBANK0  000000
+__LcstackBANK1                       cstackBANK1  000000
 __LcstackCOMRAM                      cstackCOMRAM 000000
 __Ldata                              data         000000
+__LdataCOMRAM                        dataCOMRAM   000000
 __Leeprom_data                       eeprom_data  000000
 __Lend_init                          end_init     0000A8
 __Lfarbss                            farbss       000000
 __Lfardata                           fardata      000000
 __Libigdata                          ibigdata     000000
 __Lidata                             idata        000000
+__LidataCOMRAM                       idataCOMRAM  000000
 __Lidloc                             idloc        200000
 __Lifardata                          ifardata     000000
 __Linit                              init         0000A8
@@ -528,7 +621,7 @@ __Lintentry                          intentry     000000
 __Lintret                            intret       000000
 __Lintsave_regs                      intsave_regs 000000
 __Lirdata                            irdata       000000
-__Lmediumconst                       mediumconst  000000
+__Lmediumconst                       mediumconst  003E00
 __LnvFARRAM                          nvFARRAM     000000
 __Lnvbit                             nvbit        000000
 __Lnvrram                            nvrram       000000
@@ -542,7 +635,7 @@ __Lrdata                             rdata        000000
 __Lreset_vec                         reset_vec    000000
 __Lrparam                            rparam       000000
 __Lsfr                               sfr          000000
-__Lsmallconst                        smallconst   000300
+__Lsmallconst                        smallconst   000000
 __Lspace_0                           (abs)        000000
 __Lspace_1                           (abs)        000000
 __Lspace_2                           (abs)        000000
@@ -570,6 +663,7 @@ __Ltext23                            text23       000000
 __Ltext24                            text24       000000
 __Ltext25                            text25       000000
 __Ltext26                            text26       000000
+__Ltext27                            text27       000000
 __Ltext28                            text28       000000
 __Ltext29                            text29       000000
 __Ltext3                             text3        000000
@@ -580,6 +674,7 @@ __Ltext33                            text33       000000
 __Ltext34                            text34       000000
 __Ltext35                            text35       000000
 __Ltext36                            text36       000000
+__Ltext37                            text37       000000
 __Ltext38                            text38       000000
 __Ltext39                            text39       000000
 __Ltext4                             text4        000000
@@ -590,188 +685,282 @@ __Ltext43                            text43       000000
 __Ltext44                            text44       000000
 __Ltext45                            text45       000000
 __Ltext46                            text46       000000
+__Ltext47                            text47       000000
+__Ltext48                            text48       000000
 __Ltext5                             text5        000000
+__Ltext50                            text50       000000
+__Ltext51                            text51       000000
+__Ltext52                            text52       000000
+__Ltext53                            text53       000000
+__Ltext54                            text54       000000
+__Ltext55                            text55       000000
+__Ltext56                            text56       000000
+__Ltext57                            text57       000000
+__Ltext58                            text58       000000
 __Ltext6                             text6        000000
+__Ltext60                            text60       000000
+__Ltext61                            text61       000000
+__Ltext62                            text62       000000
+__Ltext63                            text63       000000
+__Ltext64                            text64       000000
+__Ltext65                            text65       000000
+__Ltext66                            text66       000000
+__Ltext67                            text67       000000
+__Ltext68                            text68       000000
 __Ltext7                             text7        000000
 __Ltext8                             text8        000000
 __Ltext9                             text9        000000
 __S0                                 (abs)        30000E
-__S1                                 (abs)        000167
+__S1                                 (abs)        0001E7
 __S2                                 (abs)        000000
-___awdiv                             text26       000FCE
+___altoft                            text9        002CCA
+___altoft@c                          cstackBANK0  00006F
+___altoft@exp                        cstackBANK0  000077
+___altoft@sign                       cstackBANK0  000078
+___awdiv                             text48       002852
 ___awdiv@counter                     cstackBANK0  00006A
 ___awdiv@dividend                    cstackBANK0  000066
 ___awdiv@divisor                     cstackBANK0  000068
 ___awdiv@quotient                    cstackBANK0  00006C
 ___awdiv@sign                        cstackBANK0  00006B
-___ftdiv                             text19       000B58
-___ftdiv@cntr                        cstackBANK0  000074
-___ftdiv@exp                         cstackBANK0  000078
-___ftdiv@f1                          cstackBANK0  00006B
-___ftdiv@f2                          cstackBANK0  00006E
-___ftdiv@f3                          cstackBANK0  000075
-___ftdiv@sign                        cstackBANK0  000079
-___ftge                              text15       00109E
-___ftge@ff1                          cstackBANK0  000060
-___ftge@ff2                          cstackBANK0  000063
-___ftmul                             text18       0009FC
+___ftadd                             text36       001A4A
+___ftadd@exp1                        cstackBANK0  000085
+___ftadd@exp2                        cstackBANK0  000084
+___ftadd@f1                          cstackBANK0  00007A
+___ftadd@f2                          cstackBANK0  00007D
+___ftadd@sign                        cstackBANK0  000083
+___ftdiv                             text19       001FE8
+___ftdiv@cntr                        cstackBANK0  00009B
+___ftdiv@exp                         cstackBANK0  00009F
+___ftdiv@f1                          cstackBANK0  000092
+___ftdiv@f2                          cstackBANK0  000095
+___ftdiv@f3                          cstackBANK0  00009C
+___ftdiv@sign                        cstackBANK0  0000A0
+___ftge                              text39       002922
+___ftge@ff1                          cstackBANK0  00007A
+___ftge@ff2                          cstackBANK0  00007D
+___ftmul                             text37       001E8C
 ___ftmul@cntr                        cstackBANK0  000075
 ___ftmul@exp                         cstackBANK0  000071
 ___ftmul@f1                          cstackBANK0  000068
 ___ftmul@f2                          cstackBANK0  00006B
 ___ftmul@f3_as_product               cstackBANK0  000072
 ___ftmul@sign                        cstackBANK0  000076
-___ftneg                             text14       0017A4
-___ftneg@f1                          cstackBANK0  000060
-___ftpack                            text20       000DCC
+___ftneg                             text40       003746
+___ftneg@f1                          cstackBANK0  000077
+___ftpack                            text38       002386
 ___ftpack@arg                        cstackBANK0  000060
 ___ftpack@exp                        cstackBANK0  000063
 ___ftpack@sign                       cstackBANK0  000064
-___fttol                             text13       000C9A
+___ftsub                             text35       003466
+___ftsub@f1                          cstackBANK0  00008E
+___ftsub@f2                          cstackBANK0  000091
+___fttol                             text42       00212A
 ___fttol@exp1                        cstackBANK0  00006E
 ___fttol@f1                          cstackBANK0  000060
 ___fttol@lval                        cstackBANK0  00006A
 ___fttol@sign1                       cstackBANK0  000069
 ___inthi_sp                          stack        000000
 ___intlo_sp                          stack        000000
-___lwtoft                            text17       00182E
+___lwtoft                            text18       003776
 ___lwtoft@c                          cstackBANK0  000068
 ___param_bank                        (abs)        000010
 ___rparam_used                       (abs)        000001
 ___sp                                stack        000000
-___wmul                              text25       00176C
+___wmul                              text47       00370E
 ___wmul@multiplicand                 cstackBANK0  000062
 ___wmul@multiplier                   cstackBANK0  000060
 ___wmul@product                      cstackBANK0  000064
 __accesstop                          (abs)        000060
 __activetblptr                       (abs)        000002
-__end_of_ConfigInterrupt             text11       001332
-__end_of_ConfigPorts                 text10       0012AA
-__end_of_IntToC                      text24       0009FC
-__end_of_PutIntUART                  text21       0018D0
-__end_of_PutcUART                    text23       0006B4
-__end_of_PutsUART                    text22       00151E
-__end_of___awdiv                     text26       00109E
-__end_of___ftdiv                     text19       000C9A
-__end_of___ftge                      text15       00116C
-__end_of___ftmul                     text18       000B58
-__end_of___ftneg                     text14       0017D4
-__end_of___ftpack                    text20       000EEC
-__end_of___fttol                     text13       000DCC
-__end_of___lwtoft                    text17       00185A
-__end_of___wmul                      text25       0017A4
-__end_of__initialization             cinit        0017F8
-__end_of_config_QEI                  text9        0015E8
-__end_of_config_pwm                  text8        001630
-__end_of_config_uart                 text7        0018EC
-__end_of_conversion_angle            text16       0014B0
-__end_of_envoit_pwm                  text12       000FCE
-__end_of_high_isr                    intcode_body 00158A
-__end_of_init_system                 text1        00182E
-__end_of_init_timer_0                text6        00191A
-__end_of_init_timer_1                text5        001904
-__end_of_init_uart_logiciel          text4        001960
-__end_of_init_uart_reception         text3        00192E
-__end_of_interrupt_RX                text36       0016F8
-__end_of_interrupt_TX                text35       00197C
-__end_of_interruption_INT0           text34       001884
-__end_of_interruption_QEI            text33       001940
-__end_of_interruption_timer0         text32       001968
-__end_of_interruption_timer1         text31       001676
-__end_of_interruption_timer2         text30       001978
-__end_of_interuption_QEI_sens        text29       001974
+__end_of_ConfigInterrupt             text31       002FA2
+__end_of_ConfigPorts                 text30       002F1A
+__end_of_Cot                         text3        003356
+__end_of_IntToC                      text46       0017AE
+__end_of_PutIntUART                  text43       003836
+__end_of_PutcUART                    text45       001466
+__end_of_PutsUART                    text44       003280
+__end_of___altoft                    text9        002D6C
+__end_of___awdiv                     text48       002922
+__end_of___ftadd                     text36       001CC8
+__end_of___ftdiv                     text19       00212A
+__end_of___ftge                      text39       0029F0
+__end_of___ftmul                     text37       001FE8
+__end_of___ftneg                     text40       003776
+__end_of___ftpack                    text38       0024A6
+__end_of___ftsub                     text35       0034B6
+__end_of___fttol                     text42       00225C
+__end_of___lwtoft                    text18       0037A2
+__end_of___wmul                      text47       003746
+__end_of__initialization             cinit        003654
+__end_of_affichage_position          text41       003212
+__end_of_check_divergence_angle      text15       002852
+__end_of_check_divergence_position   text33       002386
+__end_of_config_QEI                  text29       003412
+__end_of_config_pwm                  text28       003592
+__end_of_config_uart                 text27       003872
+__end_of_conversion_degre_radian     text11       003466
+__end_of_cos                         text5        002B68
+__end_of_envoit_pwm                  text32       002772
+__end_of_eval_poly                   text10       002690
+__end_of_floor                       text7        0025A2
+__end_of_frexp                       text8        002E8C
+__end_of_high_isr                    intcode_body 0032EC
+__end_of_init_capteur                text26       002CCA
+__end_of_init_system                 text20       0037CC
+__end_of_init_timer_0                text25       0038A0
+__end_of_init_timer_1                text24       00388A
+__end_of_init_uart_logiciel          text23       0038C2
+__end_of_init_uart_reception         text22       0038B4
+__end_of_interrupt_RX                text58       00369A
+__end_of_interrupt_TX                text57       0038DE
+__end_of_interruption_INT0           text56       003500
+__end_of_interruption_QEI            text55       0037F0
+__end_of_interruption_timer0         text54       0038CA
+__end_of_interruption_timer1         text53       0035D8
+__end_of_interruption_timer2         text52       0038DA
+__end_of_interuption_QEI_sens        text51       0038D6
+__end_of_inversion_balises           text14       003126
 __end_of_low_isr                     intcodelo    0000A8
-__end_of_main                        text0        00121C
-__end_of_reglage_PID                 text2        00176C
-__end_of_subroutine_interruptions    text28       0013B6
-__end_ofi2_interrupt_RX              text46       001734
-__end_ofi2_interrupt_TX              text45       001988
-__end_ofi2_interruption_INT0         text44       0018AE
-__end_ofi2_interruption_QEI          text43       001952
-__end_ofi2_interruption_timer0       text42       001970
-__end_ofi2_interruption_timer1       text41       0016BC
-__end_ofi2_interruption_timer2       text40       001984
-__end_ofi2_interuption_QEI_sens      text39       001980
-__end_ofi2_subroutine_interruptions  text38       00143A
-__initialization                     cinit        0017D4
-__mediumconst                        mediumconst  000000
-__pbssBANK0                          bssBANK0     00008F
+__end_of_main                        text0        0010E8
+__end_of_modulo_angle                text16       002AB0
+__end_of_modulo_id_balise_mere       text13       003856
+__end_of_obtention_angle             text17       00319E
+__end_of_reglage_PID                 text21       00370E
+__end_of_retrouver_balise_mere       text12       002C20
+__end_of_saturation                  text2        002DFC
+__end_of_sin                         text6        001A4A
+__end_of_sqrt                        text34       001E8C
+__end_of_subroutine_interruptions    text50       003026
+__end_of_tan                         text4        0033BA
+__end_of_triangulation               text1        0009F0
+__end_ofi2_interrupt_RX              text68       0036D6
+__end_ofi2_interrupt_TX              text67       0038EA
+__end_ofi2_interruption_INT0         text66       00354A
+__end_ofi2_interruption_QEI          text65       003814
+__end_ofi2_interruption_timer0       text64       0038D2
+__end_ofi2_interruption_timer1       text63       00361E
+__end_ofi2_interruption_timer2       text62       0038E6
+__end_ofi2_interuption_QEI_sens      text61       0038E2
+__end_ofi2_subroutine_interruptions  text60       0030AA
+__end_ofsin@coeff_a                  mediumconst  003E10
+__end_ofsin@coeff_b                  mediumconst  003E1C
+__initialization                     cinit        00361E
+__mediumconst                        mediumconst  003E00
+__pbssBANK0                          bssBANK0     0000C9
 __pbssBANK1                          bssBANK1     000100
 __pbssCOMRAM                         bssCOMRAM    000026
-__pcinit                             cinit        0017D4
+__pcinit                             cinit        00361E
 __pcstackBANK0                       cstackBANK0  000060
+__pcstackBANK1                       cstackBANK1  00017E
 __pcstackCOMRAM                      cstackCOMRAM 000001
+__pdataCOMRAM                        dataCOMRAM   000049
+__pidataCOMRAM                       idataCOMRAM  0038EA
 __pintcode                           intcode      000008
-__pintcode_body                      intcode_body 00151E
+__pintcode_body                      intcode_body 003280
 __pintcodelo                         intcodelo    000018
-__psmallconst                        smallconst   000300
-__ptext0                             text0        00116C
-__ptext1                             text1        001802
-__ptext10                            text10       00121C
-__ptext11                            text11       0012AA
-__ptext12                            text12       000EEC
-__ptext13                            text13       000C9A
-__ptext14                            text14       0017A4
-__ptext15                            text15       00109E
-__ptext16                            text16       00143A
-__ptext17                            text17       00182E
-__ptext18                            text18       0009FC
-__ptext19                            text19       000B58
-__ptext2                             text2        001734
-__ptext20                            text20       000DCC
-__ptext21                            text21       0018AE
-__ptext22                            text22       0014B0
-__ptext23                            text23       000336
-__ptext24                            text24       0006B4
-__ptext25                            text25       00176C
-__ptext26                            text26       000FCE
-__ptext28                            text28       001332
-__ptext29                            text29       001970
-__ptext3                             text3        00191A
-__ptext30                            text30       001974
-__ptext31                            text31       001630
-__ptext32                            text32       001960
-__ptext33                            text33       00192E
-__ptext34                            text34       00185A
-__ptext35                            text35       001978
-__ptext36                            text36       0016BC
-__ptext38                            text38       0013B6
-__ptext39                            text39       00197C
-__ptext4                             text4        001952
-__ptext40                            text40       001980
-__ptext41                            text41       001676
-__ptext42                            text42       001968
-__ptext43                            text43       001940
-__ptext44                            text44       001884
-__ptext45                            text45       001984
-__ptext46                            text46       0016F8
-__ptext5                             text5        0018EC
-__ptext6                             text6        001904
-__ptext7                             text7        0018D0
-__ptext8                             text8        0015E8
-__ptext9                             text9        00158A
+__pmediumconst                       mediumconst  003E00
+__ptext0                             text0        0009F0
+__ptext1                             text1        0000AC
+__ptext10                            text10       0025A2
+__ptext11                            text11       003412
+__ptext12                            text12       002B68
+__ptext13                            text13       003836
+__ptext14                            text14       0030AA
+__ptext15                            text15       002772
+__ptext16                            text16       0029F0
+__ptext17                            text17       003126
+__ptext18                            text18       003776
+__ptext19                            text19       001FE8
+__ptext2                             text2        002D6C
+__ptext20                            text20       0037A2
+__ptext21                            text21       0036D6
+__ptext22                            text22       0038A0
+__ptext23                            text23       0038B4
+__ptext24                            text24       003872
+__ptext25                            text25       00388A
+__ptext26                            text26       002C20
+__ptext27                            text27       003856
+__ptext28                            text28       00354A
+__ptext29                            text29       0033BA
+__ptext3                             text3        0032EC
+__ptext30                            text30       002E8C
+__ptext31                            text31       002F1A
+__ptext32                            text32       002690
+__ptext33                            text33       00225C
+__ptext34                            text34       001CC8
+__ptext35                            text35       003466
+__ptext36                            text36       001A4A
+__ptext37                            text37       001E8C
+__ptext38                            text38       002386
+__ptext39                            text39       002922
+__ptext4                             text4        003356
+__ptext40                            text40       003746
+__ptext41                            text41       00319E
+__ptext42                            text42       00212A
+__ptext43                            text43       003814
+__ptext44                            text44       003212
+__ptext45                            text45       0010E8
+__ptext46                            text46       001466
+__ptext47                            text47       00370E
+__ptext48                            text48       002852
+__ptext5                             text5        002AB0
+__ptext50                            text50       002FA2
+__ptext51                            text51       0038D2
+__ptext52                            text52       0038D6
+__ptext53                            text53       003592
+__ptext54                            text54       0038C2
+__ptext55                            text55       0037CC
+__ptext56                            text56       0034B6
+__ptext57                            text57       0038DA
+__ptext58                            text58       00365E
+__ptext6                             text6        0017AE
+__ptext60                            text60       003026
+__ptext61                            text61       0038DE
+__ptext62                            text62       0038E2
+__ptext63                            text63       0035D8
+__ptext64                            text64       0038CA
+__ptext65                            text65       0037F0
+__ptext66                            text66       003500
+__ptext67                            text67       0038E6
+__ptext68                            text68       00369A
+__ptext7                             text7        0024A6
+__ptext8                             text8        002DFC
+__ptext9                             text9        002CCA
 __ramtop                             ramtop       000300
 __size_of_ConfigInterrupt            (abs)        000000
 __size_of_ConfigPorts                (abs)        000000
+__size_of_Cot                        (abs)        000000
 __size_of_IntToC                     (abs)        000000
 __size_of_PutIntUART                 (abs)        000000
 __size_of_PutcUART                   (abs)        000000
 __size_of_PutsUART                   (abs)        000000
+__size_of___altoft                   (abs)        000000
 __size_of___awdiv                    (abs)        000000
+__size_of___ftadd                    (abs)        000000
 __size_of___ftdiv                    (abs)        000000
 __size_of___ftge                     (abs)        000000
 __size_of___ftmul                    (abs)        000000
 __size_of___ftneg                    (abs)        000000
 __size_of___ftpack                   (abs)        000000
+__size_of___ftsub                    (abs)        000000
 __size_of___fttol                    (abs)        000000
 __size_of___lwtoft                   (abs)        000000
 __size_of___wmul                     (abs)        000000
+__size_of_affichage_position         (abs)        000000
+__size_of_check_divergence_angle     (abs)        000000
+__size_of_check_divergence_position  (abs)        000000
 __size_of_config_QEI                 (abs)        000000
 __size_of_config_pwm                 (abs)        000000
 __size_of_config_uart                (abs)        000000
-__size_of_conversion_angle           (abs)        000000
+__size_of_conversion_degre_radian    (abs)        000000
+__size_of_cos                        (abs)        000000
 __size_of_envoit_pwm                 (abs)        000000
+__size_of_eval_poly                  (abs)        000000
+__size_of_floor                      (abs)        000000
+__size_of_frexp                      (abs)        000000
 __size_of_high_isr                   (abs)        000000
+__size_of_init_capteur               (abs)        000000
 __size_of_init_system                (abs)        000000
 __size_of_init_timer_0               (abs)        000000
 __size_of_init_timer_1               (abs)        000000
@@ -785,10 +974,20 @@ __size_of_interruption_timer0        (abs)        000000
 __size_of_interruption_timer1        (abs)        000000
 __size_of_interruption_timer2        (abs)        000000
 __size_of_interuption_QEI_sens       (abs)        000000
+__size_of_inversion_balises          (abs)        000000
 __size_of_low_isr                    (abs)        000000
 __size_of_main                       (abs)        000000
+__size_of_modulo_angle               (abs)        000000
+__size_of_modulo_id_balise_mere      (abs)        000000
+__size_of_obtention_angle            (abs)        000000
 __size_of_reglage_PID                (abs)        000000
+__size_of_retrouver_balise_mere      (abs)        000000
+__size_of_saturation                 (abs)        000000
+__size_of_sin                        (abs)        000000
+__size_of_sqrt                       (abs)        000000
 __size_of_subroutine_interruptions   (abs)        000000
+__size_of_tan                        (abs)        000000
+__size_of_triangulation              (abs)        000000
 __size_ofi2_interrupt_RX             (abs)        000000
 __size_ofi2_interrupt_TX             (abs)        000000
 __size_ofi2_interruption_INT0        (abs)        000000
@@ -798,102 +997,877 @@ __size_ofi2_interruption_timer1      (abs)        000000
 __size_ofi2_interruption_timer2      (abs)        000000
 __size_ofi2_interuption_QEI_sens     (abs)        000000
 __size_ofi2_subroutine_interruptions (abs)        000000
-__smallconst                         smallconst   000300
-_config_QEI                          text9        00158A
-_config_pwm                          text8        0015E8
-_config_uart                         text7        0018D0
-_conversion_angle                    text16       00143A
-_envoit_pwm                          text12       000EEC
-_flag_cpateur                        bssBANK0     0000A7
+__smallconst                         smallconst   000000
+_affichage_position                  text41       00319E
+_capteur                             bssBANK0     0000D8
+_check_divergence_angle              text15       002772
+_check_divergence_angle$3251         cstackBANK0  00009D
+_check_divergence_position           text33       00225C
+_check_divergence_position$3252      cstackBANK0  0000B6
+_config_QEI                          text29       0033BA
+_config_pwm                          text28       00354A
+_config_uart                         text27       003856
+_conversion_degre_radian             text11       003412
+_cos                                 text5        002AB0
+_cos$3255                            cstackBANK0  0000B1
+_envoit_pwm                          text32       002690
+_errno                               bssBANK1     00010D
+_eval_poly                           text10       0025A2
+_flag_cpateur                        bssCOMRAM    00003B
+_floor                               text7        0024A6
+_frexp                               text8        002DFC
 _high_isr                            intcode      000008
-_init_system                         text1        001802
-_init_timer_0                        text6        001904
-_init_timer_1                        text5        0018EC
-_init_uart_logiciel                  text4        001952
-_init_uart_reception                 text3        00191A
-_interrupt_RX                        text36       0016BC
-_interrupt_TX                        text35       001978
-_interruption_INT0                   text34       00185A
-_interruption_QEI                    text33       00192E
-_interruption_timer0                 text32       001960
-_interruption_timer1                 text31       001630
-_interruption_timer2                 text30       001974
-_interuption_QEI_sens                text29       001970
+_init_capteur                        text26       002C20
+_init_system                         text20       0037A2
+_init_timer_0                        text25       00388A
+_init_timer_1                        text24       003872
+_init_uart_logiciel                  text23       0038B4
+_init_uart_reception                 text22       0038A0
+_interrupt_RX                        text58       00365E
+_interrupt_TX                        text57       0038DA
+_interruption_INT0                   text56       0034B6
+_interruption_QEI                    text55       0037CC
+_interruption_timer0                 text54       0038C2
+_interruption_timer1                 text53       003592
+_interruption_timer2                 text52       0038D6
+_interuption_QEI_sens                text51       0038D2
+_inversion_balises                   text14       0030AA
 _low_isr                             intcodelo    000018
-_main                                text0        00116C
-_position                            bssBANK0     00008F
-_reglage_PID                         text2        001734
-_subroutine_interruptions            text28       001332
-_uart_logiciel                       bssCOMRAM    000039
-_uart_reception                      bssBANK1     000100
-asserv@commande                      bssCOMRAM    000046
-conversion_angle@angle               cstackBANK0  00007A
-end_of_initialization                cinit        0017F8
-envoit_pwm@abs_valeur                cstackBANK0  00007A
-envoit_pwm@valeur                    cstackBANK0  000077
-fonction_PID@commande                bssCOMRAM    000035
-get_valeur_codeur@res                bssBANK0     0000A3
-i2_interrupt_RX                      text46       0016F8
-i2_interrupt_TX                      text45       001984
-i2_interruption_INT0                 text44       001884
-i2_interruption_QEI                  text43       001940
-i2_interruption_timer0               text42       001968
-i2_interruption_timer1               text41       001676
-i2_interruption_timer2               text40       001980
-i2_interuption_QEI_sens              text39       00197C
-i2_subroutine_interruptions          text38       0013B6
+_main                                text0        0009F0
+_modulo_angle                        text16       0029F0
+_modulo_id_balise_mere               text13       003836
+_obtention_angle                     text17       003126
+_position                            bssCOMRAM    000026
+_reglage_PID                         text21       0036D6
+_retrouver_balise_mere               text12       002B68
+_saturation                          text2        002D6C
+_sin                                 text6        0017AE
+_sin$3256                            cstackBANK0  0000A7
+_sqrt                                text34       001CC8
+_subroutine_interruptions            text50       002FA2
+_tan                                 text4        003356
+_tan$3253                            cstackBANK0  0000B7
+_tan$3254                            cstackBANK0  0000BA
+_triangulation                       text1        0000AC
+_triangulation$3245                  cstackBANK1  0001B2
+_triangulation$3246                  cstackBANK1  0001C4
+_triangulation$3247                  cstackBANK1  0001CA
+_triangulation$3248                  cstackBANK1  0001B5
+_triangulation$3249                  cstackBANK1  0001A6
+_uart_logiciel                       bssCOMRAM    00003C
+_uart_reception                      bssBANK1     00010F
+affichage_position@x                 cstackBANK0  000086
+affichage_position@y                 cstackBANK0  000089
+asserv@commande                      bssBANK0     0000F5
+check_divergence_angle@ancien_angle  cstackBANK0  000097
+check_divergence_angle@derive        cstackBANK0  0000A0
+check_divergence_angle@nouvel_angle  cstackBANK0  00009A
+check_divergence_position@ancien_x   cstackBANK0  0000A7
+check_divergence_position@ancien_y   cstackBANK0  0000AA
+check_divergence_position@delta_x    cstackBANK0  0000B9
+check_divergence_position@delta_y    cstackBANK0  0000BC
+check_divergence_position@distance   cstackBANK0  0000B3
+check_divergence_position@x          cstackBANK0  0000AD
+check_divergence_position@y          cstackBANK0  0000B0
+conversion_degre_radian@angle        cstackBANK0  0000A1
+cos@f                                cstackBANK0  0000AE
+end_of_initialization                cinit        003654
+envoit_pwm@abs_valeur                cstackBANK0  000086
+envoit_pwm@valeur                    cstackBANK0  000083
+eval_poly@d                          cstackBANK0  000089
+eval_poly@n                          cstackBANK0  00008B
+eval_poly@res                        cstackBANK0  00008F
+eval_poly@x                          cstackBANK0  000086
+floor@expon                          cstackBANK0  00008C
+floor@i                              cstackBANK0  000089
+floor@x                              cstackBANK0  000086
+fonction_PID@commande                bssCOMRAM    000037
+frexp@eptr                           cstackBANK0  000063
+frexp@value                          cstackBANK0  000060
+get_valeur_codeur@res                bssBANK1     000109
+i2_interrupt_RX                      text68       00369A
+i2_interrupt_TX                      text67       0038E6
+i2_interruption_INT0                 text66       003500
+i2_interruption_QEI                  text65       0037F0
+i2_interruption_timer0               text64       0038CA
+i2_interruption_timer1               text63       0035D8
+i2_interruption_timer2               text62       0038E2
+i2_interuption_QEI_sens              text61       0038DE
+i2_subroutine_interruptions          text60       003026
 i2interrupt_RX@temp                  cstackCOMRAM 000015
 i2subroutine_interruptions@priorite  cstackCOMRAM 000017
-int_func                             intcode_body 00151E
+int_func                             intcode_body 003280
 interrupt_RX@temp                    cstackCOMRAM 000001
 intlevel0                            text         000000
 intlevel1                            text         000000
 intlevel2                            text         000000
 intlevel3                            text         000000
-main@angle                           cstackBANK0  00008D
-main@i                               cstackBANK0  00008B
+inversion_balises@id_balise_mere     cstackBANK0  000060
+inversion_balises@temp               cstackBANK0  000061
+main@ancien_x                        bssBANK0     0000D2
+main@ancien_y                        bssBANK0     0000D5
+main@i                               cstackBANK1  0001DF
+main@x                               bssBANK0     0000F8
+main@x_temp                          cstackBANK1  0001E1
+main@y                               bssBANK0     0000FB
+main@y_temp                          cstackBANK1  0001E4
+modulo_angle@angle                   cstackBANK0  000094
+obtention_angle@angle                cstackBANK0  0000A4
+obtention_angle@position             cstackBANK0  0000A1
+saturation@maximum                   cstackBANK0  000086
+saturation@valeur                    cstackBANK0  000083
+sin@coeff_a                          mediumconst  003E01
+sin@coeff_b                          mediumconst  003E10
+sin@f                                cstackBANK0  0000A1
+sin@sgn                              cstackBANK0  0000AD
+sin@x2                               cstackBANK0  0000AA
+sin@y                                cstackBANK0  0000A4
+sqrt@i                               cstackBANK0  0000A0
+sqrt@og                              cstackBANK0  00009A
+sqrt@q                               cstackBANK0  0000A1
+sqrt@x                               cstackBANK0  0000A4
+sqrt@y                               cstackBANK0  000094
+sqrt@z                               cstackBANK0  00009D
 stackhi                              (abs)        0002FF
-stacklo                              (abs)        000167
+stacklo                              (abs)        0001E7
 start                                init         0000A8
-start_initialization                 cinit        0017D4
+start_initialization                 cinit        00361E
 subroutine_interruptions@priorite    cstackCOMRAM 000003
+tan@x                                cstackBANK0  0000B4
+triangulation@D                      cstackBANK1  0001A0
+triangulation@K                      cstackBANK1  0001AF
+triangulation@angle1                 cstackBANK1  000182
+triangulation@angle2                 cstackBANK1  000185
+triangulation@angle3                 cstackBANK1  000188
+triangulation@c12x                   cstackBANK1  0001A9
+triangulation@c12y                   cstackBANK1  0001AC
+triangulation@c23x                   cstackBANK1  0001BE
+triangulation@c23y                   cstackBANK1  0001C1
+triangulation@c31x                   cstackBANK1  000197
+triangulation@c31y                   cstackBANK1  00019A
+triangulation@cot_12                 cstackBANK1  0001CD
+triangulation@cot_23                 cstackBANK1  0001D0
+triangulation@cot_31                 cstackBANK1  0001C7
+triangulation@invD                   cstackBANK1  0001A3
+triangulation@k31                    cstackBANK1  00019D
+triangulation@x                      cstackBANK1  00017E
+triangulation@x1                     cstackBANK1  00018B
+triangulation@x1_                    cstackBANK1  0001D3
+triangulation@x2                     cstackBANK1  0001B8
+triangulation@x3                     cstackBANK1  000191
+triangulation@x3_                    cstackBANK1  0001D9
+triangulation@y                      cstackBANK1  000180
+triangulation@y1                     cstackBANK1  00018E
+triangulation@y1_                    cstackBANK1  0001D6
+triangulation@y2                     cstackBANK1  0001BB
+triangulation@y3                     cstackBANK1  000194
+triangulation@y3_                    cstackBANK1  0001DC
 
 
 FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 82 in file "main.c"
+		line 83 in file "main.c"
  Parameters:    Size  Location     Type
-  argc            2   38[BANK0 ] int 
-  argv            3   40[BANK0 ] PTR PTR unsigned char 
+  argc            2   99[BANK0 ] int 
+  argv            3  101[BANK0 ] PTR PTR unsigned char 
  Auto vars:     Size  Location     Type
-  angle           2   45[BANK0 ] int 
-  i               2   43[BANK0 ] int 
+  y_temp          3  102[BANK1 ] PTR PTR unsigned char 
+  x_temp          3   99[BANK1 ] PTR PTR unsigned char 
+  i               2   97[BANK1 ] int 
  Return value:  Size  Location     Type
-                  2   38[BANK0 ] int 
+                  2   99[BANK0 ] int 
  Registers used:
-		wreg, fsr0l, fsr0h, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+		wreg, fsr0l, fsr0h, fsr1l, fsr1h, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2
       Params:         0       5       0       0
-      Locals:         0       4       0       0
-      Temps:          0       0       0       0
-      Totals:         0       9       0       0
-Total ram usage:        9 bytes
- Hardware stack levels required when called:   10
+      Locals:         0       0       8       0
+      Temps:          0       1       0       0
+      Totals:         0       6       8       0
+Total ram usage:       14 bytes
+ Hardware stack levels required when called:   14
  This function calls:
 		_PutIntUART
 		_PutsUART
-		___fttol
-		_conversion_angle
+		___wmul
+		_affichage_position
+		_check_divergence_position
 		_envoit_pwm
 		_init_system
+		_inversion_balises
+		_modulo_id_balise_mere
+		_obtention_angle
+		_retrouver_balise_mere
+		_triangulation
  This function is called by:
 		Startup code after reset
+ This function uses a non-reentrant model
+
+
+ *************** function _triangulation *****************
+ Defined at:
+		line 24 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+  x               2    0[BANK1 ] PTR 
+		 -> main@x_temp(3), main@x(3), 
+  y               2    2[BANK1 ] PTR 
+		 -> main@y_temp(3), main@y(3), 
+  angle1          3    4[BANK1 ] PTR 
+  angle2          3    7[BANK1 ] PTR 
+  angle3          3   10[BANK1 ] PTR 
+ Auto vars:     Size  Location     Type
+  y3_             3   94[BANK1 ] PTR 
+  x3_             3   91[BANK1 ] PTR 
+  y1_             3   88[BANK1 ] PTR 
+  x1_             3   85[BANK1 ] PTR 
+  cot_23          3   82[BANK1 ] PTR 
+  cot_12          3   79[BANK1 ] PTR 
+  cot_31          3   73[BANK1 ] PTR 
+  c23y            3   67[BANK1 ] PTR 
+  c23x            3   64[BANK1 ] PTR 
+  y2              3   61[BANK1 ] const 
+  x2              3   58[BANK1 ] const 
+  K               3   49[BANK1 ] const 
+  c12y            3   46[BANK1 ] const 
+  c12x            3   43[BANK1 ] const 
+  invD            3   37[BANK1 ] const 
+  D               3   34[BANK1 ] const 
+  k31             3   31[BANK1 ] const 
+  c31y            3   28[BANK1 ] const 
+  c31x            3   25[BANK1 ] const 
+  y3              3   22[BANK1 ] const 
+  x3              3   19[BANK1 ] const 
+  y1              3   16[BANK1 ] const 
+  x1              3   13[BANK1 ] const 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       0      13       0
+      Locals:         0       0      84       0
+      Temps:          0       0       0       0
+      Totals:         0       0      97       0
+Total ram usage:       97 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:   13
+ This function calls:
+		_Cot
+		___ftadd
+		___ftdiv
+		___ftmul
+		___ftneg
+		_saturation
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _saturation *****************
+ Defined at:
+		line 61 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+  valeur          3   35[BANK0 ] const 
+  maximum         3   38[BANK0 ] const 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3   35[BANK0 ] const 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       6       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       6       0       0
+Total ram usage:        6 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		___ftge
+		___ftneg
+ This function is called by:
+		_triangulation
+ This function uses a non-reentrant model
+
+
+ *************** function _Cot *****************
+ Defined at:
+		line 54 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+  angle           3   93[BANK0 ] const 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3   93[BANK0 ] const 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       3       0       0
+      Temps:          0       0       0       0
+      Totals:         0       6       0       0
+Total ram usage:        6 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:   12
+ This function calls:
+		___ftdiv
+		_conversion_degre_radian
+		_tan
+ This function is called by:
+		_triangulation
+ This function uses a non-reentrant model
+
+
+ *************** function _tan *****************
+ Defined at:
+		line 9 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\tan.c"
+ Parameters:    Size  Location     Type
+  x               3   84[BANK0 ] const 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3   84[BANK0 ] const 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       6       0       0
+      Temps:          0       0       0       0
+      Totals:         0       9       0       0
+Total ram usage:        9 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:   11
+ This function calls:
+		___ftdiv
+		_cos
+		_sin
+ This function is called by:
+		_Cot
+ This function uses a non-reentrant model
+
+
+ *************** function _cos *****************
+ Defined at:
+		line 13 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\cos.c"
+ Parameters:    Size  Location     Type
+  f               3   78[BANK0 ] const 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3   78[BANK0 ] const 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       3       0       0
+      Temps:          0       0       0       0
+      Totals:         0       6       0       0
+Total ram usage:        6 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:   10
+ This function calls:
+		___ftadd
+		___ftge
+		_sin
+ This function is called by:
+		_tan
+ This function uses a non-reentrant model
+
+
+ *************** function _sin *****************
+ Defined at:
+		line 13 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\sin.c"
+ Parameters:    Size  Location     Type
+  f               3   65[BANK0 ] const 
+ Auto vars:     Size  Location     Type
+  x2              3   74[BANK0 ] const 
+  y               3   68[BANK0 ] const 
+  sgn             1   77[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  3   65[BANK0 ] unsigned char 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0      10       0       0
+      Temps:          0       0       0       0
+      Totals:         0      13       0       0
+Total ram usage:       13 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    9
+ This function calls:
+		___ftadd
+		___ftdiv
+		___ftge
+		___ftmul
+		___ftneg
+		___ftsub
+		_eval_poly
+		_floor
+ This function is called by:
+		_tan
+		_cos
+ This function uses a non-reentrant model
+
+
+ *************** function _floor *****************
+ Defined at:
+		line 13 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\floor.c"
+ Parameters:    Size  Location     Type
+  x               3   38[BANK0 ] unsigned char 
+ Auto vars:     Size  Location     Type
+  i               3   41[BANK0 ] unsigned char 
+  expon           2   44[BANK0 ] int 
+ Return value:  Size  Location     Type
+                  3   38[BANK0 ] int 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       5       0       0
+      Temps:          0       0       0       0
+      Totals:         0       8       0       0
+Total ram usage:        8 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		___altoft
+		___ftadd
+		___ftge
+		___fttol
+		_frexp
+ This function is called by:
+		_sin
+ This function uses a non-reentrant model
+
+
+ *************** function _frexp *****************
+ Defined at:
+		line 254 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\frexp.c"
+ Parameters:    Size  Location     Type
+  value           3    0[BANK0 ] int 
+  eptr            2    3[BANK0 ] PTR int 
+		 -> floor@expon(2), 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3    0[BANK0 ] PTR int 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       5       0       0
+      Locals:         0       0       0       0
+      Temps:          0       2       0       0
+      Totals:         0       7       0       0
+Total ram usage:        7 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		Nothing
+ This function is called by:
+		_floor
+ This function uses a non-reentrant model
+
+
+ *************** function ___altoft *****************
+ Defined at:
+		line 42 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\altoft.c"
+ Parameters:    Size  Location     Type
+  c               4   15[BANK0 ] long 
+ Auto vars:     Size  Location     Type
+  sign            1   24[BANK0 ] unsigned char 
+  exp             1   23[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  3   15[BANK0 ] float 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       4       0       0
+      Locals:         0       2       0       0
+      Temps:          0       4       0       0
+      Totals:         0      10       0       0
+Total ram usage:       10 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		___ftpack
+ This function is called by:
+		_floor
+		_mesure_vitesse
+ This function uses a non-reentrant model
+
+
+ *************** function _eval_poly *****************
+ Defined at:
+		line 4 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\evalpoly.c"
+ Parameters:    Size  Location     Type
+  x               3   38[BANK0 ] float 
+  d               2   41[BANK0 ] PTR const 
+		 -> sin@coeff_a(15), sin@coeff_b(12), 
+  n               2   43[BANK0 ] int 
+ Auto vars:     Size  Location     Type
+  res             3   47[BANK0 ] int 
+ Return value:  Size  Location     Type
+                  3   38[BANK0 ] int 
+ Registers used:
+		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       7       0       0
+      Locals:         0       3       0       0
+      Temps:          0       2       0       0
+      Totals:         0      12       0       0
+Total ram usage:       12 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		___ftadd
+		___ftmul
+		___wmul
+ This function is called by:
+		_sin
+ This function uses a non-reentrant model
+
+
+ *************** function _conversion_degre_radian *****************
+ Defined at:
+		line 70 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+  angle           3   65[BANK0 ] int 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3   65[BANK0 ] int 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		___ftdiv
+		___ftmul
+ This function is called by:
+		_Cot
+ This function uses a non-reentrant model
+
+
+ *************** function _retrouver_balise_mere *****************
+ Defined at:
+		line 106 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  1    wreg      char 
+ Registers used:
+		wreg, fsr0l, fsr0h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:   11
+ This function calls:
+		_PutsUART
+		_check_divergence_angle
+		_inversion_balises
+		_modulo_id_balise_mere
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function _modulo_id_balise_mere *****************
+ Defined at:
+		line 164 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+		_retrouver_balise_mere
+ This function uses a non-reentrant model
+
+
+ *************** function _inversion_balises *****************
+ Defined at:
+		line 145 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+  id_balise_me    1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  id_balise_me    1    0[BANK0 ] unsigned char 
+  temp            3    1[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       4       0       0
+      Temps:          0       0       0       0
+      Totals:         0       4       0       0
+Total ram usage:        4 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		Nothing
+ This function is called by:
+		_main
+		_retrouver_balise_mere
+ This function uses a non-reentrant model
+
+
+ *************** function _check_divergence_angle *****************
+ Defined at:
+		line 75 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+  ancien_angle    3   55[BANK0 ] unsigned char 
+  nouvel_angle    3   58[BANK0 ] unsigned char 
+ Auto vars:     Size  Location     Type
+  derive          3   64[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      char 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       6       0       0
+      Locals:         0       6       0       0
+      Temps:          0       0       0       0
+      Totals:         0      12       0       0
+Total ram usage:       12 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:   10
+ This function calls:
+		___ftadd
+		___ftge
+		___ftneg
+		_modulo_angle
+ This function is called by:
+		_retrouver_balise_mere
+ This function uses a non-reentrant model
+
+
+ *************** function _modulo_angle *****************
+ Defined at:
+		line 135 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+  angle           3   52[BANK0 ] char 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3   52[BANK0 ] char 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    9
+ This function calls:
+		___ftadd
+		___ftge
+		___ftsub
+ This function is called by:
+		_check_divergence_angle
+ This function uses a non-reentrant model
+
+
+ *************** function _obtention_angle *****************
+ Defined at:
+		line 140 in file "moteur.c"
+ Parameters:    Size  Location     Type
+  position        2   65[BANK0 ] unsigned int 
+ Auto vars:     Size  Location     Type
+  angle           3   68[BANK0 ] unsigned int 
+ Return value:  Size  Location     Type
+                  3   65[BANK0 ] unsigned int 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       3       0       0
+      Temps:          0       0       0       0
+      Totals:         0       6       0       0
+Total ram usage:        6 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    8
+ This function calls:
+		___ftdiv
+		___ftmul
+		___lwtoft
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function ___lwtoft *****************
+ Defined at:
+		line 28 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lwtoft.c"
+ Parameters:    Size  Location     Type
+  c               2    8[BANK0 ] unsigned int 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3    8[BANK0 ] float 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		___ftpack
+ This function is called by:
+		_obtention_angle
+		_conversion_angle
+ This function uses a non-reentrant model
+
+
+ *************** function ___ftdiv *****************
+ Defined at:
+		line 54 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftdiv.c"
+ Parameters:    Size  Location     Type
+  f1              3   50[BANK0 ] float 
+  f2              3   53[BANK0 ] float 
+ Auto vars:     Size  Location     Type
+  f3              3   60[BANK0 ] float 
+  sign            1   64[BANK0 ] unsigned char 
+  exp             1   63[BANK0 ] unsigned char 
+  cntr            1   59[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  3   50[BANK0 ] float 
+ Registers used:
+		wreg, status,2, status,0, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       6       0       0
+      Locals:         0       6       0       0
+      Temps:          0       3       0       0
+      Totals:         0      15       0       0
+Total ram usage:       15 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    7
+ This function calls:
+		___ftpack
+ This function is called by:
+		_obtention_angle
+		_triangulation
+		_Cot
+		_conversion_degre_radian
+		_tan
+		_sin
+		_conversion_angle
+		_mesure_vitesse
  This function uses a non-reentrant model
 
 
@@ -926,6 +1900,7 @@ Total ram usage:        0 bytes
 		_config_QEI
 		_config_pwm
 		_config_uart
+		_init_capteur
 		_init_timer_0
 		_init_uart_logiciel
 		_init_uart_reception
@@ -1085,6 +2060,36 @@ Total ram usage:        0 bytes
  This function uses a non-reentrant model
 
 
+ *************** function _init_capteur *****************
+ Defined at:
+		line 148 in file "moteur.c"
+ Parameters:    Size  Location     Type
+		None
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       0       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       0       0       0
+Total ram usage:        0 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		Nothing
+ This function is called by:
+		_init_system
+ This function uses a non-reentrant model
+
+
  *************** function _config_uart *****************
  Defined at:
 		line 31 in file "uart.c"
@@ -1117,7 +2122,7 @@ Total ram usage:        0 bytes
 
  *************** function _config_pwm *****************
  Defined at:
-		line 26 in file "moteur.c"
+		line 27 in file "moteur.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1147,7 +2152,7 @@ Total ram usage:        0 bytes
 
  *************** function _config_QEI *****************
  Defined at:
-		line 81 in file "moteur.c"
+		line 82 in file "moteur.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1237,11 +2242,11 @@ Total ram usage:        0 bytes
 
  *************** function _envoit_pwm *****************
  Defined at:
-		line 53 in file "moteur.c"
+		line 54 in file "moteur.c"
  Parameters:    Size  Location     Type
-  valeur          3   23[BANK0 ] int 
+  valeur          3   35[BANK0 ] float 
  Auto vars:     Size  Location     Type
-  abs_valeur      3   26[BANK0 ] int 
+  abs_valeur      3   38[BANK0 ] float 
  Return value:  Size  Location     Type
 		None               void
  Registers used:
@@ -1269,82 +2274,93 @@ Total ram usage:        6 bytes
  This function uses a non-reentrant model
 
 
- *************** function ___fttol *****************
+ *************** function _check_divergence_position *****************
  Defined at:
-		line 44 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fttol.c"
+		line 92 in file "triangulation.c"
  Parameters:    Size  Location     Type
-  f1              3    0[BANK0 ] float 
+  ancien_x        3   71[BANK0 ] float 
+  ancien_y        3   74[BANK0 ] float 
+  x               3   77[BANK0 ] float 
+  y               3   80[BANK0 ] float 
  Auto vars:     Size  Location     Type
-  lval            4   10[BANK0 ] unsigned long 
-  exp1            1   14[BANK0 ] unsigned char 
-  sign1           1    9[BANK0 ] unsigned char 
+  delta_y         3   92[BANK0 ] float 
+  delta_x         3   89[BANK0 ] float 
+  distance        3   83[BANK0 ] float 
  Return value:  Size  Location     Type
-                  4    0[BANK0 ] long 
+                  2   71[BANK0 ] int 
  Registers used:
-		wreg, status,2, status,0
+		wreg, status,2, status,0, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2
-      Params:         0       4       0       0
-      Locals:         0       6       0       0
-      Temps:          0       5       0       0
-      Totals:         0      15       0       0
-Total ram usage:       15 bytes
+      Params:         0      12       0       0
+      Locals:         0      12       0       0
+      Temps:          0       0       0       0
+      Totals:         0      24       0       0
+Total ram usage:       24 bytes
  Hardware stack levels used:    1
- Hardware stack levels required when called:    6
+ Hardware stack levels required when called:   10
  This function calls:
-		Nothing
+		___ftadd
+		___ftge
+		___ftmul
+		___ftneg
+		_sqrt
  This function is called by:
 		_main
-		_envoit_pwm
  This function uses a non-reentrant model
 
 
- *************** function ___ftneg *****************
+ *************** function _sqrt *****************
  Defined at:
-		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftneg.c"
+		line 13 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\sqrt.c"
  Parameters:    Size  Location     Type
-  f1              3    0[BANK0 ] float 
+  y               3   52[BANK0 ] int 
  Auto vars:     Size  Location     Type
-		None
+  x               3   68[BANK0 ] int 
+  q               3   65[BANK0 ] int 
+  z               3   61[BANK0 ] int 
+  og              3   58[BANK0 ] int 
+  i               1   64[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
-                  3    0[BANK0 ] float 
+                  3   52[BANK0 ] unsigned char 
  Registers used:
-		wreg, status,2, status,0
+		wreg, status,2, status,0, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2
       Params:         0       3       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       3       0       0
-Total ram usage:        3 bytes
+      Locals:         0      13       0       0
+      Temps:          0       3       0       0
+      Totals:         0      19       0       0
+Total ram usage:       19 bytes
  Hardware stack levels used:    1
- Hardware stack levels required when called:    6
+ Hardware stack levels required when called:    9
  This function calls:
-		Nothing
+		___ftge
+		___ftmul
+		___ftsub
  This function is called by:
-		_envoit_pwm
-		_fonction_PID
+		_check_divergence_position
  This function uses a non-reentrant model
 
 
- *************** function ___ftge *****************
+ *************** function ___ftsub *****************
  Defined at:
-		line 4 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftge.c"
+		line 20 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftsub.c"
  Parameters:    Size  Location     Type
-  ff1             3    0[BANK0 ] float 
-  ff2             3    3[BANK0 ] float 
+  f1              3   46[BANK0 ] float 
+  f2              3   49[BANK0 ] float 
  Auto vars:     Size  Location     Type
 		None
  Return value:  Size  Location     Type
-		None               void
+                  3   46[BANK0 ] float 
  Registers used:
-		wreg, status,2, status,0
+		wreg, status,2, status,0, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -1352,62 +2368,32 @@ Total ram usage:        3 bytes
  Data sizes:     COMRAM   BANK0   BANK1   BANK2
       Params:         0       6       0       0
       Locals:         0       0       0       0
-      Temps:          0       3       0       0
-      Totals:         0       9       0       0
-Total ram usage:        9 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    6
- This function calls:
-		Nothing
- This function is called by:
-		_envoit_pwm
-		_ecretage_consignes
-		_saturation_erreur_integralle_vitesse
- This function uses a non-reentrant model
-
-
- *************** function _conversion_angle *****************
- Defined at:
-		line 131 in file "moteur.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  angle           3   26[BANK0 ] float 
- Return value:  Size  Location     Type
-		None               void
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2
-      Params:         0       0       0       0
-      Locals:         0       3       0       0
       Temps:          0       0       0       0
-      Totals:         0       3       0       0
-Total ram usage:        3 bytes
+      Totals:         0       6       0       0
+Total ram usage:        6 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    8
  This function calls:
-		___ftdiv
-		___ftmul
-		___lwtoft
+		___ftadd
  This function is called by:
-		_main
-		_mesure_vitesse
+		_modulo_angle
+		_sqrt
+		_sin
  This function uses a non-reentrant model
 
 
- *************** function ___lwtoft *****************
+ *************** function ___ftadd *****************
  Defined at:
-		line 28 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lwtoft.c"
+		line 86 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftadd.c"
  Parameters:    Size  Location     Type
-  c               2    8[BANK0 ] unsigned int 
+  f1              3   26[BANK0 ] float 
+  f2              3   29[BANK0 ] float 
  Auto vars:     Size  Location     Type
-		None
+  exp1            1   37[BANK0 ] unsigned char 
+  exp2            1   36[BANK0 ] unsigned char 
+  sign            1   35[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
-                  3    8[BANK0 ] float 
+                  3   26[BANK0 ] float 
  Registers used:
 		wreg, status,2, status,0, cstack
  Tracked objects:
@@ -1415,17 +2401,26 @@ Total ram usage:        3 bytes
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2
-      Params:         0       3       0       0
-      Locals:         0       0       0       0
-      Temps:          0       0       0       0
-      Totals:         0       3       0       0
-Total ram usage:        3 bytes
+      Params:         0       6       0       0
+      Locals:         0       3       0       0
+      Temps:          0       3       0       0
+      Totals:         0      12       0       0
+Total ram usage:       12 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    7
  This function calls:
 		___ftpack
  This function is called by:
-		_conversion_angle
+		_triangulation
+		_check_divergence_angle
+		_check_divergence_position
+		_modulo_angle
+		___ftsub
+		_cos
+		_sin
+		_eval_poly
+		_floor
+		_fonction_PID
  This function uses a non-reentrant model
 
 
@@ -1460,43 +2455,15 @@ Total ram usage:       15 bytes
 		___ftpack
  This function is called by:
 		_envoit_pwm
+		_obtention_angle
+		_triangulation
+		_conversion_degre_radian
+		_check_divergence_position
+		_sqrt
+		_sin
+		_eval_poly
 		_conversion_angle
 		_fonction_PID
-		_mesure_vitesse
- This function uses a non-reentrant model
-
-
- *************** function ___ftdiv *****************
- Defined at:
-		line 54 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftdiv.c"
- Parameters:    Size  Location     Type
-  f1              3   11[BANK0 ] float 
-  f2              3   14[BANK0 ] float 
- Auto vars:     Size  Location     Type
-  f3              3   21[BANK0 ] float 
-  sign            1   25[BANK0 ] unsigned char 
-  exp             1   24[BANK0 ] unsigned char 
-  cntr            1   20[BANK0 ] unsigned char 
- Return value:  Size  Location     Type
-                  3   11[BANK0 ] float 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2
-      Params:         0       6       0       0
-      Locals:         0       6       0       0
-      Temps:          0       3       0       0
-      Totals:         0      15       0       0
-Total ram usage:       15 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    7
- This function calls:
-		___ftpack
- This function is called by:
-		_conversion_angle
 		_mesure_vitesse
  This function uses a non-reentrant model
 
@@ -1529,11 +2496,155 @@ Total ram usage:        8 bytes
  This function calls:
 		Nothing
  This function is called by:
+		___altoft
+		___ftadd
 		___ftdiv
 		___ftmul
 		___lwtoft
-		___altoft
-		___ftadd
+ This function uses a non-reentrant model
+
+
+ *************** function ___ftge *****************
+ Defined at:
+		line 4 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftge.c"
+ Parameters:    Size  Location     Type
+  ff1             3   26[BANK0 ] float 
+  ff2             3   29[BANK0 ] float 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       6       0       0
+      Locals:         0       0       0       0
+      Temps:          0       3       0       0
+      Totals:         0       9       0       0
+Total ram usage:        9 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		Nothing
+ This function is called by:
+		_envoit_pwm
+		_saturation
+		_check_divergence_angle
+		_check_divergence_position
+		_modulo_angle
+		_sqrt
+		_cos
+		_sin
+		_floor
+		_ecretage_consignes
+		_saturation_erreur_integralle_vitesse
+ This function uses a non-reentrant model
+
+
+ *************** function ___ftneg *****************
+ Defined at:
+		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftneg.c"
+ Parameters:    Size  Location     Type
+  f1              3   23[BANK0 ] float 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+                  3   23[BANK0 ] float 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       3       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       3       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		Nothing
+ This function is called by:
+		_envoit_pwm
+		_triangulation
+		_saturation
+		_check_divergence_angle
+		_check_divergence_position
+		_sin
+		_fonction_PID
+ This function uses a non-reentrant model
+
+
+ *************** function _affichage_position *****************
+ Defined at:
+		line 172 in file "triangulation.c"
+ Parameters:    Size  Location     Type
+  x               3   38[BANK0 ] float 
+  y               3   41[BANK0 ] float 
+ Auto vars:     Size  Location     Type
+		None
+ Return value:  Size  Location     Type
+		None               void
+ Registers used:
+		wreg, fsr0l, fsr0h, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       6       0       0
+      Locals:         0       0       0       0
+      Temps:          0       0       0       0
+      Totals:         0       6       0       0
+Total ram usage:        6 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:   10
+ This function calls:
+		_PutIntUART
+		_PutsUART
+		___fttol
+ This function is called by:
+		_main
+ This function uses a non-reentrant model
+
+
+ *************** function ___fttol *****************
+ Defined at:
+		line 44 in file "C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fttol.c"
+ Parameters:    Size  Location     Type
+  f1              3    0[BANK0 ] float 
+ Auto vars:     Size  Location     Type
+  lval            4   10[BANK0 ] unsigned long 
+  exp1            1   14[BANK0 ] unsigned char 
+  sign1           1    9[BANK0 ] unsigned char 
+ Return value:  Size  Location     Type
+                  4    0[BANK0 ] long 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2
+      Params:         0       4       0       0
+      Locals:         0       6       0       0
+      Temps:          0       5       0       0
+      Totals:         0      15       0       0
+Total ram usage:       15 bytes
+ Hardware stack levels used:    1
+ Hardware stack levels required when called:    6
+ This function calls:
+		Nothing
+ This function is called by:
+		_envoit_pwm
+		_affichage_position
+		_floor
  This function uses a non-reentrant model
 
 
@@ -1566,6 +2677,7 @@ Total ram usage:        3 bytes
 		_PutsUART
  This function is called by:
 		_main
+		_affichage_position
 		_traitement_reception
  This function uses a non-reentrant model
 
@@ -1576,8 +2688,11 @@ Total ram usage:        3 bytes
  Parameters:    Size  Location     Type
   type_uart       1    wreg     unsigned char 
   chaine          2   30[BANK0 ] PTR const unsigned char 
-		 -> IntToC@out(8), STR_4(20), STR_3(8), STR_2(3), 
-		 -> STR_1(24), 
+		 -> STR_19(2), STR_18(6), STR_17(16), STR_16(24), 
+		 -> STR_15(24), IntToC@out(8), STR_14(20), STR_13(8), 
+		 -> STR_12(51), STR_11(39), STR_10(20), STR_9(39), 
+		 -> STR_8(19), STR_7(37), STR_6(25), STR_5(30), 
+		 -> STR_4(34), STR_3(24), STR_2(43), STR_1(24), 
  Auto vars:     Size  Location     Type
   type_uart       1   34[BANK0 ] unsigned char 
  Return value:  Size  Location     Type
@@ -1601,6 +2716,8 @@ Total ram usage:        5 bytes
  This function is called by:
 		_main
 		_PutIntUART
+		_retrouver_balise_mere
+		_affichage_position
 		_traitement_reception
  This function uses a non-reentrant model
 
@@ -1697,7 +2814,9 @@ Total ram usage:        6 bytes
  This function calls:
 		Nothing
  This function is called by:
+		_main
 		_IntToC
+		_eval_poly
  This function uses a non-reentrant model
 
 
@@ -1804,7 +2923,7 @@ Total ram usage:        1 bytes
 
  *************** function _interuption_QEI_sens *****************
  Defined at:
-		line 186 in file "interruptions.c"
+		line 193 in file "interruptions.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1924,7 +3043,7 @@ Total ram usage:        0 bytes
 
  *************** function _interruption_QEI *****************
  Defined at:
-		line 170 in file "interruptions.c"
+		line 168 in file "interruptions.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1932,7 +3051,7 @@ Total ram usage:        0 bytes
  Return value:  Size  Location     Type
 		None               void
  Registers used:
-		status,2, status,0
+		wreg, status,2, status,0
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -1962,7 +3081,7 @@ Total ram usage:        0 bytes
  Return value:  Size  Location     Type
 		None               void
  Registers used:
-		wreg, status,2, status,0
+		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -1984,7 +3103,7 @@ Total ram usage:        2 bytes
 
  *************** function _interrupt_TX *****************
  Defined at:
-		line 219 in file "interruptions.c"
+		line 226 in file "interruptions.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2014,7 +3133,7 @@ Total ram usage:        0 bytes
 
  *************** function _interrupt_RX *****************
  Defined at:
-		line 200 in file "interruptions.c"
+		line 207 in file "interruptions.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2111,7 +3230,7 @@ Total ram usage:        1 bytes
 
  *************** function i2_interuption_QEI_sens *****************
  Defined at:
-		line 186 in file "interruptions.c"
+		line 193 in file "interruptions.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2227,7 +3346,7 @@ Total ram usage:        0 bytes
 
  *************** function i2_interruption_QEI *****************
  Defined at:
-		line 170 in file "interruptions.c"
+		line 168 in file "interruptions.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2235,7 +3354,7 @@ Total ram usage:        0 bytes
  Return value:  Size  Location     Type
 		None               void
  Registers used:
-		status,2, status,0
+		wreg, status,2, status,0
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -2264,7 +3383,7 @@ Total ram usage:        0 bytes
  Return value:  Size  Location     Type
 		None               void
  Registers used:
-		wreg, status,2, status,0
+		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -2285,7 +3404,7 @@ Total ram usage:        2 bytes
 
  *************** function i2_interrupt_TX *****************
  Defined at:
-		line 219 in file "interruptions.c"
+		line 226 in file "interruptions.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2314,7 +3433,7 @@ Total ram usage:        0 bytes
 
  *************** function i2_interrupt_RX *****************
  Defined at:
-		line 200 in file "interruptions.c"
+		line 207 in file "interruptions.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -2346,114 +3465,182 @@ MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftge.c
-		___ftge        		CODE           	109E	0000	207
+		___ftge        		CODE           	2922	0000	207
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftge.c estimated size: 207
 
 uart.c
-		_PutIntUART    		CODE           	18AE	0000	35
-		_PutcUART      		CODE           	0336	0000	895
-		_IntToC        		CODE           	06B4	0000	841
-		_PutsUART      		CODE           	14B0	0000	111
-		_init_uart_rece		CODE           	191A	0000	21
-		_init_uart_logi		CODE           	1952	0000	15
-		_config_uart   		CODE           	18D0	0000	29
+		_PutIntUART    		CODE           	3814	0000	35
+		_PutcUART      		CODE           	10E8	0000	895
+		_IntToC        		CODE           	1466	0000	841
+		_PutsUART      		CODE           	3212	0000	111
+		_init_uart_rece		CODE           	38A0	0000	21
+		_init_uart_logi		CODE           	38B4	0000	15
+		_config_uart   		CODE           	3856	0000	29
 
 uart.c estimated size: 1947
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftneg.c
-		___ftneg       		CODE           	17A4	0000	49
+		___ftneg       		CODE           	3746	0000	49
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftneg.c estimated size: 49
 
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\sin.c
+		_sin           		CODE           	17AE	0000	669
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\sin.c estimated size: 669
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftsub.c
+		___ftsub       		CODE           	3466	0000	81
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftsub.c estimated size: 81
+
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\float.c
-		___ftpack      		CODE           	0DCC	0000	289
+		___ftpack      		CODE           	2386	0000	289
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\float.c estimated size: 289
 
 asserv.c
-		_reglage_PID   		CODE           	1734	0000	57
+		_reglage_PID   		CODE           	36D6	0000	57
 
 asserv.c estimated size: 57
 
-moteur.c
-		_conversion_ang		CODE           	143A	0000	119
-		_envoit_pwm    		CODE           	0EEC	0000	227
-		_config_QEI    		CODE           	158A	0000	95
-		_config_pwm    		CODE           	15E8	0000	73
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\evalpoly.c
+		_eval_poly     		CODE           	25A2	0000	239
 
-moteur.c estimated size: 514
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\evalpoly.c estimated size: 239
+
+moteur.c
+		_init_capteur  		CODE           	2C20	0000	171
+		_envoit_pwm    		CODE           	2690	0000	227
+		_obtention_angl		CODE           	3126	0000	121
+		_config_QEI    		CODE           	33BA	0000	89
+		_config_pwm    		CODE           	354A	0000	73
+
+moteur.c estimated size: 681
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\frexp.c
+		_frexp         		CODE           	2DFC	0000	145
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\frexp.c estimated size: 145
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\floor.c
+		_floor         		CODE           	24A6	0000	253
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\floor.c estimated size: 253
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftmul.c
-		___ftmul       		CODE           	09FC	0000	349
+		___ftmul       		CODE           	1E8C	0000	349
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftmul.c estimated size: 349
 
+triangulation.c
+		_inversion_bali		CODE           	30AA	0000	125
+		_modulo_id_bali		CODE           	3836	0000	33
+		_Cot           		CODE           	32EC	0000	107
+		_modulo_angle  		CODE           	29F0	0000	193
+		_check_divergen		CODE           	2772	0000	225
+		_saturation    		CODE           	2D6C	0000	145
+		_check_divergen		CODE           	225C	0000	299
+		_conversion_deg		CODE           	3412	0000	85
+		_triangulation 		CODE           	00AC	0000	2373
+		_retrouver_bali		CODE           	2B68	0000	185
+		_affichage_posi		CODE           	319E	0000	117
+
+triangulation.c estimated size: 3887
+
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lwtoft.c
-		___lwtoft      		CODE           	182E	0000	45
+		___lwtoft      		CODE           	3776	0000	45
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\lwtoft.c estimated size: 45
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftdiv.c
-		___ftdiv       		CODE           	0B58	0000	323
+		___ftdiv       		CODE           	1FE8	0000	323
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftdiv.c estimated size: 323
 
 shared
-		i2_interruption		CODE           	1676	0000	71
-		i2_interrupt_RX		CODE           	16F8	0000	61
-		i2_interrupt_TX		CODE           	1984	0000	5
-		i2_interruption		CODE           	1940	0000	19
-		i2_interruption		CODE           	1980	0000	5
-		i2_subroutine_i		CODE           	13B6	0000	133
-		i2_interruption		CODE           	1884	0000	43
-		__initializatio		CODE           	17D4	0000	37
-		i2_interuption_		CODE           	197C	0000	5
-		i2_interruption		CODE           	1968	0000	9
+		i2_interruption		CODE           	35D8	0000	71
+		i2_interrupt_RX		CODE           	369A	0000	61
+		i2_interrupt_TX		CODE           	38E6	0000	5
+		i2_interruption		CODE           	37F0	0000	37
+		i2_interruption		CODE           	38E2	0000	5
+		i2_subroutine_i		CODE           	3026	0000	133
+		i2_interruption		CODE           	3500	0000	75
+		__initializatio		CODE           	361E	0000	55
+		i2_interuption_		CODE           	38DE	0000	5
+		i2_interruption		CODE           	38CA	0000	9
+		sin@coeff_a    		MEDIUMCONST    	3E01	0000	16
+		sin@coeff_b    		MEDIUMCONST    	3E10	0000	13
 
-shared estimated size: 388
+shared estimated size: 485
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\altoft.c
+		___altoft      		CODE           	2CCA	0000	163
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\altoft.c estimated size: 163
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\cos.c
+		_cos           		CODE           	2AB0	0000	185
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\cos.c estimated size: 185
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c
-		___awdiv       		CODE           	0FCE	0000	209
+		___awdiv       		CODE           	2852	0000	209
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\awdiv.c estimated size: 209
 
 interruptions.c
-		_interuption_QE		CODE           	1970	0000	5
-		_interruption_t		CODE           	1960	0000	9
-		_interruption_t		CODE           	1630	0000	71
-		_interruption_Q		CODE           	192E	0000	19
+		_interuption_QE		CODE           	38D2	0000	5
+		_interruption_t		CODE           	38C2	0000	9
+		_interruption_t		CODE           	3592	0000	71
+		_interruption_Q		CODE           	37CC	0000	37
 		_high_isr      		CODE           	0008	0000	125
-		_interruption_t		CODE           	1974	0000	5
-		_interrupt_RX  		CODE           	16BC	0000	61
-		_interrupt_TX  		CODE           	1978	0000	5
-		_subroutine_int		CODE           	1332	0000	133
+		_interruption_t		CODE           	38D6	0000	5
+		_interrupt_RX  		CODE           	365E	0000	61
+		_interrupt_TX  		CODE           	38DA	0000	5
+		_subroutine_int		CODE           	2FA2	0000	133
 		_low_isr       		CODE           	0018	0000	145
-		_interruption_I		CODE           	185A	0000	43
+		_interruption_I		CODE           	34B6	0000	75
 
-interruptions.c estimated size: 621
+interruptions.c estimated size: 671
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\sqrt.c
+		_sqrt          		CODE           	1CC8	0000	453
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\sqrt.c estimated size: 453
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fttol.c
-		___fttol       		CODE           	0C9A	0000	307
+		___fttol       		CODE           	212A	0000	307
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\fttol.c estimated size: 307
 
 main.c
-		_main          		CODE           	116C	0000	177
+		_main          		CODE           	09F0	0000	1785
 
-main.c estimated size: 177
+main.c estimated size: 1785
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c
-		___wmul        		CODE           	176C	0000	57
+		___wmul        		CODE           	370E	0000	57
 
 C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\Umul16.c estimated size: 57
 
-system.c
-		_ConfigInterrup		CODE           	12AA	0000	137
-		_init_system   		CODE           	1802	0000	45
-		_ConfigPorts   		CODE           	121C	0000	143
-		_init_timer_0  		CODE           	1904	0000	23
-		_init_timer_1  		CODE           	18EC	0000	25
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\tan.c
+		_tan           		CODE           	3356	0000	101
 
-system.c estimated size: 373
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\tan.c estimated size: 101
+
+system.c
+		_ConfigInterrup		CODE           	2F1A	0000	137
+		_init_system   		CODE           	37A2	0000	43
+		_ConfigPorts   		CODE           	2E8C	0000	143
+		_init_timer_0  		CODE           	388A	0000	23
+		_init_timer_1  		CODE           	3872	0000	25
+
+system.c estimated size: 371
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftadd.c
+		___ftadd       		CODE           	1A4A	0000	639
+
+C:\Program Files (x86)\Microchip\xc8\v1.34\sources\common\ftadd.c estimated size: 639
 

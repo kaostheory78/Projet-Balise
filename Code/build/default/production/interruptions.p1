@@ -75,7 +75,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "33 uart.h
 [s S446 `uc -> 11 `i `uc 1 `uc 1 ]
 [n S446 . buffer_uart transmission_en_cours indice ]
-"142 system.h
+"145 system.h
 [v _uart_logiciel `S446 ~T0 @X0 0 e ]
 "1239 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
 [s S46 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -112,11 +112,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S45 . . . . . . . . . . . ]
 "1307
 [v _PORTCbits `VS45 ~T0 @X0 0 e@3970 ]
-"29 moteur.h
-[s S448 `ui 1 `ui 1 `l 1 `d 1 ]
-[n S448 . ancien nouvelle ecart angle ]
-"144 system.h
-[v _position `S448 ~T0 @X0 0 e ]
+"37 moteur.h
+[s S449 `uc 1 `uc 1 `uc 1 `d -> 3 `i `d -> 3 `i `ui -> 3 `i `uc 1 `c 1 ]
+[n S449 . tour_en_cours synchro_debut_tour flag_capteur angle ancien_angle position indice id_balise_mere ]
+"151 system.h
+[v _capteur `S449 ~T0 @X0 0 e ]
 "324 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
 [v _POSCNTH `Vuc ~T0 @X0 0 e@3943 ]
 "313
@@ -170,9 +170,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S264 . . . . . . . . . . . . ]
 "5198
 [v _QEICONbits `VS264 ~T0 @X0 0 e@4022 ]
-"145 system.h
-[v _OVERFLOW_CODEUR `c ~T0 @X0 0 e ]
-"1169 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
+"1169
 [s S43 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S43 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
 "1179
@@ -186,7 +184,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "41 uart.h
 [s S447 `uc -> 100 `i `uc 1 `uc 1 `uc 1 ]
 [n S447 . buffer_reeption indice buffer_plein buffer_vide ]
-"143 system.h
+"146 system.h
 [v _uart_reception `S447 ~T0 @X0 0 e ]
 "5110 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
 [v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
@@ -4498,9 +4496,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;moteur.h: 32: int32_t ecart;
 [; ;moteur.h: 33: double angle;
 [; ;moteur.h: 34: }_position;
-[; ;moteur.h: 40: void config_QEI ();
-[; ;moteur.h: 41: void get_valeur_codeur (void);
-[; ;moteur.h: 42: void conversion_angle ();
+[; ;moteur.h: 36: typedef struct
+[; ;moteur.h: 37: {
+[; ;moteur.h: 38: bool tour_en_cours;
+[; ;moteur.h: 39: bool synchro_debut_tour;
+[; ;moteur.h: 40: bool flag_capteur;
+[; ;moteur.h: 41: double angle[3];
+[; ;moteur.h: 42: double ancien_angle[3];
+[; ;moteur.h: 43: uint16_t position[3];
+[; ;moteur.h: 44: uint8_t indice;
+[; ;moteur.h: 45: int8_t id_balise_mere;
+[; ;moteur.h: 46: }_capteur;
+[; ;moteur.h: 52: void config_QEI ();
+[; ;moteur.h: 53: void get_valeur_codeur (void);
+[; ;moteur.h: 54: void conversion_angle ();
+[; ;moteur.h: 55: void init_capteur();
+[; ;moteur.h: 56: double obtention_angle (uint16_t position);
 [; ;asserv.h: 46: typedef struct
 [; ;asserv.h: 47: {
 [; ;asserv.h: 48: double KP;
@@ -4524,25 +4535,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;asserv.h: 73: void reglage_PID (void);
 [; ;asserv.h: 74: void saturation_erreur_integralle_vitesse (void);
 [; ;asserv.h: 75: void ecretage_consignes(double *commande);
-[; ;system.h: 142: extern _buf uart_logiciel;
-[; ;system.h: 143: extern _uart_recption uart_reception;
-[; ;system.h: 144: extern _position position;
-[; ;system.h: 145: extern int8_t OVERFLOW_CODEUR;
-[; ;system.h: 147: extern uint8_t flag_cpateur;
-[; ;system.h: 160: void init_system (void);
-[; ;system.h: 166: void init_clock(void);
-[; ;system.h: 173: void ConfigInterrupt (void);
-[; ;system.h: 179: void ConfigPorts (void);
-[; ;system.h: 182: void init_timer_0 ();
-[; ;system.h: 183: void init_timer_1 ();
-[; ;system.h: 185: void envoit_pwm (double valeur);
-[; ;system.h: 186: void config_pwm ();
+[; ;triangulation.h: 32: void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
+[; ;triangulation.h: 33: double Cot (double angle);
+[; ;triangulation.h: 34: double saturation (double valeur, double maximum);
+[; ;triangulation.h: 35: double conversion_degre_radian (double angle);
+[; ;triangulation.h: 37: double modulo_angle (double angle);
+[; ;triangulation.h: 38: int8_t retrouver_balise_mere ();
+[; ;triangulation.h: 39: int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
+[; ;triangulation.h: 40: void inversion_balises(uint8_t id_balise_mere);
+[; ;triangulation.h: 41: void modulo_id_balise_mere ();
+[; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
+[; ;triangulation.h: 43: void affichage_position (double x, double y);
+[; ;system.h: 145: extern _buf uart_logiciel;
+[; ;system.h: 146: extern _uart_recption uart_reception;
+[; ;system.h: 147: extern _position position;
+[; ;system.h: 148: extern int8_t OVERFLOW_CODEUR;
+[; ;system.h: 150: extern uint8_t flag_cpateur;
+[; ;system.h: 151: extern _capteur capteur;
+[; ;system.h: 164: void init_system (void);
+[; ;system.h: 170: void init_clock(void);
+[; ;system.h: 177: void ConfigInterrupt (void);
+[; ;system.h: 183: void ConfigPorts (void);
+[; ;system.h: 186: void init_timer_0 ();
+[; ;system.h: 187: void init_timer_1 ();
+[; ;system.h: 189: void envoit_pwm (double valeur);
+[; ;system.h: 190: void config_pwm ();
 "20 interruptions.c
 [v _flag_cpateur `uc ~T0 @X0 1 e ]
 [; ;interruptions.c: 20: uint8_t flag_cpateur;
-[v F4826 `(v ~T0 @X0 1 tf ]
+[v F4870 `(v ~T0 @X0 1 tf ]
 "27
-[v _high_isr `IF4826 ~T0 @X0 1 e ]
+[v _high_isr `IF4870 ~T0 @X0 1 e ]
 "28
 {
 [; ;interruptions.c: 27: void interrupt high_isr(void)
@@ -4554,11 +4577,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _subroutine_interruptions (1 -> -> 1 `i `uc ]
 [; ;interruptions.c: 30: }
 "30
-[e :UE 452 ]
+[e :UE 453 ]
 }
-[v F4829 `(v ~T0 @X0 1 tf ]
+[v F4873 `(v ~T0 @X0 1 tf ]
 "33
-[v _low_isr `ILF4829 ~T0 @X0 1 e ]
+[v _low_isr `ILF4873 ~T0 @X0 1 e ]
 "34
 {
 [; ;interruptions.c: 33: void low_priority interrupt low_isr(void)
@@ -4570,7 +4593,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _subroutine_interruptions (1 -> -> 0 `i `uc ]
 [; ;interruptions.c: 36: }
 "36
-[e :UE 453 ]
+[e :UE 454 ]
 }
 "43
 [v _subroutine_interruptions `(v ~T0 @X0 1 ef1`uc ]
@@ -4583,9 +4606,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _priorite `uc ~T0 @X0 1 r1 ]
 "44
 [f ]
-[; ;interruptions.c: 45: if ( PIR3bits.IC2QEIF == 1 && 0b0 == 1 && priorite == 0b1)
+[; ;interruptions.c: 45: if ( PIR3bits.IC2QEIF == 1 && 0b1 == 1 && priorite == 0b1)
 "45
-[e $ ! && && == -> . . _PIR3bits 0 2 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 1 `i 455  ]
+[e $ ! && && == -> . . _PIR3bits 0 2 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 456  ]
 [; ;interruptions.c: 46: {
 "46
 {
@@ -4595,11 +4618,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "48
 }
 [; ;interruptions.c: 48: }
-[e $U 456  ]
+[e $U 457  ]
 "49
-[e :U 455 ]
+[e :U 456 ]
 [; ;interruptions.c: 49: else if ( PIR3bits.IC3DRIF == 1 && 0b0 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _PIR3bits 0 3 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 1 `i 457  ]
+[e $ ! && && == -> . . _PIR3bits 0 3 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 1 `i 458  ]
 [; ;interruptions.c: 50: {
 "50
 {
@@ -4609,11 +4632,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "52
 }
 [; ;interruptions.c: 52: }
-[e $U 458  ]
+[e $U 459  ]
 "53
-[e :U 457 ]
+[e :U 458 ]
 [; ;interruptions.c: 53: else if ( INTCONbits.TMR0IF == 1 && 0b0 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _INTCONbits 0 2 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 1 `i 459  ]
+[e $ ! && && == -> . . _INTCONbits 0 2 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 1 `i 460  ]
 [; ;interruptions.c: 54: {
 "54
 {
@@ -4623,11 +4646,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "56
 }
 [; ;interruptions.c: 56: }
-[e $U 460  ]
+[e $U 461  ]
 "57
-[e :U 459 ]
+[e :U 460 ]
 [; ;interruptions.c: 57: else if ( PIR1bits.TMR1IF == 1 && 0b1 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _PIR1bits 0 0 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 461  ]
+[e $ ! && && == -> . . _PIR1bits 0 0 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 462  ]
 [; ;interruptions.c: 58: {
 "58
 {
@@ -4637,11 +4660,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "60
 }
 [; ;interruptions.c: 60: }
-[e $U 462  ]
+[e $U 463  ]
 "61
-[e :U 461 ]
+[e :U 462 ]
 [; ;interruptions.c: 61: else if ( PIR1bits.TMR2IF == 1 && 0b0 == 1 && priorite == 0b0)
-[e $ ! && && == -> . . _PIR1bits 0 1 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 0 `i 463  ]
+[e $ ! && && == -> . . _PIR1bits 0 1 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 0 `i 464  ]
 [; ;interruptions.c: 62: {
 "62
 {
@@ -4651,11 +4674,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "64
 }
 [; ;interruptions.c: 64: }
-[e $U 464  ]
+[e $U 465  ]
 "65
-[e :U 463 ]
+[e :U 464 ]
 [; ;interruptions.c: 65: else if (INTCONbits.INT0IF == 1 && 0b1 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _INTCONbits 0 1 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 465  ]
+[e $ ! && && == -> . . _INTCONbits 0 1 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 466  ]
 [; ;interruptions.c: 66: {
 "66
 {
@@ -4665,11 +4688,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "68
 }
 [; ;interruptions.c: 68: }
-[e $U 466  ]
+[e $U 467  ]
 "85
-[e :U 465 ]
+[e :U 466 ]
 [; ;interruptions.c: 85: else if ( PIR1bits.RCIF == 1 && 0b1 == 1 && priorite == 0b1)
-[e $ ! && && == -> . . _PIR1bits 0 5 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 467  ]
+[e $ ! && && == -> . . _PIR1bits 0 5 `i -> 1 `i == -> 1 `i -> 1 `i == -> _priorite `i -> 1 `i 468  ]
 [; ;interruptions.c: 86: {
 "86
 {
@@ -4679,11 +4702,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "88
 }
 [; ;interruptions.c: 88: }
-[e $U 468  ]
+[e $U 469  ]
 "89
-[e :U 467 ]
+[e :U 468 ]
 [; ;interruptions.c: 89: else if (PIR1bits.TXIF == 1 && 0b0 == 1 && priorite == 0b0)
-[e $ ! && && == -> . . _PIR1bits 0 4 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 0 `i 469  ]
+[e $ ! && && == -> . . _PIR1bits 0 4 `i -> 1 `i == -> 0 `i -> 1 `i == -> _priorite `i -> 0 `i 470  ]
 [; ;interruptions.c: 90: {
 "90
 {
@@ -4692,18 +4715,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _interrupt_TX ..  ]
 "92
 }
-[e :U 469 ]
+[e :U 470 ]
 "94
-[e :U 468 ]
-[e :U 466 ]
-[e :U 464 ]
-[e :U 462 ]
-[e :U 460 ]
-[e :U 458 ]
-[e :U 456 ]
+[e :U 469 ]
+[e :U 467 ]
+[e :U 465 ]
+[e :U 463 ]
+[e :U 461 ]
+[e :U 459 ]
+[e :U 457 ]
 [; ;interruptions.c: 92: }
 [; ;interruptions.c: 94: }
-[e :UE 454 ]
+[e :UE 455 ]
 }
 "104
 [v _interruption_timer0 `(v ~T0 @X0 1 ef ]
@@ -4721,7 +4744,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _TMR0L -> -> 131 `i `uc ]
 [; ;interruptions.c: 110: }
 "110
-[e :UE 470 ]
+[e :UE 471 ]
 }
 "112
 [v _interruption_timer1 `(v ~T0 @X0 1 ef ]
@@ -4739,7 +4762,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _TMR1 -> - -> 65535 `l -> -> 810 `i `l `us ]
 [; ;interruptions.c: 117: if (uart_logiciel.transmission_en_cours == 1)
 "117
-[e $ ! == -> . _uart_logiciel 1 `i -> 1 `i 472  ]
+[e $ ! == -> . _uart_logiciel 1 `i -> 1 `i 473  ]
 [; ;interruptions.c: 118: {
 "118
 {
@@ -4751,25 +4774,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ++ . _uart_logiciel 2 -> -> 1 `i `uc ]
 [; ;interruptions.c: 122: if (uart_logiciel.indice > 10)
 "122
-[e $ ! > -> . _uart_logiciel 2 `i -> 10 `i 473  ]
+[e $ ! > -> . _uart_logiciel 2 `i -> 10 `i 474  ]
 [; ;interruptions.c: 123: uart_logiciel.transmission_en_cours = 0;
 "123
 [e = . _uart_logiciel 1 -> -> 0 `i `uc ]
-[e :U 473 ]
+[e :U 474 ]
 "124
 }
 [; ;interruptions.c: 124: }
-[e $U 474  ]
+[e $U 475  ]
 "125
-[e :U 472 ]
+[e :U 473 ]
 [; ;interruptions.c: 125: else
 [; ;interruptions.c: 126: PORTCbits.RC5 = 1;
 "126
 [e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
-[e :U 474 ]
+[e :U 475 ]
 [; ;interruptions.c: 127: }
 "127
-[e :UE 471 ]
+[e :UE 472 ]
 }
 "129
 [v _interruption_timer2 `(v ~T0 @X0 1 ef ]
@@ -4784,7 +4807,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _PIR1bits 0 1 -> -> 0 `i `uc ]
 [; ;interruptions.c: 132: }
 "132
-[e :UE 475 ]
+[e :UE 476 ]
 }
 "134
 [v _interruption_timer5 `(v ~T0 @X0 1 ef ]
@@ -4799,7 +4822,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _PIR3bits 0 0 -> -> 0 `i `uc ]
 [; ;interruptions.c: 137: }
 "137
-[e :UE 476 ]
+[e :UE 477 ]
 }
 "141
 [v _interruption_INT0 `(v ~T0 @X0 1 ef ]
@@ -4809,199 +4832,210 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interruptions.c: 142: {
 [e :U _interruption_INT0 ]
 [f ]
-[; ;interruptions.c: 143: if (flag_cpateur == 0)
+[; ;interruptions.c: 143: if (capteur.tour_en_cours == 1)
 "143
-[e $ ! == -> _flag_cpateur `i -> 0 `i 478  ]
+[e $ ! == -> . _capteur 0 `i -> 1 `i 479  ]
 [; ;interruptions.c: 144: {
 "144
 {
-[; ;interruptions.c: 146: flag_cpateur = 1;
+[; ;interruptions.c: 145: if (capteur.indice < 3)
+"145
+[e $ ! < -> . _capteur 6 `i -> 3 `i 480  ]
+[; ;interruptions.c: 146: {
 "146
-[e = _flag_cpateur -> -> 1 `i `uc ]
-[; ;interruptions.c: 148: position.nouvelle = POSCNTH * 256 + POSCNTL;
-"148
-[e = . _position 1 -> + * -> _POSCNTH `i -> 256 `i -> _POSCNTL `i `ui ]
-"153
-}
-[e :U 478 ]
-[; ;interruptions.c: 153: }
-[; ;interruptions.c: 154: INTCONbits.INT0IF = 0;
-"154
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-[; ;interruptions.c: 156: }
-"156
-[e :UE 477 ]
-}
-"158
-[v _interruption_INT1 `(v ~T0 @X0 1 ef ]
-"159
 {
-[; ;interruptions.c: 158: void interruption_INT1()
-[; ;interruptions.c: 159: {
+[; ;interruptions.c: 147: capteur.position[capteur.indice++] = POSCNTH * 256 + POSCNTL;
+"147
+[e = *U + &U . _capteur 5 * -> ++ . _capteur 6 -> -> 1 `i `uc `ux -> -> # *U &U . _capteur 5 `ui `ux -> + * -> _POSCNTH `i -> 256 `i -> _POSCNTL `i `ui ]
+"148
+}
+[; ;interruptions.c: 148: }
+[e $U 481  ]
+"149
+[e :U 480 ]
+[; ;interruptions.c: 149: else
+[; ;interruptions.c: 150: capteur.indice++;
+"150
+[e ++ . _capteur 6 -> -> 1 `i `uc ]
+[e :U 481 ]
+"151
+}
+[e :U 479 ]
+[; ;interruptions.c: 151: }
+[; ;interruptions.c: 152: INTCONbits.INT0IF = 0;
+"152
+[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
+[; ;interruptions.c: 154: }
+"154
+[e :UE 478 ]
+}
+"156
+[v _interruption_INT1 `(v ~T0 @X0 1 ef ]
+"157
+{
+[; ;interruptions.c: 156: void interruption_INT1()
+[; ;interruptions.c: 157: {
 [e :U _interruption_INT1 ]
 [f ]
-[; ;interruptions.c: 160: INTCON3bits.INT1IF = 0;
-"160
+[; ;interruptions.c: 158: INTCON3bits.INT1IF = 0;
+"158
 [e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
-[; ;interruptions.c: 161: }
-"161
-[e :UE 479 ]
+[; ;interruptions.c: 159: }
+"159
+[e :UE 482 ]
 }
-"163
+"161
 [v _interruption_INT2 `(v ~T0 @X0 1 ef ]
-"164
+"162
 {
-[; ;interruptions.c: 163: void interruption_INT2()
-[; ;interruptions.c: 164: {
+[; ;interruptions.c: 161: void interruption_INT2()
+[; ;interruptions.c: 162: {
 [e :U _interruption_INT2 ]
 [f ]
-[; ;interruptions.c: 165: INTCON3bits.INT2IF = 0;
-"165
+[; ;interruptions.c: 163: INTCON3bits.INT2IF = 0;
+"163
 [e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
-[; ;interruptions.c: 166: }
-"166
-[e :UE 480 ]
+[; ;interruptions.c: 164: }
+"164
+[e :UE 483 ]
 }
-"170
+"168
 [v _interruption_QEI `(v ~T0 @X0 1 ef ]
-"171
+"169
 {
-[; ;interruptions.c: 170: void interruption_QEI()
-[; ;interruptions.c: 171: {
+[; ;interruptions.c: 168: void interruption_QEI()
+[; ;interruptions.c: 169: {
 [e :U _interruption_QEI ]
 [f ]
-[; ;interruptions.c: 172: PIR3bits.IC2QEIF = 0;
-"172
+[; ;interruptions.c: 170: PIR3bits.IC2QEIF = 0;
+"170
 [e = . . _PIR3bits 0 2 -> -> 0 `i `uc ]
-[; ;interruptions.c: 173: QEICONbits.QERR = 0;
-"173
+[; ;interruptions.c: 171: QEICONbits.QERR = 0;
+"171
 [e = . . _QEICONbits 2 3 -> -> 0 `i `uc ]
-[; ;interruptions.c: 175: if (QEICONbits.UPDOWN == 1)
+[; ;interruptions.c: 173: if (capteur.synchro_debut_tour == 1)
+"173
+[e $ ! == -> . _capteur 1 `i -> 1 `i 485  ]
+[; ;interruptions.c: 174: {
+"174
+{
+[; ;interruptions.c: 175: capteur.tour_en_cours = 1;
 "175
-[e $ ! == -> . . _QEICONbits 10 1 `i -> 1 `i 482  ]
-[; ;interruptions.c: 176: {
+[e = . _capteur 0 -> -> 1 `i `uc ]
+[; ;interruptions.c: 176: capteur.synchro_debut_tour = 0;
 "176
-{
-[; ;interruptions.c: 177: OVERFLOW_CODEUR++;
+[e = . _capteur 1 -> -> 0 `i `uc ]
 "177
-[e ++ _OVERFLOW_CODEUR -> -> 1 `i `c ]
+}
+[; ;interruptions.c: 177: }
+[e $U 486  ]
 "178
-}
-[; ;interruptions.c: 178: }
-[e $U 483  ]
+[e :U 485 ]
+[; ;interruptions.c: 178: else
+[; ;interruptions.c: 179: capteur.tour_en_cours = 0;
 "179
-[e :U 482 ]
-[; ;interruptions.c: 179: else
-[; ;interruptions.c: 180: {
-"180
-{
-[; ;interruptions.c: 181: OVERFLOW_CODEUR--;
-"181
-[e -- _OVERFLOW_CODEUR -> -> 1 `i `c ]
-"182
-}
-[e :U 483 ]
-[; ;interruptions.c: 182: }
-[; ;interruptions.c: 184: }
-"184
-[e :UE 481 ]
-}
-"186
-[v _interuption_QEI_sens `(v ~T0 @X0 1 ef ]
-"187
-{
-[; ;interruptions.c: 186: void interuption_QEI_sens()
-[; ;interruptions.c: 187: {
-[e :U _interuption_QEI_sens ]
-[f ]
-[; ;interruptions.c: 188: PIR3bits.IC3DRIF = 0;
-"188
-[e = . . _PIR3bits 0 3 -> -> 0 `i `uc ]
-[; ;interruptions.c: 189: }
-"189
+[e = . _capteur 0 -> -> 0 `i `uc ]
+[e :U 486 ]
+[; ;interruptions.c: 191: }
+"191
 [e :UE 484 ]
 }
 "193
-[v _interrupt_ADC `(v ~T0 @X0 1 ef ]
+[v _interuption_QEI_sens `(v ~T0 @X0 1 ef ]
 "194
 {
-[; ;interruptions.c: 193: void interrupt_ADC ()
+[; ;interruptions.c: 193: void interuption_QEI_sens()
 [; ;interruptions.c: 194: {
-[e :U _interrupt_ADC ]
+[e :U _interuption_QEI_sens ]
 [f ]
-[; ;interruptions.c: 195: PIR1bits.ADIF = 0;
+[; ;interruptions.c: 195: PIR3bits.IC3DRIF = 0;
 "195
-[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[e = . . _PIR3bits 0 3 -> -> 0 `i `uc ]
 [; ;interruptions.c: 196: }
 "196
-[e :UE 485 ]
+[e :UE 487 ]
 }
 "200
-[v _interrupt_RX `(v ~T0 @X0 1 ef ]
+[v _interrupt_ADC `(v ~T0 @X0 1 ef ]
 "201
 {
-[; ;interruptions.c: 200: void interrupt_RX()
+[; ;interruptions.c: 200: void interrupt_ADC ()
 [; ;interruptions.c: 201: {
+[e :U _interrupt_ADC ]
+[f ]
+[; ;interruptions.c: 202: PIR1bits.ADIF = 0;
+"202
+[e = . . _PIR1bits 0 6 -> -> 0 `i `uc ]
+[; ;interruptions.c: 203: }
+"203
+[e :UE 488 ]
+}
+"207
+[v _interrupt_RX `(v ~T0 @X0 1 ef ]
+"208
+{
+[; ;interruptions.c: 207: void interrupt_RX()
+[; ;interruptions.c: 208: {
 [e :U _interrupt_RX ]
 [f ]
-[; ;interruptions.c: 202: PIR1bits.RCIF = 0;
-"202
-[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-[; ;interruptions.c: 203: PORTBbits.RB0 = 1;
-"203
-[e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
-[; ;interruptions.c: 205: if (uart_reception.indice < 100)
-"205
-[e $ ! < -> . _uart_reception 1 `i -> 100 `i 487  ]
-[; ;interruptions.c: 206: {
-"206
-{
-[; ;interruptions.c: 207: uart_reception.buffer_reeption[uart_reception.indice] = RCREG;
-"207
-[e = *U + &U . _uart_reception 0 * -> . _uart_reception 1 `ux -> -> # *U &U . _uart_reception 0 `ui `ux _RCREG ]
-[; ;interruptions.c: 208: uart_reception.buffer_vide = 0;
-"208
-[e = . _uart_reception 3 -> -> 0 `i `uc ]
-[; ;interruptions.c: 209: uart_reception.indice++;
+[; ;interruptions.c: 209: PIR1bits.RCIF = 0;
 "209
-[e ++ . _uart_reception 1 -> -> 1 `i `uc ]
+[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
+[; ;interruptions.c: 210: PORTBbits.RB0 = 1;
 "210
-}
-[; ;interruptions.c: 210: }
-[e $U 488  ]
-"211
-[e :U 487 ]
-[; ;interruptions.c: 211: else
-[; ;interruptions.c: 212: {
+[e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
+[; ;interruptions.c: 212: if (uart_reception.indice < 100)
 "212
-{
-[; ;interruptions.c: 213: uart_reception.buffer_plein = 1;
+[e $ ! < -> . _uart_reception 1 `i -> 100 `i 490  ]
+[; ;interruptions.c: 213: {
 "213
-[e = . _uart_reception 2 -> -> 1 `i `uc ]
-"214
-[v _temp `uc ~T0 @X0 1 a ]
-[; ;interruptions.c: 214: uint8_t temp = RCREG;
-[e = _temp _RCREG ]
-"215
-}
-[e :U 488 ]
-[; ;interruptions.c: 215: }
-[; ;interruptions.c: 217: }
-"217
-[e :UE 486 ]
-}
-"219
-[v _interrupt_TX `(v ~T0 @X0 1 ef ]
-"220
 {
-[; ;interruptions.c: 219: void interrupt_TX()
-[; ;interruptions.c: 220: {
+[; ;interruptions.c: 214: uart_reception.buffer_reeption[uart_reception.indice] = RCREG;
+"214
+[e = *U + &U . _uart_reception 0 * -> . _uart_reception 1 `ux -> -> # *U &U . _uart_reception 0 `ui `ux _RCREG ]
+[; ;interruptions.c: 215: uart_reception.buffer_vide = 0;
+"215
+[e = . _uart_reception 3 -> -> 0 `i `uc ]
+[; ;interruptions.c: 216: uart_reception.indice++;
+"216
+[e ++ . _uart_reception 1 -> -> 1 `i `uc ]
+"217
+}
+[; ;interruptions.c: 217: }
+[e $U 491  ]
+"218
+[e :U 490 ]
+[; ;interruptions.c: 218: else
+[; ;interruptions.c: 219: {
+"219
+{
+[; ;interruptions.c: 220: uart_reception.buffer_plein = 1;
+"220
+[e = . _uart_reception 2 -> -> 1 `i `uc ]
+"221
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;interruptions.c: 221: uint8_t temp = RCREG;
+[e = _temp _RCREG ]
+"222
+}
+[e :U 491 ]
+[; ;interruptions.c: 222: }
+[; ;interruptions.c: 224: }
+"224
+[e :UE 489 ]
+}
+"226
+[v _interrupt_TX `(v ~T0 @X0 1 ef ]
+"227
+{
+[; ;interruptions.c: 226: void interrupt_TX()
+[; ;interruptions.c: 227: {
 [e :U _interrupt_TX ]
 [f ]
-[; ;interruptions.c: 221: PIR1bits.TXIF = 0;
-"221
+[; ;interruptions.c: 228: PIR1bits.TXIF = 0;
+"228
 [e = . . _PIR1bits 0 4 -> -> 0 `i `uc ]
-[; ;interruptions.c: 222: }
-"222
-[e :UE 489 ]
+[; ;interruptions.c: 229: }
+"229
+[e :UE 492 ]
 }

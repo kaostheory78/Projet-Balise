@@ -1,125 +1,29 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[p mainexit ]
-"164 system.h
-[v _init_system `(v ~T0 @X0 0 ef ]
-"1507 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[s S57 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S57 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"1517
-[s S58 :7 `uc 1 :1 `uc 1 ]
-[n S58 . . SS2 ]
-"1506
-[u S56 `S57 1 `S58 1 ]
-[n S56 . . . ]
-"1522
-[v _PORTDbits `VS56 ~T0 @X0 0 e@3971 ]
-"2110
-[s S106 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S106 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 LATC6 LATC7 ]
-"2120
-[s S107 :1 `uc 1 ]
-[n S107 . LC0 ]
-"2123
-[s S108 :1 `uc 1 :1 `uc 1 ]
-[n S108 . . LC1 ]
-"2127
-[s S109 :2 `uc 1 :1 `uc 1 ]
-[n S109 . . LC2 ]
-"2131
-[s S110 :3 `uc 1 :1 `uc 1 ]
-[n S110 . . LC3 ]
-"2135
-[s S111 :4 `uc 1 :1 `uc 1 ]
-[n S111 . . LC4 ]
-"2139
-[s S112 :5 `uc 1 :1 `uc 1 ]
-[n S112 . . LC5 ]
-"2143
-[s S113 :6 `uc 1 :1 `uc 1 ]
-[n S113 . . LC6 ]
-"2147
-[s S114 :7 `uc 1 :1 `uc 1 ]
-[n S114 . . LC7 ]
-"2109
-[u S105 `S106 1 `S107 1 `S108 1 `S109 1 `S110 1 `S111 1 `S112 1 `S113 1 `S114 1 ]
-[n S105 . . . . . . . . . . ]
-"2152
-[v _LATCbits `VS105 ~T0 @X0 0 e@3979 ]
-"1169
-[s S43 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S43 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"1179
-[s S44 :3 `uc 1 :1 `uc 1 ]
-[n S44 . . CCP2_PA2 ]
-"1168
-[u S42 `S43 1 `S44 1 ]
-[n S42 . . . ]
-"1184
-[v _PORTBbits `VS42 ~T0 @X0 0 e@3969 ]
-"86 uart.h
-[v _PutsUART `(v ~T0 @X0 0 ef2`uc`*Cuc ]
-"1239 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
-[s S46 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S46 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
-"1249
-[s S47 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S47 . T1OSO T1OSI CCP1 INT0 INT1 INT2 TX RX ]
-"1259
-[s S48 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S48 . T13CKI CCP2 . T0CKI SDA SCK CK DT ]
-"1269
-[s S49 :1 `uc 1 :1 `uc 1 ]
-[n S49 . . NOT_FLTA ]
-"1273
-[s S50 :2 `uc 1 :1 `uc 1 ]
-[n S50 . . NOT_FLTB ]
-"1277
-[s S51 :6 `uc 1 :1 `uc 1 ]
-[n S51 . . NOT_SS ]
-"1281
-[s S52 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S52 . . nFLTA nFLTB T5CKI SDI SCL nSS SDO ]
-"1291
-[s S53 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
-[n S53 . . FLTA FLTB . SS ]
-"1298
-[s S54 :2 `uc 1 :1 `uc 1 ]
-[n S54 . . PA1 ]
-"1302
-[s S55 :1 `uc 1 :1 `uc 1 ]
-[n S55 . . PA2 ]
-"1238
-[u S45 `S46 1 `S47 1 `S48 1 `S49 1 `S50 1 `S51 1 `S52 1 `S53 1 `S54 1 `S55 1 ]
-[n S45 . . . . . . . . . . . ]
-"1307
-[v _PORTCbits `VS45 ~T0 @X0 0 e@3970 ]
-"189 system.h
-[v _envoit_pwm `(v ~T0 @X0 0 ef1`d ]
-[v F4451 `(v ~T0 @X0 1 tf1`ul ]
-"161 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18.h
-[v __delay `JF4451 ~T0 @X0 0 e ]
-[p i __delay ]
+"33 triangulation.h
+[v _Cot `(d ~T0 @X0 0 ef1`d ]
+"34
+[v _saturation `(d ~T0 @X0 0 ef2`d`d ]
+"35
+[v _conversion_degre_radian `(d ~T0 @X0 0 ef1`d ]
+"38 C:\Program Files (x86)\Microchip\xc8\v1.34\include\math.h
+[v _tan `(d ~T0 @X0 0 ef1`d ]
+"37 triangulation.h
+[v _modulo_angle `(d ~T0 @X0 0 ef1`d ]
+"34 C:\Program Files (x86)\Microchip\xc8\v1.34\include\math.h
+[v _sqrt `(d ~T0 @X0 0 ef1`d ]
 "37 moteur.h
 [s S449 `uc 1 `uc 1 `uc 1 `d -> 3 `i `d -> 3 `i `ui -> 3 `i `uc 1 `c 1 ]
 [n S449 . tour_en_cours synchro_debut_tour flag_capteur angle ancien_angle position indice id_balise_mere ]
 "151 system.h
 [v _capteur `S449 ~T0 @X0 0 e ]
-"117 uart.h
-[v _PutIntUART `(v ~T0 @X0 0 ef2`uc`i ]
-"56 moteur.h
-[v _obtention_angle `(d ~T0 @X0 0 ef1`ui ]
-"40 triangulation.h
-[v _inversion_balises `(v ~T0 @X0 0 ef1`uc ]
-"38
-[v _retrouver_balise_mere `(c ~T0 @X0 0 ef ]
-"32
-[v _triangulation `(v ~T0 @X0 0 ef5`*d`*d`d`d`d ]
-"43
-[v _affichage_position `(v ~T0 @X0 0 ef2`d`d ]
-"42
-[v _check_divergence_position `(i ~T0 @X0 0 ef4`d`d`d`d ]
-"41
+"41 triangulation.h
 [v _modulo_id_balise_mere `(v ~T0 @X0 0 ef ]
+"40
+[v _inversion_balises `(v ~T0 @X0 0 ef1`uc ]
+"86 uart.h
+[v _PutsUART `(v ~T0 @X0 0 ef2`uc`*Cuc ]
+"117
+[v _PutIntUART `(v ~T0 @X0 0 ef2`uc`i ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4431.h: 49: extern volatile unsigned char DFLTCON @ 0xF60;
@@ -4492,513 +4396,551 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;system.h: 187: void init_timer_1 ();
 [; ;system.h: 189: void envoit_pwm (double valeur);
 [; ;system.h: 190: void config_pwm ();
-"20 main.c
-[p x OSC=HSPLL ]
-"22
-[p x FCMEN=OFF ]
-"23
-[p x IESO=OFF ]
-"26
-[p x PWRTEN=OFF ]
-"27
-[p x BOREN=OFF ]
-"31
-[p x WDTEN=OFF ]
-"32
-[p x WDPS=32768 ]
-"33
-[p x WINEN=OFF ]
-"36
-[p x PWMPIN=OFF ]
-"37
-[p x LPOL=HIGH ]
-"38
-[p x HPOL=HIGH ]
-"39
-[p x T1OSCMX=OFF ]
-"42
-[p x FLTAMX=RC1 ]
-"43
-[p x SSPMX=RC7 ]
-"44
-[p x PWM4MX=RB5 ]
-"45
-[p x EXCLKMX=RC3 ]
-"46
-[p x MCLRE=ON ]
-"49
-[p x STVREN=OFF ]
-"50
-[p x LVP=OFF ]
-"53
-[p x CP0=OFF ]
-"54
-[p x CP1=OFF ]
-"55
-[p x CP2=OFF ]
-"56
-[p x CP3=OFF ]
-"59
-[p x CPB=OFF ]
-"60
-[p x CPD=OFF ]
-"63
-[p x WRT0=OFF ]
-"64
-[p x WRT1=OFF ]
-"65
-[p x WRT2=OFF ]
-"66
-[p x WRT3=OFF ]
-"69
-[p x WRTC=OFF ]
-"70
-[p x WRTB=OFF ]
-"71
-[p x WRTD=OFF ]
-"74
-[p x EBTR0=OFF ]
-"75
-[p x EBTR1=OFF ]
-"76
-[p x EBTR2=OFF ]
-"77
-[p x EBTR3=OFF ]
-"80
-[p x EBTRB=OFF ]
-"83
-[v _main `(i ~T0 @X0 1 ef2`i`**uc ]
-"84
+"24 triangulation.c
+[v _triangulation `(v ~T0 @X0 1 ef5`*d`*d`d`d`d ]
+"25
 {
-[; ;main.c: 83: int main(int argc, char** argv)
-[; ;main.c: 84: {
-[e :U _main ]
-"83
-[v _argc `i ~T0 @X0 1 r1 ]
-[v _argv `**uc ~T0 @X0 1 r2 ]
-"84
+[; ;triangulation.c: 24: void triangulation (double *x, double *y, double angle1, double angle2, double angle3)
+[; ;triangulation.c: 25: {
+[e :U _triangulation ]
+"24
+[v _x `*d ~T0 @X0 1 r1 ]
+[v _y `*d ~T0 @X0 1 r2 ]
+[v _angle1 `d ~T0 @X0 1 r3 ]
+[v _angle2 `d ~T0 @X0 1 r4 ]
+[v _angle3 `d ~T0 @X0 1 r5 ]
+"25
 [f ]
-[; ;main.c: 86: init_system ();
-"86
-[e ( _init_system ..  ]
-"87
-[v _i `i ~T0 @X0 1 a ]
-[; ;main.c: 87: int i = 0;
-[e = _i -> 0 `i ]
-[; ;main.c: 89: PORTDbits.RD1 = 1;
-"89
-[e = . . _PORTDbits 0 1 -> -> 1 `i `uc ]
-[; ;main.c: 90: LATCbits.LATC2 = 1;
-"90
-[e = . . _LATCbits 0 2 -> -> 1 `i `uc ]
-[; ;main.c: 91: PORTBbits.RB0 = 1;
-"91
-[e = . . _PORTBbits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 93: PutsUART(0, "Bonjour les amis !!! =)");
-"93
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 1C ]
-[; ;main.c: 95: while(PORTCbits.RC4 == 0);
-"95
-[e $U 454  ]
-[e :U 455 ]
-[e :U 454 ]
-[e $ == -> . . _PORTCbits 0 4 `i -> 0 `i 455  ]
-[e :U 456 ]
-[; ;main.c: 96: PORTBbits.RB0= 0;
-"96
-[e = . . _PORTBbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 97: PORTBbits.RB4 =1;
-"97
-[e = . . _PORTBbits 0 4 -> -> 1 `i `uc ]
-[; ;main.c: 98: envoit_pwm(60);
-"98
-[e ( _envoit_pwm (1 -> -> 60 `i `d ]
-[; ;main.c: 101: _delay((unsigned long)((10)*(40000000/4000.0)));
-"101
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 102: _delay((unsigned long)((10)*(40000000/4000.0)));
-"102
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 103: _delay((unsigned long)((10)*(40000000/4000.0)));
-"103
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 104: _delay((unsigned long)((10)*(40000000/4000.0)));
-"104
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 105: _delay((unsigned long)((10)*(40000000/4000.0)));
-"105
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 106: _delay((unsigned long)((10)*(40000000/4000.0)));
-"106
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 107: _delay((unsigned long)((10)*(40000000/4000.0)));
-"107
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 108: _delay((unsigned long)((10)*(40000000/4000.0)));
-"108
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 109: _delay((unsigned long)((10)*(40000000/4000.0)));
-"109
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 110: _delay((unsigned long)((10)*(40000000/4000.0)));
-"110
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 111: _delay((unsigned long)((10)*(40000000/4000.0)));
-"111
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 112: _delay((unsigned long)((10)*(40000000/4000.0)));
-"112
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 113: _delay((unsigned long)((10)*(40000000/4000.0)));
-"113
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 114: _delay((unsigned long)((10)*(40000000/4000.0)));
-"114
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 115: _delay((unsigned long)((10)*(40000000/4000.0)));
-"115
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 116: _delay((unsigned long)((10)*(40000000/4000.0)));
-"116
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 117: _delay((unsigned long)((10)*(40000000/4000.0)));
-"117
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 118: _delay((unsigned long)((10)*(40000000/4000.0)));
-"118
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 119: _delay((unsigned long)((10)*(40000000/4000.0)));
-"119
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 120: _delay((unsigned long)((10)*(40000000/4000.0)));
-"120
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 121: _delay((unsigned long)((10)*(40000000/4000.0)));
-"121
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 122: _delay((unsigned long)((10)*(40000000/4000.0)));
-"122
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 123: _delay((unsigned long)((10)*(40000000/4000.0)));
-"123
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 125: while(1)
-"125
-[e :U 458 ]
-[; ;main.c: 126: {
-"126
-{
-"127
-[v F4895 `d ~T0 @X0 1 s x ]
-[v F4896 `d ~T0 @X0 1 s y ]
-[v F4897 `d ~T0 @X0 1 s ancien_x ]
-[i F4897
--> -> 0 `i `d
-]
-[v F4898 `d ~T0 @X0 1 s ancien_y ]
-[i F4898
--> -> 0 `i `d
-]
-"128
-[v F4899 `uc ~T0 @X0 1 s premiere_fois ]
-[i F4899
--> -> 1 `i `uc
-]
-[; ;main.c: 127: static double x, y, ancien_x = 0, ancien_y = 0;
-[; ;main.c: 128: static bool premiere_fois = 1;
-[; ;main.c: 130: capteur.indice = 0;
-"130
-[e = . _capteur 6 -> -> 0 `i `uc ]
-[; ;main.c: 131: capteur.synchro_debut_tour = 1;
-"131
-[e = . _capteur 1 -> -> 1 `i `uc ]
-[; ;main.c: 133: while(capteur.synchro_debut_tour == 1);
-"133
-[e $U 460  ]
-[e :U 461 ]
-[e :U 460 ]
-[e $ == -> . _capteur 1 `i -> 1 `i 461  ]
-[e :U 462 ]
-[; ;main.c: 134: while(capteur.tour_en_cours == 1);
-"134
-[e $U 463  ]
-[e :U 464 ]
-[e :U 463 ]
-[e $ == -> . _capteur 0 `i -> 1 `i 464  ]
-[e :U 465 ]
-[; ;main.c: 136: if (capteur.indice != 3)
-"136
-[e $ ! != -> . _capteur 6 `i -> 3 `i 466  ]
-[; ;main.c: 137: {
-"137
-{
-[; ;main.c: 138: PutsUART(0, "\n\nProbleme de detection de balises .... : ");
-"138
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 2C ]
-[; ;main.c: 139: PutIntUART(0, (uint16_t) capteur.indice);
-"139
-[e ( _PutIntUART (2 , -> -> 0 `i `uc -> -> . _capteur 6 `ui `i ]
-[; ;main.c: 140: PutsUART(0, " Balises detectees \n\n\n\r");
-"140
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 3C ]
-"141
-}
-[; ;main.c: 141: }
-[e $U 467  ]
-"142
-[e :U 466 ]
-[; ;main.c: 142: else
-[; ;main.c: 143: {
-"143
-{
-[; ;main.c: 144: for (i = 0; i < 3 ; i++)
-"144
-{
-[e = _i -> 0 `i ]
-[e $ < _i -> 3 `i 468  ]
-[e $U 469  ]
-"145
-[e :U 468 ]
-[; ;main.c: 145: capteur.angle[i] = obtention_angle(capteur.position[i]);
-[e = *U + &U . _capteur 3 * -> -> _i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ( _obtention_angle (1 *U + &U . _capteur 5 * -> -> _i `ui `ux -> -> # *U &U . _capteur 5 `ui `ux ]
-"144
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 3 `i 468  ]
-[e :U 469 ]
-"145
-}
-[; ;main.c: 148: inversion_balises(capteur.id_balise_mere);
-"148
-[e ( _inversion_balises (1 -> . _capteur 7 `uc ]
-[; ;main.c: 151: if (retrouver_balise_mere() == 0)
-"151
-[e $ ! == -> ( _retrouver_balise_mere ..  `i -> 0 `i 471  ]
-[; ;main.c: 152: {
-"152
-{
-[; ;main.c: 153: triangulation(&x, &y, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
-"153
-[e ( _triangulation (4 , , , , &U F4895 &U F4896 *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
-[; ;main.c: 154: affichage_position(x, y);
-"154
-[e ( _affichage_position (2 , F4895 F4896 ]
-[; ;main.c: 155: ancien_x = x;
-"155
-[e = F4897 F4895 ]
-[; ;main.c: 156: ancien_y = y;
-"156
-[e = F4898 F4896 ]
-"157
-}
-[; ;main.c: 157: }
-[e $U 472  ]
-"159
-[e :U 471 ]
-[; ;main.c: 159: else
-[; ;main.c: 160: {
-"160
-{
-"161
-[v _x_temp `d ~T0 @X0 1 a ]
-[; ;main.c: 161: double x_temp = 0, y_temp = 0;
-[e = _x_temp -> -> 0 `i `d ]
-[v _y_temp `d ~T0 @X0 1 a ]
-[e = _y_temp -> -> 0 `i `d ]
-[; ;main.c: 162: PutsUART(0, "\n\n\n\r BALISE MERE PERDUE !!!!!! \n\r");
-"162
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 4C ]
-[; ;main.c: 163: PutsUART(0, "Ancienne position connue : \n\r");
-"163
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 5C ]
-[; ;main.c: 164: affichage_position(ancien_x, ancien_y);
-"164
-[e ( _affichage_position (2 , F4897 F4898 ]
-[; ;main.c: 166: triangulation(&x_temp, &y_temp, capteur.angle[0], capteur.angle[1], capteur.angle[2]);
-"166
-[e ( _triangulation (4 , , , , &U _x_temp &U _y_temp *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
-[; ;main.c: 167: PutsUART(0, "\n\rTenative de base :  \n\r");
-"167
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 6C ]
-[; ;main.c: 168: affichage_position(x_temp, y_temp);
-"168
-[e ( _affichage_position (2 , _x_temp _y_temp ]
-[; ;main.c: 171: if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0 )
-"171
-[e $ ! == ( _check_divergence_position (4 , , , F4897 F4898 _x_temp _y_temp -> 0 `i 473  ]
-[; ;main.c: 172: {
-"172
-{
-[; ;main.c: 173: PutsUART(0, "\n\n\n\r BALISE MERE INCHANGEE !!!!!! \n\r");
-"173
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 7C ]
-[; ;main.c: 174: affichage_position(x_temp, y_temp);
-"174
-[e ( _affichage_position (2 , _x_temp _y_temp ]
-[; ;main.c: 175: ancien_x = x_temp;
-"175
-[e = F4897 _x_temp ]
-[; ;main.c: 176: ancien_y = y_temp;
-"176
-[e = F4898 _y_temp ]
-"177
-}
-[; ;main.c: 177: }
-[e $U 474  ]
-"178
-[e :U 473 ]
-[; ;main.c: 178: else
-[; ;main.c: 179: {
-"179
-{
-[; ;main.c: 180: triangulation(&x_temp, &y_temp, capteur.angle[1], capteur.angle[2], capteur.angle[0]);
-"180
-[e ( _triangulation (4 , , , , &U _x_temp &U _y_temp *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
-[; ;main.c: 181: PutsUART(0, "\n\rTenative 1 :  \n\r");
-"181
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 8C ]
-[; ;main.c: 182: affichage_position(x_temp, y_temp);
-"182
-[e ( _affichage_position (2 , _x_temp _y_temp ]
-[; ;main.c: 183: if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0 )
-"183
-[e $ ! == ( _check_divergence_position (4 , , , F4897 F4898 _x_temp _y_temp -> 0 `i 475  ]
-[; ;main.c: 184: {
-"184
-{
-[; ;main.c: 185: PutsUART(0, "\n\n\n\r BALISE MERE RETROUVEE 1 !!!!!! \n\r");
-"185
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 9C ]
-[; ;main.c: 186: affichage_position(x_temp, y_temp);
-"186
-[e ( _affichage_position (2 , _x_temp _y_temp ]
-[; ;main.c: 187: capteur.id_balise_mere ++;
-"187
-[e ++ . _capteur 7 -> -> 1 `i `c ]
-[; ;main.c: 188: modulo_id_balise_mere();
-"188
-[e ( _modulo_id_balise_mere ..  ]
-[; ;main.c: 189: ancien_x = x_temp;
-"189
-[e = F4897 _x_temp ]
-[; ;main.c: 190: ancien_y = y_temp;
-"190
-[e = F4898 _y_temp ]
-"191
-}
-[; ;main.c: 191: }
-[e $U 476  ]
-"192
-[e :U 475 ]
-[; ;main.c: 192: else
-[; ;main.c: 193: {
-"193
-{
-[; ;main.c: 194: triangulation(&x_temp, &y_temp, capteur.angle[2], capteur.angle[0], capteur.angle[1]);
-"194
-[e ( _triangulation (4 , , , , &U _x_temp &U _y_temp *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
-[; ;main.c: 195: PutsUART(0, "\n\r Tenative 2 :  \n\r");
-"195
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 10C ]
-[; ;main.c: 196: affichage_position(x_temp, y_temp);
-"196
-[e ( _affichage_position (2 , _x_temp _y_temp ]
-[; ;main.c: 197: if (check_divergence_position(ancien_x, ancien_y, x_temp, y_temp) == 0)
-"197
-[e $ ! == ( _check_divergence_position (4 , , , F4897 F4898 _x_temp _y_temp -> 0 `i 477  ]
-[; ;main.c: 198: {
-"198
-{
-[; ;main.c: 199: PutsUART(0, "\n\n\n\r BALISE MERE RETROUVEE 2 !!!!!! \n\r");
-"199
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 11C ]
-[; ;main.c: 200: affichage_position(x_temp, y_temp);
-"200
-[e ( _affichage_position (2 , _x_temp _y_temp ]
-[; ;main.c: 201: capteur.id_balise_mere --;
-"201
-[e -- . _capteur 7 -> -> 1 `i `c ]
-[; ;main.c: 202: modulo_id_balise_mere();
-"202
-[e ( _modulo_id_balise_mere ..  ]
-[; ;main.c: 203: ancien_x = x_temp;
-"203
-[e = F4897 _x_temp ]
-[; ;main.c: 204: ancien_y = y_temp;
-"204
-[e = F4898 _y_temp ]
-"205
-}
-[; ;main.c: 205: }
-[e $U 478  ]
-"206
-[e :U 477 ]
-[; ;main.c: 206: else
-[; ;main.c: 207: PutsUART(0, "\n\r/!\\/!\\ BALISE MERE NON RETROUVE  !!!!!! /!\\/!\\\n\r");
-"207
-[e ( _PutsUART (2 , -> -> 0 `i `uc :s 12C ]
-[e :U 478 ]
-"208
-}
-[e :U 476 ]
-"210
-}
-[e :U 474 ]
-"211
-}
-[e :U 472 ]
-[; ;main.c: 208: }
-[; ;main.c: 210: }
-[; ;main.c: 211: }
-[; ;main.c: 214: for (i = 0 ; i < 3 ; i++)
-"214
-{
-[e = _i -> 0 `i ]
-[e $ < _i -> 3 `i 479  ]
-[e $U 480  ]
-"215
-[e :U 479 ]
-[; ;main.c: 215: capteur.ancien_angle[i] = capteur.angle[i];
-[e = *U + &U . _capteur 4 * -> -> _i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux *U + &U . _capteur 3 * -> -> _i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
-"214
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 3 `i 479  ]
-[e :U 480 ]
-"215
-}
-"216
-}
-[e :U 467 ]
-"217
-}
-[e :U 457 ]
-"125
-[e $U 458  ]
-[e :U 459 ]
-[; ;main.c: 216: }
-[; ;main.c: 217: }
-[; ;main.c: 255: while(1);
-"255
-[e :U 483 ]
-[e :U 482 ]
-[e $U 483  ]
-[e :U 484 ]
-[; ;main.c: 259: return (0);
-"259
-[e ) -> 0 `i ]
-[e $UE 453  ]
-[; ;main.c: 260: }
-"260
+"26
+[v _x1 `Cd ~T0 @X0 1 a ]
+[; ;triangulation.c: 26: const double x1 = 2062., y1 = 3062., x2 = -62., y2 = 3062., x3 = 1000., y3 = -62.;
+[e = _x1 .2062. ]
+[v _y1 `Cd ~T0 @X0 1 a ]
+[e = _y1 .3062. ]
+[v _x2 `Cd ~T0 @X0 1 a ]
+[e = _x2 -U .62. ]
+[v _y2 `Cd ~T0 @X0 1 a ]
+[e = _y2 .3062. ]
+[v _x3 `Cd ~T0 @X0 1 a ]
+[e = _x3 .1000. ]
+[v _y3 `Cd ~T0 @X0 1 a ]
+[e = _y3 -U .62. ]
+"28
+[v _cot_12 `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 28: double cot_12 = Cot( angle2 - angle1 ) ;
+[e = _cot_12 ( _Cot (1 - _angle2 _angle1 ]
+"29
+[v _cot_23 `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 29: double cot_23 = Cot( angle3 - angle2 ) ;
+[e = _cot_23 ( _Cot (1 - _angle3 _angle2 ]
+[; ;triangulation.c: 30: cot_12 = saturation( cot_12 , 100000000 ) ;
+"30
+[e = _cot_12 ( _saturation (2 , _cot_12 -> -> 100000000 `l `d ]
+[; ;triangulation.c: 31: cot_23 = saturation( cot_23 , 100000000 ) ;
+"31
+[e = _cot_23 ( _saturation (2 , _cot_23 -> -> 100000000 `l `d ]
+"32
+[v _cot_31 `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 32: double cot_31 = ( 1.0 - cot_12 * cot_23 ) / ( cot_12 + cot_23 ) ;
+[e = _cot_31 / - .1.0 * _cot_12 _cot_23 + _cot_12 _cot_23 ]
+[; ;triangulation.c: 33: cot_31 = saturation( cot_31 , 100000000 ) ;
+"33
+[e = _cot_31 ( _saturation (2 , _cot_31 -> -> 100000000 `l `d ]
+"34
+[v _x1_ `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 34: double x1_ = x1 - x2 , y1_ = y1 - y2 , x3_ = x3 - x2 , y3_ = y3 - y2 ;
+[e = _x1_ - _x1 _x2 ]
+[v _y1_ `d ~T0 @X0 1 a ]
+[e = _y1_ - _y1 _y2 ]
+[v _x3_ `d ~T0 @X0 1 a ]
+[e = _x3_ - _x3 _x2 ]
+[v _y3_ `d ~T0 @X0 1 a ]
+[e = _y3_ - _y3 _y2 ]
+"35
+[v _c12x `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 35: double c12x = x1_ + cot_12 * y1_ ;
+[e = _c12x + _x1_ * _cot_12 _y1_ ]
+"36
+[v _c12y `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 36: double c12y = y1_ - cot_12 * x1_ ;
+[e = _c12y - _y1_ * _cot_12 _x1_ ]
+"38
+[v _c23x `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 38: double c23x = x3_ - cot_23 * y3_ ;
+[e = _c23x - _x3_ * _cot_23 _y3_ ]
+"39
+[v _c23y `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 39: double c23y = y3_ + cot_23 * x3_ ;
+[e = _c23y + _y3_ * _cot_23 _x3_ ]
+"41
+[v _c31x `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 41: double c31x = (x3_ + x1_) + cot_31 * (y3_ - y1_) ;
+[e = _c31x + + _x3_ _x1_ * _cot_31 - _y3_ _y1_ ]
+"42
+[v _c31y `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 42: double c31y = (y3_ + y1_) - cot_31 * (x3_ - x1_) ;
+[e = _c31y - + _y3_ _y1_ * _cot_31 - _x3_ _x1_ ]
+"43
+[v _k31 `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 43: double k31 = (x3_ * x1_) + (y3_ * y1_) + cot_31 * ( (y3_ * x1_) - (x3_ * y1_) ) ;
+[e = _k31 + + * _x3_ _x1_ * _y3_ _y1_ * _cot_31 - * _y3_ _x1_ * _x3_ _y1_ ]
+"45
+[v _D `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 45: double D = (c12x - c23x) * (c23y - c31y) - (c23x - c31x) * (c12y - c23y) ;
+[e = _D - * - _c12x _c23x - _c23y _c31y * - _c23x _c31x - _c12y _c23y ]
+"46
+[v _invD `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 46: double invD = 1.0 / D ;
+[e = _invD / .1.0 _D ]
+"47
+[v _K `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 47: double K = k31 * invD ;
+[e = _K * _k31 _invD ]
+[; ;triangulation.c: 49: *x = K * (c12y - c23y) + x2 ;
+"49
+[e = *U _x + * _K - _c12y _c23y _x2 ]
+[; ;triangulation.c: 50: *y = K * (c23x - c12x) + y2 ;
+"50
+[e = *U _y + * _K - _c23x _c12x _y2 ]
+[; ;triangulation.c: 52: }
+"52
 [e :UE 453 ]
 }
-[a 1C 66 111 110 106 111 117 114 32 108 101 115 32 97 109 105 115 32 33 33 33 32 61 41 0 ]
-[a 2C 10 10 80 114 111 98 108 101 109 101 32 100 101 32 100 101 116 101 99 116 105 111 110 32 100 101 32 98 97 108 105 115 101 115 32 46 46 46 46 32 58 32 0 ]
-[a 12C 10 13 47 33 92 47 33 92 32 66 65 76 73 83 69 32 77 69 82 69 32 78 79 78 32 82 69 84 82 79 85 86 69 32 32 33 33 33 33 33 33 32 47 33 92 47 33 92 10 13 0 ]
-[a 5C 65 110 99 105 101 110 110 101 32 112 111 115 105 116 105 111 110 32 99 111 110 110 117 101 32 58 32 10 13 0 ]
-[a 4C 10 10 10 13 32 66 65 76 73 83 69 32 77 69 82 69 32 80 69 82 68 85 69 32 33 33 33 33 33 33 32 10 13 0 ]
-[a 7C 10 10 10 13 32 66 65 76 73 83 69 32 77 69 82 69 32 73 78 67 72 65 78 71 69 69 32 33 33 33 33 33 33 32 10 13 0 ]
-[a 11C 10 10 10 13 32 66 65 76 73 83 69 32 77 69 82 69 32 82 69 84 82 79 85 86 69 69 32 50 32 33 33 33 33 33 33 32 10 13 0 ]
-[a 9C 10 10 10 13 32 66 65 76 73 83 69 32 77 69 82 69 32 82 69 84 82 79 85 86 69 69 32 49 32 33 33 33 33 33 33 32 10 13 0 ]
-[a 6C 10 13 84 101 110 97 116 105 118 101 32 100 101 32 98 97 115 101 32 58 32 32 10 13 0 ]
-[a 10C 10 13 32 84 101 110 97 116 105 118 101 32 50 32 58 32 32 10 13 0 ]
-[a 8C 10 13 84 101 110 97 116 105 118 101 32 49 32 58 32 32 10 13 0 ]
-[a 3C 32 66 97 108 105 115 101 115 32 100 101 116 101 99 116 101 101 115 32 10 10 10 13 0 ]
+"54
+[v _Cot `(d ~T0 @X0 1 ef1`d ]
+"55
+{
+[; ;triangulation.c: 54: double Cot (double angle)
+[; ;triangulation.c: 55: {
+[e :U _Cot ]
+"54
+[v _angle `d ~T0 @X0 1 r1 ]
+"55
+[f ]
+[; ;triangulation.c: 56: angle = conversion_degre_radian(angle);
+"56
+[e = _angle ( _conversion_degre_radian (1 _angle ]
+[; ;triangulation.c: 57: return (1 / tan(angle));
+"57
+[e ) / -> -> 1 `i `d ( _tan (1 _angle ]
+[e $UE 454  ]
+[; ;triangulation.c: 58: }
+"58
+[e :UE 454 ]
+}
+"61
+[v _saturation `(d ~T0 @X0 1 ef2`d`d ]
+"62
+{
+[; ;triangulation.c: 61: double saturation (double valeur, double maximum)
+[; ;triangulation.c: 62: {
+[e :U _saturation ]
+"61
+[v _valeur `d ~T0 @X0 1 r1 ]
+[v _maximum `d ~T0 @X0 1 r2 ]
+"62
+[f ]
+[; ;triangulation.c: 63: if (valeur > maximum)
+"63
+[e $ ! > _valeur _maximum 456  ]
+[; ;triangulation.c: 64: valeur = maximum;
+"64
+[e = _valeur _maximum ]
+[e $U 457  ]
+"65
+[e :U 456 ]
+[; ;triangulation.c: 65: else if (valeur < -maximum)
+[e $ ! < _valeur -U _maximum 458  ]
+[; ;triangulation.c: 66: valeur = -maximum;
+"66
+[e = _valeur -U _maximum ]
+[e :U 458 ]
+"67
+[e :U 457 ]
+[; ;triangulation.c: 67: return valeur;
+[e ) _valeur ]
+[e $UE 455  ]
+[; ;triangulation.c: 68: }
+"68
+[e :UE 455 ]
+}
+"70
+[v _conversion_degre_radian `(d ~T0 @X0 1 ef1`d ]
+"71
+{
+[; ;triangulation.c: 70: double conversion_degre_radian (double angle)
+[; ;triangulation.c: 71: {
+[e :U _conversion_degre_radian ]
+"70
+[v _angle `d ~T0 @X0 1 r1 ]
+"71
+[f ]
+[; ;triangulation.c: 72: return ((angle / 180.) * 3.14159265);
+"72
+[e ) * / _angle .180. .3.14159265 ]
+[e $UE 459  ]
+[; ;triangulation.c: 73: }
+"73
+[e :UE 459 ]
+}
+"75
+[v _check_divergence_angle `(c ~T0 @X0 1 ef2`d`d ]
+"76
+{
+[; ;triangulation.c: 75: int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle )
+[; ;triangulation.c: 76: {
+[e :U _check_divergence_angle ]
+"75
+[v _ancien_angle `d ~T0 @X0 1 r1 ]
+[v _nouvel_angle `d ~T0 @X0 1 r2 ]
+"76
+[f ]
+"77
+[v _derive `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 77: double derive = modulo_angle(nouvel_angle - ancien_angle);
+[e = _derive ( _modulo_angle (1 - _nouvel_angle _ancien_angle ]
+[; ;triangulation.c: 79: if (derive < -20. && derive < 0.)
+"79
+[e $ ! && < _derive -U .20. < _derive .0. 461  ]
+[; ;triangulation.c: 80: {
+"80
+{
+[; ;triangulation.c: 81: return -1;
+"81
+[e ) -> -U -> 1 `i `c ]
+[e $UE 460  ]
+"82
+}
+[; ;triangulation.c: 82: }
+[e $U 462  ]
+"83
+[e :U 461 ]
+[; ;triangulation.c: 83: else if (derive > 20. && derive > 0.)
+[e $ ! && > _derive .20. > _derive .0. 463  ]
+[; ;triangulation.c: 84: {
+"84
+{
+[; ;triangulation.c: 85: return 1;
+"85
+[e ) -> -> 1 `i `c ]
+[e $UE 460  ]
+"86
+}
+[; ;triangulation.c: 86: }
+[e $U 464  ]
+"87
+[e :U 463 ]
+[; ;triangulation.c: 87: else
+[; ;triangulation.c: 88: return 0;
+"88
+[e ) -> -> 0 `i `c ]
+[e $UE 460  ]
+[e :U 464 ]
+[e :U 462 ]
+[; ;triangulation.c: 90: }
+"90
+[e :UE 460 ]
+}
+"92
+[v _check_divergence_position `(i ~T0 @X0 1 ef4`d`d`d`d ]
+"93
+{
+[; ;triangulation.c: 92: check_divergence_position (double ancien_x, double ancien_y, double x, double y)
+[; ;triangulation.c: 93: {
+[e :U _check_divergence_position ]
+"92
+[v _ancien_x `d ~T0 @X0 1 r1 ]
+[v _ancien_y `d ~T0 @X0 1 r2 ]
+[v _x `d ~T0 @X0 1 r3 ]
+[v _y `d ~T0 @X0 1 r4 ]
+"93
+[f ]
+"94
+[v _delta_x `d ~T0 @X0 1 a ]
+[v _delta_y `d ~T0 @X0 1 a ]
+[v _distance `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 94: double delta_x, delta_y, distance;
+[; ;triangulation.c: 96: delta_x = ancien_x - x;
+"96
+[e = _delta_x - _ancien_x _x ]
+[; ;triangulation.c: 97: delta_y = ancien_y - y;
+"97
+[e = _delta_y - _ancien_y _y ]
+[; ;triangulation.c: 98: distance = sqrt (delta_x * delta_x + delta_y * delta_y);
+"98
+[e = _distance ( _sqrt (1 + * _delta_x _delta_x * _delta_y _delta_y ]
+[; ;triangulation.c: 100: if (distance < 200.)
+"100
+[e $ ! < _distance .200. 466  ]
+[; ;triangulation.c: 101: return 0;
+"101
+[e ) -> 0 `i ]
+[e $UE 465  ]
+[e $U 467  ]
+"102
+[e :U 466 ]
+[; ;triangulation.c: 102: else
+[; ;triangulation.c: 103: return -1;
+"103
+[e ) -U -> 1 `i ]
+[e $UE 465  ]
+[e :U 467 ]
+[; ;triangulation.c: 104: }
+"104
+[e :UE 465 ]
+}
+"106
+[v _retrouver_balise_mere `(c ~T0 @X0 1 ef ]
+"107
+{
+[; ;triangulation.c: 106: int8_t retrouver_balise_mere ()
+[; ;triangulation.c: 107: {
+[e :U _retrouver_balise_mere ]
+[f ]
+[; ;triangulation.c: 108: if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[0]) != 0)
+"108
+[e $ ! != -> ( _check_divergence_angle (2 , *U + &U . _capteur 4 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux `i -> 0 `i 469  ]
+[; ;triangulation.c: 109: {
+"109
+{
+[; ;triangulation.c: 110: if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[1]) == 0)
+"110
+[e $ ! == -> ( _check_divergence_angle (2 , *U + &U . _capteur 4 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux `i -> 0 `i 470  ]
+[; ;triangulation.c: 111: {
+"111
+{
+[; ;triangulation.c: 112: capteur.id_balise_mere ++;
+"112
+[e ++ . _capteur 7 -> -> 1 `i `c ]
+[; ;triangulation.c: 113: modulo_id_balise_mere();
+"113
+[e ( _modulo_id_balise_mere ..  ]
+[; ;triangulation.c: 114: inversion_balises(1);
+"114
+[e ( _inversion_balises (1 -> -> 1 `i `uc ]
+[; ;triangulation.c: 116: PutsUART(0, "\n\r ROTATION A GAUCHE \n\r");
+"116
+[e ( _PutsUART (2 , -> -> 0 `i `uc :s 1C ]
+[; ;triangulation.c: 117: return 0;
+"117
+[e ) -> -> 0 `i `c ]
+[e $UE 468  ]
+"119
+}
+[; ;triangulation.c: 119: }
+[e $U 471  ]
+"120
+[e :U 470 ]
+[; ;triangulation.c: 120: else if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[2]) == 0)
+[e $ ! == -> ( _check_divergence_angle (2 , *U + &U . _capteur 4 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux `i -> 0 `i 472  ]
+[; ;triangulation.c: 121: {
+"121
+{
+[; ;triangulation.c: 122: capteur.id_balise_mere --;
+"122
+[e -- . _capteur 7 -> -> 1 `i `c ]
+[; ;triangulation.c: 123: modulo_id_balise_mere();
+"123
+[e ( _modulo_id_balise_mere ..  ]
+[; ;triangulation.c: 124: inversion_balises(2);
+"124
+[e ( _inversion_balises (1 -> -> 2 `i `uc ]
+[; ;triangulation.c: 125: PutsUART(0, "\n\r ROTATION A DROITE \n\r");
+"125
+[e ( _PutsUART (2 , -> -> 0 `i `uc :s 2C ]
+[; ;triangulation.c: 126: return 0;
+"126
+[e ) -> -> 0 `i `c ]
+[e $UE 468  ]
+"127
+}
+[; ;triangulation.c: 127: }
+[e $U 473  ]
+"128
+[e :U 472 ]
+[; ;triangulation.c: 128: else
+[; ;triangulation.c: 129: return -1;
+"129
+[e ) -> -U -> 1 `i `c ]
+[e $UE 468  ]
+[e :U 473 ]
+[e :U 471 ]
+"130
+}
+[; ;triangulation.c: 130: }
+[e $U 474  ]
+"131
+[e :U 469 ]
+[; ;triangulation.c: 131: else
+[; ;triangulation.c: 132: return 0;
+"132
+[e ) -> -> 0 `i `c ]
+[e $UE 468  ]
+[e :U 474 ]
+[; ;triangulation.c: 133: }
+"133
+[e :UE 468 ]
+}
+"135
+[v _modulo_angle `(d ~T0 @X0 1 ef1`d ]
+"136
+{
+[; ;triangulation.c: 135: double modulo_angle (double angle)
+[; ;triangulation.c: 136: {
+[e :U _modulo_angle ]
+"135
+[v _angle `d ~T0 @X0 1 r1 ]
+"136
+[f ]
+[; ;triangulation.c: 137: if (angle < -180.)
+"137
+[e $ ! < _angle -U .180. 476  ]
+[; ;triangulation.c: 138: angle+= 360.;
+"138
+[e =+ _angle .360. ]
+[e $U 477  ]
+"139
+[e :U 476 ]
+[; ;triangulation.c: 139: else if (angle > 180.)
+[e $ ! > _angle .180. 478  ]
+[; ;triangulation.c: 140: angle -= 360.;
+"140
+[e =- _angle .360. ]
+[e :U 478 ]
+"142
+[e :U 477 ]
+[; ;triangulation.c: 142: return angle;
+[e ) _angle ]
+[e $UE 475  ]
+[; ;triangulation.c: 143: }
+"143
+[e :UE 475 ]
+}
+"145
+[v _inversion_balises `(v ~T0 @X0 1 ef1`uc ]
+"146
+{
+[; ;triangulation.c: 145: void inversion_balises(uint8_t id_balise_mere)
+[; ;triangulation.c: 146: {
+[e :U _inversion_balises ]
+"145
+[v _id_balise_mere `uc ~T0 @X0 1 r1 ]
+"146
+[f ]
+"147
+[v _temp `d ~T0 @X0 1 a ]
+[; ;triangulation.c: 147: double temp;
+[; ;triangulation.c: 148: if (id_balise_mere == 1)
+"148
+[e $ ! == -> _id_balise_mere `i -> 1 `i 480  ]
+[; ;triangulation.c: 149: {
+"149
+{
+[; ;triangulation.c: 150: temp = capteur.angle[0];
+"150
+[e = _temp *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
+[; ;triangulation.c: 151: capteur.angle[0] = capteur.angle[1];
+"151
+[e = *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
+[; ;triangulation.c: 152: capteur.angle[1] = capteur.angle[2];
+"152
+[e = *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
+[; ;triangulation.c: 153: capteur.angle[2] = temp;
+"153
+[e = *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux _temp ]
+"154
+}
+[; ;triangulation.c: 154: }
+[e $U 481  ]
+"155
+[e :U 480 ]
+[; ;triangulation.c: 155: else if (id_balise_mere == 2)
+[e $ ! == -> _id_balise_mere `i -> 2 `i 482  ]
+[; ;triangulation.c: 156: {
+"156
+{
+[; ;triangulation.c: 157: temp = capteur.angle[0];
+"157
+[e = _temp *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
+[; ;triangulation.c: 158: capteur.angle[0] = capteur.angle[2];
+"158
+[e = *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
+[; ;triangulation.c: 159: capteur.angle[2] = capteur.angle[1];
+"159
+[e = *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux ]
+[; ;triangulation.c: 160: capteur.angle[1] = temp;
+"160
+[e = *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux _temp ]
+"161
+}
+[e :U 482 ]
+"162
+[e :U 481 ]
+[; ;triangulation.c: 161: }
+[; ;triangulation.c: 162: }
+[e :UE 479 ]
+}
+"164
+[v _modulo_id_balise_mere `(v ~T0 @X0 1 ef ]
+"165
+{
+[; ;triangulation.c: 164: void modulo_id_balise_mere ()
+[; ;triangulation.c: 165: {
+[e :U _modulo_id_balise_mere ]
+[f ]
+[; ;triangulation.c: 166: if (capteur.id_balise_mere == 3)
+"166
+[e $ ! == -> . _capteur 7 `i -> 3 `i 484  ]
+[; ;triangulation.c: 167: capteur.id_balise_mere = 0;
+"167
+[e = . _capteur 7 -> -> 0 `i `c ]
+[e $U 485  ]
+"168
+[e :U 484 ]
+[; ;triangulation.c: 168: else if (capteur.id_balise_mere == -1)
+[e $ ! == -> . _capteur 7 `i -U -> 1 `i 486  ]
+[; ;triangulation.c: 169: capteur.id_balise_mere = 2;
+"169
+[e = . _capteur 7 -> -> 2 `i `c ]
+[e :U 486 ]
+"170
+[e :U 485 ]
+[; ;triangulation.c: 170: }
+[e :UE 483 ]
+}
+"172
+[v _affichage_position `(v ~T0 @X0 1 ef2`d`d ]
+"173
+{
+[; ;triangulation.c: 172: void affichage_position (double x, double y)
+[; ;triangulation.c: 173: {
+[e :U _affichage_position ]
+"172
+[v _x `d ~T0 @X0 1 r1 ]
+[v _y `d ~T0 @X0 1 r2 ]
+"173
+[f ]
+[; ;triangulation.c: 174: PutsUART(0, "Position : X : ");
+"174
+[e ( _PutsUART (2 , -> -> 0 `i `uc :s 3C ]
+[; ;triangulation.c: 175: PutIntUART(0, (int16_t) x);
+"175
+[e ( _PutIntUART (2 , -> -> 0 `i `uc -> _x `i ]
+[; ;triangulation.c: 176: PutsUART(0, " Y : ");
+"176
+[e ( _PutsUART (2 , -> -> 0 `i `uc :s 4C ]
+[; ;triangulation.c: 177: PutIntUART(0, (int16_t) y);
+"177
+[e ( _PutIntUART (2 , -> -> 0 `i `uc -> _y `i ]
+[; ;triangulation.c: 178: PutsUART(0, "\r");
+"178
+[e ( _PutsUART (2 , -> -> 0 `i `uc :s 5C ]
+[; ;triangulation.c: 179: }
+"179
+[e :UE 487 ]
+}
+[a 4C 32 89 32 58 32 0 ]
+[a 3C 80 111 115 105 116 105 111 110 32 58 32 88 32 58 32 0 ]
+[a 2C 10 13 32 82 79 84 65 84 73 79 78 32 65 32 68 82 79 73 84 69 32 10 13 0 ]
+[a 1C 10 13 32 82 79 84 65 84 73 79 78 32 65 32 71 65 85 67 72 69 32 10 13 0 ]
+[a 5C 13 0 ]

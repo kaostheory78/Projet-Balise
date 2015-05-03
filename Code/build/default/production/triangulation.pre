@@ -1,5 +1,5 @@
 
-# 1 "interruptions.c"
+# 1 "triangulation.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.34\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -5958,176 +5958,160 @@ void init_timer_1 ();
 void envoit_pwm (double valeur);
 void config_pwm ();
 
-# 20 "interruptions.c"
-uint8_t flag_cpateur;
+# 24 "triangulation.c"
+void triangulation (double *x, double *y, double angle1, double angle2, double angle3)
+{
+const double x1 = 2062., y1 = 3062., x2 = -62., y2 = 3062., x3 = 1000., y3 = -62.;
 
-# 27
-void interrupt high_isr(void)
-{
-subroutine_interruptions(0b1);
-}
+double cot_12 = Cot( angle2 - angle1 ) ;
+double cot_23 = Cot( angle3 - angle2 ) ;
+cot_12 = saturation( cot_12 , 100000000 ) ;
+cot_23 = saturation( cot_23 , 100000000 ) ;
+double cot_31 = ( 1.0 - cot_12 * cot_23 ) / ( cot_12 + cot_23 ) ;
+cot_31 = saturation( cot_31 , 100000000 ) ;
+double x1_ = x1 - x2 , y1_ = y1 - y2 , x3_ = x3 - x2 , y3_ = y3 - y2 ;
+double c12x = x1_ + cot_12 * y1_ ;
+double c12y = y1_ - cot_12 * x1_ ;
 
+double c23x = x3_ - cot_23 * y3_ ;
+double c23y = y3_ + cot_23 * x3_ ;
 
-void low_priority interrupt low_isr(void)
-{
-subroutine_interruptions(0b0);
-}
+double c31x = (x3_ + x1_) + cot_31 * (y3_ - y1_) ;
+double c31y = (y3_ + y1_) - cot_31 * (x3_ - x1_) ;
+double k31 = (x3_ * x1_) + (y3_ * y1_) + cot_31 * ( (y3_ * x1_) - (x3_ * y1_) ) ;
 
-# 43
-void subroutine_interruptions (bool priorite)
-{
-if ( PIR3bits.IC2QEIF == 1 && 0b1 == 1 && priorite == 0b1)
-{
-interruption_QEI();
-}
-else if ( PIR3bits.IC3DRIF == 1 && 0b0 == 1 && priorite == 0b1)
-{
-interuption_QEI_sens();
-}
-else if ( INTCONbits.TMR0IF == 1 && 0b0 == 1 && priorite == 0b1)
-{
-interruption_timer0();
-}
-else if ( PIR1bits.TMR1IF == 1 && 0b1 == 1 && priorite == 0b1)
-{
-interruption_timer1();
-}
-else if ( PIR1bits.TMR2IF == 1 && 0b0 == 1 && priorite == 0b0)
-{
-interruption_timer2();
-}
-else if (INTCONbits.INT0IF == 1 && 0b1 == 1 && priorite == 0b1)
-{
-interruption_INT0();
-}
+double D = (c12x - c23x) * (c23y - c31y) - (c23x - c31x) * (c12y - c23y) ;
+double invD = 1.0 / D ;
+double K = k31 * invD ;
 
-# 85
-else if ( PIR1bits.RCIF == 1 && 0b1 == 1 && priorite == 0b1)
-{
-interrupt_RX();
-}
-else if (PIR1bits.TXIF == 1 && 0b0 == 1 && priorite == 0b0)
-{
-interrupt_TX();
-}
+*x = K * (c12y - c23y) + x2 ;
+*y = K * (c23x - c12x) + y2 ;
 
 }
 
-# 104
-void interruption_timer0 ()
+double Cot (double angle)
 {
-INTCONbits.TMR0IF = 0;
-TMR0L = 131;
-
-
+angle = conversion_degre_radian(angle);
+return (1 / tan(angle));
 }
 
-void interruption_timer1()
-{
-PIR1bits.TMR1IF = 0;
-TMR1 = 65535 - 810;
 
-if (uart_logiciel.transmission_en_cours == 1)
+double saturation (double valeur, double maximum)
 {
-PORTCbits.RC5 = uart_logiciel.buffer_uart[uart_logiciel.indice];
-uart_logiciel.indice++;
+if (valeur > maximum)
+valeur = maximum;
+else if (valeur < -maximum)
+valeur = -maximum;
+return valeur;
+}
 
-if (uart_logiciel.indice > 10)
-uart_logiciel.transmission_en_cours = 0;
+double conversion_degre_radian (double angle)
+{
+return ((angle / 180.) * 3.14159265);
+}
+
+int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle )
+{
+double derive = modulo_angle(nouvel_angle - ancien_angle);
+
+if (derive < -20. && derive < 0.)
+{
+return -1;
+}
+else if (derive > 20. && derive > 0.)
+{
+return 1;
 }
 else
-PORTCbits.RC5 = 1;
+return 0;
+
 }
 
-void interruption_timer2()
+check_divergence_position (double ancien_x, double ancien_y, double x, double y)
 {
-PIR1bits.TMR2IF = 0;
+double delta_x, delta_y, distance;
+
+delta_x = ancien_x - x;
+delta_y = ancien_y - y;
+distance = sqrt (delta_x * delta_x + delta_y * delta_y);
+
+if (distance < 200.)
+return 0;
+else
+return -1;
 }
 
-void interruption_timer5()
+int8_t retrouver_balise_mere ()
 {
-PIR3bits.TMR5IF = 0;
+if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[0]) != 0)
+{
+if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[1]) == 0)
+{
+capteur.id_balise_mere ++;
+modulo_id_balise_mere();
+inversion_balises(1);
+
+PutsUART(0, "\n\r ROTATION A GAUCHE \n\r");
+return 0;
+
 }
-
-
-
-void interruption_INT0()
+else if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[2]) == 0)
 {
-if (capteur.tour_en_cours == 1)
-{
-if (capteur.indice < 3)
-{
-capteur.position[capteur.indice++] = POSCNTH * 256 + POSCNTL;
+capteur.id_balise_mere --;
+modulo_id_balise_mere();
+inversion_balises(2);
+PutsUART(0, "\n\r ROTATION A DROITE \n\r");
+return 0;
 }
 else
-capteur.indice++;
-}
-INTCONbits.INT0IF = 0;
-
-}
-
-void interruption_INT1()
-{
-INTCON3bits.INT1IF = 0;
-}
-
-void interruption_INT2()
-{
-INTCON3bits.INT2IF = 0;
-}
-
-
-
-void interruption_QEI()
-{
-PIR3bits.IC2QEIF = 0;
-QEICONbits.QERR = 0;
-
-if (capteur.synchro_debut_tour == 1)
-{
-capteur.tour_en_cours = 1;
-capteur.synchro_debut_tour = 0;
+return -1;
 }
 else
-capteur.tour_en_cours = 0;
-
-# 191
+return 0;
 }
 
-void interuption_QEI_sens()
+double modulo_angle (double angle)
 {
-PIR3bits.IC3DRIF = 0;
+if (angle < -180.)
+angle+= 360.;
+else if (angle > 180.)
+angle -= 360.;
+
+return angle;
 }
 
-
-
-void interrupt_ADC ()
+void inversion_balises(uint8_t id_balise_mere)
 {
-PIR1bits.ADIF = 0;
+double temp;
+if (id_balise_mere == 1)
+{
+temp = capteur.angle[0];
+capteur.angle[0] = capteur.angle[1];
+capteur.angle[1] = capteur.angle[2];
+capteur.angle[2] = temp;
+}
+else if (id_balise_mere == 2)
+{
+temp = capteur.angle[0];
+capteur.angle[0] = capteur.angle[2];
+capteur.angle[2] = capteur.angle[1];
+capteur.angle[1] = temp;
+}
 }
 
-
-
-void interrupt_RX()
+void modulo_id_balise_mere ()
 {
-PIR1bits.RCIF = 0;
-PORTBbits.RB0 = 1;
-
-if (uart_reception.indice < 100)
-{
-uart_reception.buffer_reeption[uart_reception.indice] = RCREG;
-uart_reception.buffer_vide = 0;
-uart_reception.indice++;
-}
-else
-{
-uart_reception.buffer_plein = 1;
-uint8_t temp = RCREG;
+if (capteur.id_balise_mere == 3)
+capteur.id_balise_mere = 0;
+else if (capteur.id_balise_mere == -1)
+capteur.id_balise_mere = 2;
 }
 
-}
-
-void interrupt_TX()
+void affichage_position (double x, double y)
 {
-PIR1bits.TXIF = 0;
+PutsUART(0, "Position : X : ");
+PutIntUART(0, (int16_t) x);
+PutsUART(0, " Y : ");
+PutIntUART(0, (int16_t) y);
+PutsUART(0, "\r");
 }

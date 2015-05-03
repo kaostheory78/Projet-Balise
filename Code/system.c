@@ -32,8 +32,7 @@ void init_system (void)
     config_QEI();
     reglage_PID();
 
-    flag_cpateur = 0;
-    capteur.tour_fini = false;
+    init_capteur();
 }
 
 

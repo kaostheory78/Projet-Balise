@@ -5868,10 +5868,24 @@ int32_t ecart;
 double angle;
 }_position;
 
-# 40
+typedef struct
+{
+bool tour_en_cours;
+bool synchro_debut_tour;
+bool flag_capteur;
+double angle[3];
+double ancien_angle[3];
+uint16_t position[3];
+uint8_t indice;
+int8_t id_balise_mere;
+}_capteur;
+
+# 52
 void config_QEI ();
 void get_valeur_codeur (void);
 void conversion_angle ();
+void init_capteur();
+double obtention_angle (uint16_t position);
 
 # 46 "asserv.h"
 typedef struct
@@ -5902,24 +5916,39 @@ void reglage_PID (void);
 void saturation_erreur_integralle_vitesse (void);
 void ecretage_consignes(double *commande);
 
-# 142 "system.h"
+# 32 "triangulation.h"
+void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
+double Cot (double angle);
+double saturation (double valeur, double maximum);
+double conversion_degre_radian (double angle);
+
+double modulo_angle (double angle);
+int8_t retrouver_balise_mere ();
+int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
+void inversion_balises(uint8_t id_balise_mere);
+void modulo_id_balise_mere ();
+check_divergence_position (double ancien_x, double ancien_y, double x, double y);
+void affichage_position (double x, double y);
+
+# 145 "system.h"
 extern _buf uart_logiciel;
 extern _uart_recption uart_reception;
 extern _position position;
 extern int8_t OVERFLOW_CODEUR;
 
 extern uint8_t flag_cpateur;
+extern _capteur capteur;
 
-# 160
+# 164
 void init_system (void);
 
-# 166
+# 170
 void init_clock(void);
 
-# 173
+# 177
 void ConfigInterrupt (void);
 
-# 179
+# 183
 void ConfigPorts (void);
 
 
@@ -6000,7 +6029,7 @@ void mesure_vitesse (void)
 get_valeur_codeur();
 
 VITESSE.actuelle = position.ecart;
-VITESSE.actuelle /= ((4 * 2000) );
+VITESSE.actuelle /= (((4 * 2000) - 1) );
 VITESSE.actuelle *= 1000;
 conversion_angle();
 }
