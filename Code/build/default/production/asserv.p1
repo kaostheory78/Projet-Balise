@@ -1,27 +1,4 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"47 asserv.h
-[s S450 `d 1 `d 1 `d 1 ]
-[n S450 . KP KI KD ]
-"54
-[s S451 `d 1 `d 1 ]
-[n S451 . consigne actuelle ]
-"60
-[s S452 `d 1 `d 1 `d 1 ]
-[n S452 . actuelle integralle precedente ]
-"42 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
-"189 system.h
-[v _envoit_pwm `(v ~T0 @X0 0 ef1`d ]
-"53 moteur.h
-[v _get_valeur_codeur `(v ~T0 @X0 0 ef ]
-"29
-[s S448 `ui 1 `ui 1 `l 1 `d 1 ]
-[n S448 . ancien nouvelle ecart angle ]
-"147 system.h
-[v _position `S448 ~T0 @X0 0 e ]
-"54 moteur.h
-[v _conversion_angle `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4431.h: 49: extern volatile unsigned char DFLTCON @ 0xF60;
@@ -4323,273 +4300,57 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interruptions.h: 91: void interrupt_ADC ();
 [; ;interruptions.h: 98: void interrupt_RX();
 [; ;interruptions.h: 103: void interrupt_TX();
-[; ;moteur.h: 28: typedef struct
-[; ;moteur.h: 29: {
-[; ;moteur.h: 30: uint16_t ancien;
-[; ;moteur.h: 31: uint16_t nouvelle;
-[; ;moteur.h: 32: int32_t ecart;
-[; ;moteur.h: 33: double angle;
-[; ;moteur.h: 34: }_position;
-[; ;moteur.h: 36: typedef struct
-[; ;moteur.h: 37: {
-[; ;moteur.h: 38: bool tour_en_cours;
-[; ;moteur.h: 39: bool synchro_debut_tour;
-[; ;moteur.h: 40: bool flag_capteur;
-[; ;moteur.h: 41: double angle[3];
-[; ;moteur.h: 42: double ancien_angle[3];
-[; ;moteur.h: 43: uint16_t position[3];
-[; ;moteur.h: 44: uint8_t indice;
-[; ;moteur.h: 45: int8_t id_balise_mere;
-[; ;moteur.h: 46: }_capteur;
-[; ;moteur.h: 52: void config_QEI ();
-[; ;moteur.h: 53: void get_valeur_codeur (void);
-[; ;moteur.h: 54: void conversion_angle ();
-[; ;moteur.h: 55: void init_capteur();
-[; ;moteur.h: 56: double obtention_angle (uint16_t position);
-[; ;asserv.h: 46: typedef struct
-[; ;asserv.h: 47: {
-[; ;asserv.h: 48: double KP;
-[; ;asserv.h: 49: double KI;
-[; ;asserv.h: 50: double KD;
-[; ;asserv.h: 51: }_coef_PID;
-[; ;asserv.h: 53: typedef struct
-[; ;asserv.h: 54: {
-[; ;asserv.h: 55: double consigne;
-[; ;asserv.h: 56: double actuelle;
-[; ;asserv.h: 57: }_systeme_asserv;
-[; ;asserv.h: 59: typedef struct
-[; ;asserv.h: 60: {
-[; ;asserv.h: 61: double actuelle;
-[; ;asserv.h: 62: double integralle;
-[; ;asserv.h: 63: double precedente;
-[; ;asserv.h: 64: }_erreur;
-[; ;asserv.h: 70: void mesure_vitesse (void);
-[; ;asserv.h: 71: void asserv (void);
-[; ;asserv.h: 72: double fonction_PID (void);
-[; ;asserv.h: 73: void reglage_PID (void);
-[; ;asserv.h: 74: void saturation_erreur_integralle_vitesse (void);
-[; ;asserv.h: 75: void ecretage_consignes(double *commande);
-[; ;triangulation.h: 32: void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
-[; ;triangulation.h: 33: double Cot (double angle);
-[; ;triangulation.h: 34: double saturation (double valeur, double maximum);
-[; ;triangulation.h: 35: double conversion_degre_radian (double angle);
-[; ;triangulation.h: 37: double modulo_angle (double angle);
-[; ;triangulation.h: 38: int8_t retrouver_balise_mere ();
-[; ;triangulation.h: 39: int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
-[; ;triangulation.h: 40: void inversion_balises(uint8_t id_balise_mere);
-[; ;triangulation.h: 41: void modulo_id_balise_mere ();
-[; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
-[; ;triangulation.h: 43: void affichage_position (double x, double y);
-[; ;triangulation.h: 44: double get_distance (double ancien_x, double ancien_y, double x, double y);
+[; ;triangulation.h: 48: typedef struct
+[; ;triangulation.h: 49: {
+[; ;triangulation.h: 50: double x;
+[; ;triangulation.h: 51: double y;
+[; ;triangulation.h: 52: }_coordonees;
+[; ;triangulation.h: 54: typedef struct
+[; ;triangulation.h: 55: {
+[; ;triangulation.h: 56: _coordonees _1_2;
+[; ;triangulation.h: 57: _coordonees _2_3;
+[; ;triangulation.h: 58: _coordonees _3_1;
+[; ;triangulation.h: 59: }_cercle;
+[; ;triangulation.h: 61: typedef struct
+[; ;triangulation.h: 62: {
+[; ;triangulation.h: 63: _cercle cercle;
+[; ;triangulation.h: 64: double cotan_1_2;
+[; ;triangulation.h: 65: double cotan_2_3;
+[; ;triangulation.h: 66: double cotan_3_1;
+[; ;triangulation.h: 67: double D;
+[; ;triangulation.h: 68: double K;
+[; ;triangulation.h: 70: }_triangulation;
+[; ;triangulation.h: 77: void triangulation (_coordonees *c, double angle1, double angle2, double angle3);
+[; ;triangulation.h: 78: double cotangeante (double angle);
+[; ;triangulation.h: 79: double saturation (double valeur, double maximum);
+[; ;triangulation.h: 80: double conversion_degre_radian (double angle);
+[; ;triangulation.h: 82: void affichage_position ();
+[; ;triangulation.h: 83: double get_distance (_coordonees ancien, _coordonees actu);
+[; ;moteur.h: 39: typedef struct
+[; ;moteur.h: 40: {
+[; ;moteur.h: 41: bool tour_en_cours;
+[; ;moteur.h: 42: bool synchro_debut_tour;
+[; ;moteur.h: 43: bool flag_capteur;
+[; ;moteur.h: 44: double angle[3];
+[; ;moteur.h: 45: uint16_t position[3];
+[; ;moteur.h: 46: uint8_t indice;
+[; ;moteur.h: 47: _coordonees c;
+[; ;moteur.h: 49: }_capteur;
+[; ;moteur.h: 55: void config_QEI ();
+[; ;moteur.h: 56: void get_valeur_codeur (void);
+[; ;moteur.h: 57: void conversion_angle ();
+[; ;moteur.h: 58: void init_capteur();
+[; ;moteur.h: 59: double obtention_angle (uint16_t position);
 [; ;system.h: 145: extern _buf uart_logiciel;
 [; ;system.h: 146: extern _uart_recption uart_reception;
-[; ;system.h: 147: extern _position position;
 [; ;system.h: 148: extern int8_t OVERFLOW_CODEUR;
 [; ;system.h: 150: extern uint8_t flag_cpateur;
 [; ;system.h: 151: extern _capteur capteur;
-[; ;system.h: 164: void init_system (void);
-[; ;system.h: 170: void init_clock(void);
-[; ;system.h: 177: void ConfigInterrupt (void);
-[; ;system.h: 183: void ConfigPorts (void);
-[; ;system.h: 186: void init_timer_0 ();
-[; ;system.h: 187: void init_timer_1 ();
-[; ;system.h: 189: void envoit_pwm (double valeur);
-[; ;system.h: 190: void config_pwm ();
-"24 asserv.c
-[v _PID `S450 ~T0 @X0 1 e ]
-[; ;asserv.c: 24: _coef_PID PID;
-"25
-[v _VITESSE `S451 ~T0 @X0 1 e ]
-[; ;asserv.c: 25: _systeme_asserv VITESSE;
-"26
-[v _ERREUR_VITESSE `S452 ~T0 @X0 1 e ]
-[; ;asserv.c: 26: _erreur ERREUR_VITESSE;
-"32
-[v _init_angle `(v ~T0 @X0 1 ef1`d ]
-"33
-{
-[; ;asserv.c: 32: void init_angle (double angle)
-[; ;asserv.c: 33: {
-[e :U _init_angle ]
-"32
-[v _angle `d ~T0 @X0 1 r1 ]
-"33
-[f ]
-[; ;asserv.c: 34: __nop();
-"34
-[e ( ___nop ..  ]
-[; ;asserv.c: 35: }
-"35
-[e :UE 453 ]
-}
-"44
-[v _ecretage_consignes `(v ~T0 @X0 1 ef1`*d ]
-"45
-{
-[; ;asserv.c: 44: void ecretage_consignes(double *commande)
-[; ;asserv.c: 45: {
-[e :U _ecretage_consignes ]
-"44
-[v _commande `*d ~T0 @X0 1 r1 ]
-"45
-[f ]
-[; ;asserv.c: 46: if (*commande > (double) (12. * 100. / 12.))
-"46
-[e $ ! > *U _commande / * .12. .100. .12. 455  ]
-[; ;asserv.c: 47: *commande = (double) (12. * 100. / 12.);
-"47
-[e = *U _commande / * .12. .100. .12. ]
-[e $U 456  ]
-"48
-[e :U 455 ]
-[; ;asserv.c: 48: else if (*commande < - (double) (12. * 100. / 12.))
-[e $ ! < *U _commande -U / * .12. .100. .12. 457  ]
-[; ;asserv.c: 49: *commande = - (double) (12. * 100. / 12.);
-"49
-[e = *U _commande -U / * .12. .100. .12. ]
-[e :U 457 ]
-"50
-[e :U 456 ]
-[; ;asserv.c: 50: }
-[e :UE 454 ]
-}
-"52
-[v _saturation_erreur_integralle_vitesse `(v ~T0 @X0 1 ef ]
-"53
-{
-[; ;asserv.c: 52: void saturation_erreur_integralle_vitesse (void)
-[; ;asserv.c: 53: {
-[e :U _saturation_erreur_integralle_vitesse ]
-[f ]
-[; ;asserv.c: 54: if (ERREUR_VITESSE.integralle > 1000.)
-"54
-[e $ ! > . _ERREUR_VITESSE 1 .1000. 459  ]
-[; ;asserv.c: 55: ERREUR_VITESSE.integralle = 1000.;
-"55
-[e = . _ERREUR_VITESSE 1 .1000. ]
-[e $U 460  ]
-"56
-[e :U 459 ]
-[; ;asserv.c: 56: else if (ERREUR_VITESSE.integralle < - 1000.)
-[e $ ! < . _ERREUR_VITESSE 1 -U .1000. 461  ]
-[; ;asserv.c: 57: ERREUR_VITESSE.integralle = - 1000.;
-"57
-[e = . _ERREUR_VITESSE 1 -U .1000. ]
-[e :U 461 ]
-"58
-[e :U 460 ]
-[; ;asserv.c: 58: }
-[e :UE 458 ]
-}
-"64
-[v _reglage_PID `(v ~T0 @X0 1 ef ]
-"65
-{
-[; ;asserv.c: 64: void reglage_PID (void)
-[; ;asserv.c: 65: {
-[e :U _reglage_PID ]
-[f ]
-[; ;asserv.c: 67: PID.KP = 0.;
-"67
-[e = . _PID 0 .0. ]
-[; ;asserv.c: 68: PID.KI = 10.;
-"68
-[e = . _PID 1 .10. ]
-[; ;asserv.c: 69: PID.KD = 0.;
-"69
-[e = . _PID 2 .0. ]
-[; ;asserv.c: 70: }
-"70
-[e :UE 462 ]
-}
-"72
-[v _fonction_PID `(d ~T0 @X0 1 ef ]
-"73
-{
-[; ;asserv.c: 72: double fonction_PID (void)
-[; ;asserv.c: 73: {
-[e :U _fonction_PID ]
-[f ]
-"74
-[v F4886 `d ~T0 @X0 1 s commande ]
-[; ;asserv.c: 74: static double commande;
-[; ;asserv.c: 75: ERREUR_VITESSE.actuelle = VITESSE.consigne - VITESSE.actuelle;
-"75
-[e = . _ERREUR_VITESSE 0 - . _VITESSE 0 . _VITESSE 1 ]
-[; ;asserv.c: 76: ERREUR_VITESSE.integralle += ERREUR_VITESSE.actuelle;
-"76
-[e =+ . _ERREUR_VITESSE 1 . _ERREUR_VITESSE 0 ]
-[; ;asserv.c: 78: saturation_erreur_integralle_vitesse();
-"78
-[e ( _saturation_erreur_integralle_vitesse ..  ]
-[; ;asserv.c: 81: commande = ERREUR_VITESSE.actuelle * PID.KP + ERREUR_VITESSE.integralle * PID.KI + (ERREUR_VITESSE.actuelle - ERREUR_VITESSE.precedente ) * PID.KD;
-"81
-[e = F4886 + + * . _ERREUR_VITESSE 0 . _PID 0 * . _ERREUR_VITESSE 1 . _PID 1 * - . _ERREUR_VITESSE 0 . _ERREUR_VITESSE 2 . _PID 2 ]
-[; ;asserv.c: 83: ERREUR_VITESSE.precedente = ERREUR_VITESSE.actuelle;
-"83
-[e = . _ERREUR_VITESSE 2 . _ERREUR_VITESSE 0 ]
-[; ;asserv.c: 85: return commande;
-"85
-[e ) F4886 ]
-[e $UE 463  ]
-[; ;asserv.c: 86: }
-"86
-[e :UE 463 ]
-}
-"92
-[v _asserv `(v ~T0 @X0 1 ef ]
-"93
-{
-[; ;asserv.c: 92: void asserv (void)
-[; ;asserv.c: 93: {
-[e :U _asserv ]
-[f ]
-"94
-[v F4888 `d ~T0 @X0 1 s commande ]
-[i F4888
--> -> 0 `i `d
-]
-[; ;asserv.c: 94: static double commande = 0;
-[; ;asserv.c: 96: VITESSE.consigne = 0.00005;
-"96
-[e = . _VITESSE 0 .0.00005 ]
-[; ;asserv.c: 98: commande = fonction_PID();
-"98
-[e = F4888 ( _fonction_PID ..  ]
-[; ;asserv.c: 99: ecretage_consignes(&commande);
-"99
-[e ( _ecretage_consignes (1 &U F4888 ]
-[; ;asserv.c: 100: envoit_pwm(commande);
-"100
-[e ( _envoit_pwm (1 F4888 ]
-[; ;asserv.c: 101: }
-"101
-[e :UE 464 ]
-}
-"104
-[v _mesure_vitesse `(v ~T0 @X0 1 ef ]
-"105
-{
-[; ;asserv.c: 104: void mesure_vitesse (void)
-[; ;asserv.c: 105: {
-[e :U _mesure_vitesse ]
-[f ]
-[; ;asserv.c: 106: get_valeur_codeur();
-"106
-[e ( _get_valeur_codeur ..  ]
-[; ;asserv.c: 108: VITESSE.actuelle = position.ecart;
-"108
-[e = . _VITESSE 1 -> . _position 2 `d ]
-[; ;asserv.c: 109: VITESSE.actuelle /= (((4 * 2000) - 1) );
-"109
-[e =/ . _VITESSE 1 -> - * -> 4 `i -> 2000 `i -> 1 `i `d ]
-[; ;asserv.c: 110: VITESSE.actuelle *= 1000;
-"110
-[e =* . _VITESSE 1 -> -> 1000 `i `d ]
-[; ;asserv.c: 111: conversion_angle();
-"111
-[e ( _conversion_angle ..  ]
-[; ;asserv.c: 112: }
-"112
-[e :UE 465 ]
-}
+[; ;system.h: 165: void init_system (void);
+[; ;system.h: 171: void init_clock(void);
+[; ;system.h: 178: void ConfigInterrupt (void);
+[; ;system.h: 184: void ConfigPorts (void);
+[; ;system.h: 187: void init_timer_0 ();
+[; ;system.h: 188: void init_timer_1 ();
+[; ;system.h: 190: void envoit_pwm (double valeur);
+[; ;system.h: 191: void config_pwm ();

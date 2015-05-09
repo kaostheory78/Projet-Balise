@@ -5859,97 +5859,79 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 28 "moteur.h"
+# 48 "triangulation.h"
 typedef struct
 {
-uint16_t ancien;
-uint16_t nouvelle;
-int32_t ecart;
-double angle;
-}_position;
+double x;
+double y;
+}_coordonees;
 
+typedef struct
+{
+_coordonees _1_2;
+_coordonees _2_3;
+_coordonees _3_1;
+}_cercle;
+
+typedef struct
+{
+_cercle cercle;
+double cotan_1_2;
+double cotan_2_3;
+double cotan_3_1;
+double D;
+double K;
+
+}_triangulation;
+
+# 77
+void triangulation (_coordonees *c, double angle1, double angle2, double angle3);
+double cotangeante (double angle);
+double saturation (double valeur, double maximum);
+double conversion_degre_radian (double angle);
+
+void affichage_position ();
+double get_distance (_coordonees ancien, _coordonees actu);
+
+# 39 "moteur.h"
 typedef struct
 {
 bool tour_en_cours;
 bool synchro_debut_tour;
 bool flag_capteur;
 double angle[3];
-double ancien_angle[3];
 uint16_t position[3];
 uint8_t indice;
-int8_t id_balise_mere;
+_coordonees c;
+
 }_capteur;
 
-# 52
+# 55
 void config_QEI ();
 void get_valeur_codeur (void);
 void conversion_angle ();
 void init_capteur();
 double obtention_angle (uint16_t position);
 
-# 46 "asserv.h"
-typedef struct
-{
-double KP;
-double KI;
-double KD;
-}_coef_PID;
-
-typedef struct
-{
-double consigne;
-double actuelle;
-}_systeme_asserv;
-
-typedef struct
-{
-double actuelle;
-double integralle;
-double precedente;
-}_erreur;
-
-# 70
-void mesure_vitesse (void);
-void asserv (void);
-double fonction_PID (void);
-void reglage_PID (void);
-void saturation_erreur_integralle_vitesse (void);
-void ecretage_consignes(double *commande);
-
-# 32 "triangulation.h"
-void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
-double Cot (double angle);
-double saturation (double valeur, double maximum);
-double conversion_degre_radian (double angle);
-
-double modulo_angle (double angle);
-int8_t retrouver_balise_mere ();
-int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
-void inversion_balises(uint8_t id_balise_mere);
-void modulo_id_balise_mere ();
-check_divergence_position (double ancien_x, double ancien_y, double x, double y);
-void affichage_position (double x, double y);
-double get_distance (double ancien_x, double ancien_y, double x, double y);
-
 # 145 "system.h"
 extern _buf uart_logiciel;
 extern _uart_recption uart_reception;
-extern _position position;
+
 extern int8_t OVERFLOW_CODEUR;
 
 extern uint8_t flag_cpateur;
 extern _capteur capteur;
 
-# 164
+# 165
 void init_system (void);
 
-# 170
+# 171
 void init_clock(void);
 
-# 177
+# 178
 void ConfigInterrupt (void);
 
-# 183
+# 184
 void ConfigPorts (void);
 
 
@@ -5960,37 +5942,43 @@ void envoit_pwm (double valeur);
 void config_pwm ();
 
 # 24 "triangulation.c"
-void triangulation (double *x, double *y, double angle1, double angle2, double angle3)
+void triangulation (_coordonees *c, double angle1, double angle2, double angle3)
 {
-const double x1 = 2062., y1 = 3062., x2 = -62., y2 = 3062., x3 = 1000., y3 = -62.;
+_triangulation t;
 
-double cot_12 = Cot( angle2 - angle1 ) ;
-double cot_23 = Cot( angle3 - angle2 ) ;
-cot_12 = saturation( cot_12 , 100000000 ) ;
-cot_23 = saturation( cot_23 , 100000000 ) ;
-double cot_31 = ( 1.0 - cot_12 * cot_23 ) / ( cot_12 + cot_23 ) ;
-cot_31 = saturation( cot_31 , 100000000 ) ;
-double x1_ = x1 - x2 , y1_ = y1 - y2 , x3_ = x3 - x2 , y3_ = y3 - y2 ;
-double c12x = x1_ + cot_12 * y1_ ;
-double c12y = y1_ - cot_12 * x1_ ;
 
-double c23x = x3_ - cot_23 * y3_ ;
-double c23y = y3_ + cot_23 * x3_ ;
+t.cotan_1_2= cotangeante( angle2 - angle1 ) ;
+t.cotan_2_3 = cotangeante( angle3 - angle2 ) ;
 
-double c31x = (x3_ + x1_) + cot_31 * (y3_ - y1_) ;
-double c31y = (y3_ + y1_) - cot_31 * (x3_ - x1_) ;
-double k31 = (x3_ * x1_) + (y3_ * y1_) + cot_31 * ( (y3_ * x1_) - (x3_ * y1_) ) ;
 
-double D = (c12x - c23x) * (c23y - c31y) - (c23x - c31x) * (c12y - c23y) ;
-double invD = 1.0 / D ;
-double K = k31 * invD ;
+t.cotan_1_2 = saturation( t.cotan_1_2 , 100000000 ) ;
+t.cotan_2_3 = saturation( t.cotan_2_3 , 100000000 ) ;
 
-*x = K * (c12y - c23y) + x2 ;
-*y = K * (c23x - c12x) + y2 ;
+t.cotan_3_1 = ( 1.0 - t.cotan_1_2 * t.cotan_2_3 ) / ( t.cotan_1_2 + t.cotan_2_3 ) ;
+t.cotan_3_1 = saturation( t.cotan_3_1 , 100000000 ) ;
 
+
+t.cercle._1_2.x = (2062. - -62.) + t.cotan_1_2 * (3062. - 3062.) ;
+t.cercle._1_2.y = (3062. - 3062.) - t.cotan_1_2 * (2062. - -62.) ;
+
+
+t.cercle._2_3.x = (1000. - -62.) - t.cotan_2_3 * (-62. - 3062.);
+t.cercle._2_3.y = (-62. - 3062.) + t.cotan_2_3 * (1000. - -62.);
+
+
+t.cercle._3_1.x = ((1000. - -62.) + (2062. - -62.)) + t.cotan_3_1 * ((-62. - 3062.) - (3062. - 3062.));
+t.cercle._3_1.y = ((-62. - 3062.) + (3062. - 3062.)) - t.cotan_3_1 * ((1000. - -62.) - (2062. - -62.));
+
+t.K = ((1000. - -62.) * (2062. - -62.)) + ((-62. - 3062.) * (3062. - 3062.)) + t.cotan_3_1 * ( ((-62. - 3062.) * (2062. - -62.)) - ((1000. - -62.) * (3062. - 3062.)));
+
+t.D = (t.cercle._1_2.x - t.cercle._2_3.x) * (t.cercle._2_3.y - t.cercle._3_1.y) - (t.cercle._2_3.x - t.cercle._3_1.x) * (t.cercle._1_2.y - t.cercle._2_3.y);
+t.K /= t.D;
+
+c->x = t.K * (t.cercle._1_2.y - t.cercle._2_3.y) + -62. ;
+c->y = t.K * (t.cercle._2_3.x - t.cercle._1_2.x) + 3062. ;
 }
 
-double Cot (double angle)
+double cotangeante (double angle)
 {
 angle = conversion_degre_radian(angle);
 return (1 / tan(angle));
@@ -6011,117 +5999,66 @@ double conversion_degre_radian (double angle)
 return ((angle / 180.) * 3.14159265);
 }
 
-int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle )
-{
-double derive = modulo_angle(nouvel_angle - ancien_angle);
 
-if (derive < -20. && derive < 0.)
-{
-return -1;
-}
-else if (derive > 20. && derive > 0.)
-{
-return 1;
-}
-else
-return 0;
-
-}
-
-check_divergence_position (double ancien_x, double ancien_y, double x, double y)
-{
-double distance = get_distance(ancien_x, ancien_y, x, y);
-
-if (distance < 200.)
-return 0;
-else
-return -1;
-}
-
-double get_distance (double ancien_x, double ancien_y, double x, double y)
+double get_distance (_coordonees ancien, _coordonees actu)
 {
 double delta_x, delta_y, distance;
 
-delta_x = ancien_x - x;
-delta_y = ancien_y - y;
+delta_x = ancien.x - actu.x;
+delta_y = ancien.y - actu.y;
 distance = sqrt (delta_x * delta_x + delta_y * delta_y);
 
 return distance;
 }
 
 
+void affichage_position ()
+{
 
-int8_t retrouver_balise_mere ()
-{
-if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[0]) != 0)
-{
-if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[1]) == 0)
-{
-capteur.id_balise_mere ++;
-modulo_id_balise_mere();
-inversion_balises(1);
+int i, j;
+static int compteur = 0;
 
-PutsUART(0, "\n\r ROTATION A GAUCHE \n\r");
-return 0;
-
-}
-else if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[2]) == 0)
+if (compteur == 2)
 {
-capteur.id_balise_mere --;
-modulo_id_balise_mere();
-inversion_balises(2);
-PutsUART(0, "\n\r ROTATION A DROITE \n\r");
-return 0;
-}
+int _x = (int)(capteur.c.x / 100.);
+int _y = (int)(capteur.c.y / 100.);
+
+PutsUART(0, "X ");
+for (i = 0; i < 60; i++)
+PutsUART(0, "~");
+PutsUART(0, "\n\r");
+
+for (i = 0; i < 20; i++)
+{
+PutsUART(0, " |");
+for (j = 0; j < 30; j++)
+{
+if (_x == i && _y == j)
+PutsUART(0, "O ");
 else
-return -1;
+PutsUART(0, "- ");
 }
-else
-return 0;
-}
-
-double modulo_angle (double angle)
-{
-if (angle < -180.)
-angle+= 360.;
-else if (angle > 180.)
-angle -= 360.;
-
-return angle;
+PutsUART(0, "|");
+if (i == 10)
+PutsUART(0, "X");
+PutsUART(0, "\n\r");
 }
 
-void inversion_balises(uint8_t id_balise_mere)
-{
-double temp;
-if (id_balise_mere == 1)
-{
-temp = capteur.angle[0];
-capteur.angle[0] = capteur.angle[1];
-capteur.angle[1] = capteur.angle[2];
-capteur.angle[2] = temp;
-}
-else if (id_balise_mere == 2)
-{
-temp = capteur.angle[0];
-capteur.angle[0] = capteur.angle[2];
-capteur.angle[2] = capteur.angle[1];
-capteur.angle[1] = temp;
-}
+PutsUART(0, "X ");
+for (i = 0; i < 60; i++)
+PutsUART(0, "~");
+PutsUART(0, "\n\r");
+
+
+PutIntUART(0, (int16_t) capteur.c.x);
+PutsUART(0, "\n\r");
+PutIntUART(0, (int16_t) capteur.c.y);
+PutsUART(0, "\n\r");
+
+compteur = 0;
 }
 
-void modulo_id_balise_mere ()
-{
-if (capteur.id_balise_mere == 3)
-capteur.id_balise_mere = 0;
-else if (capteur.id_balise_mere == -1)
-capteur.id_balise_mere = 2;
-}
+compteur++;
 
-void affichage_position (double x, double y)
-{
-PutsUART(0, "Position : X : ");
-PutIntUART(0, (int16_t) x);
-PutsUART(0, " Y : ");
-PutIntUART(0, (int16_t) y);
-PutsUART(0, "\r");
+
 }

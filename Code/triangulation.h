@@ -24,24 +24,63 @@ extern "C" {
 #define _ERREUR                 -1
 
 
+    //Coordonées des balises
+#define X_BALISE_1              2062.
+#define Y_BALISE_1              3062.
+
+#define X_BALISE_2              -62.
+#define Y_BALISE_2              3062.
+
+#define X_BALISE_3              1000.
+#define Y_BALISE_3              -62.
+
+#define ECART_BALISE_X1_X2      (X_BALISE_1 - X_BALISE_2)
+#define ECART_BALISE_Y1_Y2      (Y_BALISE_1 - Y_BALISE_2)
+
+#define ECART_BALISE_X2_X3      (X_BALISE_3 - X_BALISE_2)
+#define ECART_BALISE_Y2_Y3      (Y_BALISE_3 - Y_BALISE_2)
+
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+    typedef struct
+{
+    double x;
+    double y;
+}_coordonees;
+
+typedef struct
+{
+    _coordonees _1_2;
+    _coordonees _2_3;
+    _coordonees _3_1;
+}_cercle;
+
+typedef struct
+{
+    _cercle cercle;
+    double cotan_1_2;
+    double cotan_2_3;
+    double cotan_3_1;
+    double D;
+    double K;
+
+}_triangulation;
+
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
 
 
-void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
-double Cot (double angle);
+void triangulation (_coordonees *c, double angle1, double angle2, double angle3);
+double cotangeante (double angle);
 double saturation (double valeur, double maximum);
 double conversion_degre_radian (double angle);
 
-double modulo_angle (double angle);
-int8_t retrouver_balise_mere ();
-int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
-void inversion_balises(uint8_t id_balise_mere);
-void modulo_id_balise_mere ();
-check_divergence_position (double ancien_x, double ancien_y, double x, double y);
-void affichage_position (double x, double y);
-double get_distance (double ancien_x, double ancien_y, double x, double y);
+void affichage_position ();
+double get_distance (_coordonees ancien, _coordonees actu);
 
 #ifdef	__cplusplus
 }

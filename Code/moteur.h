@@ -8,6 +8,9 @@
 #ifndef MOTEUR_H
 #define	MOTEUR_H
 
+#include "triangulation.h"
+
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -25,13 +28,13 @@ extern "C" {
 /******************************* structures ***********************************/
 /******************************************************************************/
 
-    typedef struct
-    {
-        uint16_t ancien;
-        uint16_t nouvelle;
-        int32_t ecart;
-        double angle;
-    }_position;
+//    typedef struct
+//    {
+//        uint16_t ancien;
+//        uint16_t nouvelle;
+//        int32_t ecart;
+//        double angle;
+//    }_position;
 
     typedef struct
     {
@@ -39,10 +42,10 @@ extern "C" {
         bool synchro_debut_tour;
         bool flag_capteur;
         double angle[3];
-        double ancien_angle[3];
         uint16_t position[3];
         uint8_t indice;
-        int8_t id_balise_mere;
+        _coordonees c;
+        //int8_t id_balise_mere;
     }_capteur;
 
 /******************************************************************************/

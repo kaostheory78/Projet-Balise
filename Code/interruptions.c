@@ -104,7 +104,10 @@ void subroutine_interruptions (bool priorite)
 void interruption_timer0 ()
 {
     FLAG_TIMER0 = false;
-    TMR0L = 131;
+
+    //affichage_position();
+
+    TMR0 = 32750;
 
     //asserv();
 }

@@ -1,10 +1,10 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"29 moteur.h
-[s S448 `ui 1 `ui 1 `l 1 `d 1 ]
-[n S448 . ancien nouvelle ecart angle ]
-"37
-[s S449 `uc 1 `uc 1 `uc 1 `d -> 3 `i `d -> 3 `i `ui -> 3 `i `uc 1 `c 1 ]
-[n S449 . tour_en_cours synchro_debut_tour flag_capteur angle ancien_angle position indice id_balise_mere ]
+"49 triangulation.h
+[s S448 `d 1 `d 1 ]
+[n S448 . x y ]
+"40 moteur.h
+[s S451 `uc 1 `uc 1 `uc 1 `d -> 3 `i `ui -> 3 `i `uc 1 `S448 1 ]
+[n S451 . tour_en_cours synchro_debut_tour flag_capteur angle position indice c ]
 "926 C:\Program Files (x86)\Microchip\xc8\v1.34\include\pic18f4431.h
 [s S34 :2 `uc 1 :2 `uc 1 :4 `uc 1 ]
 [n S34 . PTMOD PTCKPS PTOPS ]
@@ -4448,437 +4448,321 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interruptions.h: 91: void interrupt_ADC ();
 [; ;interruptions.h: 98: void interrupt_RX();
 [; ;interruptions.h: 103: void interrupt_TX();
-[; ;moteur.h: 28: typedef struct
-[; ;moteur.h: 29: {
-[; ;moteur.h: 30: uint16_t ancien;
-[; ;moteur.h: 31: uint16_t nouvelle;
-[; ;moteur.h: 32: int32_t ecart;
-[; ;moteur.h: 33: double angle;
-[; ;moteur.h: 34: }_position;
-[; ;moteur.h: 36: typedef struct
-[; ;moteur.h: 37: {
-[; ;moteur.h: 38: bool tour_en_cours;
-[; ;moteur.h: 39: bool synchro_debut_tour;
-[; ;moteur.h: 40: bool flag_capteur;
-[; ;moteur.h: 41: double angle[3];
-[; ;moteur.h: 42: double ancien_angle[3];
-[; ;moteur.h: 43: uint16_t position[3];
-[; ;moteur.h: 44: uint8_t indice;
-[; ;moteur.h: 45: int8_t id_balise_mere;
-[; ;moteur.h: 46: }_capteur;
-[; ;moteur.h: 52: void config_QEI ();
-[; ;moteur.h: 53: void get_valeur_codeur (void);
-[; ;moteur.h: 54: void conversion_angle ();
-[; ;moteur.h: 55: void init_capteur();
-[; ;moteur.h: 56: double obtention_angle (uint16_t position);
-[; ;asserv.h: 46: typedef struct
-[; ;asserv.h: 47: {
-[; ;asserv.h: 48: double KP;
-[; ;asserv.h: 49: double KI;
-[; ;asserv.h: 50: double KD;
-[; ;asserv.h: 51: }_coef_PID;
-[; ;asserv.h: 53: typedef struct
-[; ;asserv.h: 54: {
-[; ;asserv.h: 55: double consigne;
-[; ;asserv.h: 56: double actuelle;
-[; ;asserv.h: 57: }_systeme_asserv;
-[; ;asserv.h: 59: typedef struct
-[; ;asserv.h: 60: {
-[; ;asserv.h: 61: double actuelle;
-[; ;asserv.h: 62: double integralle;
-[; ;asserv.h: 63: double precedente;
-[; ;asserv.h: 64: }_erreur;
-[; ;asserv.h: 70: void mesure_vitesse (void);
-[; ;asserv.h: 71: void asserv (void);
-[; ;asserv.h: 72: double fonction_PID (void);
-[; ;asserv.h: 73: void reglage_PID (void);
-[; ;asserv.h: 74: void saturation_erreur_integralle_vitesse (void);
-[; ;asserv.h: 75: void ecretage_consignes(double *commande);
-[; ;triangulation.h: 32: void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
-[; ;triangulation.h: 33: double Cot (double angle);
-[; ;triangulation.h: 34: double saturation (double valeur, double maximum);
-[; ;triangulation.h: 35: double conversion_degre_radian (double angle);
-[; ;triangulation.h: 37: double modulo_angle (double angle);
-[; ;triangulation.h: 38: int8_t retrouver_balise_mere ();
-[; ;triangulation.h: 39: int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
-[; ;triangulation.h: 40: void inversion_balises(uint8_t id_balise_mere);
-[; ;triangulation.h: 41: void modulo_id_balise_mere ();
-[; ;triangulation.h: 42: check_divergence_position (double ancien_x, double ancien_y, double x, double y);
-[; ;triangulation.h: 43: void affichage_position (double x, double y);
-[; ;triangulation.h: 44: double get_distance (double ancien_x, double ancien_y, double x, double y);
+[; ;triangulation.h: 48: typedef struct
+[; ;triangulation.h: 49: {
+[; ;triangulation.h: 50: double x;
+[; ;triangulation.h: 51: double y;
+[; ;triangulation.h: 52: }_coordonees;
+[; ;triangulation.h: 54: typedef struct
+[; ;triangulation.h: 55: {
+[; ;triangulation.h: 56: _coordonees _1_2;
+[; ;triangulation.h: 57: _coordonees _2_3;
+[; ;triangulation.h: 58: _coordonees _3_1;
+[; ;triangulation.h: 59: }_cercle;
+[; ;triangulation.h: 61: typedef struct
+[; ;triangulation.h: 62: {
+[; ;triangulation.h: 63: _cercle cercle;
+[; ;triangulation.h: 64: double cotan_1_2;
+[; ;triangulation.h: 65: double cotan_2_3;
+[; ;triangulation.h: 66: double cotan_3_1;
+[; ;triangulation.h: 67: double D;
+[; ;triangulation.h: 68: double K;
+[; ;triangulation.h: 70: }_triangulation;
+[; ;triangulation.h: 77: void triangulation (_coordonees *c, double angle1, double angle2, double angle3);
+[; ;triangulation.h: 78: double cotangeante (double angle);
+[; ;triangulation.h: 79: double saturation (double valeur, double maximum);
+[; ;triangulation.h: 80: double conversion_degre_radian (double angle);
+[; ;triangulation.h: 82: void affichage_position ();
+[; ;triangulation.h: 83: double get_distance (_coordonees ancien, _coordonees actu);
+[; ;moteur.h: 39: typedef struct
+[; ;moteur.h: 40: {
+[; ;moteur.h: 41: bool tour_en_cours;
+[; ;moteur.h: 42: bool synchro_debut_tour;
+[; ;moteur.h: 43: bool flag_capteur;
+[; ;moteur.h: 44: double angle[3];
+[; ;moteur.h: 45: uint16_t position[3];
+[; ;moteur.h: 46: uint8_t indice;
+[; ;moteur.h: 47: _coordonees c;
+[; ;moteur.h: 49: }_capteur;
+[; ;moteur.h: 55: void config_QEI ();
+[; ;moteur.h: 56: void get_valeur_codeur (void);
+[; ;moteur.h: 57: void conversion_angle ();
+[; ;moteur.h: 58: void init_capteur();
+[; ;moteur.h: 59: double obtention_angle (uint16_t position);
 [; ;system.h: 145: extern _buf uart_logiciel;
 [; ;system.h: 146: extern _uart_recption uart_reception;
-[; ;system.h: 147: extern _position position;
 [; ;system.h: 148: extern int8_t OVERFLOW_CODEUR;
 [; ;system.h: 150: extern uint8_t flag_cpateur;
 [; ;system.h: 151: extern _capteur capteur;
-[; ;system.h: 164: void init_system (void);
-[; ;system.h: 170: void init_clock(void);
-[; ;system.h: 177: void ConfigInterrupt (void);
-[; ;system.h: 183: void ConfigPorts (void);
-[; ;system.h: 186: void init_timer_0 ();
-[; ;system.h: 187: void init_timer_1 ();
-[; ;system.h: 189: void envoit_pwm (double valeur);
-[; ;system.h: 190: void config_pwm ();
-"18 moteur.c
-[v _position `S448 ~T0 @X0 1 e ]
-[; ;moteur.c: 18: _position position;
-"19
-[v _capteur `S449 ~T0 @X0 1 e ]
+[; ;system.h: 165: void init_system (void);
+[; ;system.h: 171: void init_clock(void);
+[; ;system.h: 178: void ConfigInterrupt (void);
+[; ;system.h: 184: void ConfigPorts (void);
+[; ;system.h: 187: void init_timer_0 ();
+[; ;system.h: 188: void init_timer_1 ();
+[; ;system.h: 190: void envoit_pwm (double valeur);
+[; ;system.h: 191: void config_pwm ();
+"19 moteur.c
+[v _capteur `S451 ~T0 @X0 1 e ]
 [; ;moteur.c: 19: _capteur capteur;
-"20
+"21
 [v _OVERFLOW_CODEUR `c ~T0 @X0 1 e ]
-[; ;moteur.c: 20: int8_t OVERFLOW_CODEUR;
-"27
-[v _config_pwm `(v ~T0 @X0 1 ef ]
+[; ;moteur.c: 21: int8_t OVERFLOW_CODEUR;
 "28
+[v _config_pwm `(v ~T0 @X0 1 ef ]
+"29
 {
-[; ;moteur.c: 27: void config_pwm ()
-[; ;moteur.c: 28: {
+[; ;moteur.c: 28: void config_pwm ()
+[; ;moteur.c: 29: {
 [e :U _config_pwm ]
 [f ]
-[; ;moteur.c: 29: PTCON0bits.PTOPS = 0;
-"29
-[e = . . _PTCON0bits 0 2 -> -> 0 `i `uc ]
-[; ;moteur.c: 30: PTCON0bits.PTCKPS = 0;
+[; ;moteur.c: 30: PTCON0bits.PTOPS = 0;
 "30
-[e = . . _PTCON0bits 0 1 -> -> 0 `i `uc ]
-[; ;moteur.c: 31: PTCON0bits.PTMOD = 0;
+[e = . . _PTCON0bits 0 2 -> -> 0 `i `uc ]
+[; ;moteur.c: 31: PTCON0bits.PTCKPS = 0;
 "31
+[e = . . _PTCON0bits 0 1 -> -> 0 `i `uc ]
+[; ;moteur.c: 32: PTCON0bits.PTMOD = 0;
+"32
 [e = . . _PTCON0bits 0 0 -> -> 0 `i `uc ]
-[; ;moteur.c: 33: PTCON1bits.PTEN = 1;
-"33
+[; ;moteur.c: 34: PTCON1bits.PTEN = 1;
+"34
 [e = . . _PTCON1bits 0 2 -> -> 1 `i `uc ]
-[; ;moteur.c: 35: PWMCON0bits.PMOD0 = 1;
-"35
-[e = . . _PWMCON0bits 1 0 -> -> 1 `i `uc ]
-[; ;moteur.c: 36: PWMCON0bits.PWMEN = 0b001;
+[; ;moteur.c: 36: PWMCON0bits.PMOD0 = 1;
 "36
+[e = . . _PWMCON0bits 1 0 -> -> 1 `i `uc ]
+[; ;moteur.c: 37: PWMCON0bits.PWMEN = 0b001;
+"37
 [e = . . _PWMCON0bits 0 1 -> -> 1 `i `uc ]
-[; ;moteur.c: 38: PWMCON1bits.UDIS = 0;
-"38
+[; ;moteur.c: 39: PWMCON1bits.UDIS = 0;
+"39
 [e = . . _PWMCON1bits 0 1 -> -> 0 `i `uc ]
-[; ;moteur.c: 40: PTPERL = 166;
-"40
-[e = _PTPERL -> -> 166 `i `uc ]
-[; ;moteur.c: 41: PTPERH = 0;
+[; ;moteur.c: 41: PTPERL = 166;
 "41
+[e = _PTPERL -> -> 166 `i `uc ]
+[; ;moteur.c: 42: PTPERH = 0;
+"42
 [e = _PTPERH -> -> 0 `i `uc ]
-[; ;moteur.c: 44: PDC0L = 0;
-"44
-[e = _PDC0L -> -> 0 `i `uc ]
-[; ;moteur.c: 45: PDC0H = 0;
+[; ;moteur.c: 45: PDC0L = 0;
 "45
-[e = _PDC0H -> -> 0 `i `uc ]
-[; ;moteur.c: 46: PDC1L = 0;
+[e = _PDC0L -> -> 0 `i `uc ]
+[; ;moteur.c: 46: PDC0H = 0;
 "46
-[e = _PDC1L -> -> 0 `i `uc ]
-[; ;moteur.c: 47: PDC1H = 0;
+[e = _PDC0H -> -> 0 `i `uc ]
+[; ;moteur.c: 47: PDC1L = 0;
 "47
-[e = _PDC1H -> -> 0 `i `uc ]
-[; ;moteur.c: 48: PDC2L = 0;
+[e = _PDC1L -> -> 0 `i `uc ]
+[; ;moteur.c: 48: PDC1H = 0;
 "48
-[e = _PDC2L -> -> 0 `i `uc ]
-[; ;moteur.c: 49: PDC2H = 0;
+[e = _PDC1H -> -> 0 `i `uc ]
+[; ;moteur.c: 49: PDC2L = 0;
 "49
-[e = _PDC2H -> -> 0 `i `uc ]
-[; ;moteur.c: 50: PDC3L = 0;
+[e = _PDC2L -> -> 0 `i `uc ]
+[; ;moteur.c: 50: PDC2H = 0;
 "50
-[e = _PDC3L -> -> 0 `i `uc ]
-[; ;moteur.c: 51: PDC3H = 0;
+[e = _PDC2H -> -> 0 `i `uc ]
+[; ;moteur.c: 51: PDC3L = 0;
 "51
-[e = _PDC3H -> -> 0 `i `uc ]
-[; ;moteur.c: 52: }
+[e = _PDC3L -> -> 0 `i `uc ]
+[; ;moteur.c: 52: PDC3H = 0;
 "52
+[e = _PDC3H -> -> 0 `i `uc ]
+[; ;moteur.c: 53: }
+"53
+[e :UE 452 ]
+}
+"55
+[v _envoit_pwm `(v ~T0 @X0 1 ef1`d ]
+"56
+{
+[; ;moteur.c: 55: void envoit_pwm (double valeur)
+[; ;moteur.c: 56: {
+[e :U _envoit_pwm ]
+"55
+[v _valeur `d ~T0 @X0 1 r1 ]
+"56
+[f ]
+"57
+[v _abs_valeur `d ~T0 @X0 1 a ]
+[; ;moteur.c: 57: double abs_valeur;
+[; ;moteur.c: 59: if (valeur < 0)
+"59
+[e $ ! < _valeur -> -> 0 `i `d 454  ]
+[; ;moteur.c: 60: abs_valeur = (double) (-valeur);
+"60
+[e = _abs_valeur -U _valeur ]
+[e $U 455  ]
+"61
+[e :U 454 ]
+[; ;moteur.c: 61: else
+[; ;moteur.c: 62: abs_valeur = (double) valeur;
+"62
+[e = _abs_valeur _valeur ]
+[e :U 455 ]
+[; ;moteur.c: 64: abs_valeur *= (double) 669 / 100;
+"64
+[e =* _abs_valeur / -> -> 669 `i `d -> -> 100 `i `d ]
+[; ;moteur.c: 66: if (abs_valeur > 669)
+"66
+[e $ ! > _abs_valeur -> -> 669 `i `d 456  ]
+[; ;moteur.c: 67: abs_valeur = 669;
+"67
+[e = _abs_valeur -> -> 669 `i `d ]
+[e :U 456 ]
+[; ;moteur.c: 69: if (valeur < (double) 0.)
+"69
+[e $ ! < _valeur .0. 457  ]
+[; ;moteur.c: 70: {
+"70
+{
+[; ;moteur.c: 71: PORTDbits.RD4 = 1;
+"71
+[e = . . _PORTDbits 0 4 -> -> 1 `i `uc ]
+"72
+}
+[; ;moteur.c: 72: }
+[e $U 458  ]
+"73
+[e :U 457 ]
+[; ;moteur.c: 73: else
+[; ;moteur.c: 74: {
+"74
+{
+[; ;moteur.c: 75: PORTDbits.RD4 = 0;
+"75
+[e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
+"76
+}
+[e :U 458 ]
+[; ;moteur.c: 76: }
+[; ;moteur.c: 78: PDC0L = (uint8_t) ((uint16_t) abs_valeur % 256);
+"78
+[e = _PDC0L -> % -> _abs_valeur `ui -> -> 256 `i `ui `uc ]
+[; ;moteur.c: 79: PDC0H = (uint8_t) ((uint16_t) abs_valeur / 256);
+"79
+[e = _PDC0H -> / -> _abs_valeur `ui -> -> 256 `i `ui `uc ]
+[; ;moteur.c: 81: }
+"81
 [e :UE 453 ]
 }
-"54
-[v _envoit_pwm `(v ~T0 @X0 1 ef1`d ]
-"55
-{
-[; ;moteur.c: 54: void envoit_pwm (double valeur)
-[; ;moteur.c: 55: {
-[e :U _envoit_pwm ]
-"54
-[v _valeur `d ~T0 @X0 1 r1 ]
-"55
-[f ]
-"56
-[v _abs_valeur `d ~T0 @X0 1 a ]
-[; ;moteur.c: 56: double abs_valeur;
-[; ;moteur.c: 58: if (valeur < 0)
-"58
-[e $ ! < _valeur -> -> 0 `i `d 455  ]
-[; ;moteur.c: 59: abs_valeur = (double) (-valeur);
-"59
-[e = _abs_valeur -U _valeur ]
-[e $U 456  ]
-"60
-[e :U 455 ]
-[; ;moteur.c: 60: else
-[; ;moteur.c: 61: abs_valeur = (double) valeur;
-"61
-[e = _abs_valeur _valeur ]
-[e :U 456 ]
-[; ;moteur.c: 63: abs_valeur *= (double) 669 / 100;
-"63
-[e =* _abs_valeur / -> -> 669 `i `d -> -> 100 `i `d ]
-[; ;moteur.c: 65: if (abs_valeur > 669)
-"65
-[e $ ! > _abs_valeur -> -> 669 `i `d 457  ]
-[; ;moteur.c: 66: abs_valeur = 669;
-"66
-[e = _abs_valeur -> -> 669 `i `d ]
-[e :U 457 ]
-[; ;moteur.c: 68: if (valeur < (double) 0.)
-"68
-[e $ ! < _valeur .0. 458  ]
-[; ;moteur.c: 69: {
-"69
-{
-[; ;moteur.c: 70: PORTDbits.RD4 = 1;
-"70
-[e = . . _PORTDbits 0 4 -> -> 1 `i `uc ]
-"71
-}
-[; ;moteur.c: 71: }
-[e $U 459  ]
-"72
-[e :U 458 ]
-[; ;moteur.c: 72: else
-[; ;moteur.c: 73: {
-"73
-{
-[; ;moteur.c: 74: PORTDbits.RD4 = 0;
-"74
-[e = . . _PORTDbits 0 4 -> -> 0 `i `uc ]
-"75
-}
-[e :U 459 ]
-[; ;moteur.c: 75: }
-[; ;moteur.c: 77: PDC0L = (uint8_t) ((uint16_t) abs_valeur % 256);
-"77
-[e = _PDC0L -> % -> _abs_valeur `ui -> -> 256 `i `ui `uc ]
-[; ;moteur.c: 78: PDC0H = (uint8_t) ((uint16_t) abs_valeur / 256);
-"78
-[e = _PDC0H -> / -> _abs_valeur `ui -> -> 256 `i `ui `uc ]
-[; ;moteur.c: 80: }
-"80
-[e :UE 454 ]
-}
-"82
-[v _config_QEI `(v ~T0 @X0 1 ef ]
 "83
+[v _config_QEI `(v ~T0 @X0 1 ef ]
+"84
 {
-[; ;moteur.c: 82: void config_QEI ()
-[; ;moteur.c: 83: {
+[; ;moteur.c: 83: void config_QEI ()
+[; ;moteur.c: 84: {
 [e :U _config_QEI ]
 [f ]
-[; ;moteur.c: 84: CAP1CONbits.CAP1REN = 1;
-"84
-[e = . . _CAP1CONbits 0 3 -> -> 1 `i `uc ]
-[; ;moteur.c: 85: ANSEL0 = 0;
+[; ;moteur.c: 85: CAP1CONbits.CAP1REN = 1;
 "85
+[e = . . _CAP1CONbits 0 3 -> -> 1 `i `uc ]
+[; ;moteur.c: 86: ANSEL0 = 0;
+"86
 [e = _ANSEL0 -> -> 0 `i `uc ]
-[; ;moteur.c: 88: QEICONbits.VELM = 1;
-"88
-[e = . . _QEICONbits 5 7 -> -> 1 `i `uc ]
-[; ;moteur.c: 89: QEICONbits.QERR = 0;
+[; ;moteur.c: 89: QEICONbits.VELM = 1;
 "89
-[e = . . _QEICONbits 2 3 -> -> 0 `i `uc ]
-[; ;moteur.c: 90: QEICONbits.QEIM = 0b110;
+[e = . . _QEICONbits 5 7 -> -> 1 `i `uc ]
+[; ;moteur.c: 90: QEICONbits.QERR = 0;
 "90
-[e = . . _QEICONbits 2 1 -> -> 6 `i `uc ]
-[; ;moteur.c: 91: QEICONbits.PDEC = 0b01;
+[e = . . _QEICONbits 2 3 -> -> 0 `i `uc ]
+[; ;moteur.c: 91: QEICONbits.QEIM = 0b110;
 "91
+[e = . . _QEICONbits 2 1 -> -> 6 `i `uc ]
+[; ;moteur.c: 92: QEICONbits.PDEC = 0b01;
+"92
 [e = . . _QEICONbits 2 0 -> -> 1 `i `uc ]
-[; ;moteur.c: 96: DFLTCONbits.FLT3EN = 1;
-"96
-[e = . . _DFLTCONbits 0 3 -> -> 1 `i `uc ]
-[; ;moteur.c: 97: DFLTCONbits.FLT2EN = 1;
+[; ;moteur.c: 97: DFLTCONbits.FLT3EN = 1;
 "97
-[e = . . _DFLTCONbits 0 2 -> -> 1 `i `uc ]
-[; ;moteur.c: 98: DFLTCONbits.FLTCK = 0b010;
+[e = . . _DFLTCONbits 0 3 -> -> 1 `i `uc ]
+[; ;moteur.c: 98: DFLTCONbits.FLT2EN = 1;
 "98
+[e = . . _DFLTCONbits 0 2 -> -> 1 `i `uc ]
+[; ;moteur.c: 99: DFLTCONbits.FLTCK = 0b010;
+"99
 [e = . . _DFLTCONbits 0 0 -> -> 2 `i `uc ]
-[; ;moteur.c: 100: POSCNTH = 0;
-"100
-[e = _POSCNTH -> -> 0 `i `uc ]
-[; ;moteur.c: 101: POSCNTL = 0;
+[; ;moteur.c: 101: POSCNTH = 0;
 "101
+[e = _POSCNTH -> -> 0 `i `uc ]
+[; ;moteur.c: 102: POSCNTL = 0;
+"102
 [e = _POSCNTL -> -> 0 `i `uc ]
-[; ;moteur.c: 103: MAXCNTH = (uint8_t) (((4 * 2000) - 1) / 256);
-"103
-[e = _MAXCNTH -> / - * -> 4 `i -> 2000 `i -> 1 `i -> 256 `i `uc ]
-[; ;moteur.c: 104: MAXCNTL = (uint8_t) (((4 * 2000) - 1) % 256);
+[; ;moteur.c: 104: MAXCNTH = (uint8_t) (((4 * 2000) - 1) / 256);
 "104
+[e = _MAXCNTH -> / - * -> 4 `i -> 2000 `i -> 1 `i -> 256 `i `uc ]
+[; ;moteur.c: 105: MAXCNTL = (uint8_t) (((4 * 2000) - 1) % 256);
+"105
 [e = _MAXCNTL -> % - * -> 4 `i -> 2000 `i -> 1 `i -> 256 `i `uc ]
-[; ;moteur.c: 106: position.ancien = 0;
-"106
-[e = . _position 0 -> -> 0 `i `ui ]
-[; ;moteur.c: 107: position.ecart = 0;
-"107
-[e = . _position 2 -> -> 0 `i `l ]
-[; ;moteur.c: 108: position.nouvelle = 0;
-"108
-[e = . _position 1 -> -> 0 `i `ui ]
-[; ;moteur.c: 109: }
-"109
+[; ;moteur.c: 110: }
+"110
+[e :UE 459 ]
+}
+"141
+[v _obtention_angle `(d ~T0 @X0 1 ef1`ui ]
+"142
+{
+[; ;moteur.c: 141: double obtention_angle (uint16_t position)
+[; ;moteur.c: 142: {
+[e :U _obtention_angle ]
+"141
+[v _position `ui ~T0 @X0 1 r1 ]
+"142
+[f ]
+"143
+[v _angle `d ~T0 @X0 1 a ]
+[; ;moteur.c: 143: double angle;
+[; ;moteur.c: 144: angle = (double) ((position) / 7999.);
+"144
+[e = _angle / -> _position `d .7999. ]
+[; ;moteur.c: 145: angle *= 360;
+"145
+[e =* _angle -> -> 360 `i `d ]
+[; ;moteur.c: 146: return angle;
+"146
+[e ) _angle ]
+[e $UE 460  ]
+[; ;moteur.c: 147: }
+"147
 [e :UE 460 ]
 }
-"112
-[v _get_valeur_codeur `(v ~T0 @X0 1 ef ]
-"113
-{
-[; ;moteur.c: 112: void get_valeur_codeur (void)
-[; ;moteur.c: 113: {
-[e :U _get_valeur_codeur ]
-[f ]
-"114
-[v F4886 `l ~T0 @X0 1 s res ]
-[i F4886
--> -> 0 `i `l
-]
-"115
-[v _etat_overflow `i ~T0 @X0 1 a ]
-[; ;moteur.c: 114: static int32_t res = 0;
-[; ;moteur.c: 115: int etat_overflow;
-[; ;moteur.c: 117: etat_overflow = OVERFLOW_CODEUR;
-"117
-[e = _etat_overflow -> _OVERFLOW_CODEUR `i ]
-[; ;moteur.c: 118: OVERFLOW_CODEUR = 0;
-"118
-[e = _OVERFLOW_CODEUR -> -> 0 `i `c ]
-[; ;moteur.c: 120: position.nouvelle = POSCNTH * 256 + POSCNTL;
-"120
-[e = . _position 1 -> + * -> _POSCNTH `i -> 256 `i -> _POSCNTL `i `ui ]
-[; ;moteur.c: 122: res = (int32_t)( (int32_t) position.nouvelle - (int32_t) position.ancien );
-"122
-[e = F4886 - -> . _position 1 `l -> . _position 0 `l ]
-[; ;moteur.c: 123: if (etat_overflow != 0)
-"123
-[e $ ! != _etat_overflow -> 0 `i 462  ]
-[; ;moteur.c: 124: {
-"124
-{
-[; ;moteur.c: 125: res+= (int32_t) etat_overflow * (((4 * 2000) - 1));
-"125
-[e =+ F4886 * -> _etat_overflow `l -> - * -> 4 `i -> 2000 `i -> 1 `i `l ]
-"126
-}
-[e :U 462 ]
-[; ;moteur.c: 126: }
-[; ;moteur.c: 128: position.ecart = res;
-"128
-[e = . _position 2 F4886 ]
-[; ;moteur.c: 129: position.ancien = position.nouvelle;
-"129
-[e = . _position 0 . _position 1 ]
-[; ;moteur.c: 130: }
-"130
-[e :UE 461 ]
-}
-"132
-[v _conversion_angle `(v ~T0 @X0 1 ef ]
-"133
-{
-[; ;moteur.c: 132: void conversion_angle ()
-[; ;moteur.c: 133: {
-[e :U _conversion_angle ]
-[f ]
-"134
-[v _angle `d ~T0 @X0 1 a ]
-[; ;moteur.c: 134: double angle;
-[; ;moteur.c: 135: angle = (double) ((position.nouvelle) / 8000.);
-"135
-[e = _angle / -> . _position 1 `d .8000. ]
-[; ;moteur.c: 136: angle *= 360;
-"136
-[e =* _angle -> -> 360 `i `d ]
-[; ;moteur.c: 137: position.angle = angle;
-"137
-[e = . _position 3 _angle ]
-[; ;moteur.c: 138: }
-"138
-[e :UE 463 ]
-}
-"140
-[v _obtention_angle `(d ~T0 @X0 1 ef1`ui ]
-"141
-{
-[; ;moteur.c: 140: double obtention_angle (uint16_t position)
-[; ;moteur.c: 141: {
-[e :U _obtention_angle ]
-[v _position `ui ~T0 @X0 1 r1 ]
-[f ]
-"142
-[v _angle `d ~T0 @X0 1 a ]
-[; ;moteur.c: 142: double angle;
-[; ;moteur.c: 143: angle = (double) ((position) / 7999.);
-"143
-[e = _angle / -> _position `d .7999. ]
-[; ;moteur.c: 144: angle *= 360;
-"144
-[e =* _angle -> -> 360 `i `d ]
-[; ;moteur.c: 145: return angle;
-"145
-[e ) _angle ]
-[e $UE 464  ]
-[; ;moteur.c: 146: }
-"146
-[e :UE 464 ]
-}
-"148
-[v _init_capteur `(v ~T0 @X0 1 ef ]
 "149
+[v _init_capteur `(v ~T0 @X0 1 ef ]
+"150
 {
-[; ;moteur.c: 148: void init_capteur()
-[; ;moteur.c: 149: {
+[; ;moteur.c: 149: void init_capteur()
+[; ;moteur.c: 150: {
 [e :U _init_capteur ]
 [f ]
-[; ;moteur.c: 150: capteur.angle[0] = 0.;
-"150
-[e = *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux .0. ]
-[; ;moteur.c: 151: capteur.angle[1] = 0.;
+[; ;moteur.c: 151: capteur.angle[0] = 0.;
 "151
-[e = *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux .0. ]
-[; ;moteur.c: 152: capteur.angle[2] = 0.;
+[e = *U + &U . _capteur 3 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux .0. ]
+[; ;moteur.c: 152: capteur.angle[1] = 0.;
 "152
-[e = *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux .0. ]
-[; ;moteur.c: 153: capteur.ancien_angle[0] = 0.;
+[e = *U + &U . _capteur 3 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux .0. ]
+[; ;moteur.c: 153: capteur.angle[2] = 0.;
 "153
-[e = *U + &U . _capteur 4 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux .0. ]
-[; ;moteur.c: 154: capteur.ancien_angle[1] = 0.;
+[e = *U + &U . _capteur 3 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 3 `ui `ux .0. ]
+[; ;moteur.c: 154: capteur.flag_capteur = 0;
 "154
-[e = *U + &U . _capteur 4 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux .0. ]
-[; ;moteur.c: 155: capteur.ancien_angle[2] = 0.;
-"155
-[e = *U + &U . _capteur 4 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux .0. ]
-[; ;moteur.c: 156: capteur.flag_capteur = 0;
-"156
 [e = . _capteur 2 -> -> 0 `i `uc ]
-[; ;moteur.c: 157: capteur.indice = 0;
+[; ;moteur.c: 155: capteur.indice = 0;
+"155
+[e = . _capteur 5 -> -> 0 `i `uc ]
+[; ;moteur.c: 156: capteur.position[0] = 0;
+"156
+[e = *U + &U . _capteur 4 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux -> -> 0 `i `ui ]
+[; ;moteur.c: 157: capteur.position[1] = 0;
 "157
-[e = . _capteur 6 -> -> 0 `i `uc ]
-[; ;moteur.c: 158: capteur.position[0] = 0;
+[e = *U + &U . _capteur 4 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux -> -> 0 `i `ui ]
+[; ;moteur.c: 158: capteur.position[2] = 0;
 "158
-[e = *U + &U . _capteur 5 * -> -> -> 0 `i `ui `ux -> -> # *U &U . _capteur 5 `ui `ux -> -> 0 `i `ui ]
-[; ;moteur.c: 159: capteur.position[1] = 0;
+[e = *U + &U . _capteur 4 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 4 `ui `ux -> -> 0 `i `ui ]
+[; ;moteur.c: 159: capteur.synchro_debut_tour = 0;
 "159
-[e = *U + &U . _capteur 5 * -> -> -> 1 `i `ui `ux -> -> # *U &U . _capteur 5 `ui `ux -> -> 0 `i `ui ]
-[; ;moteur.c: 160: capteur.position[2] = 0;
-"160
-[e = *U + &U . _capteur 5 * -> -> -> 2 `i `ui `ux -> -> # *U &U . _capteur 5 `ui `ux -> -> 0 `i `ui ]
-[; ;moteur.c: 161: capteur.synchro_debut_tour = 0;
-"161
 [e = . _capteur 1 -> -> 0 `i `uc ]
-[; ;moteur.c: 162: capteur.tour_en_cours = 0;
-"162
+[; ;moteur.c: 160: capteur.tour_en_cours = 0;
+"160
 [e = . _capteur 0 -> -> 0 `i `uc ]
-[; ;moteur.c: 163: capteur.id_balise_mere = 0;
-"163
-[e = . _capteur 7 -> -> 0 `i `c ]
 [; ;moteur.c: 165: }
 "165
-[e :UE 465 ]
+[e :UE 461 ]
 }

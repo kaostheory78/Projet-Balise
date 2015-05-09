@@ -30,7 +30,7 @@ void init_system (void)
     config_uart ();
     config_pwm();
     config_QEI();
-    reglage_PID();
+    //reglage_PID();
 
     init_capteur();
 }
@@ -49,7 +49,8 @@ void init_timer_0 () //1ms
     T0CONbits.T0CS = 0;         // INternal Clock FOSC/4 = 4 Mhz
     T0CONbits.PSA = 0;          // Prescaler actif
 
-    TMR0L = 131;                  //32 * 125 * 1/4Mhz = 1 ms
+    //TMR0L = 131;                  //32 * 125 * 1/4Mhz = 1 ms
+    TMR0 = 32750; //100 ms
 
     TMR0ON = 1;                 //TIMER 0 activé
 }

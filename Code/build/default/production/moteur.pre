@@ -5859,97 +5859,79 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 28 "moteur.h"
+# 48 "triangulation.h"
 typedef struct
 {
-uint16_t ancien;
-uint16_t nouvelle;
-int32_t ecart;
-double angle;
-}_position;
+double x;
+double y;
+}_coordonees;
 
+typedef struct
+{
+_coordonees _1_2;
+_coordonees _2_3;
+_coordonees _3_1;
+}_cercle;
+
+typedef struct
+{
+_cercle cercle;
+double cotan_1_2;
+double cotan_2_3;
+double cotan_3_1;
+double D;
+double K;
+
+}_triangulation;
+
+# 77
+void triangulation (_coordonees *c, double angle1, double angle2, double angle3);
+double cotangeante (double angle);
+double saturation (double valeur, double maximum);
+double conversion_degre_radian (double angle);
+
+void affichage_position ();
+double get_distance (_coordonees ancien, _coordonees actu);
+
+# 39 "moteur.h"
 typedef struct
 {
 bool tour_en_cours;
 bool synchro_debut_tour;
 bool flag_capteur;
 double angle[3];
-double ancien_angle[3];
 uint16_t position[3];
 uint8_t indice;
-int8_t id_balise_mere;
+_coordonees c;
+
 }_capteur;
 
-# 52
+# 55
 void config_QEI ();
 void get_valeur_codeur (void);
 void conversion_angle ();
 void init_capteur();
 double obtention_angle (uint16_t position);
 
-# 46 "asserv.h"
-typedef struct
-{
-double KP;
-double KI;
-double KD;
-}_coef_PID;
-
-typedef struct
-{
-double consigne;
-double actuelle;
-}_systeme_asserv;
-
-typedef struct
-{
-double actuelle;
-double integralle;
-double precedente;
-}_erreur;
-
-# 70
-void mesure_vitesse (void);
-void asserv (void);
-double fonction_PID (void);
-void reglage_PID (void);
-void saturation_erreur_integralle_vitesse (void);
-void ecretage_consignes(double *commande);
-
-# 32 "triangulation.h"
-void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
-double Cot (double angle);
-double saturation (double valeur, double maximum);
-double conversion_degre_radian (double angle);
-
-double modulo_angle (double angle);
-int8_t retrouver_balise_mere ();
-int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
-void inversion_balises(uint8_t id_balise_mere);
-void modulo_id_balise_mere ();
-check_divergence_position (double ancien_x, double ancien_y, double x, double y);
-void affichage_position (double x, double y);
-double get_distance (double ancien_x, double ancien_y, double x, double y);
-
 # 145 "system.h"
 extern _buf uart_logiciel;
 extern _uart_recption uart_reception;
-extern _position position;
+
 extern int8_t OVERFLOW_CODEUR;
 
 extern uint8_t flag_cpateur;
 extern _capteur capteur;
 
-# 164
+# 165
 void init_system (void);
 
-# 170
+# 171
 void init_clock(void);
 
-# 177
+# 178
 void ConfigInterrupt (void);
 
-# 183
+# 184
 void ConfigPorts (void);
 
 
@@ -5959,12 +5941,12 @@ void init_timer_1 ();
 void envoit_pwm (double valeur);
 void config_pwm ();
 
-# 18 "moteur.c"
-_position position;
+# 19 "moteur.c"
 _capteur capteur;
+
 int8_t OVERFLOW_CODEUR;
 
-# 27
+# 28
 void config_pwm ()
 {
 PTCON0bits.PTOPS = 0;
@@ -6044,40 +6026,12 @@ POSCNTL = 0;
 MAXCNTH = (uint8_t) (((4 * 2000) - 1) / 256);
 MAXCNTL = (uint8_t) (((4 * 2000) - 1) % 256);
 
-position.ancien = 0;
-position.ecart = 0;
-position.nouvelle = 0;
+
+
+
 }
 
-
-void get_valeur_codeur (void)
-{
-static int32_t res = 0;
-int etat_overflow;
-
-etat_overflow = OVERFLOW_CODEUR;
-OVERFLOW_CODEUR = 0;
-
-position.nouvelle = POSCNTH * 256 + POSCNTL;
-
-res = (int32_t)( (int32_t) position.nouvelle - (int32_t) position.ancien );
-if (etat_overflow != 0)
-{
-res+= (int32_t) etat_overflow * (((4 * 2000) - 1));
-}
-
-position.ecart = res;
-position.ancien = position.nouvelle;
-}
-
-void conversion_angle ()
-{
-double angle;
-angle = (double) ((position.nouvelle) / 8000.);
-angle *= 360;
-position.angle = angle;
-}
-
+# 141
 double obtention_angle (uint16_t position)
 {
 double angle;
@@ -6091,9 +6045,6 @@ void init_capteur()
 capteur.angle[0] = 0.;
 capteur.angle[1] = 0.;
 capteur.angle[2] = 0.;
-capteur.ancien_angle[0] = 0.;
-capteur.ancien_angle[1] = 0.;
-capteur.ancien_angle[2] = 0.;
 capteur.flag_capteur = 0;
 capteur.indice = 0;
 capteur.position[0] = 0;
@@ -6101,6 +6052,8 @@ capteur.position[1] = 0;
 capteur.position[2] = 0;
 capteur.synchro_debut_tour = 0;
 capteur.tour_en_cours = 0;
-capteur.id_balise_mere = 0;
+
+
+
 
 }

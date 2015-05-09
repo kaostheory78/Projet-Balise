@@ -5859,97 +5859,79 @@ void interrupt_RX();
 # 103
 void interrupt_TX();
 
-# 28 "moteur.h"
+# 48 "triangulation.h"
 typedef struct
 {
-uint16_t ancien;
-uint16_t nouvelle;
-int32_t ecart;
-double angle;
-}_position;
+double x;
+double y;
+}_coordonees;
 
+typedef struct
+{
+_coordonees _1_2;
+_coordonees _2_3;
+_coordonees _3_1;
+}_cercle;
+
+typedef struct
+{
+_cercle cercle;
+double cotan_1_2;
+double cotan_2_3;
+double cotan_3_1;
+double D;
+double K;
+
+}_triangulation;
+
+# 77
+void triangulation (_coordonees *c, double angle1, double angle2, double angle3);
+double cotangeante (double angle);
+double saturation (double valeur, double maximum);
+double conversion_degre_radian (double angle);
+
+void affichage_position ();
+double get_distance (_coordonees ancien, _coordonees actu);
+
+# 39 "moteur.h"
 typedef struct
 {
 bool tour_en_cours;
 bool synchro_debut_tour;
 bool flag_capteur;
 double angle[3];
-double ancien_angle[3];
 uint16_t position[3];
 uint8_t indice;
-int8_t id_balise_mere;
+_coordonees c;
+
 }_capteur;
 
-# 52
+# 55
 void config_QEI ();
 void get_valeur_codeur (void);
 void conversion_angle ();
 void init_capteur();
 double obtention_angle (uint16_t position);
 
-# 46 "asserv.h"
-typedef struct
-{
-double KP;
-double KI;
-double KD;
-}_coef_PID;
-
-typedef struct
-{
-double consigne;
-double actuelle;
-}_systeme_asserv;
-
-typedef struct
-{
-double actuelle;
-double integralle;
-double precedente;
-}_erreur;
-
-# 70
-void mesure_vitesse (void);
-void asserv (void);
-double fonction_PID (void);
-void reglage_PID (void);
-void saturation_erreur_integralle_vitesse (void);
-void ecretage_consignes(double *commande);
-
-# 32 "triangulation.h"
-void triangulation (double *x, double *y, double angle1, double angle2, double angle3);
-double Cot (double angle);
-double saturation (double valeur, double maximum);
-double conversion_degre_radian (double angle);
-
-double modulo_angle (double angle);
-int8_t retrouver_balise_mere ();
-int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle );
-void inversion_balises(uint8_t id_balise_mere);
-void modulo_id_balise_mere ();
-check_divergence_position (double ancien_x, double ancien_y, double x, double y);
-void affichage_position (double x, double y);
-double get_distance (double ancien_x, double ancien_y, double x, double y);
-
 # 145 "system.h"
 extern _buf uart_logiciel;
 extern _uart_recption uart_reception;
-extern _position position;
+
 extern int8_t OVERFLOW_CODEUR;
 
 extern uint8_t flag_cpateur;
 extern _capteur capteur;
 
-# 164
+# 165
 void init_system (void);
 
-# 170
+# 171
 void init_clock(void);
 
-# 177
+# 178
 void ConfigInterrupt (void);
 
-# 183
+# 184
 void ConfigPorts (void);
 
 
@@ -5985,7 +5967,7 @@ else if ( PIR3bits.IC3DRIF == 1 && 0b0 == 1 && priorite == 0b1)
 {
 interuption_QEI_sens();
 }
-else if ( INTCONbits.TMR0IF == 1 && 0b0 == 1 && priorite == 0b1)
+else if ( INTCONbits.TMR0IF == 1 && 0b1 == 1 && priorite == 0b0)
 {
 interruption_timer0();
 }
@@ -6018,7 +6000,10 @@ interrupt_TX();
 void interruption_timer0 ()
 {
 INTCONbits.TMR0IF = 0;
-TMR0L = 131;
+
+
+
+TMR0 = 32750;
 
 
 }
@@ -6092,7 +6077,7 @@ capteur.synchro_debut_tour = 0;
 else
 capteur.tour_en_cours = 0;
 
-# 191
+# 194
 }
 
 void interuption_QEI_sens()

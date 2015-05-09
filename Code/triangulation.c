@@ -21,37 +21,43 @@
 /******************************************************************************/
 /******************************************************************************/
 
-void triangulation (double *x, double *y, double angle1, double angle2, double angle3)
+void triangulation (_coordonees *c, double angle1, double angle2, double angle3)
 {
-    const double x1 = 2062., y1 = 3062., x2 = -62., y2 = 3062., x3 = 1000., y3 = -62.;
+    _triangulation t;
 
-    double cot_12 = Cot( angle2 - angle1 ) ;
-    double cot_23 = Cot( angle3 - angle2 ) ;
-    cot_12 = saturation( cot_12 , COT_MAX ) ;
-    cot_23 = saturation( cot_23 , COT_MAX ) ;
-    double cot_31 = ( 1.0 - cot_12 * cot_23 ) / ( cot_12 + cot_23 ) ;
-    cot_31 = saturation( cot_31 , COT_MAX ) ;
-    double x1_ = x1 - x2 , y1_ = y1 - y2 , x3_ = x3 - x2 , y3_ = y3 - y2 ;
-    double c12x = x1_ + cot_12 * y1_ ;
-    double c12y = y1_ - cot_12 * x1_ ;
+    // Calcul des cotangeantes :
+    t.cotan_1_2= cotangeante( angle2 - angle1 ) ;
+    t.cotan_2_3 = cotangeante( angle3 - angle2 ) ;
 
-    double c23x = x3_ - cot_23 * y3_ ;
-    double c23y = y3_ + cot_23 * x3_ ;
+    // Saturation des valeurs pour éviter les overflow
+    t.cotan_1_2 = saturation( t.cotan_1_2 , COT_MAX ) ;
+    t.cotan_2_3 = saturation( t.cotan_2_3 , COT_MAX ) ;
 
-    double c31x = (x3_ + x1_) + cot_31 * (y3_ - y1_) ;
-    double c31y = (y3_ + y1_) - cot_31 * (x3_ - x1_) ;
-    double k31 = (x3_ * x1_) + (y3_ * y1_) + cot_31 * ( (y3_ * x1_) - (x3_ * y1_) ) ;
+    t.cotan_3_1 = ( 1.0 - t.cotan_1_2 * t.cotan_2_3 ) / ( t.cotan_1_2 + t.cotan_2_3 ) ;
+    t.cotan_3_1 = saturation( t.cotan_3_1 , COT_MAX ) ;
 
-    double D = (c12x - c23x) * (c23y - c31y) - (c23x - c31x) * (c12y - c23y) ;
-    double invD = 1.0 / D ;
-    double K = k31 * invD ;
+    // Calcul du centre du cercle circonscrit du triangle formé par la balise 1 et 2
+    t.cercle._1_2.x = ECART_BALISE_X1_X2 + t.cotan_1_2 * ECART_BALISE_Y1_Y2 ;
+    t.cercle._1_2.y = ECART_BALISE_Y1_Y2 - t.cotan_1_2 * ECART_BALISE_X1_X2 ;
 
-    *x = K * (c12y - c23y) + x2 ;
-    *y = K * (c23x - c12x) + y2 ;
-    //return invD ; /* return 1/D */
+    // Calcul du centre du cercle circonscrit du triangle formé par la balise 2 et 3
+    t.cercle._2_3.x = ECART_BALISE_X2_X3 - t.cotan_2_3 * ECART_BALISE_Y2_Y3;
+    t.cercle._2_3.y = ECART_BALISE_Y2_Y3 + t.cotan_2_3 * ECART_BALISE_X2_X3;
+
+    // Calcul du centre du cercle circonscrit du triangle formé par la balise 3 et 1
+    t.cercle._3_1.x = (ECART_BALISE_X2_X3 + ECART_BALISE_X1_X2) + t.cotan_3_1 * (ECART_BALISE_Y2_Y3 - ECART_BALISE_Y1_Y2);
+    t.cercle._3_1.y = (ECART_BALISE_Y2_Y3 + ECART_BALISE_Y1_Y2) - t.cotan_3_1 * (ECART_BALISE_X2_X3 - ECART_BALISE_X1_X2);
+
+    t.K = (ECART_BALISE_X2_X3 * ECART_BALISE_X1_X2) + (ECART_BALISE_Y2_Y3 * ECART_BALISE_Y1_Y2) + t.cotan_3_1 * ( (ECART_BALISE_Y2_Y3 * ECART_BALISE_X1_X2) - (ECART_BALISE_X2_X3 * ECART_BALISE_Y1_Y2));
+
+    t.D = (t.cercle._1_2.x - t.cercle._2_3.x) * (t.cercle._2_3.y - t.cercle._3_1.y) - (t.cercle._2_3.x - t.cercle._3_1.x) * (t.cercle._1_2.y - t.cercle._2_3.y);
+    t.K /= t.D;
+
+    c->x = t.K * (t.cercle._1_2.y - t.cercle._2_3.y) + X_BALISE_2 ;
+    c->y = t.K * (t.cercle._2_3.x - t.cercle._1_2.x) + Y_BALISE_2 ;
 }
 
-double Cot (double angle)
+double cotangeante (double angle)
 {
     angle = conversion_degre_radian(angle);
     return (1 / tan(angle));
@@ -72,117 +78,66 @@ double conversion_degre_radian (double angle)
     return ((angle / 180.) * 3.14159265);
 }
 
-int8_t check_divergence_angle ( double ancien_angle, double nouvel_angle )
-{
-    double derive = modulo_angle(nouvel_angle - ancien_angle);
 
-    if (derive < -20. && derive < 0.)
-    {
-        return -1;
-    }
-    else if (derive > 20. && derive > 0.)
-    {
-        return 1;
-    }
-    else
-        return OK;
-
-}
-
-check_divergence_position (double ancien_x, double ancien_y, double x, double y)
-{
-    double distance = get_distance(ancien_x, ancien_y, x, y);
-
-    if (distance < 200.)
-        return OK;
-    else
-        return -1;
-}
-
-double get_distance (double ancien_x, double ancien_y, double x, double y)
+double get_distance (_coordonees ancien, _coordonees actu)
 {
     double delta_x, delta_y, distance;
 
-    delta_x = ancien_x - x;
-    delta_y = ancien_y - y;
+    delta_x = ancien.x - actu.x;
+    delta_y = ancien.y - actu.y;
     distance = sqrt (delta_x * delta_x + delta_y * delta_y);
 
     return distance;
 }
 
 
-
-int8_t retrouver_balise_mere ()
+void affichage_position ()
 {
-    if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[0]) != OK)
+
+    int i, j;
+    static int compteur = 0;
+
+    if (compteur == 2)
     {
-        if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[1]) == OK)
+        int _x = (int)(capteur.c.x / 100.);
+        int _y = (int)(capteur.c.y / 100.);
+
+        PutsUART(UART_BLUETOOTH, "X ");
+        for (i = 0; i < 60; i++)
+                PutsUART(UART_BLUETOOTH, "~");
+        PutsUART(UART_BLUETOOTH, "\n\r");
+
+        for (i = 0; i < 20; i++)
         {
-            capteur.id_balise_mere ++;
-            modulo_id_balise_mere();
-            inversion_balises(1);
-
-            PutsUART(UART_BLUETOOTH, "\n\r ROTATION A GAUCHE \n\r");
-            return OK;
-
+                PutsUART(UART_BLUETOOTH, " |");
+                for (j = 0; j < 30; j++)
+                {
+                        if (_x == i  && _y == j)
+                                PutsUART(UART_BLUETOOTH, "O ");
+                        else
+                                PutsUART(UART_BLUETOOTH, "- ");
+                }
+                PutsUART(UART_BLUETOOTH, "|");
+                if (i == 10)
+                        PutsUART(UART_BLUETOOTH, "X");
+                PutsUART(UART_BLUETOOTH, "\n\r");
         }
-        else if (check_divergence_angle(capteur.ancien_angle[0], capteur.angle[2]) == OK)
-        {
-            capteur.id_balise_mere --;
-            modulo_id_balise_mere();
-            inversion_balises(2);
-            PutsUART(UART_BLUETOOTH, "\n\r ROTATION A DROITE \n\r");
-            return OK;
-        }
-        else
-            return _ERREUR;
+
+        PutsUART(UART_BLUETOOTH, "X ");
+        for (i = 0; i < 60; i++)
+                PutsUART(UART_BLUETOOTH, "~");
+        PutsUART(UART_BLUETOOTH, "\n\r");
+
+
+       PutIntUART(UART_BLUETOOTH, (int16_t) capteur.c.x);
+        PutsUART(UART_BLUETOOTH, "\n\r");
+        PutIntUART(UART_BLUETOOTH, (int16_t) capteur.c.y);
+        PutsUART(UART_BLUETOOTH, "\n\r");
+
+        compteur = 0;
     }
-    else
-        return OK;
-}
 
-double modulo_angle (double angle)
-{
-    if (angle < -180.)
-        angle+= 360.;
-    else if (angle > 180.)
-        angle -= 360.;
+    compteur++;
 
-    return angle;
-}
-
-void inversion_balises(uint8_t id_balise_mere)
-{
-    double temp;
-    if (id_balise_mere == 1)
-    {
-        temp = capteur.angle[0];
-        capteur.angle[0] = capteur.angle[1];
-        capteur.angle[1] = capteur.angle[2];
-        capteur.angle[2] = temp;
-    }
-    else if (id_balise_mere == 2)
-    {
-        temp = capteur.angle[0];
-        capteur.angle[0] = capteur.angle[2];
-        capteur.angle[2] = capteur.angle[1];
-        capteur.angle[1] = temp;
-    }
-}
-
-void modulo_id_balise_mere ()
-{
-    if (capteur.id_balise_mere == 3)
-        capteur.id_balise_mere = 0;
-    else if (capteur.id_balise_mere == -1)
-        capteur.id_balise_mere = 2;
-}
-
-void affichage_position (double x, double y)
-{
-    PutsUART(UART_BLUETOOTH, "Position : X : ");
-    PutIntUART(UART_BLUETOOTH, (int16_t) x);
-    PutsUART(UART_BLUETOOTH, " Y : ");
-    PutIntUART(UART_BLUETOOTH, (int16_t) y);
-    PutsUART(UART_BLUETOOTH, "\r");
+    
 }

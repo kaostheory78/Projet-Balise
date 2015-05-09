@@ -15,8 +15,9 @@
 #include "system.h"
 
 
-_position position;
+//_position position;
 _capteur capteur;
+//_coordonees _c;
 int8_t  OVERFLOW_CODEUR;
 
 /******************************************************************************/
@@ -103,43 +104,43 @@ void config_QEI ()
     MAXCNTH = (uint8_t) (NOMBRE_DE_TICKS / 256);
     MAXCNTL = (uint8_t) (NOMBRE_DE_TICKS % 256);
 
-    position.ancien = 0;
-    position.ecart = 0;
-    position.nouvelle = 0;
+    //position.ancien = 0;
+    //position.ecart = 0;
+    //position.nouvelle = 0;
 }
 
 
-void get_valeur_codeur (void)
-{
-    static int32_t res = 0;
-    int etat_overflow;
+//void get_valeur_codeur (void)
+//{
+//    static int32_t res = 0;
+//    int etat_overflow;
+//
+//    etat_overflow = OVERFLOW_CODEUR;
+//    OVERFLOW_CODEUR = PAS_D_OVERFLOW_CODEUR;
+//
+//    position.nouvelle =  POSCNTH * 256 + POSCNTL;
+//
+//    res = (int32_t)( (int32_t) position.nouvelle - (int32_t) position.ancien );
+//    if (etat_overflow != PAS_D_OVERFLOW_CODEUR)
+//    {
+//        res+= (int32_t) etat_overflow * (NOMBRE_DE_TICKS);
+//    }
+//
+//    position.ecart = res;
+//    position.ancien = position.nouvelle;
+//}
 
-    etat_overflow = OVERFLOW_CODEUR;
-    OVERFLOW_CODEUR = PAS_D_OVERFLOW_CODEUR;
-
-    position.nouvelle =  POSCNTH * 256 + POSCNTL;
-
-    res = (int32_t)( (int32_t) position.nouvelle - (int32_t) position.ancien );
-    if (etat_overflow != PAS_D_OVERFLOW_CODEUR)
-    {
-        res+= (int32_t) etat_overflow * (NOMBRE_DE_TICKS);
-    }
-
-    position.ecart = res;
-    position.ancien = position.nouvelle;
-}
-
-void conversion_angle ()
-{
-    double angle;
-    angle  = (double) ((position.nouvelle) / 8000.);
-    angle *= 360;
-    position.angle = angle;
-}
+//void conversion_angle ()
+//{
+//    double angle;
+//    angle  = (double) ((position.nouvelle) / 8000.);
+//    angle *= 360;
+//    position.angle = angle;
+//}
 
 double obtention_angle (uint16_t position)
 {
-        double angle;
+    double angle;
     angle  = (double) ((position) / 7999.);
     angle *= 360;
     return angle;
@@ -150,9 +151,6 @@ void init_capteur()
     capteur.angle[0] = 0.;
     capteur.angle[1] = 0.;
     capteur.angle[2] = 0.;
-    capteur.ancien_angle[0] = 0.;
-    capteur.ancien_angle[1] = 0.;
-    capteur.ancien_angle[2] = 0.;
     capteur.flag_capteur = false;
     capteur.indice = 0;
     capteur.position[0] = 0;
@@ -160,6 +158,8 @@ void init_capteur()
     capteur.position[2] = 0;
     capteur.synchro_debut_tour = false;
     capteur.tour_en_cours = false;
-    capteur.id_balise_mere = 0;
+
+    //_c.x = 0;
+    //_c.y = 0;
 
 }
