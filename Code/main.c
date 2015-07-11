@@ -124,6 +124,10 @@ int main(int argc, char** argv)
 
     while(1)
     {
+
+        static bool led = true;
+        led = !led;
+        LED0 = led;
         static _coordonees c[3];
         static double distance[3];
         static bool premiere_fois = true;

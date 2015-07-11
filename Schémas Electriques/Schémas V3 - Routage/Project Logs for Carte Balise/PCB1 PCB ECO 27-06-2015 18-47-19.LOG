@@ -1,0 +1,275 @@
+Removed Pin From Net: NetName=GND Pin=C1-1
+Removed Pin From Net: NetName=GND Pin=C2-1
+Removed Pin From Net: NetName=NetC4_1 Pin=C4-1
+Removed Pin From Net: NetName=NetC4_2 Pin=C4-2
+Removed Pin From Net: NetName=GND Pin=C9-1
+Removed Pin From Net: NetName=GND Pin=C10-1
+Removed Pin From Net: NetName=GND Pin=C21-2
+Removed Pin From Net: NetName=GND Pin=C22-2
+Removed Pin From Net: NetName=GND Pin=C23-2
+Removed Pin From Net: NetName=NetCap3_2 Pin=Cap3-2
+Removed Pin From Net: NetName=NetC4_2 Pin=J1-1
+Removed Pin From Net: NetName=GND Pin=J3-2
+Removed Pin From Net: NetName=GND Pin=J4-1
+Removed Pin From Net: NetName=GND Pin=J4-2
+Removed Pin From Net: NetName=12V Pin=J4-4
+Removed Pin From Net: NetName=GND Pin=J5-1
+Removed Pin From Net: NetName=GND Pin=J5-2
+Removed Pin From Net: NetName=12V Pin=J5-4
+Removed Pin From Net: NetName=GND Pin=J6-1
+Removed Pin From Net: NetName=GND Pin=J6-2
+Removed Pin From Net: NetName=12V Pin=J6-4
+Removed Pin From Net: NetName=GND Pin=P?-2
+Removed Pin From Net: NetName=GND Pin=R17-1
+Removed Pin From Net: NetName=GND Pin=R21-1
+Removed Pin From Net: NetName=3.3V Pin=R30-2
+Removed Pin From Net: NetName=GND Pin=R33-2
+Removed Pin From Net: NetName=GND Pin=R39-1
+Removed Pin From Net: NetName=GND Pin=R45-2
+Removed Pin From Net: NetName=3.3V Pin=R48-1
+Removed Pin From Net: NetName=3.3V Pin=R49-2
+Removed Pin From Net: NetName=GND Pin=R62-1
+Removed Pin From Net: NetName=GND Pin=R63-1
+Removed Member From Class: ClassName=Sheet 1 - Micro Member=C3
+Removed Member From Class: ClassName=Sheet 2 - Moteurs Member=C8
+Removed Member From Class: ClassName=Sheet 2 - Moteurs Member=C9
+Removed Member From Class: ClassName=Sheet 2 - Moteurs Member=C10
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=C21
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=C22
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=C23
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=J4
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=J5
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=J6
+Removed Member From Class: ClassName=Sheet 1 - Micro Member=P?
+Removed Member From Class: ClassName=Sheet 2 - Moteurs Member=R17
+Removed Member From Class: ClassName=Sheet 2 - Moteurs Member=R18
+Removed Member From Class: ClassName=Sheet 2 - Moteurs Member=R19
+Removed Member From Class: ClassName=Sheet 2 - Moteurs Member=R20
+Removed Member From Class: ClassName=Sheet 2 - Moteurs Member=R21
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R34
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R35
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R36
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R39
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R40
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R41
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R42
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R45
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R48
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R49
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R50
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R51
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R52
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R53
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R54
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R55
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R56
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R57
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R58
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R59
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R60
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R61
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R62
+Removed Member From Class: ClassName=Sheet 4 - Capteurs Member=R63
+Removed Member From Class: ClassName=Sheet 1 - Micro Member=Y1
+Change Component DesignItemId : Designator=C2 Old DesignItemId=Cap New DesignItemId=Cap2
+Change Component Footprint: Designator=C2 Old Footprint=0805 New Footprint=CAPA_D10_E5
+Change Component Comment : Designator=C2 Old Comment=Cap New Comment=Cap2
+Change Component Designator: OldDesignator=C3 NewDesignator=C1
+Change Component Designator: OldDesignator=C4 NewDesignator=C3
+Change Component Designator: OldDesignator=C5 NewDesignator=C4
+Change Component Designator: OldDesignator=C6 NewDesignator=C5
+Change Component Designator: OldDesignator=C7 NewDesignator=C6
+Change Component Designator: OldDesignator=C11 NewDesignator=C7
+Change Component Designator: OldDesignator=C12 NewDesignator=C8
+Change Component Designator: OldDesignator=C13 NewDesignator=C9
+Change Component Designator: OldDesignator=C14 NewDesignator=C10
+Change Component Designator: OldDesignator=C15 NewDesignator=C11
+Change Component Designator: OldDesignator=C16 NewDesignator=C12
+Change Component Designator: OldDesignator=C17 NewDesignator=C13
+Change Component Designator: OldDesignator=C18 NewDesignator=C14
+Change Component Designator: OldDesignator=C19 NewDesignator=C15
+Change Component Designator: OldDesignator=C20 NewDesignator=C16
+Change Component Designator: OldDesignator=D7 NewDesignator=D5
+Change Component Designator: OldDesignator=D8 NewDesignator=D6
+Change Component Designator: OldDesignator=D9 NewDesignator=D7
+Change Component Designator: OldDesignator=D10 NewDesignator=D8
+Change Component Designator: OldDesignator=R11 NewDesignator=R9
+Change Component Designator: OldDesignator=R12 NewDesignator=R10
+Change Component Designator: OldDesignator=R13 NewDesignator=R11
+Change Component Designator: OldDesignator=R14 NewDesignator=R12
+Change Component Designator: OldDesignator=R15 NewDesignator=R13
+Change Component Designator: OldDesignator=R16 NewDesignator=R14
+Change Component Designator: OldDesignator=R22 NewDesignator=R15
+Change Component Designator: OldDesignator=R23 NewDesignator=R16
+Change Component Designator: OldDesignator=R24 NewDesignator=R17
+Change Component Designator: OldDesignator=R25 NewDesignator=R18
+Change Component Designator: OldDesignator=R26 NewDesignator=R19
+Change Component Designator: OldDesignator=R27 NewDesignator=R20
+Change Component Designator: OldDesignator=R28 NewDesignator=R21
+Change Component Designator: OldDesignator=R29 NewDesignator=R22
+Change Component Designator: OldDesignator=R31 NewDesignator=R24
+Change Component Designator: OldDesignator=R32 NewDesignator=R25
+Change Component Designator: OldDesignator=R33 NewDesignator=R26
+Change Component Designator: OldDesignator=R37 NewDesignator=R28
+Change Component Designator: OldDesignator=R38 NewDesignator=R29
+Change Component Designator: OldDesignator=R39 NewDesignator=R30
+Change Component Designator: OldDesignator=R43 NewDesignator=R23
+Change Component Designator: OldDesignator=R44 NewDesignator=R32
+Change Component Designator: OldDesignator=R46 NewDesignator=R27
+Change Component Designator: OldDesignator=R47 NewDesignator=R31
+Added Component: Designator=Cap4(0805)
+Added Component: Designator=Cap5(0805)
+Added Component: Designator=Cap6(RAD-0.3)
+Added Component: Designator=Cap7(0805)
+Added Component: Designator=Cap8(0805)
+Added Component: Designator=Cap9(0805)
+Added Component: Designator=D3(C0805)
+Added Component: Designator=D4(C0805)
+Added Component: Designator=K1(IQXO-70)
+Added Component: Designator=R7(0805)
+Added Component: Designator=R8(0805)
+Added Component: Designator=U1(TQFP-PT44_N)
+Added Component: Designator=U2(SSOP-28)
+Added Pin To Net: NetName=5V Pin=C2-1
+Added Pin To Net: NetName=GND Pin=C2-2
+Added Pin To Net: NetName=NetC4_1 Pin=C4-1
+Added Pin To Net: NetName=NetC4_2 Pin=C4-2
+Added Pin To Net: NetName=3.3V Pin=Cap3-2
+Added Pin To Net: NetName=GND Pin=Cap4-1
+Added Pin To Net: NetName=GND Pin=Cap3-1
+Added Pin To Net: NetName=NetCap3_2 Pin=Cap3-2
+Added Pin To Net: NetName=5V Pin=Cap6-1
+Added Pin To Net: NetName=GND Pin=Cap6-2
+Added Pin To Net: NetName=GND Pin=Cap7-2
+Added Pin To Net: NetName=5V Pin=Cap8-1
+Added Pin To Net: NetName=GND Pin=Cap8-2
+Added Pin To Net: NetName=5V Pin=Cap9-1
+Added Pin To Net: NetName=GND Pin=Cap9-2
+Added Pin To Net: NetName=GND Pin=D3-2
+Added Pin To Net: NetName=GND Pin=D4-2
+Added Pin To Net: NetName=NetC4_2 Pin=J1-2
+Added Pin To Net: NetName=5V Pin=K1-1
+Added Pin To Net: NetName=GND Pin=K1-2
+Added Pin To Net: NetName=5V Pin=K1-4
+Added Pin To Net: NetName=NetP2_2 Pin=U1-1
+Added Pin To Net: NetName=NetU1_2 Pin=U1-2
+Added Pin To Net: NetName=NetU1_3 Pin=U1-3
+Added Pin To Net: NetName=GND Pin=U1-6
+Added Pin To Net: NetName=NetU1_9 Pin=U1-9
+Added Pin To Net: NetName=NetP3_5 Pin=U1-13
+Added Pin To Net: NetName=NetP3_3 Pin=U1-14
+Added Pin To Net: NetName=NetP3_2 Pin=U1-15
+Added Pin To Net: NetName=GND Pin=U1-16
+Added Pin To Net: NetName=3.3V Pin=U1-17
+Added Pin To Net: NetName=NetP1_1 Pin=U1-18
+Added Pin To Net: NetName=NetP1_4 Pin=U1-21
+Added Pin To Net: NetName=NetP1_5 Pin=U1-22
+Added Pin To Net: NetName=3.3V Pin=U1-28
+Added Pin To Net: NetName=GND Pin=U1-29
+Added Pin To Net: NetName=NetP3_1 Pin=U1-32
+Added Pin To Net: NetName=GND Pin=U1-39
+Added Pin To Net: NetName=3.3V Pin=U1-40
+Added Pin To Net: NetName=NetP2_4 Pin=U1-44
+Added Pin To Net: NetName=5V Pin=U2-4
+Added Pin To Net: NetName=GND Pin=U2-7
+Added Pin To Net: NetName=GND Pin=U2-18
+Added Pin To Net: NetName=5V Pin=U2-20
+Added Pin To Net: NetName=GND Pin=U2-21
+Added Pin To Net: NetName=GND Pin=U2-25
+Added Pin To Net: NetName=GND Pin=U2-26
+Change Net Name : Old Net Name=NetC11_1 New Net Name=NetC7_1
+Change Net Name : Old Net Name=NetC19_2 New Net Name=NetC15_2
+Change Net Name : Old Net Name=NetC20_1 New Net Name=NetC16_1
+Change Net Name : Old Net Name=NetCap3_2 New Net Name=NetCap5_2
+Change Net Name : Old Net Name=NetD7_1 New Net Name=NetD5_1
+Change Net Name : Old Net Name=NetD7_2 New Net Name=NetD5_2
+Change Net Name : Old Net Name=NetD8_1 New Net Name=NetD6_1
+Change Net Name : Old Net Name=NetD9_1 New Net Name=NetD7_1
+Change Net Name : Old Net Name=NetD10_1 New Net Name=NetD8_1
+Change Net Name : Old Net Name=NetR11_2 New Net Name=NetR9_2
+Change Net Name : Old Net Name=NetR14_2 New Net Name=NetR12_2
+Change Net Name : Old Net Name=NetR26_1 New Net Name=NetR19_1
+Change Net Name : Old Net Name=NetR27_2 New Net Name=NetR20_2
+Change Net Name : Old Net Name=NetR29_2 New Net Name=NetR22_2
+Change Net Name : Old Net Name=NetR32_2 New Net Name=NetR25_2
+Change Net Name : Old Net Name=NetR37_1 New Net Name=NetR28_1
+Change Net Name : Old Net Name=NetR38_1 New Net Name=NetR29_1
+Change Net Name : Old Net Name=NetR46_2 New Net Name=NetR27_2
+Added Pin To Net: NetName=NC Pin=U2-8
+Added Pin To Net: NetName=NC Pin=U2-24
+Added Net: Name=NC
+Added Pin To Net: NetName=NetC3_1 Pin=C3-1
+Added Net: Name=NetC3_1
+Added Pin To Net: NetName=NetC3_2 Pin=C3-2
+Added Pin To Net: NetName=NetC3_2 Pin=J1-1
+Added Net: Name=NetC3_2
+Added Pin To Net: NetName=NetCap7_1 Pin=Cap7-1
+Added Pin To Net: NetName=NetCap7_1 Pin=U2-17
+Added Net: Name=NetCap7_1
+Added Pin To Net: NetName=NetD3_1 Pin=D3-1
+Added Pin To Net: NetName=NetD3_1 Pin=R7-2
+Added Net: Name=NetD3_1
+Added Pin To Net: NetName=NetD4_1 Pin=D4-1
+Added Pin To Net: NetName=NetD4_1 Pin=R8-2
+Added Net: Name=NetD4_1
+Added Pin To Net: NetName=NetJ3_2 Pin=J3-2
+Added Pin To Net: NetName=NetJ3_2 Pin=R26-2
+Added Pin To Net: NetName=NetJ3_2 Pin=R30-1
+Added Net: Name=NetJ3_2
+Added Pin To Net: NetName=NetK1_3 Pin=K1-3
+Added Pin To Net: NetName=NetK1_3 Pin=U1-30
+Added Net: Name=NetK1_3
+Added Pin To Net: NetName=NetR7_1 Pin=R7-1
+Added Pin To Net: NetName=NetR7_1 Pin=U2-23
+Added Net: Name=NetR7_1
+Added Pin To Net: NetName=NetR8_1 Pin=R8-1
+Added Pin To Net: NetName=NetR8_1 Pin=U2-22
+Added Net: Name=NetR8_1
+Added Pin To Net: NetName=NetR9_1 Pin=R9-1
+Added Pin To Net: NetName=NetR9_1 Pin=U1-4
+Added Net: Name=NetR9_1
+Added Pin To Net: NetName=NetR12_1 Pin=R12-1
+Added Pin To Net: NetName=NetR12_1 Pin=U1-5
+Added Net: Name=NetR12_1
+Added Pin To Net: NetName=NetU1_8 Pin=U1-8
+Added Net: Name=NetU1_8
+Added Pin To Net: NetName=NetU1_10 Pin=U1-10
+Added Pin To Net: NetName=NetU1_10 Pin=U2-1
+Added Net: Name=NetU1_10
+Added Pin To Net: NetName=NetU1_11 Pin=U1-11
+Added Pin To Net: NetName=NetU1_11 Pin=U2-5
+Added Net: Name=NetU1_11
+Added Pin To Net: NetName=NetU1_23 Pin=U1-23
+Added Net: Name=NetU1_23
+Added Pin To Net: NetName=NetU1_24 Pin=U1-24
+Added Net: Name=NetU1_24
+Added Pin To Net: NetName=NetU1_25 Pin=U1-25
+Added Net: Name=NetU1_25
+Added Pin To Net: NetName=NetU1_26 Pin=U1-26
+Added Net: Name=NetU1_26
+Added Pin To Net: NetName=NetU1_34 Pin=U1-34
+Added Net: Name=NetU1_34
+Added Pin To Net: NetName=NetU1_35 Pin=U1-35
+Added Net: Name=NetU1_35
+Added Pin To Net: NetName=NetU1_43 Pin=U1-43
+Added Net: Name=NetU1_43
+Added Pin To Net: NetName=NetU2_15 Pin=U2-15
+Added Net: Name=NetU2_15
+Added Pin To Net: NetName=NetU2_16 Pin=U2-16
+Added Net: Name=NetU2_16
+Added Pin To Net: NetName=VCAP Pin=Cap4-2
+Added Pin To Net: NetName=VCAP Pin=U1-7
+Added Net: Name=VCAP
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component Cap4 0.1uF
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component Cap5 0.1uF
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component Cap6 Cap
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component Cap7 0.1uF
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component Cap8 0.1uF
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component Cap9 0.1uF
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component D3 LED2
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component D4 LED2
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component K1 CLOCK
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component R7 Res3
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component R8 Res3
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component U1 DSPIC33FJ128MC804T-I/PT
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component U2 IC_FT232RL
