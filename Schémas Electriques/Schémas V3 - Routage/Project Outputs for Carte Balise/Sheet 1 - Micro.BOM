@@ -1,0 +1,42 @@
+Bill of Material for 
+On 19/07/2015 at 19:48:33
+
+ Comment             Pattern     Quantity  Components
+------------------------------------------------------------------------------
+ 0.1uF               0805             9    Cap1, Cap2, Cap3, Cap4, Cap5 Capacitor            
+                                           Cap6, Cap7, Cap8, Cap10
+ 100R                0805             1    R2                           Resistor             
+ 1206                C1206            1    C7                           Capacitor            
+ 12V                 MINICONNEC_D     1    J2                           Connecteur           
+ 330                 0805             1    R5                           Resistor             
+ 4.7uF               0805             1    Cap9                         Capacitor            
+ 5V                  MINICONNEC_D     1    P5                           Header, 2-Pin        
+ Cap                 0805            12    C1, C3, C4, C6, C8, C9, C10  Capacitor            
+                                           C12, C13, C14, C15, C16
+ Cap2                0805             1    1                            Capacitor            
+ CLOCK               IQXO-70          1    K1                           Oscillateur quartz   
+ CO                  690367280476     1    J3                           Connecteur           
+ Codeur              690367280476     1    P4                           Header, 4-Pin        
+ D Schottky          C0805            1    D5                           Schottky Diode       
+ DSPIC33FJ128MC804T-I/PT TQFP-PT44_N      1    U1                           High-Performance 16-bit Digital Signal Controller, 128 KB Flash, 16 KB RAM, 44-Pin TQFP, Industrial Temperature, Tape and Reel 
+ EEEFK1C221XP        Capa CMS D6.3_E1.8    1    C5                           Capacitor            
+ EEUFM1C122L         CAPA_D10_E5      1    C11                          Capacitor            
+ I²C                 690367280476     1    P2                           Header, 4-Pin        
+ IC_FT232RL          SSOP-28          1    U2                           FT232R USB UART      
+ LED2                C0805            7    D1, D2, D3, D4, D6, D7, D8   Typical RED, GREEN, YELLOW, AMBER GaAs LED 
+ LM1117IMP-5.0       MP04A_N          1    U6                           800mA Low-Dropout Linear Regulator 
+ LM1117MP-3.3        MP04A_N          1    U4                           800mA Low-Dropout Linear Regulator 
+ LM2588S-ADJ         TS7B_N           1    U5                           SIMPLE SWITCHER 5A Flyback Regulator with Shutdown 
+ LMD18200T           TA11B            1    U3                           3A, 55V H-Bridge     
+ Moteur              MINICONNEC_D     1    J1                           Connecteur           
+ NDS0605 (FAR:9846352) SOT-23           1    Q1                           P-Channel Power MOSFET 
+ Pick-it             690367280676     1    P1                           Header, 6-Pin        
+ QNPN (RS:5449400)   SOT23_L          1    Q2                           NPN Bipolar Transistor 
+ Res3                0805            30    R1, R3, R4, R6, R7, R8, R9   Resistor             
+                                           R10, R11, R12, R13, R14, R15
+                                           R16, R17, R18, R19, R20, R21
+                                           R22, R23, R24, R25, R26, R27
+                                           R28, R29, R30, R31, R32
+ SRP4020TA-150M      Inductance 4.06 x 4.45    1    L1                           Inductor             
+ Uart bluetooth      690367280676     1    P3                           Header, 6-Pin        
+ WE-Communication Connectors 651005136421 651005136421     1    C2                           WR-COM Mini USB Vertical TH Type B 5 Contacts 
