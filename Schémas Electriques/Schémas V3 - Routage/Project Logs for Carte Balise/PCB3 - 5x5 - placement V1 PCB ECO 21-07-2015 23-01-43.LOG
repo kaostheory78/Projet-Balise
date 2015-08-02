@@ -1,0 +1,8 @@
+Added Pin To Net: NetName=NetP1_4 Pin=U1-21
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component P1 mini connect
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component P3 Mini connect
+Added Member To Class: ClassName=Sheet 1 - Micro Member=Component R1 10K
+Added Room: Name=Sheet 1 - Micro
+Added Room: Name=Sheet 2 - Moteurs
+Added Room: Name=Sheet 3 - Alims
+Added Room: Name=Sheet 4 - Capteurs

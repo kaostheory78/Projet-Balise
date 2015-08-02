@@ -1,24 +1,23 @@
-Field=Comment~String~Comment~100|Field=Description~String~Description~100|Field=Designator~String~Designator~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|Field=reference farnell~String~reference farnell~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~Carte Balise.PrjPCB|ReportField=ProjectFullPath~C:\Users\Quentin\Desktop\Projet-Balise\Schémas Electriques\Schémas V3 - Routage\Carte Balise.PrjPCB|ReportField=Title~Bill of Materials For Project [Carte Balise.PrjPCB] (No PCB Document Selected)|ReportField=TotalQuantity~85|ReportField=ReportTime~20:46:29|ReportField=ReportDate~19/07/2015|ReportField=ReportDateTime~19/07/2015 20:46:29|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=Application_BuildNumber~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~19/07/2015|ReportField=CurrentTime~20:46:08|ReportField=Date~|ReportField=DocumentFullPathAndName~C:\Users\Quentin\Desktop\Projet-Balise\Schémas Electriques\Schémas V3 - Routage\Sheet 1 - Micro.SchDoc|ReportField=DocumentName~Sheet 1 - Micro.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~19/07/2015|ReportField=Organization~|ReportField=ProjectName~Carte Balise.PrjPCB|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~Carte Balise.PrjPCB|ReportField=DataSourceFullPath~C:\Users\Quentin\Desktop\Projet-Balise\Schémas Electriques\Schémas V3 - Routage\Carte Balise.PrjPCB
-100pF|Capacitor 0805|C1, C16|Cap|2|
+Field=Comment~String~Comment~100|Field=Description~String~Description~100|Field=Designator~String~Designator~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|Field=reference farnell~String~reference farnell~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~Carte Balise.PrjPCB|ReportField=ProjectFullPath~C:\Users\Quentin\Desktop\Projet-Balise\Schémas Electriques\Schémas V3 - Routage\Carte Balise.PrjPCB|ReportField=Title~Bill of Materials For Project [Carte Balise.PrjPCB] (No PCB Document Selected)|ReportField=TotalQuantity~85|ReportField=ReportTime~07:24:59|ReportField=ReportDate~20/07/2015|ReportField=ReportDateTime~20/07/2015 07:24:59|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=Application_BuildNumber~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~19/07/2015|ReportField=CurrentTime~22:41:05|ReportField=Date~|ReportField=DocumentFullPathAndName~C:\Users\Quentin\Desktop\Projet-Balise\Schémas Electriques\Schémas V3 - Routage\Sheet 1 - Micro.SchDoc|ReportField=DocumentName~Sheet 1 - Micro.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~19/07/2015|ReportField=Organization~|ReportField=ProjectName~Carte Balise.PrjPCB|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~Carte Balise.PrjPCB|ReportField=DataSourceFullPath~C:\Users\Quentin\Desktop\Projet-Balise\Schémas Electriques\Schémas V3 - Routage\Carte Balise.PrjPCB
+100pF|Capacitor 0805|C1, C17|Cap|2|
 WE-Communication Connectors 651005136421|WR-COM Mini USB Vertical TH Type B 5 Contacts|C2|WE-Communication Connectors 651005136421|1|
-10nF|Capacitor 0805|C3, C4|Cap|2|
-220uF|EEEFK1C221XP|C5|Cap2|1|
-1uF|Capacitor 0805|C6, C9, C13|Cap|3|
-100uF|Capacitor 1206|C7|Cap2|1|2211193
-0.1uF|Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor|C8, C12, C?, Cap1, Cap2, Cap3, Cap4, Cap5, Cap6, Cap7, Cap8, Cap10|Cap|12|
-10uF|Capacitor 0805|C10, C14|Cap|2|
-1200uF|EEUFM1C122L|C11|Cap2|1|
-0.2uF|Capacitor 0805|C15|Cap|1|
+0.1uF|Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor 0805, Capacitor|C3, C9, C13, Cap1, Cap2, Cap3, Cap4, Cap5, Cap6, Cap7, Cap8, Cap10|Cap|12|
+10nF|Capacitor 0805|C4, C5|Cap|2|
+220uF|EEEFK1C221XP|C6|Cap2|1|
+1uF|Capacitor 0805|C7, C10, C14|Cap|3|
+100uF|Capacitor 1206|C8|Cap2|1|2211193
+10uF|Capacitor 0805|C11, C15|Cap|2|
+1200uF|EEUFM1C122L|C12|Cap2|1|
+0.2uF|Capacitor 0805|C16|Cap|1|
 4.7uF|Capacitor 0805|Cap9|Cap|1|
 LED|Typical RED, GREEN, YELLOW, AMBER GaAs LED 0805|D1, D2, D3, D4, D6, D7, D8|LED2|7|
 D Schottky|Schottky Diode 0805|D5|D Schottky|1|
-mini connect|Connecteur|J1, J2|MINICONNEC_2B|2|
-WE 4 pins|connecteur WE, Header, 4-Pin|J3, P4|MICRO-MATCH FOB.04P, MHDR1X4|2|
+WE Type 691321100002|WR-TBL Terminal block - serie 3211 - 3.50 mm|J1, J2, J3|WE-Terminal Blocks Plugable Type 691321100002|3|
+WE 4 pins|connecteur WE, Header, 4-Pin|J4, P4|MICRO-MATCH FOB.04P, MHDR1X4|2|
 Quartz 10Mhz|Oscillateur quartz|K1|OSCILLATEUR|1|
 15uH|SRP4020TA-150M|L1|Inductor|1|
 mini connect|Header, 6-Pin|P1, P3|MHDR1X6|2|
 mini connect|Header, 4-Pin|P2|MHDR1X4|1|
-5V|Header, 2-Pin|P5|MHDR1X2|1|
 MOSFET P|P-Channel Power MOSFET|Q1|PMOS-2|1|
 Transistor NPN|NPN Bipolar Transistor|Q2|QNPN|1|
 10K|Resistor 0805|R1, R10, R23, R29, R31|Res3|5|
@@ -27,11 +26,10 @@ Transistor NPN|NPN Bipolar Transistor|Q2|QNPN|1|
 330R|Resistor 0805|R5, R6, R16|Res3|3|
 470R|Resistor 0805|R7, R8, R9, R17|Res3|4|
 15K|Resistor 0805|R11|Res3|1|
-Res3|Resistor|R15|Res3|1|
+0R|Resistor 0805|R15, R24, R26, R28, R30|Res3|5|
 17K4|Resistor 0805|R19|Res3|1|
 2K|Resistor 0805|R21|Res3|1|
 215K|Resistor 0805|R22|Res3|1|
-0R|Resistor 0805|R24, R26, R28, R30|Res3|4|
 3K4|Resistor 0805|R32|Res3|1|
 DSPIC33FJ128MC804T-I/PT|High-Performance 16-bit Digital Signal Controller, 128 KB Flash, 16 KB RAM, 44-Pin TQFP, Industrial Temperature, Tape and Reel|U1|DSPIC33FJ128MC804T-I/PT|1|
 IC_FT232RL|FT232R USB UART|U2|IC_FT232RL|1|
