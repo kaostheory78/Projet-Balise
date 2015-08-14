@@ -1,3 +1,0 @@
-*Default PNP BJT
-*PNP Trans Pinout: C,B,E
-.MODEL PNP PNP()

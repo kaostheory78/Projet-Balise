@@ -1,3 +1,0 @@
-*ST Microelectronics
-*HCF4502: Strobed Hex Inverter/Buffer
-.MODEL HCF4502 xsimcode(file="{MODEL_PATH}CMOS.SCB" func=4502 {mntymx})

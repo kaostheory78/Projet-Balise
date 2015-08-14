@@ -1,2 +1,0 @@
-*Default P-Channel MESFET
-.MODEL PMESFET PMF()

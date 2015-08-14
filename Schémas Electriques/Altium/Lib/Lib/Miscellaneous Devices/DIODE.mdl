@@ -1,3 +1,0 @@
-*Default Diode
-*Diode Pinout: A,K
-.MODEL DIODE D()

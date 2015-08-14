@@ -1,3 +1,0 @@
-*Default N-Channel MOSFET
-*Pinout: D,G,S
-.MODEL NMOS NMOS()
