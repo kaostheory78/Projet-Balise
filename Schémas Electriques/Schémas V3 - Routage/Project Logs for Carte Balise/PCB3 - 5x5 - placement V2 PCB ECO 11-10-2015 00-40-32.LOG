@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=RX USB Pin=U1-10
+Removed Pin From Net: NetName=TX USB Pin=U1-11
+Added Pin To Net: NetName=TX USB Pin=U1-10
+Added Pin To Net: NetName=RX USB Pin=U1-11

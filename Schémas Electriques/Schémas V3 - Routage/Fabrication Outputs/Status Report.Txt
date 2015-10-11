@@ -1,0 +1,10 @@
+Output: Design Rules Check
+Type  : DRC
+From  : PCB Document [PCB3 - 5x5 - placement V2.PcbDoc]
+   Generated File[PCB3 - 5x5 - placement V2.html]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 18:24:49 On 11/10/2015

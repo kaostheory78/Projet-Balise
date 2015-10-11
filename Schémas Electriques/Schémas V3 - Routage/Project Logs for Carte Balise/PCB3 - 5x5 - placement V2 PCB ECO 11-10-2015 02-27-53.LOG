@@ -1,0 +1,4 @@
+Change Component Comment : Designator=R35 Old Comment=470R New Comment=330R
+Change Component Comment : Designator=R36 Old Comment=470R New Comment=330R
+Added Pin To Net: NetName=TX BL Pin=R35-1
+Added Pin To Net: NetName=RX BL Pin=R36-1

@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=MCLR Pin=P1-1
+Removed Pin From Net: NetName=3.3V Pin=P1-2
+Removed Pin From Net: NetName=GND Pin=P1-3
+Removed Pin From Net: NetName=PGD Pin=P1-4
+Removed Pin From Net: NetName=PGC Pin=P1-5
