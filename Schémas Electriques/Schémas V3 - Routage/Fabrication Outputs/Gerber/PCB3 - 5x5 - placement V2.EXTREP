@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------------------
-Gerber File Extension Report For: PCB3 - 5x5 - placement V2.GBR   11/10/2015  18:24:41
+Gerber File Extension Report For: PCB3 - 5x5 - placement V2.GBR   03/11/2015  22:34:52
 ------------------------------------------------------------------------------------------
 
 
@@ -14,6 +14,5 @@ Layer Extension     Layer Description
 .GBS                Bottom Solder                           
 .GBP                Bottom Paste                            
 .GBO                Bottom Overlay                          
-.GKO                Keep-Out Layer                          
 .GM32               Mechanical 32                           
 ------------------------------------------------------------------------------------------

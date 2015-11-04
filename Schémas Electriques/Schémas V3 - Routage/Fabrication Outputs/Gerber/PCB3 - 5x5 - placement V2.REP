@@ -52,8 +52,8 @@ Generating : Bottom Layer
 
 
 Used DCodes :
-    D10
-    D15
+    D12
+    D13
     D23
     D24
     D26
@@ -172,8 +172,8 @@ Generating : Bottom Solder
 
 Used DCodes :
     D47
-    D50
-    D55
+    D52
+    D53
     D63
     D64
     D65
@@ -206,8 +206,8 @@ Generating : Bottom Paste
 
 
 Used DCodes :
-    D10
-    D15
+    D12
+    D13
     D39
     D40
     D41
@@ -232,17 +232,6 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
-Generating : Keep-Out Layer
-      File : PCB3 - 5x5 - placement V2.GKO
-
-    Adding Layer      : Keep-Out Layer
-
-
-Used DCodes :
-    D47
-*************************************************************
-
-*************************************************************
 Generating : Mechanical 32
       File : PCB3 - 5x5 - placement V2.GM32
 
@@ -250,6 +239,5 @@ Generating : Mechanical 32
 
 
 Used DCodes :
-    D47
 *************************************************************
 

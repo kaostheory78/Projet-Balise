@@ -1,10 +1,10 @@
-Output: Design Rules Check
-Type  : DRC
-From  : PCB Document [PCB3 - 5x5 - placement V2.PcbDoc]
-   Generated File[PCB3 - 5x5 - placement V2.html]
+Output: Bill of Materials
+Type  : BOM
+From  : Project [Carte Balise.PrjPCB]
+   Generated File[Bill of Materials-Carte Balise.xls]
 
 
 Files Generated   : 1
 Documents Printed : 0
 
-Finished Output Generation At 18:24:49 On 11/10/2015
+Finished Output Generation At 22:35:01 On 03/11/2015
