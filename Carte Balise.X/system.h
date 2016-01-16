@@ -20,6 +20,9 @@ extern "C" {
     #include <stdint.h>
     #include <stdlib.h>
     #include <math.h>
+    #include "Uart.h"
+    #include "codeurs.h"
+    #include "pwm.h"
     
 /******************************************************************************/
 /***************************** Defines ****************************************/
@@ -34,14 +37,14 @@ extern "C" {
 
 
 /******************************************************************************/
-/********************************* Timers *************************************/
+/********************************* TIMERS *************************************/
 /******************************************************************************/
 
 #define ACTIVE                  0b1
 #define DESACTIVE               0b0
-
-#define DIGITAL                 1
-#define ANALOGIQUE              0
+    
+#define FRONT_MONTANT           0
+#define FRONT_DESCENDANT        1
 
 #define TIMER_5ms               T1CONbits.TON
 #define TIMER_10ms              T4CONbits.TON
@@ -57,72 +60,79 @@ extern "C" {
 /********************************  PORT CARTE   *******************************/
 /******************************************************************************/
 
-#define SYS_COULEUR             _SYS_COULEUR
-#define SYS_STRAT               _SYS_STRAT
+#define BOUTON1             PORTCbits.RC9
+#define BOUTON2             PORTCbits.RC8
+#define BOUTON3             PORTCbits.RC7
+    
+#define SENS_MOTEUR         PORTCbits.RC0
 
-#define SENS_MOTEUR_DROIT   PORTBbits.RB11
-#define SENS_MOTEUR_GAUCHE  PORTBbits.RB13
-
-#define XBEE_RESET          PORTAbits.RA7
-#define INHIBIT_AX12        PORTAbits.RA10
-#define DIR_UART_AX12       PORTBbits.RB7
-
-
-#define SYS_JACK            PORTBbits.RB4
-
-//Du JACK  vers les codeurs
-#define CAPTEUR1            PORTAbits.RA4
-#define CAPTEUR2            PORTAbits.RA9
-#define CAPTEUR3            PORTCbits.RC3
-#define CAPTEUR4            PORTCbits.RC4
-
-//Carte d'extenssion
-//De la gauche vers la droite (nappe en bas)
-#define CAPTEUR5            PORTAbits.RA8
-#define CAPTEUR6            PORTAbits.RA3
-#define CAPTEUR7            PORTAbits.RA2
-#define CAPTEUR8            PORTCbits.RC1
-#define CAPTEUR9            PORTCbits.RC2
-#define CAPTEUR10           PORTCbits.RC0
+#define CAPTEUR             PORTCbits.RC1
+#define ENABLE_CAPTEUR      PORTCbits.RC2
+    
+#define ENABLE_BL           PORTCbits.RC6
+#define STATUS_BL           PORTBbits.RB7
+    
+#define LED1                PORTBbits.RB12
+#define LED2                PORTAbits.RA10
+#define LED3                PORTAbits.RA7
+#define LED4                PORTAbits.RA0
+#define LED5                PORTAbits.RA1
+#define LED6                PORTBbits.RB0
+#define LED7                PORTBbits.RB1
+#define LED8                PORTBbits.RB2
+#define LED9                PORTBbits.RB3
 
 /******************************************************************************/
 /******************************* Interruptions  *******************************/
 /******************************************************************************/
 
-#define TENSION_MOTEUR_DROIT    _TENSION_MOTEUR_DROIT
-#define TENSION_MOTEUR_GAUCHE   _TENSION_MOTEUR_GAUCHE
-
-#define TENSION_SORTIE_PTN      _TENSION_SORTIE_PTN
+#define TENSION_MOTEUR      _TENSION_MOTEUR
 
 /******************************************************************************/
 /******************************* Interruptions  *******************************/
 /******************************************************************************/
+    
+#define FRONT_INT0          FRONT_MONTANT
+#define FRONT_INT1          FRONT_MONTANT
+#define FRONT_INT2          FRONT_MONTANT
+    
+//#define UTILISATION_INT_CAPTEUR
+//#define UTILISATION_INT_BOUTON1
+//#define UTILISATION_INT_BOUTON2
+//#define UTILISATION_INT_BOUTON3
+//#define UTILISATION_INT_STATUS_BL
 
-#define PRIO_INTER_TIMER1               5   // Timer Assev
-#define PRIO_INTER_TIMER2               0   // Timer 2 en mode 32 bits (couplé à T3 donc osef)
-#define PRIO_INTER_UART1_RX             1   // Prio XBEE
-#define PRIO_INTER_TIMER3               6   // Timer Fin de match
-#define PRIO_INTER_I2C_MAITRE           5   // I²C désactivé pour le moment
-#define PRIO_INTER_I2C_ESCLAVE          4   // I²C désactivé pour le moment
-#define PRIO_INTER_TIMER4               2   // Autom
-#define PRIO_INTER_TIMER5               1   //Prio Timer debug
-#define PRIO_INTER_UART2_TX             3   // AX12
-#define PRIO_INTER_UART2_RX             3   // AX12
-#define PRIO_INTER_QEI1                 7   // Codeurs : prio la plus haute
-#define PRIO_INTER_QEI2                 7   // Codeurs : prio la plus haute
+#define PRIO_INTER_TIMER1               0   // 
+#define PRIO_INTER_TIMER2               0   // 
+#define PRIO_INTER_TIMER3               0   // 
+#define PRIO_INTER_TIMER4               0   // 
+#define PRIO_INTER_TIMER5               0   // 
+#define PRIO_INTER_UART1_RX             0   // USB RECEPTION
+#define PRIO_INTER_UART1_TX             0   // USB TRANSMISSION
+#define PRIO_INTER_UART2_RX             0   // BLE RECEPTION
+#define PRIO_INTER_UART2_TX             0   // BLE TRANSMISSION
+#define PRIO_INTER_INT0                 0   // INT0 : SATUS BL
+#define PRIO_INTER_INT1                 0   // INT1 : CAPTEUR
+#define PRIO_INTER_INT2                 0   // INT2 : BOUTON X
+#define PRIO_INTER_I2C_MAITRE           0   // I²C désactivé pour le moment
+#define PRIO_INTER_I2C_ESCLAVE          0   // I²C désactivé pour le moment
+#define PRIO_INTER_QEI                  0   // CODEUR : prio la plus haute
 
-#define ACTIV_INTER_UART1_RX            0   // Uart XBEE
-#define ACTIV_INTER_TIMER3              1   // Timer 90 secondes : fin de match
-#define ACTIV_INTER_TIMER2              0   // Osef : TIMER 2 et 3 sur 32 bits
-#define ACTIV_INTER_TIMER1              1   // Timer asserv : 5 ms
-#define ACTIV_INTER_UART2_TX            1   // UART AX12 : Acquittement trame envoyée
-#define ACTIV_INTER_UART2_RX            1   // UART AX12
-#define ACTIV_INTER_TIMER4              1   // Timer Autom : 10 ms
-#define ACTIV_INTER_TIMER5              1   // Timer debug : 200 ms
+#define ACTIV_INTER_TIMER1              0   // Timer 
+#define ACTIV_INTER_TIMER2              0   // Timer
+#define ACTIV_INTER_TIMER3              0   // Timer 
+#define ACTIV_INTER_TIMER4              0   // Timer 
+#define ACTIV_INTER_TIMER5              0   // Timer 
+#define ACTIV_INTER_UART1_RX            0   // UART USB : 
+#define ACTIV_INTER_UART1_TX            0   // UART USB : type inter
+#define ACTIV_INTER_UART2_RX            0   // UART BLE 
+#define ACTIV_INTER_UART2_TX            0   // UART BLE : type inter
+#define ACTIV_INTER_INT0                0   // INT0 : STATUS BL
+#define ACTIV_INTER_INT1                0   // INT1 : CAPTEUR
+#define ACTIV_INTER_INT2                0   // INT2 : BOUTON X
 #define ACTIV_INTER_I2C_MAITRE          0   // Pas implémenté pour le moment
 #define ACTIV_INTER_I2C_ESCLAVE         0   // Pas implémenté pour le moment
-#define ACTIV_INTER_QEI1                1   // Codeurs
-#define ACTIV_INTER_QEI2                1   // Codeurs
+#define ACTIV_INTER_QEI                 0   // CODEUR
 
 
 /******************************************************************************/

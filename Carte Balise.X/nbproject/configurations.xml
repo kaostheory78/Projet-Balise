@@ -6,6 +6,11 @@
                    projectFiles="true">
       <itemPath>Config_robots.h</itemPath>
       <itemPath>system.h</itemPath>
+      <itemPath>asserv.h</itemPath>
+      <itemPath>codeurs.h</itemPath>
+      <itemPath>interruptions.h</itemPath>
+      <itemPath>pwm.h</itemPath>
+      <itemPath>Uart.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -16,6 +21,11 @@
                    projectFiles="true">
       <itemPath>main.c</itemPath>
       <itemPath>system.c</itemPath>
+      <itemPath>Uart.c</itemPath>
+      <itemPath>asserv.c</itemPath>
+      <itemPath>codeurs.c</itemPath>
+      <itemPath>interruptions.c</itemPath>
+      <itemPath>pwm.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
