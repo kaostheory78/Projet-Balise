@@ -1,5 +1,5 @@
-build/default/production/interruptions.o:  \
-interruptions.c  \
+build/default/production/triangulation.o:  \
+triangulation.c  \
 system.h  \
 Uart.h  \
  codeurs.h  \

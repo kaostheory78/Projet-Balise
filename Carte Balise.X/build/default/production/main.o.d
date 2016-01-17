@@ -3,6 +3,7 @@ main.c  \
 system.h  \
 Uart.h  \
 codeurs.h  \
- Config_robots.h  \
 pwm.h  \
-asserv.h 
+ Config_robots.h  \
+asserv.h  \
+triangulation.h 

@@ -43,23 +43,23 @@ extern "C" {
 
         //Autres réglages asserv
     #define _SEUIL_IMMOBILITE            100 //200
-    #define _MAX_ERREUR_INTEGRALE        1000
+    #define _MAX_ERREUR_INTEGRALE        20000
 
     /**************************************************************************/
     /********************************* PID ************************************/
     /**************************************************************************/
    
     //PID
-    #define _KP                     0.1  
-    #define _KI                     0.1 
-    #define _KD                     0.1 
+    #define _KP                     0.6  
+    #define _KI                     0.005 
+    #define _KD                     0. 
 
     /**************************************************************************/
     /******************************* TENSIONS *********************************/
     /**************************************************************************/
 
     //Tensions d'alimentations
-    #define _TENSION_MOTEUR              6u
+    #define _TENSION_MOTEUR              12u
     #define _TENSION_ALIM                12u 
 
 
@@ -71,9 +71,9 @@ extern "C" {
     //Paramètres codeurs, et moteurs
     #define _RAPPORT_REDUCTION           1u
 
-    #define _CODEUR_NB_IMP               3600u
+    #define _CODEUR_NB_IMP               2000u
     //PWM
-    #define _SENS_ROT                    1
+    #define _SENS_ROT                    -1
 
     #define _AVANCER_MOTEUR              1 
     #define _RECULER_MOTEUR              0   

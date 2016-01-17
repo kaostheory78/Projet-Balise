@@ -59,5 +59,7 @@ void __attribute__ ((interrupt, no_auto_psv)) 	_U1RXInterrupt (void);
  */
 void __attribute__ ((interrupt, no_auto_psv)) 	_U2RXInterrupt (void);
 
+
+void __attribute__((__interrupt__, no_auto_psv)) _INT1Interrupt(void);
 #endif	/* INTERRUPTIONS_H */
 

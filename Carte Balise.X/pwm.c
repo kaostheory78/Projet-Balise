@@ -35,7 +35,7 @@ void ConfigPWM (void)
 
 	P1TCONbits.PTMOD	= 0;		//Base de temps en free running mode (11 bits vmax = 2048)
 
-    P1TPER              = 999;		//F=20kHz 11 bits
+    P1TPER              = 1999;		//F=20kHz 11 bits
 
 	PWM1CON1bits.PMOD1	= 1;		//Mode indépendant             //Mode complementaire sur pwm1L1
 	PWM1CON1bits.PMOD2	= 1;		//Mode indépendant             //Mode complementaire sur pwm1L2
@@ -92,12 +92,14 @@ void envoit_pwm (double valeur)
     PDC1 = (uint16_t) abs_valeur;
 }
 
-void controle_LED1 (double pourcentage)
+void controle_LED1 (uint16_t pourcentage)
 {
-    if (pourcentage > 100.)
-        pourcentage = 100.;
+    if (pourcentage > 100)
+        pourcentage = 100;
     
-    PDC2 = (uint16_t) ((uint16_t) pourcentage * PWM_MAX_VALUE) / 100u;
+    double ratio =  ( (double) pourcentage * (double) PWM_MAX_VALUE);
+    ratio /= 100.;
+    PDC2 = (uint16_t) ratio;
     //PDC2 = (uint16_t) pourcentage;
 }
 

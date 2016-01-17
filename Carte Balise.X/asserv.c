@@ -17,10 +17,11 @@
 /*************************** Variables Globales *******************************/
 /******************************************************************************/
 
-_PID PID;
-_systeme_asserv VITESSE;
-_erreur ERREUR;
-double COMMANDE;
+volatile _PID PID;
+volatile _systeme_asserv VITESSE;
+volatile _erreur ERREUR;
+volatile double COMMANDE;
+volatile double ORIENTATION;
 
 /******************************************************************************/
 /***************************** Fonctions Inits ********************************/
@@ -36,6 +37,14 @@ void init_flag()
 void init_commande_moteur(void)
 {
     COMMANDE = 0;
+}
+
+void init_position_codeur (void)
+{
+    position.ancien = 0;
+    position.ecart = 0;
+    position.ancien = 0;
+    ORIENTATION = 0;
 }
 
 void reinit_asserv(void)
@@ -118,10 +127,10 @@ void calcul_vitesse (double pourcentage_vitesse)
 //D'envoyer la commande aux moteurs, et de sortir des fonctions de déplacements
 void asserv()
 {
-    VITESSE.consigne = 0;
+    //VITESSE.consigne = 0;
 
     //Fonction d'appel de l'asserv
-    if (0)
+    //if (0)
     {
            
         //Réinitialisation des commandes moteurs à 0
@@ -134,11 +143,11 @@ void asserv()
         //envoit sur les moteurs
         envoit_pwm(COMMANDE);     
     }
-    else
-    {
-        //Si aucun asserv, on bloque les moteurs à 0;
-        envoit_pwm(0);
-    }     
+//    else
+//    {
+//        //Si aucun asserv, on bloque les moteurs à 0;
+//        envoit_pwm(0);
+//    }     
 }
 
 
@@ -169,4 +178,12 @@ double fonction_PID ()
     return (double) 0;
 }
 
+
+void calcul_orientation (void)
+{
+    get_valeur_codeur();
+    
+    VITESSE.actuelle = (double) position.ecart;
+    ORIENTATION = (double) position.nouvelle * 360. / MAX_CODEUR;
+}
 

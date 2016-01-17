@@ -28,7 +28,10 @@
 void __attribute__((__interrupt__, no_auto_psv)) _T1Interrupt(void)
 {
     FLAG_TIMER_5ms = 0;
-    Nop();
+    calcul_orientation();
+    //PutIntUART(UART_USB, position.ecart);
+    //PutcUART(UART_USB, '\r');
+    asserv();
 }
 
 /**
@@ -54,6 +57,23 @@ void __attribute__((__interrupt__, no_auto_psv)) _T4Interrupt(void)
 void __attribute__((__interrupt__, no_auto_psv)) _T5Interrupt(void)
 {
     TIMER_DEBUG = DESACTIVE;
+    
+    
+    PutIntUART(UART_USB, VITESSE.consigne);
+    PutcUART(UART_USB, '\t');
+    PutIntUART(UART_USB, VITESSE.actuelle);
+    PutcUART(UART_USB, '\t');
+    PutIntUART(UART_USB, ERREUR.actuelle);
+    PutcUART(UART_USB, '\t');
+    PutIntUART(UART_USB, ERREUR.integrale);
+    PutcUART(UART_USB, '\t');
+    PutIntUART(UART_USB, COMMANDE);
+    PutcUART(UART_USB, '\n');
+    PutcUART(UART_USB, '\r');
+    
+    
+    
+    
 
     FLAG_TIMER_DEBUG = 0;        //On clear le flag d'interruption du timer
     TIMER_DEBUG = ACTIVE;
@@ -74,6 +94,37 @@ void __attribute__((__interrupt__, no_auto_psv)) _QEI1Interrupt(void)
         OVERFLOW_CODEUR++;
     else                            // codeur decroit
         OVERFLOW_CODEUR--;
+    
+    if (capteur.synchro_debut_tour == true)
+    {
+        capteur.tour_en_cours = true;
+        capteur.synchro_debut_tour = false;
+    }
+    else
+        capteur.tour_en_cours = false;
+
+}
+
+
+/******************************************************************************/
+/************************** INTERRUPTION DES INT ******************************/
+/******************************************************************************/
+
+/**
+ * Interruption sur capteur 
+ */
+void __attribute__((__interrupt__, no_auto_psv)) _INT1Interrupt(void)
+{
+    if (capteur.tour_en_cours == true)
+    {
+        if (capteur.indice < 3)
+        {
+            capteur.position[capteur.indice++] = POS1CNT;
+        }
+        else
+            capteur.indice++;
+    }
+    IFS1bits.INT1IF = 0;            //Clear du flag de l'event;
 }
 
 

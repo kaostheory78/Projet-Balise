@@ -15,7 +15,7 @@
 
 //Type UART
 #define UART_USB                        1   // UART1
-#define UART_BLUETOOTH                  2   // UART2
+#define UART_BLUETOOTH                  1 //2   // UART2
 
 
 /** P R O T O T Y P E S **********************************/

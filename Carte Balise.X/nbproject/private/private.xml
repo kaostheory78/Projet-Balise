@@ -3,20 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/pwm.c</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/Uart.h</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/Config_robots.h</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/codeurs.c</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/interruptions.h</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/main.c</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/pwm.h</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/asserv.c</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/asserv.h</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/Uart.c</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/codeurs.h</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/interruptions.c</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/system.c</file>
-            <file>file:/C:/Users/KaosTheOry/Desktop/projet-balise/Carte%20Balise.X/system.h</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/pwm.h</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/triangulation.h</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/interruptions.c</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/pwm.c</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/asserv.c</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/asserv.h</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/codeurs.h</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/triangulation.c</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/codeurs.c</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/main.c</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/interruptions.h</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/system.c</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/Uart.h</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/Config_robots.h</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/Uart.c</file>
+            <file>file:/C:/Users/Quentin/Desktop/Projet-Balise/Carte%20Balise.X/system.h</file>
         </group>
     </open-files>
 </project-private>

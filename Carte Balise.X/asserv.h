@@ -85,6 +85,7 @@
  /*****************************************************************************/
 
     void calcul_vitesse (double pourcentage_vitesse);
+    void calcul_orientation (void); 
     
 /**
  * Fonction qui renvoit l'orientation du robot en degré
@@ -130,6 +131,8 @@ void init_commande_moteur(void);
  * Fonction qui initialise les flag de l'asserv pour démarer l'asserv
  */
 void init_flag();
+
+void init_position_codeur (void);
 
 /**
  * Fonction qui écrete les commandes moteurs pour ne pas envoyer plus que la tension nominale des moteurs

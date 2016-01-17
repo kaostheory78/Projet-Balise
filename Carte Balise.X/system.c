@@ -25,6 +25,14 @@ void init_system (void)
     ConfigPorts();
     ConfigInterrupt();
     ConfigPWM();
+    InitUART(UART_USB, 115200);
+    ConfigQEI ();
+    config_timer_5ms();
+    config_timer_debug();
+    
+    init_position_codeur();
+    init_flag();
+    init_capteur();
 }
 
 
@@ -127,40 +135,49 @@ void config_timer_90s()
 
 void init_clock(void)
 {
+//    //Tunage de la fréquence : Ftune = 8,0056625
+//    OSCTUNbits.TUN = 0;             //SEMBLE NE PAS FONCTIONNER ....
+//
+//    //New Osc = FRC sans PLL
+//    OSCCONbits.NOSC = 0b000;
+//    OSCCONbits.OSWEN = 1;
+//    while(OSCCONbits.OSWEN != 0);
+//
+//
+//
+//    // Configure PLL prescaler, PLL postscaler, PLL divisor
+//    // Fext = Fin * M / (N1 * N2)
+//    // F =  80,000 000 MHz
+//
+//    PLLFBDbits.PLLDIV = 20;//30;                // M = 32
+//    CLKDIVbits.PLLPRE= 0;       // N1 = 2
+//    CLKDIVbits.PLLPOST= 0b00;   // N2 = 2 
+// 
+//    CLKDIVbits.DOZE = 0b000;    // FCY = FOSC/2
+//    
+//    //On switch sur la nouvelle clock avec PLL
+//   
+//    OSCCONbits.CLKLOCK = 0;
+//    __builtin_write_OSCCONH(0x03);
+//    __builtin_write_OSCCONL(0x01);
+//    
+//    //OSCCONbits.NOSC = 0b011;
+//    //OSCCONbits.OSWEN = 1;
+//    while(OSCCONbits.OSWEN != 0);
+//    while(OSCCONbits.COSC != 0b011);
+//
+//    // Wait for PLL to lock
+//    while(OSCCONbits.LOCK!=1);
+    
+    
+    
     //Tunage de la fréquence : Ftune = 8,0056625
-    OSCTUNbits.TUN = 0;             //SEMBLE NE PAS FONCTIONNER ....
-
-    //New Osc = EC sans PLL
-    OSCCONbits.NOSC = 0b010;        // Clock externe sans PLL
-    OSCCONbits.OSWEN = 1;
-    while(OSCCONbits.OSWEN != 0);
-
-
-    // Configure PLL prescaler, PLL postscaler, PLL divisor
-    // Fext = Fin * M / (N1 * N2)
-    // F =  80,000 000 MHz
-
-    PLLFBD = 30;                // M = 32
-    CLKDIVbits.PLLPOST= 0b00;   // N2 = 2 
-    CLKDIVbits.PLLPRE= 0;       // N1 = 2
-
-    //On switch sur la nouvelle clock avec PLL
-    OSCCONbits.NOSC = 0b011;
-    OSCCONbits.OSWEN = 1;
-    while(OSCCONbits.OSWEN != 0);
-
-    // Wait for PLL to lock
-    while(OSCCONbits.LOCK!=1);
-    
-    
-    
-    /*//Tunage de la fréquence : Ftune = 8,0056625
     OSCTUNbits.TUN = 0;        //SEMBLE NE PAS FONCTIONNER ....
 
     //New Osc = FRC sans PLL
-    //OSCCONbits.NOSC = 0b000;
-    //OSCCONbits.OSWEN = 1;
-    //while(OSCCONbits.OSWEN != 0);
+    OSCCONbits.NOSC = 0b000;
+    OSCCONbits.OSWEN = 1;
+    while(OSCCONbits.OSWEN != 0);
 
 
     // Configure PLL prescaler, PLL postscaler, PLL divisor
@@ -179,7 +196,7 @@ void init_clock(void)
     while(OSCCONbits.OSWEN != 0);
 
     // Wait for PLL to lock
-    while(OSCCONbits.LOCK!=1);*/
+    while(OSCCONbits.LOCK!=1);
 }
 
 /******************************************************************************/
