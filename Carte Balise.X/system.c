@@ -21,7 +21,10 @@
 void init_system (void)
 {
     init_clock();
-
+    ConfigMapping ();
+    ConfigPorts();
+    ConfigInterrupt();
+    ConfigPWM();
 }
 
 
@@ -148,6 +151,35 @@ void init_clock(void)
 
     // Wait for PLL to lock
     while(OSCCONbits.LOCK!=1);
+    
+    
+    
+    /*//Tunage de la fréquence : Ftune = 8,0056625
+    OSCTUNbits.TUN = 0;        //SEMBLE NE PAS FONCTIONNER ....
+
+    //New Osc = FRC sans PLL
+    //OSCCONbits.NOSC = 0b000;
+    //OSCCONbits.OSWEN = 1;
+    //while(OSCCONbits.OSWEN != 0);
+
+
+    // Configure PLL prescaler, PLL postscaler, PLL divisor
+    // Fext = Fin * M / (N1 * N2)
+    // F =  80,017 142 MHz
+
+    PLLFBD = 150;//150; // M = 152
+    CLKDIVbits.PLLPOST= 0;//0b00; // N2 = 2 
+    CLKDIVbits.PLLPRE= 5;//5; // N1 = 7
+
+    CLKDIVbits.DOZE = 0b000; //FRC = 1:1 FRC
+
+    //On switch sur la nouvelle clock avec PLL
+    OSCCONbits.NOSC = 0b001;
+    OSCCONbits.OSWEN = 1;
+    while(OSCCONbits.OSWEN != 0);
+
+    // Wait for PLL to lock
+    while(OSCCONbits.LOCK!=1);*/
 }
 
 /******************************************************************************/

@@ -54,7 +54,7 @@ void __attribute__((__interrupt__, no_auto_psv)) _T4Interrupt(void)
 void __attribute__((__interrupt__, no_auto_psv)) _T5Interrupt(void)
 {
     TIMER_DEBUG = DESACTIVE;
-    debug();
+
     FLAG_TIMER_DEBUG = 0;        //On clear le flag d'interruption du timer
     TIMER_DEBUG = ACTIVE;
 }
@@ -91,7 +91,7 @@ void __attribute__ ((interrupt, no_auto_psv)) 	_U1RXInterrupt (void)
         static uint8_t value = 0;
         buf= U1RXREG;
 
-        PORTCbits.RC5 = value;
+        //PORTCbits.RC5 = value;
 
         if (value == 0)
             value = 1;

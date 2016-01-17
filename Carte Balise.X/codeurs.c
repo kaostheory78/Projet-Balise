@@ -17,8 +17,8 @@
 #include "system.h"
 
 
-    int8_t OVERFLOW_CODEUR;
-    _position position ;
+    volatile int8_t OVERFLOW_CODEUR;
+    volatile _position position ;
 
 
 /******************************************************************************/
@@ -75,7 +75,7 @@ void get_valeur_codeur ()
         res+= (int32_t) etat_overflow * max_codeur;
     }
 
-    position.ecart = res * RESOLUTION_LOGICIELLE * sens_rotation;
+    position.ecart = res * sens_rotation;
     position.ancien = position.nouvelle;
 }
 

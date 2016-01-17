@@ -1,5 +1,5 @@
-build/default/production/Uart.o:  \
-Uart.c  \
+build/default/production/pwm.o:  \
+pwm.c  \
 system.h  \
 Uart.h  \
 codeurs.h  \

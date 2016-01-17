@@ -23,6 +23,8 @@ extern "C" {
     #include "Uart.h"
     #include "codeurs.h"
     #include "pwm.h"
+    #include "Config_robots.h"
+    #include "asserv.h"
     
 /******************************************************************************/
 /***************************** Defines ****************************************/
@@ -72,15 +74,16 @@ extern "C" {
 #define ENABLE_BL           PORTCbits.RC6
 #define STATUS_BL           PORTBbits.RB7
     
-#define LED1                PORTBbits.RB12
-#define LED2                PORTAbits.RA10
-#define LED3                PORTAbits.RA7
-#define LED4                PORTAbits.RA0
-#define LED5                PORTAbits.RA1
-#define LED6                PORTBbits.RB0
-#define LED7                PORTBbits.RB1
-#define LED8                PORTBbits.RB2
-#define LED9                PORTBbits.RB3
+#define LED1_PWM
+#define LED1                LATBbits.LATB12
+#define LED2                LATAbits.LATA10
+#define LED3                LATAbits.LATA7
+#define LED4                LATAbits.LATA0
+#define LED5                LATAbits.LATA1
+#define LED6                LATBbits.LATB0
+#define LED7                LATBbits.LATB1
+#define LED8                LATBbits.LATB2
+#define LED9                LATBbits.LATB3
 
 /******************************************************************************/
 /******************************* Interruptions  *******************************/
@@ -139,6 +142,8 @@ extern "C" {
 /*************************** Variables Globales *******************************/
 /******************************************************************************/
 
+    extern volatile int8_t OVERFLOW_CODEUR;
+    extern volatile _position position ;
     
 
 /******************************************************************************/

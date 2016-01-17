@@ -1,4 +1,4 @@
-build/default/production/Uart.o:  \
+build/default/debug/Uart.o:  \
 Uart.c  \
 system.h  \
 Uart.h  \

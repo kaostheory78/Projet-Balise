@@ -92,12 +92,13 @@ void envoit_pwm (double valeur)
     PDC1 = (uint16_t) abs_valeur;
 }
 
-void controle_LED1 (uint8_t pourcentage)
+void controle_LED1 (double pourcentage)
 {
-    if (pourcentage > 100)
-        pourcentage = 100;
+    if (pourcentage > 100.)
+        pourcentage = 100.;
     
-    PDC2 = (uint16_t) (pourcentage * PWM_MAX_VALUE) / 100;
+    PDC2 = (uint16_t) ((uint16_t) pourcentage * PWM_MAX_VALUE) / 100u;
+    //PDC2 = (uint16_t) pourcentage;
 }
 
 

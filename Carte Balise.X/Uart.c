@@ -105,34 +105,34 @@ uint16_t calcul_baud (uint32_t baud)
     switch (baud)
     {
         case 1000000 :
-            return 9;
+            return 9u;
             break;
         case 500000 :
-            return 19;
+            return 19u;
             break;
         case 400000 :
-            return 24;
+            return 24u;
             break;
         case 250000 :
-            return 39;
+            return 39u;
             break;
         case 200000 :
-            return 49;
+            return 49u;
             break;
         case 115200 :
-            return 86;
+            return 86u;
             break;
         case 57600 :
-            return 173;
+            return 173u;
             break;
         case 19200 :
-            return 520;
+            return 520u;
             break;
         case 9600 :
-            return 1041;
+            return 1041u;
             break;
         default :
-            return (uint16_t) ((FCY/baud/4) - 1);
+            return (uint16_t) ((FCY/baud/4u) - 1);
             break;
     }
 }

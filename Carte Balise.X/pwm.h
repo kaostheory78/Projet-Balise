@@ -27,14 +27,15 @@ extern "C" {
 /***************************** Defines ****************************************/
 /******************************************************************************/
 
-#define PWM_MAX_VALUE           2046
+#define PWM_MAX_VALUE           2046u
 
 #define TENSION_MOTEUR          _TENSION_MOTEUR
+#define TENSION_ALIM            _TENSION_ALIM
 
 #define PWM_VALEUR_MAX          (uint16_t) ( PWM_MAX_VALUE * TENSION_MOTEUR / TENSION_ALIM )
 
-#define AVANCER_MOTEUR          _AVANCER_MOTEUR_D
-#define RECULER_MOTEUR          _RECULER_MOTEUR_D
+#define AVANCER_MOTEUR          _AVANCER_MOTEUR
+#define RECULER_MOTEUR          _RECULER_MOTEUR
 
 /******************************************************************************/
 /****************************** Prototypes ************************************/
@@ -42,7 +43,8 @@ extern "C" {
 
 
     void ConfigPWM (void);
-    void envoit_pwm (char moteur, double valeur);
+    void envoit_pwm (double valeur);
+    void controle_LED1 (double pourcentage);
 
 #ifdef CARTE_V2
     void alimenter_moteur_Y (uint8_t alim, int8_t sens_marche);

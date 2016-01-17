@@ -26,12 +26,8 @@ extern "C" {
 #define SENS_ROT                        _SENS_ROT
 #define CODEUR_NB_IMP                   _CODEUR_NB_IMP
 #define RAPPORT_REDUCTION               _RAPPORT_REDUCTION
-#define RESOLUTION_LOGICIELLE           _RESOLUTION_LOGICIELLE
-
-#define CODEUR_NB_IMP_LOG               (RESOLUTION_LOGICIELLE * 4 * CODEUR_NB_IMP * RAPPORT_REDUCTION)
-
+    
 #define MAX_CODEUR                      (4 * CODEUR_NB_IMP * RAPPORT_REDUCTION - 1)
-#define MAX_CODEUR_LOGICIEL             (RESOLUTION_LOGICIELLE * CODEUR_NB_IMP * 4 * RAPPORT_REDUCTION - 1)
 
 #define PAS_D_OVERFLOW_CODEUR           0
 
@@ -65,7 +61,7 @@ extern "C" {
       * @param codeur : codeur à étudier
       * @return : valeur totale des codeurs
       */
-     void get_valeur_codeur (int codeur);
+     void get_valeur_codeur (void);
 
 
      void debug(void);
