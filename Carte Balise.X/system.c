@@ -29,6 +29,8 @@ void init_system (void)
     ConfigQEI ();
     config_timer_5ms();
     config_timer_debug();
+    //config_i2c();
+    setupI2C(400000);
     
     init_position_codeur();
     init_flag();
@@ -616,3 +618,5 @@ void ConfigADC (void)
 {
       
 }
+
+

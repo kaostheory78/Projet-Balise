@@ -88,7 +88,22 @@ int main(int argc, char** argv)
     //envoit_pwm(50);
     
     VITESSE.consigne = 200;
-    ENABLE_CAPTEUR = 1;
+    ENABLE_CAPTEUR = 0;
+    
+    delay_ms(1000);
+    
+    //PutsUART(UART_USB, "Test : Bonjour\n\r");
+    //config_boussole();
+    while(1)
+    {
+        //PutsUART(UART_USB, "Envoi\n\r");
+         //envoiInformationI2C(0x1E, 0x02);
+        //i2c_envoi_octet(0x02, 0x00);
+        //recup_valeur();
+        
+        get_value();
+        delay_ms(100);
+    }
     
     while(1)
     {

@@ -6,4 +6,5 @@ Uart.h  \
 pwm.h  \
 Config_robots.h  \
 asserv.h  \
-triangulation.h 
+triangulation.h  \
+i2c.h 

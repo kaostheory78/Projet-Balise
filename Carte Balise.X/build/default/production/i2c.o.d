@@ -1,5 +1,5 @@
-build/default/production/Uart.o:  \
-Uart.c  \
+build/default/production/i2c.o:  \
+i2c.c  \
 system.h  \
 Uart.h  \
 codeurs.h  \

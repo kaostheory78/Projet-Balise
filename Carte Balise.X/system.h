@@ -28,6 +28,7 @@ extern "C" {
     #include "Config_robots.h"
     #include "asserv.h"
     #include "triangulation.h"
+    #include "i2c.h"
 
     
 /******************************************************************************/
@@ -196,6 +197,10 @@ extern "C" {
     
     void config_timer_5ms();
     void config_timer_debug();
+    
+    void config_i2c ();
+    void envoit_octet_i2C (uint8_t octet);
+    int16_t receive_i2c(uint8_t adresse);
 
     
 
