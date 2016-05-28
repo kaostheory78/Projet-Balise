@@ -66,6 +66,58 @@
 /********************* DECLARATION DES VARIABLES GLOBALES *********************/
 /******************************************************************************/
 
+    typedef enum 
+    {
+        // /!\ ENUM CODEE SUR 2 BIT !!! /!\ //
+        // /!\      VALEUR MIN : -2     /!\ //
+        // /!\      VALEUR MAX :  1     /!\ //
+        SENS_INDIRECT   = -1,
+        ROT_EN_BAS      = -1,
+        SENS_DIRECT     =  1,
+        ROT_EN_HAUT     =  1
+    }_enum_sens_rotation;
+
+    typedef struct decal
+    {
+        // /!\ suivant et symétrique limité de -32 à + 31 /!\ //
+        int16_t angle                       : 16;   // 16 : add 1
+        uint16_t position                   : 16;   // 16 : add 2 
+        _Bool etat               : 1;    //  1 : add 3
+        int8_t suivant                      : 6;    //  7 : add 3
+        _enum_sens_rotation sens_rotation   : 2;    //  9 : add 3
+        int8_t symetrique                   : 6;    // 15 : add 3
+    }decal;
+   
+typedef enum
+{
+    VRAI = true,
+    FAUX = false
+}_enum_vrai_faux;
+
+typedef enum
+{
+    NB_1,
+    NB_2 = NB_1,
+    NB_3,
+    NB_4,
+    NB_5,
+    NB_6 = NB_5,
+    NB_7,
+    NB_8,
+    NB_9
+}_enum_nombre;
+
+typedef struct
+{
+    _enum_vrai_faux boolen_1 :1;
+    _enum_vrai_faux boolen_2 :1;
+    _enum_vrai_faux boolen_3 :1;
+    _enum_vrai_faux boolen_4 :1;
+    _enum_vrai_faux boolen_5 :1;
+    _enum_vrai_faux boolen_6 :1;
+    _enum_nombre nb_1        :4;
+    _enum_nombre nb_2        :4;
+}_test;
 
 /******************************************************************************/
 /******************************************************************************/
@@ -79,8 +131,38 @@ int main(int argc, char** argv)
     /**************************************************************************/
 
     uint16_t i;
-    uint16_t j=0.;
+    uint16_t j=0;
     init_system();
+    
+    
+    
+    // TEST //
+    _test test;
+    test.boolen_1 = VRAI;
+    test.boolen_2 = FAUX;
+    test.boolen_3 = FAUX;
+    test.boolen_4 = FAUX;
+    test.boolen_5 = FAUX;
+    test.boolen_6 = FAUX;
+    test.nb_1 = NB_1;
+    test.nb_2 = NB_9;
+    
+    decal test2;
+    test2.angle = 0;
+    test2.etat  = false;
+    test2.sens_rotation = -2;
+    test2.suivant = 0;
+    
+    printf("\n\n\rTest des bit-fields dans des enum\n\r");
+    printf("VRAI : %d, FAUX : %d\n\r", VRAI, FAUX);
+    printf("NB_1 : %d, NB_2 : %d, NB_3 : %d, NB_4 : %d, NB_5 : %d\n\r", NB_1, NB_2, NB_3, NB_4, NB_5);
+    printf("NB_6 : %d, NB_7 : %d, NB_8 : %d, NB_9 : %d\n\r", NB_6, NB_7, NB_8, NB_9);
+    printf("b1 : %d, b2 : %d, b3 : %d, n1 : %d, n2 : %d\n\r", test.boolen_1, test.boolen_2, test.boolen_3, test.nb_1, test.nb_2);
+    printf("taille de la structure : %d octets\n\r", sizeof(_test));
+    printf("indice negatif : %d\n\r", test2.sens_rotation);
+    test2.sens_rotation = 1;
+    printf("indice positif : %d\n\r", test2.sens_rotation);
+    printf("Structure : %x\n\n\r", test);
     
     
     TIMER_5ms = ACTIVE;
@@ -92,7 +174,8 @@ int main(int argc, char** argv)
     
     delay_ms(1000);
     
-    //PutsUART(UART_USB, "Test : Bonjour\n\r");
+    PutsUART(UART_USB, "Test : Bonjour\n\r");
+    printf("Test 2 : Utilisation de la fonction sprintf");
     //config_boussole();
     while(1)
     {

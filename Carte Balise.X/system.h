@@ -22,6 +22,7 @@ extern "C" {
     #include <stdlib.h>
     #include <math.h>
     #include <stdbool.h>
+    #include <stdio.h>
     #include "Uart.h"
     #include "codeurs.h"
     #include "pwm.h"
@@ -29,6 +30,7 @@ extern "C" {
     #include "asserv.h"
     #include "triangulation.h"
     #include "i2c.h"
+     
 
     
 /******************************************************************************/
