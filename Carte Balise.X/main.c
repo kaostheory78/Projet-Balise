@@ -133,39 +133,10 @@ int main(int argc, char** argv)
     uint16_t i;
     uint16_t j=0;
     init_system();
-    
-    
-    
-    // TEST //
-    _test test;
-    test.boolen_1 = VRAI;
-    test.boolen_2 = FAUX;
-    test.boolen_3 = FAUX;
-    test.boolen_4 = FAUX;
-    test.boolen_5 = FAUX;
-    test.boolen_6 = FAUX;
-    test.nb_1 = NB_1;
-    test.nb_2 = NB_9;
-    
-    decal test2;
-    test2.angle = 0;
-    test2.etat  = false;
-    test2.sens_rotation = -2;
-    test2.suivant = 0;
-    
-    printf("\n\n\rTest des bit-fields dans des enum\n\r");
-    printf("VRAI : %d, FAUX : %d\n\r", VRAI, FAUX);
-    printf("NB_1 : %d, NB_2 : %d, NB_3 : %d, NB_4 : %d, NB_5 : %d\n\r", NB_1, NB_2, NB_3, NB_4, NB_5);
-    printf("NB_6 : %d, NB_7 : %d, NB_8 : %d, NB_9 : %d\n\r", NB_6, NB_7, NB_8, NB_9);
-    printf("b1 : %d, b2 : %d, b3 : %d, n1 : %d, n2 : %d\n\r", test.boolen_1, test.boolen_2, test.boolen_3, test.nb_1, test.nb_2);
-    printf("taille de la structure : %d octets\n\r", sizeof(_test));
-    printf("indice negatif : %d\n\r", test2.sens_rotation);
-    test2.sens_rotation = 1;
-    printf("indice positif : %d\n\r", test2.sens_rotation);
-    printf("Structure : %x\n\n\r", test);
-    
+     
     
     TIMER_5ms = ACTIVE;
+    TIMER_10ms = ACTIVE;
     //TIMER_DEBUG = ACTIVE;
     //envoit_pwm(50);
     
@@ -174,18 +145,31 @@ int main(int argc, char** argv)
     
     delay_ms(1000);
     
-    PutsUART(UART_USB, "Test : Bonjour\n\r");
-    printf("Test 2 : Utilisation de la fonction sprintf");
+    PutsUART(UART_USB, "\n\n\rBonjour\n\r");
+    delay_ms(100);
+    
+    // config hmc5883L
+    ByteWriteI2C(0x3C, 0x00, 0x70);  
+    ByteWriteI2C(0x3C, 0x01, 0xA0);  
+    
     //config_boussole();
     while(1)
     {
-        //PutsUART(UART_USB, "Envoi\n\r");
-         //envoiInformationI2C(0x1E, 0x02);
-        //i2c_envoi_octet(0x02, 0x00);
-        //recup_valeur();
+//        //PutsUART(UART_USB, "Envoi\n\r");
+//         //envoiInformationI2C(0x1E, 0x02);
+//        //i2c_envoi_octet(0x02, 0x00);
+//        //recup_valeur();
+//        
+//        get_value();
+//        delay_ms(100);
+        uint8_t i = 0;
         
-        get_value();
-        delay_ms(100);
+        for (i = 0 ; i <=12 ; i++)
+        {
+            ByteReadI2C(0x3C, i);
+            delay_ms(50);
+        }
+        delay_ms(2000);
     }
     
     while(1)

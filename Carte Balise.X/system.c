@@ -28,9 +28,10 @@ void init_system (void)
     InitUART(UART_USB, 115200);
     ConfigQEI ();
     config_timer_5ms();
+    config_timer_10ms();
     config_timer_debug();
     //config_i2c();
-    setupI2C(400000);
+    setupI2C(100000);
     
     init_position_codeur();
     init_flag();

@@ -115,7 +115,7 @@ extern "C" {
 #define PRIO_INTER_TIMER1               5   // 
 #define PRIO_INTER_TIMER2               0   // 
 #define PRIO_INTER_TIMER3               0   // 
-#define PRIO_INTER_TIMER4               0   // 
+#define PRIO_INTER_TIMER4               6   // 
 #define PRIO_INTER_TIMER5               1   // 
 #define PRIO_INTER_UART1_RX             0   // USB RECEPTION
 #define PRIO_INTER_UART1_TX             0   // USB TRANSMISSION
@@ -124,14 +124,14 @@ extern "C" {
 #define PRIO_INTER_INT0                 0   // INT0 : SATUS BL
 #define PRIO_INTER_INT1                 6   // INT1 : CAPTEUR
 #define PRIO_INTER_INT2                 0   // INT2 : BOUTON X
-#define PRIO_INTER_I2C_MAITRE           0   // I²C désactivé pour le moment
-#define PRIO_INTER_I2C_ESCLAVE          0   // I²C désactivé pour le moment
+#define PRIO_INTER_I2C_MAITRE           3   // I²C désactivé pour le moment
+#define PRIO_INTER_I2C_ESCLAVE          2   // I²C désactivé pour le moment
 #define PRIO_INTER_QEI                  7   // CODEUR : prio la plus haute
 
 #define ACTIV_INTER_TIMER1              1   // Timer asserv 
 #define ACTIV_INTER_TIMER2              0   // Timer
 #define ACTIV_INTER_TIMER3              0   // Timer 
-#define ACTIV_INTER_TIMER4              0   // Timer 
+#define ACTIV_INTER_TIMER4              1   // Timer 10 ms 
 #define ACTIV_INTER_TIMER5              1   // Timer 
 #define ACTIV_INTER_UART1_RX            0   // UART USB : 
 #define ACTIV_INTER_UART1_TX            0   // UART USB : type inter
@@ -140,7 +140,7 @@ extern "C" {
 #define ACTIV_INTER_INT0                0   // INT0 : STATUS BL
 #define ACTIV_INTER_INT1                1   // INT1 : CAPTEUR
 #define ACTIV_INTER_INT2                0   // INT2 : BOUTON X
-#define ACTIV_INTER_I2C_MAITRE          0   // Pas implémenté pour le moment
+#define ACTIV_INTER_I2C_MAITRE          1   // Pas implémenté pour le moment
 #define ACTIV_INTER_I2C_ESCLAVE         0   // Pas implémenté pour le moment
 #define ACTIV_INTER_QEI                 1   // CODEUR
 
@@ -157,6 +157,7 @@ extern "C" {
     extern volatile double COMMANDE;
     extern volatile double ORIENTATION;
     extern volatile _capteur capteur;
+    extern volatile _i2c_cmd i2c_cmd;
     
 
 /******************************************************************************/
@@ -198,6 +199,7 @@ extern "C" {
     
     
     void config_timer_5ms();
+    void config_timer_10ms();
     void config_timer_debug();
     
     void config_i2c ();

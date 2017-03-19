@@ -43,15 +43,23 @@ void __attribute__((__interrupt__, no_auto_psv)) _T3Interrupt(void)
 }
 
 /**
- * Timer 10 ms : Autom et capteurs
+ * Timer 10 ms : génération de delay
+ * ATTENTION : ne jamais bloquer cette tache !!!!!!! 
  */
 void __attribute__((__interrupt__, no_auto_psv)) _T4Interrupt(void)
 {
-    TIMER_10ms = DESACTIVE;
-
-    TMR4 = 0;
     FLAG_TIMER_10ms = 0;        //On clear le flag d'interruption du timer
-    TIMER_10ms = ACTIVE;
+    
+    if (i2c_cmd.isTimerStarted == true)
+    {
+        i2c_cmd.waitingEventTimer -=10;
+        if (i2c_cmd.waitingEventTimer <= 0)
+        {
+            i2c_cmd.isTimerStarted = false;
+            i2c_cmd.waitingEventTimer = 0;
+            i2c_cmd.receiveEvent |= (ERROR_OCCURED | TIMER_TIMEOUT);
+        }
+    }
 }
 
 void __attribute__((__interrupt__, no_auto_psv)) _T5Interrupt(void)
@@ -171,8 +179,17 @@ void __attribute__ ((interrupt, no_auto_psv)) 	_U2TXInterrupt (void)
     IFS1bits.U2TXIF = 0; //remise du flag à 0 quand le buffer de transmission est vide
 }
 
+/******************************************************************************/
+/***************************** INTERRUPTIONS I2C ******************************/
+/******************************************************************************/
 
-
+void __attribute__ ((interrupt, no_auto_psv)) 	_MI2C1Interrupt (void)
+{
+    i2c_interupt();
+    
+    // remise à zéro du flag
+	IFS1bits.MI2C1IF = 0;
+}
 
 /******************************************************************************/
 /******************************************************************************/
